@@ -1,6 +1,7 @@
 package com.legends.edumia.worldgen.chunkgen;
 
 import com.legends.edumia.utils.noises.BlendedNoise;
+import com.legends.edumia.worldgen.biome.EdumiaBiomeKeys;
 import com.legends.edumia.worldgen.biome.surface.EdumiaBiome;
 import com.legends.edumia.worldgen.biome.surface.EdumiaBiomesData;
 import com.legends.edumia.worldgen.biome.surface.ModBiomeSource;
@@ -25,6 +26,7 @@ import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.*;
 import net.minecraft.world.level.levelgen.blending.Blender;
+import net.minecraftforge.registries.DeferredRegister;
 import org.joml.SimplexNoise;
 
 import java.util.ArrayList;
@@ -274,4 +276,5 @@ public class EdumiaChunkGenerator extends ChunkGenerator {
     public void addDebugScreenInfo(List<String> text, RandomState noiseConfig, BlockPos pos) {
 
     }
+
 }

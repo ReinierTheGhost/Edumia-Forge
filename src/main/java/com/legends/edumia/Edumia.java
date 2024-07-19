@@ -9,6 +9,7 @@ import com.ferreusveritas.dynamictrees.tree.species.Species;
 import com.legends.edumia.dynamictrees.registry.DTEdumiaRegistries;
 import com.legends.edumia.worldgen.biome.EdumiaBiomeKeys;
 import com.legends.edumia.worldgen.biome.surface.EdumiaBiomesData;
+import com.legends.edumia.worldgen.chunkgen.ModChunkGenerators;
 import com.legends.edumia.worldgen.dimension.ModDimensions;
 import com.legends.edumia.worldgen.gen.ModWorldGeneration;
 import com.legends.edumia.worldgen.map.EdumiaMapGeneration;
@@ -52,6 +53,7 @@ public class Edumia
     {
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
+        ModChunkGenerators.register(modEventBus);
 
         ModDimensions.register();
         EdumiaBiomeKeys.registerModBiomes();

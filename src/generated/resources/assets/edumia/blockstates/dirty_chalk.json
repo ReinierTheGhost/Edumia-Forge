@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "edumia:block/dirty_chalk",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "edumia:block/dirty_chalk"
+    },
+    "axis=z": {
+      "model": "edumia:block/dirty_chalk",
+      "x": 90
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "edumia:block/template/arch_twometer_shape",
+  "textures": {
+    "side": "edumia:block/yellow_stone_bricks"
+  }
+}

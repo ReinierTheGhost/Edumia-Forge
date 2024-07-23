@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_glass_pane_side_alt",
+  "textures": {
+    "edge": "edumia:block/purple_paperwall_top",
+    "pane": "edumia:block/purple_paperwall"
+  }
+}

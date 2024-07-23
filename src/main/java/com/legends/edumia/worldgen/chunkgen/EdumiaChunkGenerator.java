@@ -13,13 +13,16 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.RegistryOps;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.WorldGenRegion;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeManager;
 import net.minecraft.world.level.biome.BiomeSource;
+import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkAccess;
@@ -32,6 +35,7 @@ import org.joml.SimplexNoise;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 
@@ -61,59 +65,59 @@ public class EdumiaChunkGenerator extends ChunkGenerator {
     public EdumiaChunkGenerator(HolderGetter<Biome> biomeRegistry) {
         super(new ModBiomeSource(
                         new ArrayList<>(Arrays.asList(
-//                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.OCEAN),
-//                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.EDUMIA_VALES),
-//                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.GENSAI_BEACH),
-//                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.EDUMIA_FOOTHILLS),
-//                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.DARK_ELF_FOREST),
-//                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.EDUMIA_TUNDRA),
-//                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.FROZEN_OCEAN),
-//                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.FROZEN_POND),
-//                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.ORC_DESERT),
-//                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.AVELION_PLAINS),
-//
-//
-//                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.GENSAI_SAKURA_GROVE),
-//                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.OASIS),
-//                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.POND),
-//
-//
-//                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.FAIRY_SWAMP),
-//                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.AVELION_MOUNTAINS),
-//                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.EDUMIA_MOUNTAINS),
-//
-//
-//                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.GENSAI_VOLCANO),
-//
-//
-//                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.OCEAN_COAST),
-//
-//
-//                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.EDUMIA_RIVER),
-//
-//
-//                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.GENSAI_REEF),
-//
-//
-//                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.TAIGA_FOREST),
-//
-//
-//                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.GENSAI_JUNGLE),
-//
-//
-//                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.WASTE_POND),
-//
-//
-//                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.BASIC_CAVE),
-//                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.LUSH_CAVE),
-//                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.DRIPSTONE_CAVE),
-//                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.MUD_CAVE),
-//                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.FUNGUS_CAVE),
-//                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.MITHRIL_CAVE),
-//                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.BASALT_CAVE),
-//                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.MAGMA_CAVE),
-//                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.DRY_CAVE),
-//                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.ICE_CAVE)
+                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.OCEAN),
+                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.EDUMIA_VALES),
+                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.GENSAI_BEACH),
+                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.EDUMIA_FOOTHILLS),
+                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.DARK_ELF_FOREST),
+                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.EDUMIA_TUNDRA),
+                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.FROZEN_OCEAN),
+                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.FROZEN_POND),
+                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.ORC_DESERT),
+                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.AVELION_PLAINS),
+
+
+                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.GENSAI_SAKURA_GROVE),
+                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.OASIS),
+                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.POND),
+
+
+                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.FAIRY_SWAMP),
+                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.AVELION_MOUNTAINS),
+                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.EDUMIA_MOUNTAINS),
+
+
+                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.GENSAI_VOLCANO),
+
+
+                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.OCEAN_COAST),
+
+
+                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.EDUMIA_RIVER),
+
+
+                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.GENSAI_REEF),
+
+
+                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.TAIGA_FOREST),
+
+
+                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.GENSAI_JUNGLE),
+
+
+                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.WASTE_POND),
+
+
+                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.BASIC_CAVE),
+                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.LUSH_CAVE),
+                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.DRIPSTONE_CAVE),
+                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.MUD_CAVE),
+                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.FUNGUS_CAVE),
+                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.MITHRIL_CAVE),
+                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.BASALT_CAVE),
+                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.MAGMA_CAVE),
+                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.DRY_CAVE),
+                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.ICE_CAVE)
                         ))
                 )
         );
@@ -277,4 +281,8 @@ public class EdumiaChunkGenerator extends ChunkGenerator {
 
     }
 
+    @Override
+    public Optional<ResourceKey<Codec<? extends ChunkGenerator>>> getTypeNameForDataFixer() {
+        return BuiltInRegistries.CHUNK_GENERATOR.getResourceKey(this.codec());
+    }
 }

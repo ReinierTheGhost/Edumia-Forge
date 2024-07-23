@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/leaves",
+  "textures": {
+    "all": "edumia:block/cherry_leaves_fruit"
+  }
+}

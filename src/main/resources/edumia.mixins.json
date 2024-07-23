@@ -4,7 +4,8 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "edumia.refmap.json",
   "mixins": [
-    "WorldGenRegionMixin"
+    "WorldGenRegionMixin",
+    "ChunkGeneratorsMixin"
   ],
   "client": [
   ],

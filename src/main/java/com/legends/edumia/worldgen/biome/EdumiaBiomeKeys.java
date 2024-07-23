@@ -30,7 +30,7 @@ public class EdumiaBiomeKeys extends Biomes {
 
         public static final ResourceKey<Biome> GENSAI_VOLCANO = EdumiaBiomeKeys.register("gensai_volcano");
 
-        public static final ResourceKey<Biome> OCEAN = EdumiaBiomeKeys.register("ocean");
+        public static final ResourceKey<Biome> OCEAN = EdumiaBiomeKeys.register("edumia_ocean");
         public static final ResourceKey<Biome> OCEAN_COAST = EdumiaBiomeKeys.register("ocean_coast");
 
         public static final ResourceKey<Biome> OASIS = EdumiaBiomeKeys.register("oasis");

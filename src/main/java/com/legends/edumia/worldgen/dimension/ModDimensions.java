@@ -41,8 +41,8 @@ public class ModDimensions {
             ResourceKey.create(Registries.DIMENSION, DIMENSION_KEY.location());
 
     public static void register() {
-        replaceDimensionCodecToForceStability();
-        Registry.register(BuiltInRegistries.CHUNK_GENERATOR, new ResourceLocation(Edumia.MOD_ID, PATH), EdumiaChunkGenerator.CODEC);
+        //replaceDimensionCodecToForceStability();
+        //Registry.register(BuiltInRegistries.CHUNK_GENERATOR, new ResourceLocation(Edumia.MOD_ID, PATH), EdumiaChunkGenerator.CODEC);
         WORLD_KEY = ResourceKey.create(Registries.DIMENSION, new ResourceLocation(Edumia.MOD_ID, PATH));
 
         LoggerUtil.getInstance().logDebugMsg("Registering ModDimensions for " + Edumia.MOD_ID);

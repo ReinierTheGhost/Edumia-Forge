@@ -1,0 +1,6 @@
+{
+  "parent": "edumia:block/template/arch_twometer_shape",
+  "textures": {
+    "side": "edumia:block/mossy_red_gensai_bricks"
+  }
+}

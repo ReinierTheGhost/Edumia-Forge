@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_bottom_left_open",
+  "textures": {
+    "bottom": "edumia:block/white_ash_door_bottom",
+    "top": "edumia:block/white_ash_door_top"
+  }
+}

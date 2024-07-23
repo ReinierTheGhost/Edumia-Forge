@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_top_right",
+  "textures": {
+    "bottom": "edumia:block/ghost_gum_door_bottom",
+    "top": "edumia:block/ghost_gum_door_top"
+  }
+}

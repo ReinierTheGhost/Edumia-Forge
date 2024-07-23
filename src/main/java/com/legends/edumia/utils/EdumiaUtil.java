@@ -1,7 +1,13 @@
 package com.legends.edumia.utils;
 
 import com.legends.edumia.EdumiaLog;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 
+import javax.swing.text.html.BlockView;
 import java.lang.reflect.Field;
 
 public class EdumiaUtil {
@@ -17,5 +23,10 @@ public class EdumiaUtil {
             var2.printStackTrace();
         }
 
+    }
+
+    public static boolean hasSolidSide(BlockGetter world, BlockPos pos, Direction side) {
+        BlockState state = world.getBlockState(pos);
+        return Block.isFaceFull(state.getBlockSupportShape(world, pos), side);
     }
 }

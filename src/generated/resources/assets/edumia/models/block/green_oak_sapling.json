@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "edumia:block/green_oak_sapling"
+  }
+}

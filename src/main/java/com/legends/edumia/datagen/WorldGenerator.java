@@ -14,8 +14,7 @@ import java.util.concurrent.CompletableFuture;
 
 public class WorldGenerator  extends DatapackBuiltinEntriesProvider {
     public static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
-            .add(Registries.BIOME, ModBiomes::bootstrap)
-            .add(Registries.BIOME, ModCaveBiomes::bootstrap);
+            .add(Registries.BIOME, ModBiomes::bootstrap);
     public WorldGenerator(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries, BUILDER, Set.of(Edumia.MOD_ID));
     }

@@ -2,6 +2,7 @@ package com.legends.edumia.worldgen.biome.surface;
 
 import com.legends.edumia.worldgen.biome.BiomeColorsDTO;
 import com.legends.edumia.worldgen.biome.EdumiaBiomeKeys;
+import com.legends.edumia.worldgen.biome.caves.ModCaveBiomes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
 import net.minecraft.data.worldgen.BootstapContext;
@@ -33,6 +34,7 @@ public class ModBiomes {
     private static ArrayList<ResourceKey<PlacedFeature>> undergroundOres = new ArrayList<>();;
 
     public static void bootstrap(BootstapContext<Biome> context) {
+        ModCaveBiomes.bootstrap(context);
         context.register(EdumiaBiomeKeys.EDUMIA_VALES, createTestBiome(context, new BiomeColorsDTO(
                 defaultSky, defaultFog, defaultWater, defaultWaterFog, 8703593, 8703593)));
 

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/leaves",
+  "textures": {
+    "all": "edumia:block/apple_leaves_red"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_top_right",
+  "textures": {
+    "bottom": "edumia:block/banana_door_bottom",
+    "top": "edumia:block/banana_door_top"
+  }
+}

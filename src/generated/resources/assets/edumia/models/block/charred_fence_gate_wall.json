@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_custom_fence_gate_wall",
+  "textures": {
+    "particle": "edumia:block/charred_planks",
+    "texture": "edumia:block/charred_planks"
+  }
+}

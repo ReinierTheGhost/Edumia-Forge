@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "edumia:block/mahogany_sapling"
+  }
+}

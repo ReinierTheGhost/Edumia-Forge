@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/leaves",
+  "textures": {
+    "all": "edumia:block/green_oak_leaves"
+  }
+}

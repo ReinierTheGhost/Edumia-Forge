@@ -1,12 +1,7 @@
 package com.legends.edumia;
 
-import com.ferreusveritas.dynamictrees.api.GatherDataHelper;
-import com.ferreusveritas.dynamictrees.api.registry.RegistryHandler;
-import com.ferreusveritas.dynamictrees.block.leaves.LeavesProperties;
-import com.ferreusveritas.dynamictrees.init.DTRegistries;
-import com.ferreusveritas.dynamictrees.tree.family.Family;
-import com.ferreusveritas.dynamictrees.tree.species.Species;
-import com.legends.edumia.dynamictrees.registry.DTEdumiaRegistries;
+import com.legends.edumia.blocks.blocksets.BuildingSets;
+import com.legends.edumia.core.CreativeTabLoader;
 import com.legends.edumia.worldgen.biome.EdumiaBiomeKeys;
 import com.legends.edumia.worldgen.biome.surface.EdumiaBiomesData;
 import com.legends.edumia.worldgen.chunkgen.ModChunkGenerators;
@@ -52,6 +47,9 @@ public class Edumia
     public Edumia()
     {
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        CreativeTabLoader.register(modEventBus);
+        BuildingSets.register(modEventBus);
 
         ModChunkGenerators.register(modEventBus);
 

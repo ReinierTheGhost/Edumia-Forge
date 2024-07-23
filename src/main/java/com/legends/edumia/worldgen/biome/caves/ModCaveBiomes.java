@@ -1,6 +1,7 @@
 package com.legends.edumia.worldgen.biome.caves;
 
 import com.legends.edumia.worldgen.biome.BiomeColorsDTO;
+import com.legends.edumia.worldgen.biome.EdumiaBiomeKeys;
 import com.legends.edumia.worldgen.biome.surface.EdumiaBiome;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
@@ -37,7 +38,22 @@ public class ModCaveBiomes {
     public static CaveBiomesMap desertCaves = new CaveBiomesMap();
 
     public static void init() {
+        defaultCaves.addCave(new CaveBiomeDTO(EdumiaBiomeKeys.LUSH_CAVE, new Vec2(-1.0f,0f)));
+        defaultCaves.addCave(new CaveBiomeDTO(EdumiaBiomeKeys.DRIPSTONE_CAVE, new Vec2(1.0f,0f)));
+        defaultCaves.addCave(new CaveBiomeDTO(EdumiaBiomeKeys.MUD_CAVE, new Vec2(1.0f,1.0f)));
+        defaultCaves.addCave(new CaveBiomeDTO(EdumiaBiomeKeys.FUNGUS_CAVE, new Vec2(0f,-1.0f)));
+        defaultCaves.addCave(new CaveBiomeDTO(EdumiaBiomeKeys.BASIC_CAVE, new Vec2(0.0f,0.8f)));
 
+        ashCaves.addCave(new CaveBiomeDTO(EdumiaBiomeKeys.DRIPSTONE_CAVE, new Vec2(1.0f,0.5f)));
+        ashCaves.addCave(new CaveBiomeDTO(EdumiaBiomeKeys.BASALT_CAVE, new Vec2(-1.0f,0.5f)));
+        ashCaves.addCave(new CaveBiomeDTO(EdumiaBiomeKeys.MAGMA_CAVE, new Vec2(0.0f,-1.0f)));
+
+        desertCaves.addCave(new CaveBiomeDTO(EdumiaBiomeKeys.DRIPSTONE_CAVE, new Vec2(1.0f,0f)));
+        desertCaves.addCave(new CaveBiomeDTO(EdumiaBiomeKeys.DRY_CAVE, new Vec2(0.0f,0f)));
+        desertCaves.addCave(new CaveBiomeDTO(EdumiaBiomeKeys.BASIC_CAVE, new Vec2(-1.0f,0f)));
+
+        forodCaves.addCave(new CaveBiomeDTO(EdumiaBiomeKeys.ICE_CAVE, new Vec2(-0.5f,0f)));
+        forodCaves.addCave(new CaveBiomeDTO(EdumiaBiomeKeys.DRIPSTONE_CAVE, new Vec2(1.0f,0f)));
     }
 
     public static ResourceKey<Biome> getBiome(Vec2 coordinates, EdumiaBiome surfaceBiome) {
@@ -50,6 +66,29 @@ public class ModCaveBiomes {
     }
 
     public static void bootstrap(BootstapContext<Biome> context) {
+        context.register(EdumiaBiomeKeys.BASIC_CAVE, createBasicCave(context, new BiomeColorsDTO(
+                defaultSky, defaultFog, defaultWater, defaultWaterFog, 10338918, 10604137)));
+        context.register(EdumiaBiomeKeys.LUSH_CAVE, createLushCave(context, new BiomeColorsDTO(
+                defaultSky, defaultFog, defaultWater, defaultWaterFog, 8703593, 8703593)));
+        context.register(EdumiaBiomeKeys.DRIPSTONE_CAVE, createDripstoneCave(context, new BiomeColorsDTO(
+                defaultSky, defaultFog, defaultWater, defaultWaterFog, 10338918, 10604137)));
+        context.register(EdumiaBiomeKeys.MUD_CAVE, createMudCaves(context, new BiomeColorsDTO(
+                defaultSky, defaultFog, defaultWater, defaultWaterFog, 7435337, 7905386)));
+        context.register(EdumiaBiomeKeys.FUNGUS_CAVE, createFungusCave(context, new BiomeColorsDTO(
+                defaultSky, defaultFog, defaultWater, defaultWaterFog, 5869935, 6263141)));
+
+        context.register(EdumiaBiomeKeys.MITHRIL_CAVE, createMithrilCave(context, new BiomeColorsDTO(
+                defaultSky, defaultFog, defaultWater, defaultWaterFog, 10338918, 10604137)));
+
+        context.register(EdumiaBiomeKeys.BASALT_CAVE, createBasaltCave(context, new BiomeColorsDTO(
+                defaultSky, defaultFog, defaultWater, defaultWaterFog, 9534809, 8878692)));
+        context.register(EdumiaBiomeKeys.MAGMA_CAVE, createMagmaCave(context, new BiomeColorsDTO(
+                defaultSky, defaultFog, defaultWater, defaultWaterFog, 9527897, 8876132)));
+
+        context.register(EdumiaBiomeKeys.DRY_CAVE, createDryCave(context, new BiomeColorsDTO(
+                defaultSky, defaultFog, defaultWater, defaultWaterFog, 10928742, 11259497)));
+        context.register(EdumiaBiomeKeys.ICE_CAVE, createIceCaves(context, new BiomeColorsDTO(
+                defaultSky, defaultFog, defaultWater, defaultWaterFog, 11121530, 10990723)));
 
     }
 

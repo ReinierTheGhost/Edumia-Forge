@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "l": {
+      "item": "edumia:pine_log"
+    }
+  },
+  "pattern": [
+    "l",
+    "l",
+    "l"
+  ],
+  "result": {
+    "count": 3,
+    "item": "edumia:pine_beam"
+  },
+  "show_notification": true
+}

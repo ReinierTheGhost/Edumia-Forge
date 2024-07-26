@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "edumia:cedar_log"
+    }
+  ],
+  "result": {
+    "item": "edumia:cedar_planks"
+  }
+}

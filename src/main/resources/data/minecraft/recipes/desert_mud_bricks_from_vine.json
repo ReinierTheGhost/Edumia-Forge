@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "mossy_Block{edumia:desert_mud_bricks}",
+  "ingredients": [
+    {
+      "item": "edumia:desert_mud_bricks"
+    },
+    {
+      "item": "minecraft:vine"
+    }
+  ],
+  "result": {
+    "item": "edumia:mossy_desert_mud_bricks"
+  }
+}

@@ -8,6 +8,11 @@
   "creativetab.edumia_rewards": "Edumia Rewards",
   "creativetab.edumia_blocks": "Edumia Blocks",
   "creativetab.edumia_building_blocks": "Edumia Building Blocks",
+  "creativetab.edumia_glass_blocks": "Glass Blocks",
+  "creativetab.edumia_utilities": "Utilities",
+  "creativetab.edumia_weapons": "Edumia Weapons",
+  "creativetab.edumia_materials": "Edumia Materials",
+  "creativetab.edumia_tools": "Edumia Tools",
   "creativetab.edumia_wood_blocks": "Edumia Wood Blocks",
   "creativetab.edumia_natural_stone_blocks": "Edumia Natural Stone Blocks",
   "creativetab.edumia_ores_gems_blocks": "Edumia Ores and Gem Blocks",
@@ -15,7 +20,7 @@
   "creativetab.edumia_spawns": "Edumia Spawns",
   "creativetab.edumia_gems": "Edumia Gems",
   "creativetab.edumia_plants": "Edumia Plants",
-  "creativetab.food_items": "Edumia Food",
+  "creativetab.edumia_food": "Edumia Food",
 
 "#Comment:": "Status Effects",
 
@@ -2132,4 +2137,5 @@
   "block.edumia.willow_trapdoor": "Willow trapdoor",
 
   "gui.edumia.map.coords": "x : %d, z: %d"
+
 }

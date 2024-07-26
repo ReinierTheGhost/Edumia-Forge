@@ -19,6 +19,8 @@ public class EdumiaBiomeKeys extends Biomes {
         public static final ResourceKey<Biome> FROZEN_POND = EdumiaBiomeKeys.register("frozen_pond");
         public static final ResourceKey<Biome> ORC_DESERT = EdumiaBiomeKeys.register("orc_desert");
 
+
+        public static final ResourceKey<Biome> OGRE_FOREST = EdumiaBiomeKeys.register("ogre_forest");
         public static final ResourceKey<Biome> AVELION_PLAINS = EdumiaBiomeKeys.register("avelion_plains");
 
         public static final ResourceKey<Biome> GENSAI_SAKURA_GROVE = EdumiaBiomeKeys.register("gensai_sakura_grove");

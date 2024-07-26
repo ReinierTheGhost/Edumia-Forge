@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "l": {
+      "item": "edumia:dark_high_elven_cobblestone"
+    }
+  },
+  "pattern": [
+    "lll"
+  ],
+  "result": {
+    "count": 6,
+    "item": "edumia:dark_high_elven_cobblestone_slab"
+  },
+  "show_notification": true
+}

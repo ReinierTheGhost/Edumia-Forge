@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "edumia:blackthorn_log"
+    }
+  ],
+  "result": {
+    "item": "edumia:blackthorn_planks"
+  }
+}

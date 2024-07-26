@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "edumia:light_gray_stone_bricks"
+  },
+  "result": "edumia:light_gray_stone_bricks_round_arch"
+}

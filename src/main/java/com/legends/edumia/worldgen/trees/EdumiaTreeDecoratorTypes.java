@@ -1,0 +1,27 @@
+package com.legends.edumia.worldgen.trees;
+
+import com.legends.edumia.Edumia;
+import com.legends.edumia.worldgen.trees.foliageplacer.GhostGumFoliagePlacer;
+import com.legends.edumia.worldgen.trees.treedecorators.HangingBranchDecorator;
+import com.legends.edumia.worldgen.trees.treedecorators.PineBranchDecorator;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
+import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.RegistryObject;
+
+
+public class EdumiaTreeDecoratorTypes {
+
+    public static final DeferredRegister<TreeDecoratorType<?>> TREE_DECORATORS =
+            DeferredRegister.create(Registries.TREE_DECORATOR_TYPE, Edumia.MOD_ID);
+    public static final RegistryObject<TreeDecoratorType<PineBranchDecorator>> PINE_BRANCH_DECORATOR =
+            TREE_DECORATORS.register("pine_branch_decorator", () -> new TreeDecoratorType<>(PineBranchDecorator.CODEC));
+    public static final RegistryObject<TreeDecoratorType<HangingBranchDecorator>> HANGING_BRANCH_DECORATOR =
+            TREE_DECORATORS.register("hanging_branch_decorator", () -> new TreeDecoratorType<>(HangingBranchDecorator.CODEC));
+
+    public static void register(IEventBus eventBus) {
+        TREE_DECORATORS.register(eventBus);
+    }
+}

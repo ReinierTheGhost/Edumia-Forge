@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "edumia:graystone_bricks"
+  },
+  "result": "edumia:graystone_bricks_gothic_arch"
+}

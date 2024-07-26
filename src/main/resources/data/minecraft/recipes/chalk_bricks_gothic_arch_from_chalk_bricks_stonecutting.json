@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "edumia:chalk_bricks"
+  },
+  "result": "edumia:chalk_bricks_gothic_arch"
+}

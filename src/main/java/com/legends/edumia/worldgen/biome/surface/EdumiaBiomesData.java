@@ -1,5 +1,7 @@
 package com.legends.edumia.worldgen.biome.surface;
 
+import com.legends.edumia.blocks.blocksets.StoneSets;
+import com.legends.edumia.core.BlockLoader;
 import com.legends.edumia.worldgen.biome.EdumiaBiomeKeys;
 import com.legends.edumia.worldgen.biome.caves.CaveType;
 import net.minecraft.core.Holder;
@@ -84,23 +86,23 @@ public class EdumiaBiomesData {
 
         addBiome(new Color(101, 123, 243), new EdumiaBiome(-11, EdumiaBiomeKeys.FROZEN_OCEAN, Blocks.GRAVEL, Blocks.ICE, Blocks.STONE, CaveType.FROZEN));
         addBiome(new Color(75, 106, 199), new EdumiaBiome(-9, EdumiaBiomeKeys.OCEAN_COAST, Blocks.SAND, Blocks.STONE, Blocks.STONE));
-        addBiome(new Color(83, 129, 186), new EdumiaBiome(-8, EdumiaBiomeKeys.EDUMIA_RIVER, Blocks.WHITE_WOOL, Blocks.STONE, Blocks.STONE));
+        addBiome(new Color(83, 129, 186), new EdumiaBiome(-8, EdumiaBiomeKeys.EDUMIA_RIVER, Blocks.SAND, Blocks.STONE, Blocks.STONE));
         addBiome(new Color(255, 0, 110), new EdumiaBiome(-1, EdumiaBiomeKeys.GENSAI_REEF, Blocks.CALCITE, Blocks.STONE, Blocks.STONE));
 
 
 
         addBiome(new Color(156, 207, 113), new EdumiaBiome(4, EdumiaBiomeKeys.EDUMIA_VALES, Blocks.GRASS_BLOCK, Blocks.DIRT, Blocks.STONE));
-        addBiome(new Color(234, 222, 117), new EdumiaBiome(1, EdumiaBiomeKeys.GENSAI_BEACH, Blocks.WHITE_WOOL, Blocks.SANDSTONE, Blocks.STONE, CaveType.DESERT));
+        addBiome(new Color(234, 222, 117), new EdumiaBiome(1, EdumiaBiomeKeys.GENSAI_BEACH, Blocks.SAND, Blocks.SANDSTONE, Blocks.STONE, CaveType.DESERT));
         addBiome(new Color(132, 137, 124), new EdumiaBiome(35, EdumiaBiomeKeys.EDUMIA_FOOTHILLS, Blocks.STONE, Blocks.STONE, Blocks.STONE));
         addBiome(new Color(54, 75, 12), new EdumiaBiome(6, EdumiaBiomeKeys.DARK_ELF_FOREST, Blocks.GRASS_BLOCK, Blocks.DIRT, Blocks.STONE));
         addBiome(new Color(236, 236, 236), new EdumiaBiome(14, EdumiaBiomeKeys.EDUMIA_TUNDRA, Blocks.SNOW_BLOCK, Blocks.SNOW_BLOCK, Blocks.ICE, CaveType.FROZEN));
         addBiome(new Color(237, 229, 145), new EdumiaBiome(4, EdumiaBiomeKeys.ORC_DESERT, Blocks.SAND, Blocks.SAND, Blocks.SANDSTONE, CaveType.DESERT));
         addBiome(new Color(92, 42, 109), new EdumiaBiome(5, EdumiaBiomeKeys.GENSAI_SAKURA_GROVE, Blocks.GRASS_BLOCK, Blocks.DIRT, Blocks.CALCITE, Blocks.STONE));
         addBiome(new Color(178, 0, 255), new EdumiaBiome(35, EdumiaBiomeKeys.AVELION_MOUNTAINS, Blocks.STONE, Blocks.STONE, Blocks.STONE, CaveType.MISTIES));
-        addBiome(new Color(67, 193, 125), new EdumiaBiome(35, EdumiaBiomeKeys.AVELION_PLAINS, Blocks.GRASS_BLOCK, Blocks.DIRT, Blocks.CALCITE));
+        addBiome(new Color(67, 193, 125), new EdumiaBiome(5, EdumiaBiomeKeys.AVELION_PLAINS, Blocks.GRASS_BLOCK, Blocks.DIRT, Blocks.CALCITE));
         addBiome(new Color(129, 129, 129), new EdumiaBiome(53, EdumiaBiomeKeys.EDUMIA_MOUNTAINS, Blocks.SNOW_BLOCK, Blocks.STONE, Blocks.STONE, CaveType.MISTIES));
-        addBiome(new Color(36, 31, 31), new EdumiaBiome(47, EdumiaBiomeKeys.GENSAI_VOLCANO, Blocks.BLACK_WOOL, Blocks.BLACK_WOOL, Blocks.BLACK_WOOL, CaveType.ASHEN));
-
+        addBiome(new Color(36, 31, 31), new EdumiaBiome(15, EdumiaBiomeKeys.GENSAI_VOLCANO, BlockLoader.VOLCANIC_DIRT.get(), StoneSets.VOLCANIC_ROCK.block().get(), Blocks.BLACKSTONE, CaveType.ASHEN));
+        addBiome(new Color(92, 42, 235), new EdumiaBiome(5, EdumiaBiomeKeys.OGRE_FOREST, Blocks.GRASS_BLOCK, Blocks.DIRT, Blocks.CALCITE, Blocks.STONE));
         addBiome(new Color(121, 186, 111), new EdumiaBiome(4, EdumiaBiomeKeys.TAIGA_FOREST, Blocks.GRASS_BLOCK, Blocks.DIRT, Blocks.STONE));
 
         addBiome(new Color(48, 109, 42), new EdumiaBiome(7, EdumiaBiomeKeys.GENSAI_JUNGLE, Blocks.GRASS_BLOCK, Blocks.DIRT, Blocks.STONE));

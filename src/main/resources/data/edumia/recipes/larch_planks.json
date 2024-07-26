@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "edumia:larch_log"
+    }
+  ],
+  "result": {
+    "item": "edumia:larch_planks"
+  }
+}

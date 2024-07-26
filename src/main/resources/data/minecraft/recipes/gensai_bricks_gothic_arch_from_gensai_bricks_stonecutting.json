@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "edumia:gensai_bricks"
+  },
+  "result": "edumia:gensai_bricks_gothic_arch"
+}

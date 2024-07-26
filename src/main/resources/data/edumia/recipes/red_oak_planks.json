@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "edumia:red_oak_log"
+    }
+  ],
+  "result": {
+    "item": "edumia:red_oak_planks"
+  }
+}

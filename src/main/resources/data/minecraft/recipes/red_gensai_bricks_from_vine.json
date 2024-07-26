@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "mossy_Block{edumia:red_gensai_bricks}",
+  "ingredients": [
+    {
+      "item": "edumia:red_gensai_bricks"
+    },
+    {
+      "item": "minecraft:vine"
+    }
+  ],
+  "result": {
+    "item": "edumia:mossy_red_gensai_bricks"
+  }
+}

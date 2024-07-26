@@ -210,8 +210,8 @@ public class BuildingSets {
     private static <T extends Block> RegistryObject<BlockItem> registerBuildingBlockItem(String name, RegistryObject<T> block) {
         var item = ItemLoader.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
 
-        Item.BY_BLOCK.put(block.get(), item.get());
-        CreativeTabLoader.BUILDING_CONTENTS.add(item.get().getDefaultInstance());
+//        Item.BY_BLOCK.put(block.get(), item.get());
+//        CreativeTabLoader.BUILDING_CONTENTS.add(item.get().getDefaultInstance());
 
         return item;
     }

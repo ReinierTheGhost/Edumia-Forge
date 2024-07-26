@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "edumia:dragon_blood_log"
+    }
+  ],
+  "result": {
+    "item": "edumia:dragon_blood_planks"
+  }
+}

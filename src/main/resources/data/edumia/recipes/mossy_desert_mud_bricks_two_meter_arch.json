@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "l": {
+      "item": "edumia:mossy_desert_mud_bricks"
+    }
+  },
+  "pattern": [
+    "lll",
+    "ll ",
+    "l  "
+  ],
+  "result": {
+    "count": 3,
+    "item": "edumia:mossy_desert_mud_bricks_two_meter_arch"
+  },
+  "show_notification": true
+}

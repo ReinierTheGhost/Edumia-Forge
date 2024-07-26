@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_dark_high_elven_cobblestone": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "edumia:dark_high_elven_cobblestone"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "edumia:dark_high_elven_cobblestone_slab"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_dark_high_elven_cobblestone",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "edumia:dark_high_elven_cobblestone_slab"
+    ]
+  },
+  "sends_telemetry_event": false
+}

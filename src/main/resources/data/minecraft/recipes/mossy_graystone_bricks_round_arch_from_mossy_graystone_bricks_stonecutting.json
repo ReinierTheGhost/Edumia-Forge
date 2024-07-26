@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "edumia:mossy_graystone_bricks"
+  },
+  "result": "edumia:mossy_graystone_bricks_round_arch"
+}

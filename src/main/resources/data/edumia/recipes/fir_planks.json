@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "edumia:fir_log"
+    }
+  ],
+  "result": {
+    "item": "edumia:fir_planks"
+  }
+}

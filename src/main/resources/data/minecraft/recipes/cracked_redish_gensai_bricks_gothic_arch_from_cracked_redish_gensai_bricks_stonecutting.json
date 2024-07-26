@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "edumia:cracked_redish_gensai_bricks"
+  },
+  "result": "edumia:cracked_redish_gensai_bricks_gothic_arch"
+}

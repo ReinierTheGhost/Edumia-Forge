@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "edumia:mossy_blue_bricks"
+  },
+  "result": "edumia:mossy_blue_bricks_round_arch"
+}

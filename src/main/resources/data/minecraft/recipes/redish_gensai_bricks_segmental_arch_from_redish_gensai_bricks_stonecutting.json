@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "edumia:redish_gensai_bricks"
+  },
+  "result": "edumia:redish_gensai_bricks_segmental_arch"
+}

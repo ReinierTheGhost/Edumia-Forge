@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "edumia:cracked_volcanic_demon_bricks"
+  },
+  "result": "edumia:cracked_volcanic_demon_bricks_round_arch"
+}

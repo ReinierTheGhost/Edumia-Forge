@@ -31,7 +31,11 @@
     [],
     [],
     [
-      "minecraft:glow_lichen"
+      "edumia:tree/tropical/gensai_jungle_trees",
+      "minecraft:bamboo_light",
+      "minecraft:glow_lichen",
+      "minecraft:patch_grass_plain",
+      "minecraft:patch_tall_grass_2"
     ],
     [
       "minecraft:freeze_top_layer"

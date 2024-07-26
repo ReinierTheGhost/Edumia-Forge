@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:sand",
+    "edumia:white_sand",
+    "minecraft:dirt",
+    "minecraft:grass_block"
+  ]
+}

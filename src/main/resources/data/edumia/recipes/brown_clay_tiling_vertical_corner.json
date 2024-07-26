@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "l": {
+      "item": "edumia:brown_clay_tiling"
+    }
+  },
+  "pattern": [
+    "lll",
+    " ll",
+    "  l"
+  ],
+  "result": {
+    "count": 4,
+    "item": "edumia:brown_clay_tiling_vertical_corner"
+  },
+  "show_notification": true
+}

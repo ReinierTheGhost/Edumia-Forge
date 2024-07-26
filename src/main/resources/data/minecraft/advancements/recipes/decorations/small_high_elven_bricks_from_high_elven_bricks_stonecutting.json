@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_high_elven_bricks": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "edumia:high_elven_bricks"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:small_high_elven_bricks_from_high_elven_bricks_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_high_elven_bricks",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:small_high_elven_bricks_from_high_elven_bricks_stonecutting"
+    ]
+  },
+  "sends_telemetry_event": false
+}

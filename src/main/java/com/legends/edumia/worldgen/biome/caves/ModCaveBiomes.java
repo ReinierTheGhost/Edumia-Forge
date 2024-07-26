@@ -3,6 +3,7 @@ package com.legends.edumia.worldgen.biome.caves;
 import com.legends.edumia.worldgen.biome.BiomeColorsDTO;
 import com.legends.edumia.worldgen.biome.EdumiaBiomeKeys;
 import com.legends.edumia.worldgen.biome.surface.EdumiaBiome;
+import com.legends.edumia.worldgen.placedfeatures.crystrals.CrystalPlacedFeatures;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
 import net.minecraft.data.worldgen.BootstapContext;
@@ -115,7 +116,7 @@ public class ModCaveBiomes {
         undergroundOres.add(MiscOverworldPlacements.DISK_SAND);
         undergroundOres.add(MiscOverworldPlacements.DISK_CLAY);
         undergroundOres.add(MiscOverworldPlacements.DISK_GRAVEL);
-        //undergroundOres.add(CrystalPlacedFeatures.ELVEN_CRYSTAL);
+        undergroundOres.add(CrystalPlacedFeatures.ELVEN_CRYSTAL);
 
 
         return createBiome(biomeColors, spawnSettings, generationSettings, 0.5f, true);

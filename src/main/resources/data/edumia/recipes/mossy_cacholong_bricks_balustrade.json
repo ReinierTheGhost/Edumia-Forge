@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "l": {
+      "item": "edumia:mossy_cacholong_bricks"
+    }
+  },
+  "pattern": [
+    "lll",
+    " l ",
+    "lll"
+  ],
+  "result": {
+    "count": 3,
+    "item": "edumia:mossy_cacholong_bricks_balustrade"
+  },
+  "show_notification": true
+}

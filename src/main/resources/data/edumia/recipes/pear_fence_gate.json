@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "l": {
+      "item": "edumia:pear_planks"
+    },
+    "s": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "sls",
+    "sls"
+  ],
+  "result": {
+    "item": "edumia:pear_fence_gate"
+  },
+  "show_notification": true
+}

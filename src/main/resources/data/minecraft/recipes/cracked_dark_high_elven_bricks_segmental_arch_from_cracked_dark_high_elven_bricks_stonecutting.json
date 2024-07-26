@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "edumia:cracked_dark_high_elven_bricks"
+  },
+  "result": "edumia:cracked_dark_high_elven_bricks_segmental_arch"
+}

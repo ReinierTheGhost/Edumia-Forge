@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "edumia:ghost_gum_log"
+    }
+  ],
+  "result": {
+    "item": "edumia:ghost_gum_planks"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "edumia:diorite_bricks"
+  },
+  "result": "edumia:diorite_bricks_round_arch"
+}

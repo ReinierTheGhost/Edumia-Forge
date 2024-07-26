@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "l": {
+      "item": "edumia:small_dark_high_elven_bricks"
+    }
+  },
+  "pattern": [
+    "lll",
+    "ll ",
+    "l  "
+  ],
+  "result": {
+    "count": 3,
+    "item": "edumia:small_dark_high_elven_bricks_two_meter_arch"
+  },
+  "show_notification": true
+}

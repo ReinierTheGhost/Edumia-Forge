@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "edumia:charred_log"
+    }
+  ],
+  "result": {
+    "item": "edumia:charred_planks"
+  }
+}

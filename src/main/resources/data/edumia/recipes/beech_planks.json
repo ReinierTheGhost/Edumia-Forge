@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "edumia:beech_log"
+    }
+  ],
+  "result": {
+    "item": "edumia:beech_planks"
+  }
+}

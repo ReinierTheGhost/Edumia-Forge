@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "l": {
+      "item": "edumia:mossy_redish_gensai_bricks"
+    }
+  },
+  "pattern": [
+    "l l",
+    "l l",
+    "l l"
+  ],
+  "result": {
+    "count": 4,
+    "item": "edumia:mossy_redish_gensai_bricks_arrowslit"
+  },
+  "show_notification": true
+}

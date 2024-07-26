@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "edumia:willow_log"
+    }
+  ],
+  "result": {
+    "item": "edumia:willow_planks"
+  }
+}

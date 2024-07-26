@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "edumia:yellow_cobble_wall"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_yellow_cobble": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "edumia:yellow_cobble"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_yellow_cobble",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "edumia:yellow_cobble_wall"
+    ]
+  },
+  "sends_telemetry_event": false
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "edumia:mango_log"
+    }
+  ],
+  "result": {
+    "item": "edumia:mango_planks"
+  }
+}

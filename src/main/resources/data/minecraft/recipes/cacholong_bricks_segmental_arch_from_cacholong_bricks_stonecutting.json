@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "edumia:cacholong_bricks"
+  },
+  "result": "edumia:cacholong_bricks_segmental_arch"
+}

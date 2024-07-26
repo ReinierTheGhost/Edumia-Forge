@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "edumia:brown_sandstone_gold_bricks"
+  },
+  "result": "edumia:brown_sandstone_gold_bricks_segmental_arch"
+}

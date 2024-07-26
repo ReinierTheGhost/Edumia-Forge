@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "l": {
+      "item": "edumia:cracked_light_high_elven_bricks"
+    }
+  },
+  "pattern": [
+    "lll",
+    "l l",
+    "l l"
+  ],
+  "result": {
+    "count": 4,
+    "item": "edumia:cracked_light_high_elven_bricks_small_arch"
+  },
+  "show_notification": true
+}

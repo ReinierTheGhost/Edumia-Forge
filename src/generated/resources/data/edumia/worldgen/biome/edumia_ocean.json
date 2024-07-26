@@ -17,6 +17,9 @@
     [],
     [],
     [
+      "minecraft:disk_clay",
+      "minecraft:disk_gravel",
+      "minecraft:disk_sand",
       "minecraft:ore_andesite_lower",
       "minecraft:ore_andesite_upper",
       "minecraft:ore_coal_upper",
@@ -31,7 +34,13 @@
     [],
     [],
     [
-      "minecraft:glow_lichen"
+      "minecraft:flower_default",
+      "minecraft:glow_lichen",
+      "minecraft:kelp_cold",
+      "minecraft:patch_grass_forest",
+      "minecraft:patch_pumpkin",
+      "minecraft:patch_sugar_cane",
+      "minecraft:seagrass_normal"
     ],
     [
       "minecraft:freeze_top_layer"

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "edumia:andesite_bricks"
+  },
+  "result": "edumia:andesite_bricks_gothic_arch"
+}

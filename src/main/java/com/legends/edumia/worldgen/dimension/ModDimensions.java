@@ -15,6 +15,7 @@ import com.mojang.serialization.Lifecycle;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -103,5 +104,16 @@ public class ModDimensions {
 
     public static boolean isInEdumia(Level world){
         return world.dimension().location().equals(WORLD_KEY.location());
+    }
+
+    public static Component getDisplayName(ResourceKey<Level> dimensionWorldKey) {
+        ResourceLocation dimensionName = dimensionWorldKey.location();
+        String key = String.format("dimension.%s.%s", dimensionName.getNamespace(), dimensionName.getPath());
+        return Component.translatable(key);
+    }
+
+    public static ResourceKey<Level> getCurrentEdumiaDimensionOfFallback(Level level) {
+        Level dimension = level;
+        return dimension instanceof EdumiaDimensionType ? level.dimension() : WORLD_KEY;
     }
 }

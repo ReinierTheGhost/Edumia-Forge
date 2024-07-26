@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "edumia:cracked_high_elven_bricks"
+  },
+  "result": "edumia:cracked_high_elven_bricks_round_arch"
+}

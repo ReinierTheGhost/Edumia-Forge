@@ -1,13 +1,19 @@
 package com.legends.edumia;
 
-import com.legends.edumia.blocks.blocksets.BuildingSets;
+import com.legends.edumia.blocks.blocksets.*;
+import com.legends.edumia.core.BlockLoader;
 import com.legends.edumia.core.CreativeTabLoader;
+import com.legends.edumia.core.ItemLoader;
 import com.legends.edumia.worldgen.biome.EdumiaBiomeKeys;
 import com.legends.edumia.worldgen.biome.surface.EdumiaBiomesData;
 import com.legends.edumia.worldgen.chunkgen.ModChunkGenerators;
 import com.legends.edumia.worldgen.dimension.ModDimensions;
+import com.legends.edumia.worldgen.features.EdumiaFeatures;
 import com.legends.edumia.worldgen.gen.ModWorldGeneration;
 import com.legends.edumia.worldgen.map.EdumiaMapGeneration;
+import com.legends.edumia.worldgen.trees.EdumiaFoliagePlacerTypes;
+import com.legends.edumia.worldgen.trees.EdumiaTreeDecoratorTypes;
+import com.legends.edumia.worldgen.trees.EdumiaTrunkPlacerTypes;
 import com.mojang.logging.LogUtils;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -48,9 +54,25 @@ public class Edumia
     {
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        CreativeTabLoader.register(modEventBus);
-        BuildingSets.register(modEventBus);
 
+        BuildingSets.register(modEventBus);
+        ClayTilingSets.register(modEventBus);
+        GlassSets.register(modEventBus);
+        NotBrickBuildingSets.register(modEventBus);
+        PaperwallSets.register(modEventBus);
+        StoneSets.register(modEventBus);
+        WoodBlockSets.register(modEventBus);
+        ModNatureBlocks.register(modEventBus);
+        BlockLoader.register(modEventBus);
+        ItemLoader.register(modEventBus);
+        CreativeTabLoader.register(modEventBus);
+
+        EdumiaTrunkPlacerTypes.register(modEventBus);
+        EdumiaFoliagePlacerTypes.register(modEventBus);
+        EdumiaTreeDecoratorTypes.register(modEventBus);
+        EdumiaFeatures.register(modEventBus);
+
+        modEventBus.addListener(EdumiaClient::onClientSetup);
         ModChunkGenerators.register(modEventBus);
 
         ModDimensions.register();

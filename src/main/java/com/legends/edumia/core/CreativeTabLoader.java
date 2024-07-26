@@ -1,204 +1,254 @@
 package com.legends.edumia.core;
 
 import com.legends.edumia.Edumia;
-import com.legends.edumia.blocks.blocksets.BuildingSets;
+import com.legends.edumia.blocks.EdumiaLeavesBlock;
+import com.legends.edumia.blocks.blocksets.*;
+import com.legends.edumia.blocks.trees.BlackOakLeavesBlock;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+
+import static com.legends.edumia.blocks.blocksets.WoodBlockSets.LEAVES_STRENGTH;
 
 public class CreativeTabLoader {
 
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS =
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Edumia.MOD_ID);
 
-//    public static final ItemGroup LEGENDS_GROUP = FabricItemGroup.builder()
-//            .displayName(Text.literal("Rewards"))
-//                    .icon(() -> new ItemStack(ItemLoader.LEGENDS_COIN)).entries((displayContext, entries) -> {
-//                        entries.add(ItemLoader.LEGENDS_COIN);
-//                        entries.add(ItemLoader.ATLAS);
-//                        entries.add(BlockLoader.HIGH_ELVEN_CRYSTAL);
-////                        entries.add(BlockLoader.BIRCH_LOG_SMALL_BRANCH);
-////                        entries.add(BlockLoader.BIRCH_LOG_BRANCH);
-////                        entries.add(BlockLoader.BIRCH_LOG_LARGE_BRANCH);
-//                    }).build();
+    public static final RegistryObject<CreativeModeTab>  LEGENDS_GROUP = CREATIVE_MODE_TABS.register("edumia_rewards",() ->
+            CreativeModeTab.builder().icon(() -> new ItemStack(ItemLoader.LEGENDS_COIN.get()))
+                    .title(Component.translatable("creativetab.edumia_rewards"))
+                    .displayItems((displayParameters, entries) -> {
+                        entries.accept(ItemLoader.LEGENDS_COIN.get());
+                        entries.accept(ItemLoader.ATLAS.get());
+                    }).build());
 
-    public static final List<ItemStack> UTILITY_CONTENTS = new LinkedList<>();
-//    public static final ItemGroup UTILITY_GROUP = FabricItemGroup.builder()
-//            .displayName(Text.literal("Utilities"))
-//            .icon(() -> new ItemStack(WoodBlockSets.DRAGON_BLOOD.door())).entries((displayContext, entries) -> {
-//                for (ItemStack item : UTILITY_CONTENTS) {
-//                    entries.add(item);
-//                }
-//            }).build();
-//    public static final ItemGroup WEAPON_GROUP = FabricItemGroup.builder()
-//            .displayName(Text.literal("Weapons"))
-//            .icon(() -> new ItemStack(ItemLoader.ABOMINABLE_BLADE)).entries((displayContext, entries) -> {
-//                entries.add(ItemLoader.ABOMINABLE_BLADE);
-//            }).build();
+    public static final RegistryObject<CreativeModeTab>  UTILITY_GROUP =
+            CREATIVE_MODE_TABS.register("edumia_utilities",() ->
+                    CreativeModeTab.builder().icon(() -> new ItemStack(WoodBlockSets.DRAGON_BLOOD.door().get()))
+                            .title(Component.translatable("creativetab.edumia_utilities"))
+                            .displayItems((displayParameters, entries) -> {
+                                for (WoodBlockSets.SimpleBlockSet wood: WoodBlockSets.sets){
+                                    entries.accept(wood.door().get());
+                                    entries.accept(wood.trapdoor().get());
+                                }
+                            }).build());
 
-//    public static final ItemGroup MATERIAL_GROUP = FabricItemGroup.builder()
-//            .displayName(Text.literal("Materials"))
-//            .icon(() -> new ItemStack(ItemLoader.GENSAI_STEEL)).entries((displayContext, entries) -> {
-//                entries.add(ItemLoader.GENSAI_STEEL);
-//            }).build();
+    public static final RegistryObject<CreativeModeTab>  WEAPON_GROUP = CREATIVE_MODE_TABS.register("edumia_weapons",() ->
+            CreativeModeTab.builder().icon(() -> new ItemStack(ItemLoader.ABOMINABLE_BLADE.get()))
+                    .title(Component.translatable("creativetab.edumia_weapons"))
+                    .displayItems((displayParameters, entries) -> {
+                        entries.accept(ItemLoader.ABOMINABLE_BLADE.get());
+                    }).build());
 
-//    public static final ItemGroup TOOL_GROUP = FabricItemGroup.builder()
-//            .displayName(Text.literal("Tools"))
-//            .icon(() -> new ItemStack(ItemLoader.GENSAI_AXE)).entries((displayContext, entries) -> {
-//                entries.add(ItemLoader.GENSAI_AXE);
-//                entries.add(ItemLoader.GENSAI_HOE);
-//                entries.add(ItemLoader.GENSAI_PICKAXE);
-//                entries.add(ItemLoader.GENSAI_SHOVEL);
-//            }).build();
+    public static final RegistryObject<CreativeModeTab>  MATERIAL_GROUP = CREATIVE_MODE_TABS.register("edumia_materials",() ->
+            CreativeModeTab.builder().icon(() -> new ItemStack(ItemLoader.GENSAI_STEEL.get()))
+                    .title(Component.translatable("creativetab.edumia_materials"))
+                    .displayItems((displayParameters, entries) -> {
+                        entries.accept(ItemLoader.GENSAI_STEEL.get());
+                    }).build());
+
+    public static final RegistryObject<CreativeModeTab>  TOOL_GROUP = CREATIVE_MODE_TABS.register("edumia_tools",() ->
+            CreativeModeTab.builder().icon(() -> new ItemStack(ItemLoader.GENSAI_AXE.get()))
+                    .title(Component.translatable("creativetab.edumia_tools"))
+                    .displayItems((displayParameters, entries) -> {
+                        entries.accept(ItemLoader.GENSAI_AXE.get());
+                        entries.accept(ItemLoader.GENSAI_HOE.get());
+                        entries.accept(ItemLoader.GENSAI_PICKAXE.get());
+                        entries.accept(ItemLoader.GENSAI_SHOVEL.get());
+                    }).build());
+
+    public static final RegistryObject<CreativeModeTab>  EDUMIA_PLANTS =
+            CREATIVE_MODE_TABS.register("edumia_plants",() ->
+                    CreativeModeTab.builder().icon(() -> new ItemStack(BlockLoader.PAPYRUS.get()))
+                            .title(Component.translatable("creativetab.edumia_plants"))
+                            .displayItems((displayParameters, entries) -> {
+                                for (WoodBlockSets.SimpleBlockSet set : WoodBlockSets.sets){
+                                    if (set.leaves() != null){
+                                        entries.accept(set.leaves().get());
+                                    }
+                                }
+                                entries.accept(ModNatureBlocks.GHOST_GUM_LEAVES.get());
+                                entries.accept(ModNatureBlocks.HOLLY_LEAVES.get());
+                                entries.accept(ModNatureBlocks.MAPLE_LEAVES.get());
+                                entries.accept(ModNatureBlocks.BLACK_OAK_LEAVES.get());
+
+                                entries.accept(ModNatureBlocks.APPLE_LEAVES_RED.get());
+                                entries.accept(ModNatureBlocks.APPLE_LEAVES_GREEN.get());
+                                entries.accept(ModNatureBlocks.PEAR_LEAVES_FRUIT.get());
+                                entries.accept(ModNatureBlocks.CHERRY_LEAVES_FRUIT.get());
+                                entries.accept(ModNatureBlocks.TEST_SAPLING.get());
+                                entries.accept(ModNatureBlocks.APPLE_SAPLING.get());
+                                entries.accept(ModNatureBlocks.BANANA_SAPLING.get());
+                                entries.accept(ModNatureBlocks.ASPEN_SAPLING.get());
+                                entries.accept(ModNatureBlocks.GHOST_GUM_SAPLING.get());
+
+                                entries.accept(ModNatureBlocks.BEECH_SAPLING.get());
+                                entries.accept(ModNatureBlocks.BLACKTHORN_SAPLING.get());
+                                entries.accept(ModNatureBlocks.BLACK_OAK_SAPLING.get());
+                                entries.accept(ModNatureBlocks.CEDAR_SAPLING.get());
+                                entries.accept(ModNatureBlocks.CHERRY_SAPLING.get());
+                                entries.accept(ModNatureBlocks.CYPRESS_SAPLING.get());
+                                entries.accept(ModNatureBlocks.DRAGON_BLOOD_SAPLING.get());
+                                entries.accept(ModNatureBlocks.FIR_SAPLING.get());
+                                entries.accept(ModNatureBlocks.GREEN_OAK_SAPLING.get());
+                                entries.accept(ModNatureBlocks.HOLLY_SAPLING.get());
+                                entries.accept(ModNatureBlocks.LARCH_SAPLING.get());
+                                entries.accept(ModNatureBlocks.MAHOGANY_SAPLING.get());
+                                entries.accept(ModNatureBlocks.MAPLE_SAPLING.get());
+                                entries.accept(ModNatureBlocks.MANGO_SAPLING.get());
 
 
-    public static final List<ItemStack> PLANT_CONTENTS = new LinkedList<>();
-//
-//    public static final ItemGroup EDUMIA_PLANTS = FabricItemGroup.builder()
-//            .displayName(Text.literal("Edumia Plants"))
-//            .icon(() -> new ItemStack(BlockLoader.PAPYRUS)).entries((displayContext, entries) -> {
-//                for (ItemStack item : PLANT_CONTENTS) {
-//                    entries.add(item);
-//                }
-//                entries.add(BlockLoader.PAPYRUS);
-//                entries.add(BlockLoader.REEDS);
-//                entries.add(BlockLoader.DRIED_REEDS);
-//
-//                entries.add(BlockLoader.DRY_BUSH);
-//                entries.add(BlockLoader.TALL_DRY_BUSH);
-//                entries.add(BlockLoader.TALL_DEAD_BUSH);
-//
-//                entries.add(BlockLoader.ARID_GRASS);
-//                entries.add(BlockLoader.BLACK_GRASS);
-//                entries.add(BlockLoader.FLAX_GRASS);
-//                entries.add(BlockLoader.BEACH_GRASS);
-//                entries.add(BlockLoader.TALL_BEACH_GRASS);
-//                entries.add(BlockLoader.FROSTED_GRASS);
-//                entries.add(BlockLoader.TALL_FROSTED_GRASS);
-//
-//                entries.add(BlockLoader.PARASOL_MUSHROOM_1);
-//                entries.add(BlockLoader.PARASOL_MUSHROOM_2);
-//                entries.add(BlockLoader.PARASOL_MUSHROOM_TALL);
-//
-////                        flowers
-//                entries.add(BlockLoader.ASPHODEL);
-//                entries.add(BlockLoader.BLUE_DELPHINIUM);
-//                entries.add(BlockLoader.BLUEBELL);
-//                entries.add(BlockLoader.CALLA_LILY);
-//                entries.add(BlockLoader.CELSEMIUM);
-//                entries.add(BlockLoader.CHRYS_BLUE);
-//                entries.add(BlockLoader.CHRYS_ORANGE);
-//                entries.add(BlockLoader.CHRYS_PINK);
-//                entries.add(BlockLoader.CHRYS_WHITE);
-//                entries.add(BlockLoader.CHRYS_YELLOW);
-//                entries.add(BlockLoader.CROCUS);
-//                entries.add(BlockLoader.DAISY);
-//                entries.add(BlockLoader.DELPHINIUM);
-//                entries.add(BlockLoader.FLAX_FLOWERS);
-//                entries.add(BlockLoader.FOXGLOVE_ORANGE);
-//                entries.add(BlockLoader.FOXGLOVE_PINK);
-//                entries.add(BlockLoader.FOXGLOVE_RED);
-//                entries.add(BlockLoader.FOXGLOVE_WHITE);
-//                entries.add(BlockLoader.GERBERA_RED);
-//                entries.add(BlockLoader.GENSAI_ORCHID);
-//                entries.add(BlockLoader.GERBERA_YELLOW);
-//                entries.add(BlockLoader.HEATHER_BUSH);
-//                entries.add(BlockLoader.LAVENDER);
-//                entries.add(BlockLoader.MARIGOLD);
-//                entries.add(BlockLoader.PINK_ANEMONE);
-//                entries.add(BlockLoader.SIMBLELMYNE);
-//                entries.add(BlockLoader.TUBEROSE);
-//                entries.add(BlockLoader.YELLOW_IRIS);
-//                entries.add(BlockLoader.FLAME_OF_THE_SOUTH);
-//                entries.add(BlockLoader.HIBISCUS);
-//            })
-//            .build();
+                                entries.accept(ModNatureBlocks.PEAR_SAPLING.get());
 
-//    public static final ItemGroup EDUMIA_GEMS = FabricItemGroup.builder()
-//            .displayName(Text.literal("Edumia Gems"))
-//                    .icon(() -> new ItemStack(ItemLoader.GEM_PERFECT_AMBER)).entries((displayContext, entries) -> {
-//                        entries.add(ItemLoader.GEM_FINE_AMBER);
-//                        entries.add(ItemLoader.GEM_FLAWED_AMBER);
-//                        entries.add(ItemLoader.GEM_FLAWLESS_AMBER);
-//                        entries.add(ItemLoader.GEM_PERFECT_AMBER);
-//                        entries.add(ItemLoader.GEM_ROUGH_AMBER);
-//                        entries.add(ItemLoader.GEM_FINE_AMETHYST);
-//                        entries.add(ItemLoader.GEM_FLAWED_AMETHYST);
-//                        entries.add(ItemLoader.GEM_FLAWLESS_AMETHYST);
-//                        entries.add(ItemLoader.GEM_PERFECT_AMETHYST);
-//                        entries.add(ItemLoader.GEM_ROUGH_AMETHYST);
-//                        entries.add(ItemLoader.GEM_FINE_JADE);
-//                        entries.add(ItemLoader.GEM_FLAWED_JADE);
-//                        entries.add(ItemLoader.GEM_FLAWLESS_JADE);
-//                        entries.add(ItemLoader.GEM_PERFECT_JADE);
-//                        entries.add(ItemLoader.GEM_ROUGH_JADE);
-//                        entries.add(ItemLoader.GEM_FINE_JASPER);
-//                        entries.add(ItemLoader.GEM_FLAWED_JASPER);
-//                        entries.add(ItemLoader.GEM_FLAWLESS_JASPER);
-//                        entries.add(ItemLoader.GEM_PERFECT_JASPER);
-//                        entries.add(ItemLoader.GEM_ROUGH_JASPER);
-//                        entries.add(ItemLoader.GEM_FINE_RUBY);
-//                        entries.add(ItemLoader.GEM_FLAWED_RUBY);
-//                        entries.add(ItemLoader.GEM_FLAWLESS_RUBY);
-//                        entries.add(ItemLoader.GEM_PERFECT_RUBY);
-//                        entries.add(ItemLoader.GEM_ROUGH_RUBY);
-//                        entries.add(ItemLoader.GEM_FINE_SAPPHIRE);
-//                        entries.add(ItemLoader.GEM_FLAWED_SAPPHIRE);
-//                        entries.add(ItemLoader.GEM_FLAWLESS_SAPPHIRE);
-//                        entries.add(ItemLoader.GEM_PERFECT_SAPPHIRE);
-//                        entries.add(ItemLoader.GEM_ROUGH_SAPPHIRE);
-//                        entries.add(ItemLoader.GEM_FINE_TOPAZ);
-//                        entries.add(ItemLoader.GEM_FLAWED_TOPAZ);
-//                        entries.add(ItemLoader.GEM_FLAWLESS_TOPAZ);
-//                        entries.add(ItemLoader.GEM_PERFECT_TOPAZ);
-//                        entries.add(ItemLoader.GEM_ROUGH_TOPAZ);
-//                    })
-//                    .build();
-//
-//    public static final ItemGroup FOOD_GROUP = FabricItemGroup.builder()
-//            .displayName(Text.literal("Food"))
-//            .icon(() -> new ItemStack(ItemLoader.TEA_HIBISCUS_PETALS)).entries((displayContext, entries) -> {
-//                entries.add(ItemLoader.TEA_SAKURA_PETALS);
-//                entries.add(ItemLoader.TEA_MINT_LEAVES);
-//                entries.add(ItemLoader.TEA_LEAF);
-//                entries.add(ItemLoader.TEA_LILY_PETALS);
-//                entries.add(ItemLoader.TEA_WHITE_JADE_PETALS);
-//                entries.add(ItemLoader.TEA_HIBISCUS_PETALS);
-//                entries.add(ItemLoader.TEA_JASMINE_PETALS);
-//                entries.add(ItemLoader.TEA_CINNAMON_STICK);
-//                entries.add(ItemLoader.TEA_WHITE_DRAGON_PETALS);
-//
-//                entries.add(ItemLoader.BROCCOLI);
-//                entries.add(ItemLoader.PAPRIKA_GREEN);
-//                entries.add(ItemLoader.RAMEN);
-//                entries.add(ItemLoader.RAMEN_BEEF);
-//                entries.add(ItemLoader.RAMEN_PORK);
-//                entries.add(ItemLoader.RAMEN_SHRIMPS);
-//                entries.add(ItemLoader.RAMEN_VEGI);
-//                entries.add(ItemLoader.RED_GRAPES);
-//                entries.add(ItemLoader.RICE);
-//                entries.add(ItemLoader.RICE_BALL);
-//                entries.add(ItemLoader.SPINACH);
-//                entries.add(ItemLoader.TOMATO);
-//                entries.add(ItemLoader.CHEESE);
-//
-//                entries.add(ItemLoader.LETTUCE);
-//                entries.add(ItemLoader.BANANA);
-//                entries.add(ItemLoader.BANANA_BREAD);
-//                entries.add(ItemLoader.MANGO);
-//                entries.add(ItemLoader.DATE);
-//
-//
-//            }).build();
+                                entries.accept(ModNatureBlocks.PALM_SAPLING.get());
+                                entries.accept(ModNatureBlocks.PINE_SAPLING.get());
+                                entries.accept(ModNatureBlocks.RED_OAK_SAPLING.get());
+                                entries.accept(ModNatureBlocks.REDWOOD_SAPLING.get());
+                                entries.accept(ModNatureBlocks.SILVER_SPRUCE_SAPLING.get());
+                                entries.accept(ModNatureBlocks.WHITE_ASH_SAPLING.get());
+                                entries.accept(ModNatureBlocks.WILLOW_SAPLING.get());
+                                entries.accept(BlockLoader.PAPYRUS.get());
+                                entries.accept(BlockLoader.REEDS.get());
+                                entries.accept(BlockLoader.DRIED_REEDS.get());
+
+                                entries.accept(BlockLoader.DRY_BUSH.get());
+                                entries.accept(BlockLoader.TALL_DRY_BUSH.get());
+                                entries.accept(BlockLoader.TALL_DEAD_BUSH.get());
+
+                                entries.accept(BlockLoader.ARID_GRASS.get());
+                                entries.accept(BlockLoader.BLACK_GRASS.get());
+                                entries.accept(BlockLoader.FLAX_GRASS.get());
+                                entries.accept(BlockLoader.BEACH_GRASS.get());
+                                entries.accept(BlockLoader.TALL_BEACH_GRASS.get());
+                                entries.accept(BlockLoader.FROSTED_GRASS.get());
+                                entries.accept(BlockLoader.TALL_FROSTED_GRASS.get());
+
+                                entries.accept(BlockLoader.PARASOL_MUSHROOM_1.get());
+                                entries.accept(BlockLoader.PARASOL_MUSHROOM_2.get());
+                                entries.accept(BlockLoader.PARASOL_MUSHROOM_TALL.get());
+
+//                             flowers
+                                entries.accept(BlockLoader.ASPHODEL.get());
+                                entries.accept(BlockLoader.BLUE_DELPHINIUM.get());
+                                entries.accept(BlockLoader.BLUEBELL.get());
+                                entries.accept(BlockLoader.CALLA_LILY.get());
+                                entries.accept(BlockLoader.CELSEMIUM.get());
+                                entries.accept(BlockLoader.CHRYS_BLUE.get());
+                                entries.accept(BlockLoader.CHRYS_ORANGE.get());
+                                entries.accept(BlockLoader.CHRYS_PINK.get());
+                                entries.accept(BlockLoader.CHRYS_WHITE.get());
+                                entries.accept(BlockLoader.CHRYS_YELLOW.get());
+                                entries.accept(BlockLoader.CROCUS.get());
+                                entries.accept(BlockLoader.DAISY.get());
+                                entries.accept(BlockLoader.DELPHINIUM.get());
+                                entries.accept(BlockLoader.FLAX_FLOWERS.get());
+                                entries.accept(BlockLoader.FOXGLOVE_ORANGE.get());
+                               entries.accept(BlockLoader.FOXGLOVE_PINK.get());
+                               entries.accept(BlockLoader.FOXGLOVE_RED.get());
+                               entries.accept(BlockLoader.FOXGLOVE_WHITE.get());
+                               entries.accept(BlockLoader.GERBERA_RED.get());
+                               entries.accept(BlockLoader.GENSAI_ORCHID.get());
+                               entries.accept(BlockLoader.GERBERA_YELLOW.get());
+                               entries.accept(BlockLoader.HEATHER_BUSH.get());
+                               entries.accept(BlockLoader.LAVENDER.get());
+                               entries.accept(BlockLoader.MARIGOLD.get());
+                               entries.accept(BlockLoader.PINK_ANEMONE.get());
+                               entries.accept(BlockLoader.SIMBLELMYNE.get());
+                               entries.accept(BlockLoader.TUBEROSE.get());
+                               entries.accept(BlockLoader.YELLOW_IRIS.get());
+                               entries.accept(BlockLoader.FLAME_OF_THE_SOUTH.get());
+                               entries.accept(BlockLoader.HIBISCUS.get());
+                            }).build());
+
+
+    public static final RegistryObject<CreativeModeTab>  EDUMIA_GEMS = CREATIVE_MODE_TABS.register("edumia_gems",() ->
+            CreativeModeTab.builder().icon(() -> new ItemStack(ItemLoader.GEM_PERFECT_AMBER.get()))
+                    .title(Component.translatable("creativetab.edumia_gems"))
+                    .displayItems((displayParameters, entries) -> {
+                        entries.accept(ItemLoader.GEM_FINE_AMBER.get());
+                        entries.accept(ItemLoader.GEM_FLAWED_AMBER.get());
+                        entries.accept(ItemLoader.GEM_FLAWLESS_AMBER.get());
+                        entries.accept(ItemLoader.GEM_PERFECT_AMBER.get());
+                        entries.accept(ItemLoader.GEM_ROUGH_AMBER.get());
+                        entries.accept(ItemLoader.GEM_FINE_AMETHYST.get());
+                        entries.accept(ItemLoader.GEM_FLAWED_AMETHYST.get());
+                        entries.accept(ItemLoader.GEM_FLAWLESS_AMETHYST.get());
+                        entries.accept(ItemLoader.GEM_PERFECT_AMETHYST.get());
+                        entries.accept(ItemLoader.GEM_ROUGH_AMETHYST.get());
+                        entries.accept(ItemLoader.GEM_FINE_JADE.get());
+                        entries.accept(ItemLoader.GEM_FLAWED_JADE.get());
+                        entries.accept(ItemLoader.GEM_FLAWLESS_JADE.get());
+                        entries.accept(ItemLoader.GEM_PERFECT_JADE.get());
+                        entries.accept(ItemLoader.GEM_ROUGH_JADE.get());
+                        entries.accept(ItemLoader.GEM_FINE_JASPER.get());
+                        entries.accept(ItemLoader.GEM_FLAWED_JASPER.get());
+                        entries.accept(ItemLoader.GEM_FLAWLESS_JASPER.get());
+                        entries.accept(ItemLoader.GEM_PERFECT_JASPER.get());
+                        entries.accept(ItemLoader.GEM_ROUGH_JASPER.get());
+                        entries.accept(ItemLoader.GEM_FINE_RUBY.get());
+                        entries.accept(ItemLoader.GEM_FLAWED_RUBY.get());
+                        entries.accept(ItemLoader.GEM_FLAWLESS_RUBY.get());
+                        entries.accept(ItemLoader.GEM_PERFECT_RUBY.get());
+                        entries.accept(ItemLoader.GEM_ROUGH_RUBY.get());
+                        entries.accept(ItemLoader.GEM_FINE_SAPPHIRE.get());
+                        entries.accept(ItemLoader.GEM_FLAWED_SAPPHIRE.get());
+                        entries.accept(ItemLoader.GEM_FLAWLESS_SAPPHIRE.get());
+                        entries.accept(ItemLoader.GEM_PERFECT_SAPPHIRE.get());
+                        entries.accept(ItemLoader.GEM_ROUGH_SAPPHIRE.get());
+                        entries.accept(ItemLoader.GEM_FINE_TOPAZ.get());
+                        entries.accept(ItemLoader.GEM_FLAWED_TOPAZ.get());
+                        entries.accept(ItemLoader.GEM_FLAWLESS_TOPAZ.get());
+                        entries.accept(ItemLoader.GEM_PERFECT_TOPAZ.get());
+                        entries.accept(ItemLoader.GEM_ROUGH_TOPAZ.get());
+                    }).build());
+
+    public static final RegistryObject<CreativeModeTab>  FOOD_GROUP = CREATIVE_MODE_TABS.register("edumia_food",() ->
+            CreativeModeTab.builder().icon(() -> new ItemStack(ItemLoader.TEA_HIBISCUS_PETALS.get()))
+                    .title(Component.translatable("creativetab.edumia_food"))
+                    .displayItems((displayParameters, entries) -> {
+                        entries.accept(ItemLoader.TEA_SAKURA_PETALS.get());
+                entries.accept(ItemLoader.TEA_MINT_LEAVES.get());
+                entries.accept(ItemLoader.TEA_LEAF.get());
+                entries.accept(ItemLoader.TEA_LILY_PETALS.get());
+                entries.accept(ItemLoader.TEA_WHITE_JADE_PETALS.get());
+                entries.accept(ItemLoader.TEA_HIBISCUS_PETALS.get());
+                entries.accept(ItemLoader.TEA_JASMINE_PETALS.get());
+                entries.accept(ItemLoader.TEA_CINNAMON_STICK.get());
+                entries.accept(ItemLoader.TEA_WHITE_DRAGON_PETALS.get());
+
+                entries.accept(ItemLoader.BROCCOLI.get());
+                entries.accept(ItemLoader.PAPRIKA_GREEN.get());
+                entries.accept(ItemLoader.RAMEN.get());
+                entries.accept(ItemLoader.RAMEN_BEEF.get());
+                entries.accept(ItemLoader.RAMEN_PORK.get());
+                entries.accept(ItemLoader.RAMEN_SHRIMPS.get());
+                entries.accept(ItemLoader.RAMEN_VEGI.get());
+                entries.accept(ItemLoader.RED_GRAPES.get());
+                entries.accept(ItemLoader.RICE.get());
+                entries.accept(ItemLoader.RICE_BALL.get());
+                entries.accept(ItemLoader.SPINACH.get());
+                entries.accept(ItemLoader.TOMATO.get());
+                entries.accept(ItemLoader.CHEESE.get());
+
+                entries.accept(ItemLoader.LETTUCE.get());
+                entries.accept(ItemLoader.BANANA.get());
+                entries.accept(ItemLoader.BANANA_BREAD.get());
+                entries.accept(ItemLoader.MANGO.get());
+                entries.accept(ItemLoader.DATE.get());
+                    }).build());
 
 //
 //    public static final ItemGroup EDUMIA_ITEMS = Registry.register(Registries.ITEM_GROUP,
@@ -276,122 +326,188 @@ public class CreativeTabLoader {
 //                        entries.add(ItemLoader.BADGER_SPAWN_EGG);
 //                    })
 //                    .build());
-    public static final List<ItemStack> BUILDING_CONTENTS = new LinkedList<>();
+//    public static List<ItemStack> BUILDING_CONTENTS = new ArrayList<>() {
+//        {
+//            for (BuildingSets.BuildSet set : BuildingSets.buildSets){
+//                add(set.block().get().asItem().getDefaultInstance());
+//            }
+//        }
+//    };
 
 
-    public static final RegistryObject<CreativeModeTab> EDUMIA_BUILDING_BLOCKS = CREATIVE_MODE_TABS.register("course_tab",
+    public static final RegistryObject<CreativeModeTab> EDUMIA_BUILDING_BLOCKS = CREATIVE_MODE_TABS.register("edumia_building_blocks",
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(BuildingSets.GREEN_BASALT_BRICKS.block().get()))
-                    .title(Component.translatable("creativetab.course_tab"))
+                    .title(Component.translatable("creativetab.edumia_building_blocks"))
                     .displayItems((displayParameters, entries) -> {
-                        for (ItemStack item : BUILDING_CONTENTS) {
-                            entries.accept(item);
+                        for (BuildingSets.BuildSet set : BuildingSets.buildSets) {
+                            entries.accept(set.block().get());
+                            entries.accept(set.slab().get());
+                            entries.accept(set.stair().get());
+                            entries.accept(set.wall().get());
+                            if (set.pillar() != null){
+                                entries.accept(set.pillar().get());
+                                entries.accept(set.pillarSlab().get());
+                            }
+                            entries.accept(set.smallArch().get());
+                            entries.accept(set.twoMeterArch().get());
+                            entries.accept(set.roundArch().get());
+                            entries.accept(set.segmentalArch().get());
+                            entries.accept(set.gothicArch().get());
+                            entries.accept(set.balustrade().get());
                         }
-//                        entries.add(BlockLoader.BRICK_PILLAR);
-//                        entries.add(BlockLoader.STONE_PILLAR);
-//                        entries.add(BlockLoader.SANDSTONE_PILLAR);
-//
-//                        entries.add(BlockLoader.BLUE_BRICK);
-//                        entries.add(BlockLoader.BLUE_BRICK_SLAB);
-//                        entries.add(BlockLoader.BLUE_BRICK_STAIRS);
-//                        entries.add(BlockLoader.BLUE_BRICK_WALL);
-//
-//                        entries.add(BlockLoader.CHISELED_HIGH_ELVEN_BRICKS);
-//
-//                        entries.add(BlockLoader.HIGH_ELVEN_BRICK_TILING);
-//                        entries.add(BlockLoader.HIGH_ELVEN_BRICK_TILING_STAIRS);
-//                        entries.add(BlockLoader.HIGH_ELVEN_BRICK_TILING_SLAB);
-//
-//                        entries.add(BlockLoader.CHISELED_LIGHT_HIGH_ELVEN_BRICKS);
-//
-//                        entries.add(BlockLoader.LIGHT_HIGH_ELVEN_BRICK_TILING);
-//                        entries.add(BlockLoader.LIGHT_HIGH_ELVEN_BRICK_TILING_SLAB);
-//                        entries.add(BlockLoader.LIGHT_HIGH_ELVEN_BRICK_TILING_STAIRS);
-//
-//                        entries.add(BlockLoader.CHISELED_DARK_HIGH_ELVEN_BRICKS);
-//
-//                        entries.add(BlockLoader.DARK_HIGH_ELVEN_BRICK_TILING);
-//                        entries.add(BlockLoader.DARK_HIGH_ELVEN_BRICK_TILING_STAIRS);
-//                        entries.add(BlockLoader.DARK_HIGH_ELVEN_BRICK_TILING_SLAB);
-//
-//                        entries.add(BlockLoader.CRACKED_GREEN_BASALT);
-//                        entries.add(BlockLoader.CRACKED_GREEN_BASALT_SLAB);
-//                        entries.add(BlockLoader.CRACKED_GREEN_BASALT_STAIRS);
-//                        entries.add(BlockLoader.CRACKED_GREEN_BASALT_WALL);
-//
-//                        entries.add(BlockLoader.CHISELED_BASALT);
-//
-//                        entries.add(BlockLoader.CARVED_BROWN_SANDSTONE_BRICKS);
-//
-//                        entries.add(BlockLoader.CARVED_CACHOLONG_BRICKS);
-//
-//                        entries.add(BlockLoader.CARVED_BLACK_DEMON_BRICKS);
-//
-//                        entries.add(BlockLoader.CARVED_BLUE_BRICKS);
-//
-//                        entries.add(BlockLoader.CARVED_DEMON_BASALT_BRICKS);
-//
-//                        entries.add(BlockLoader.CARVED_VOLCANIC_DEMON_BRICKS);
-//
-//                        entries.add(BlockLoader.CARVED_RED_GENSAI_BRICKS);
-//
-//                        entries.add(BlockLoader.CHISELED_ANDESITE);
-//                        entries.add(BlockLoader.CHISELED_DRIPSTONE);
-//                        entries.add(BlockLoader.CHISELED_DIORITE);
-//                        entries.add(BlockLoader.CHISELED_GRANITE);
-//                        entries.add(BlockLoader.DIRTY_CHALK);
+
+                        for (ClayTilingSets.ClayTilingSet set : ClayTilingSets.sets) {
+                            entries.accept(set.block().get());
+                            entries.accept(set.slab().get());
+                            entries.accept(set.stairs().get());
+                            entries.accept(set.corner().get());
+                        }
+
+                        for (NotBrickBuildingSets.BuildSet set : NotBrickBuildingSets.buildSets) {
+                            entries.accept(set.block().get());
+                            entries.accept(set.slab().get());
+                            entries.accept(set.stair().get());
+                            if (set.wall() != null){
+                                entries.accept(set.wall().get());
+                            }
+                        }
+                       entries.accept(BlockLoader.BRICK_PILLAR.get());
+                       entries.accept(BlockLoader.STONE_PILLAR.get());
+                       entries.accept(BlockLoader.SANDSTONE_PILLAR.get());
+
+                       entries.accept(BlockLoader.BLUE_BRICK.get());
+                       entries.accept(BlockLoader.BLUE_BRICK_SLAB.get());
+                       entries.accept(BlockLoader.BLUE_BRICK_STAIRS.get());
+                       entries.accept(BlockLoader.BLUE_BRICK_WALL.get());
+
+                       entries.accept(BlockLoader.CHISELED_HIGH_ELVEN_BRICKS.get());
+
+                       entries.accept(BlockLoader.HIGH_ELVEN_BRICK_TILING.get());
+                       entries.accept(BlockLoader.HIGH_ELVEN_BRICK_TILING_STAIRS.get());
+                       entries.accept(BlockLoader.HIGH_ELVEN_BRICK_TILING_SLAB.get());
+
+                       entries.accept(BlockLoader.CHISELED_LIGHT_HIGH_ELVEN_BRICKS.get());
+
+                       entries.accept(BlockLoader.LIGHT_HIGH_ELVEN_BRICK_TILING.get());
+                       entries.accept(BlockLoader.LIGHT_HIGH_ELVEN_BRICK_TILING_SLAB.get());
+                       entries.accept(BlockLoader.LIGHT_HIGH_ELVEN_BRICK_TILING_STAIRS.get());
+
+                       entries.accept(BlockLoader.CHISELED_DARK_HIGH_ELVEN_BRICKS.get());
+
+                       entries.accept(BlockLoader.DARK_HIGH_ELVEN_BRICK_TILING.get());
+                       entries.accept(BlockLoader.DARK_HIGH_ELVEN_BRICK_TILING_STAIRS.get());
+                       entries.accept(BlockLoader.DARK_HIGH_ELVEN_BRICK_TILING_SLAB.get());
+
+                       entries.accept(BlockLoader.CRACKED_GREEN_BASALT.get());
+                       entries.accept(BlockLoader.CRACKED_GREEN_BASALT_SLAB.get());
+                       entries.accept(BlockLoader.CRACKED_GREEN_BASALT_STAIRS.get());
+                       entries.accept(BlockLoader.CRACKED_GREEN_BASALT_WALL.get());
+
+                       entries.accept(BlockLoader.CHISELED_BASALT.get());
+
+                       entries.accept(BlockLoader.CARVED_BROWN_SANDSTONE_BRICKS.get());
+
+                       entries.accept(BlockLoader.CARVED_CACHOLONG_BRICKS.get());
+
+                       entries.accept(BlockLoader.CARVED_BLACK_DEMON_BRICKS.get());
+
+                       entries.accept(BlockLoader.CARVED_BLUE_BRICKS.get());
+
+                       entries.accept(BlockLoader.CARVED_DEMON_BASALT_BRICKS.get());
+
+                       entries.accept(BlockLoader.CARVED_VOLCANIC_DEMON_BRICKS.get());
+
+                       entries.accept(BlockLoader.CARVED_RED_GENSAI_BRICKS.get());
+
+                       entries.accept(BlockLoader.CHISELED_ANDESITE.get());
+                       entries.accept(BlockLoader.CHISELED_DRIPSTONE.get());
+                       entries.accept(BlockLoader.CHISELED_DIORITE.get());
+                       entries.accept(BlockLoader.CHISELED_GRANITE.get());
+                       entries.accept(BlockLoader.DIRTY_CHALK.get());
 
                     }).build());
 
-    public static final List<ItemStack> WOOD_BLOCKS_CONTENTS = new LinkedList<>();
-//    public static final ItemGroup EDUMIA_WOOD_BLOCKS = FabricItemGroup.builder()
-//            .displayName(Text.literal("Edumia Wood Blocks"))
-//                    .icon(() -> new ItemStack(WoodBlockSets.APPLE.planks().asItem()))
-//                    .entries((displayContext, entries) ->  {
-//                        for (ItemStack item: WOOD_BLOCKS_CONTENTS){
-//                            entries.add(item);
-//                        }
-//                    }).build();
+    public static final RegistryObject<CreativeModeTab>  EDUMIA_WOOD_BLOCKS =
+            CREATIVE_MODE_TABS.register("edumia_wood_blocks",() ->
+                    CreativeModeTab.builder().icon(() -> new ItemStack(WoodBlockSets.APPLE.planks().get()))
+                            .title(Component.translatable("creativetab.edumia_wood_blocks"))
+                            .displayItems((displayParameters, entries) -> {
+                                for (WoodBlockSets.SimpleBlockSet wood: WoodBlockSets.sets){
+                                    entries.accept(wood.log().get());
+                                    entries.accept(wood.wood().get());
+                                    entries.accept(wood.woodStairs().get());
+                                    entries.accept(wood.woodSlab().get());
+                                    entries.accept(wood.woodWall().get());
+                                    entries.accept(wood.woodFence().get());
+                                    entries.accept(wood.strippedLog().get());
+                                    entries.accept(wood.strippedWood().get());
+                                    entries.accept(wood.strippedWoodStairs().get());
+                                    entries.accept(wood.strippedWoodSlab().get());
+                                    entries.accept(wood.strippedWoodWall().get());
+                                    entries.accept(wood.strippedWoodFence().get());
+                                    entries.accept(wood.planks().get());
+                                    entries.accept(wood.planksSlab().get());
+                                    entries.accept(wood.planksStairs().get());
+                                    entries.accept(wood.planksSlab().get());
+                                    entries.accept(wood.planksFence().get());
+                                    entries.accept(wood.planksGate().get());
+                                    entries.accept(wood.pressurePlate().get());
+                                    entries.accept(wood.button().get());
+                                    entries.accept(wood.beam().get());
+                                }
 
-    public static final List<ItemStack> NATURAL_STONE_BLOCKS_CONTENTS = new LinkedList<>();
-//    public static final ItemGroup EDUMIA_NATURAL_STONE_BLOCKS = FabricItemGroup.builder()
-//            .displayName(Text.literal("Edumia Natural stone blocks"))
-//                    .icon(() -> new ItemStack(BlockLoader.WHITE_SAND)).entries((displayContext, entries) -> {
-//                        for (ItemStack item : NATURAL_STONE_BLOCKS_CONTENTS){
-//                            entries.add(item);
-//                        }
-//
-//
-//                        entries.add(BlockLoader.CRACKED_GREEN_BASALT);
-//                        entries.add(BlockLoader.CRACKED_GREEN_BASALT_SLAB);
-//                        entries.add(BlockLoader.CRACKED_GREEN_BASALT_STAIRS);
-//                        entries.add(BlockLoader.CRACKED_GREEN_BASALT_WALL);
-//
-//                        entries.add(BlockLoader.CHISELED_BASALT);
-//
-//                        entries.add(BlockLoader.BROWN_SANDSTONE_SLATES);
-//
-//                        entries.add(BlockLoader.DIRTY_CHALK);
-////
-//                        entries.add(BlockLoader.SAND_LAYER);
-//                        entries.add(BlockLoader.RED_SAND_LAYER);
-//                        entries.add(BlockLoader.WHITE_SAND);
-//                        entries.add(BlockLoader.WHITE_SAND_LAYER);
-//
-//                        entries.add(BlockLoader.VOLCANIC_DIRT);
-//                        entries.add(BlockLoader.VOLCANIC_DIRT_PATH);
-//                        entries.add(BlockLoader.VOLCANIC_GRAVEL);
-//                    })
-//                    .build();
+                                for (WoodBlockSets.SimpleVanillaBlocks wood: WoodBlockSets.beams){
+                                    entries.accept(wood.beam().get());
+                                }
+                            }).build());
 
-    public static final List<ItemStack> GLASS_CONTENTS = new LinkedList<>();
-//    public static final ItemGroup EDUMIA_GLASS_BLOCKS = FabricItemGroup.builder()
-//            .displayName(Text.literal("Edumia Glass Blocks"))
-//            .icon(() -> new ItemStack(GlassSets.FINE_GLASS.block().asItem()))
-//            .entries((displayContext, entries) ->  {
-//                for (ItemStack item: GLASS_CONTENTS){
-//                    entries.add(item);
-//                }
-//            }).build();
+
+    public static final RegistryObject<CreativeModeTab>  EDUMIA_NATURAL_STONE_BLOCKS =
+            CREATIVE_MODE_TABS.register("edumia_natural_stone_blocks",() ->
+            CreativeModeTab.builder().icon(() -> new ItemStack(GlassSets.FINE_GLASS.block().get()))
+                    .title(Component.translatable("creativetab.edumia_natural_stone_blocks"))
+                    .displayItems((displayParameters, entries) -> {
+                        for (StoneSets.StoneSet item: StoneSets.naturalSets){
+                            entries.accept(item.block().get());
+                            entries.accept(item.slab().get());
+                            entries.accept(item.stair().get());
+                            entries.accept(item.wall().get());
+                        }
+
+                        entries.accept(BlockLoader.CRACKED_GREEN_BASALT.get());
+                        entries.accept(BlockLoader.CRACKED_GREEN_BASALT_SLAB.get());
+                       entries.accept(BlockLoader.CRACKED_GREEN_BASALT_STAIRS.get());
+                       entries.accept(BlockLoader.CRACKED_GREEN_BASALT_WALL.get());
+
+                       entries.accept(BlockLoader.CHISELED_BASALT.get());
+
+                       entries.accept(BlockLoader.BROWN_SANDSTONE_SLATES.get());
+
+                       entries.accept(BlockLoader.DIRTY_CHALK.get());
+//
+                       entries.accept(BlockLoader.SAND_LAYER.get());
+                       entries.accept(BlockLoader.RED_SAND_LAYER.get());
+                       entries.accept(BlockLoader.WHITE_SAND.get());
+                       entries.accept(BlockLoader.WHITE_SAND_LAYER.get());
+
+                       entries.accept(BlockLoader.VOLCANIC_DIRT.get());
+                       entries.accept(BlockLoader.VOLCANIC_DIRT_PATH.get());
+                       entries.accept(BlockLoader.VOLCANIC_GRAVEL.get());
+                    }).build());
+
+    public static final RegistryObject<CreativeModeTab>  EDUMIA_GLASS_BLOCKS = CREATIVE_MODE_TABS.register("edumia_glass_blocks",() ->
+            CreativeModeTab.builder().icon(() -> new ItemStack(GlassSets.FINE_GLASS.block().get()))
+                    .title(Component.translatable("creativetab.edumia_glass_blocks"))
+                    .displayItems((displayParameters, entries) -> {
+                for (GlassSets.GlassSet item: GlassSets.glassSets){
+                    entries.accept(item.pane().get());
+                    entries.accept(item.block().get());
+                }
+
+                for (PaperwallSets.PaperwallSet set : PaperwallSets.paperwallSets){
+                    entries.accept(set.pane().get());
+                }
+            }).build());
 
     public static void register(IEventBus eventBus) {
         CREATIVE_MODE_TABS.register(eventBus);

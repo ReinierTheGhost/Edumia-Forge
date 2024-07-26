@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "edumia:demon_basalt_bricks"
+  },
+  "result": "edumia:demon_basalt_bricks_gothic_arch"
+}

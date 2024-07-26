@@ -1,0 +1,32 @@
+{
+  "replace": false,
+  "values": [
+    "edumia:apple_pressure_plate",
+    "edumia:aspen_pressure_plate",
+    "edumia:banana_pressure_plate",
+    "edumia:beech_pressure_plate",
+    "edumia:black_oak_pressure_plate",
+    "edumia:blackthorn_pressure_plate",
+    "edumia:cedar_pressure_plate",
+    "edumia:cherry_pressure_plate",
+    "edumia:cypress_pressure_plate",
+    "edumia:charred_pressure_plate",
+    "edumia:dragon_blood_pressure_plate",
+    "edumia:fir_pressure_plate",
+    "edumia:ghost_gum_pressure_plate",
+    "edumia:green_oak_pressure_plate",
+    "edumia:holly_pressure_plate",
+    "edumia:larch_pressure_plate",
+    "edumia:mahogany_pressure_plate",
+    "edumia:mango_pressure_plate",
+    "edumia:maple_pressure_plate",
+    "edumia:palm_pressure_plate",
+    "edumia:pear_pressure_plate",
+    "edumia:pine_pressure_plate",
+    "edumia:red_oak_pressure_plate",
+    "edumia:redwood_pressure_plate",
+    "edumia:silver_spruce_pressure_plate",
+    "edumia:white_ash_pressure_plate",
+    "edumia:willow_pressure_plate"
+  ]
+}

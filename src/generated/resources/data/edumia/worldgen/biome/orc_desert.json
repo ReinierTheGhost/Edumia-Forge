@@ -17,6 +17,9 @@
     [],
     [],
     [
+      "minecraft:disk_clay",
+      "minecraft:disk_gravel",
+      "minecraft:disk_sand",
       "minecraft:ore_andesite_lower",
       "minecraft:ore_andesite_upper",
       "minecraft:ore_coal_upper",
@@ -31,13 +34,18 @@
     [],
     [],
     [
-      "minecraft:glow_lichen"
+      "edumia:boulders/big_sandstone_boulder",
+      "edumia:boulders/sandstone_boulder",
+      "minecraft:glow_lichen",
+      "minecraft:patch_dead_bush_2",
+      "minecraft:patch_grass_savanna",
+      "minecraft:patch_sugar_cane"
     ],
     [
       "minecraft:freeze_top_layer"
     ]
   ],
-  "has_precipitation": true,
+  "has_precipitation": false,
   "spawn_costs": {},
   "spawners": {
     "ambient": [],
@@ -49,5 +57,5 @@
     "water_ambient": [],
     "water_creature": []
   },
-  "temperature": 0.5
+  "temperature": 0.8
 }

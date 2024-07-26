@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "l": {
+      "item": "edumia:small_dark_high_elven_bricks"
+    }
+  },
+  "pattern": [
+    "l l",
+    "l l",
+    "l l"
+  ],
+  "result": {
+    "count": 4,
+    "item": "edumia:small_dark_high_elven_bricks_arrowslit"
+  },
+  "show_notification": true
+}

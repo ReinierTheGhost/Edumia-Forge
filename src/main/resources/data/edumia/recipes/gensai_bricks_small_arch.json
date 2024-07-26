@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "l": {
+      "item": "edumia:gensai_bricks"
+    }
+  },
+  "pattern": [
+    "lll",
+    "l l",
+    "l l"
+  ],
+  "result": {
+    "count": 4,
+    "item": "edumia:gensai_bricks_small_arch"
+  },
+  "show_notification": true
+}

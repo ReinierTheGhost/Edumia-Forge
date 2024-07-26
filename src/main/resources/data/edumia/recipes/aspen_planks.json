@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "edumia:aspen_log"
+    }
+  ],
+  "result": {
+    "item": "edumia:aspen_planks"
+  }
+}

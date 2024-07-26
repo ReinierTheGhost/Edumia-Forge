@@ -31,7 +31,14 @@
     [],
     [],
     [
-      "minecraft:glow_lichen"
+      "edumia:boulders/big_granite_boulder",
+      "edumia:boulders/big_sandstone_boulder",
+      "edumia:boulders/big_stone_boulder",
+      "edumia:boulders/granite_boulder",
+      "edumia:boulders/sandstone_boulder",
+      "edumia:boulders/stone_boulder",
+      "minecraft:glow_lichen",
+      "minecraft:patch_cactus_desert"
     ],
     [
       "minecraft:freeze_top_layer"

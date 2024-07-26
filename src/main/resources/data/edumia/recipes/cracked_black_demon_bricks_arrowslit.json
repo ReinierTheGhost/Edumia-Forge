@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "l": {
+      "item": "edumia:cracked_black_demon_bricks"
+    }
+  },
+  "pattern": [
+    "l l",
+    "l l",
+    "l l"
+  ],
+  "result": {
+    "count": 4,
+    "item": "edumia:cracked_black_demon_bricks_arrowslit"
+  },
+  "show_notification": true
+}

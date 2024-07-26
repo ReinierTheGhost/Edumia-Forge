@@ -6,6 +6,7 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 
 import java.awt.*;
+import java.util.function.Supplier;
 
 public class EdumiaBiome {
     public int height;
@@ -20,16 +21,16 @@ public class EdumiaBiome {
     public EdumiaBiome(){
 
     }
-    public EdumiaBiome(int height, ResourceKey<Biome> biome, Block surfaceBlock, Block underSurfaceBlock, Block stoneBlock) {
-        this(height, biome, surfaceBlock, underSurfaceBlock, stoneBlock, stoneBlock, CaveType.DEFAULT);
+    public EdumiaBiome(int height, ResourceKey<Biome> biome, Supplier<Block> surfaceBlock, Supplier<Block> underSurfaceBlock, Supplier<Block> stoneBlock) {
+        this(height, biome, surfaceBlock.get(), underSurfaceBlock.get(), stoneBlock.get(), stoneBlock.get(), CaveType.DEFAULT);
     }
 
-    public EdumiaBiome(int height, ResourceKey<Biome> biome, Block surfaceBlock, Block underSurfaceBlock, Block stoneBlock, CaveType caveType) {
-        this(height, biome, surfaceBlock, underSurfaceBlock, stoneBlock, stoneBlock, caveType);
+    public EdumiaBiome(int height, ResourceKey<Biome> biome, Supplier<Block> surfaceBlock, Supplier<Block> underSurfaceBlock, Supplier<Block> stoneBlock, CaveType caveType) {
+        this(height, biome, surfaceBlock.get(), underSurfaceBlock.get(), stoneBlock.get(), stoneBlock.get(), caveType);
     }
 
-    public EdumiaBiome(int height, ResourceKey<Biome> biome, Block surfaceBlock, Block underSurfaceBlock, Block upperStoneBlock, Block stoneBlock) {
-        this(height, biome, surfaceBlock, underSurfaceBlock, upperStoneBlock, stoneBlock, CaveType.DEFAULT);
+    public EdumiaBiome(int height, ResourceKey<Biome> biome, Supplier<Block> surfaceBlock, Supplier<Block> underSurfaceBlock, Supplier<Block> upperStoneBlock, Supplier<Block> stoneBlock) {
+        this(height, biome, surfaceBlock.get(), underSurfaceBlock.get(), upperStoneBlock.get(), stoneBlock.get(), CaveType.DEFAULT);
     }
 
     public EdumiaBiome(int height, ResourceKey<Biome> biome, Block surfaceBlock, Block underSurfaceBlock, Block upperStoneBlock, Block stoneBlock, CaveType caveType) {

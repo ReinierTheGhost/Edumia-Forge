@@ -1,5 +1,12 @@
 package com.legends.edumia;
 
+import com.ferreusveritas.dynamictrees.api.GatherDataHelper;
+import com.ferreusveritas.dynamictrees.api.registry.RegistryHandler;
+import com.ferreusveritas.dynamictrees.block.leaves.LeavesProperties;
+import com.ferreusveritas.dynamictrees.systems.fruit.Fruit;
+import com.ferreusveritas.dynamictrees.systems.pod.Pod;
+import com.ferreusveritas.dynamictrees.tree.family.Family;
+import com.ferreusveritas.dynamictrees.tree.species.Species;
 import com.legends.edumia.blocks.blocksets.*;
 import com.legends.edumia.core.BlockLoader;
 import com.legends.edumia.core.CreativeTabLoader;
@@ -29,6 +36,8 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig.Type;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLConstructModEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.resource.PathPackResources;
 import org.slf4j.Logger;
@@ -44,7 +53,7 @@ public class Edumia
     public static final String MOD_ID = "edumia";
     // Directly reference a slf4j logger
 
-    public static final String MOD_VERSION = "alpha-1.4.0-1.20.1";
+    public static final String MOD_VERSION = "1.4.0-1.20.1";
     private static final Logger LOGGER = LogUtils.getLogger();
     // Create a Deferred Register to hold Blocks which will all be registered under the "edumia" namespace
 
@@ -53,7 +62,7 @@ public class Edumia
     public Edumia()
     {
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-
+        modEventBus.addListener(this::commonSetup);
 
         BuildingSets.register(modEventBus);
         ClayTilingSets.register(modEventBus);
@@ -77,8 +86,8 @@ public class Edumia
 
         ModDimensions.register();
         EdumiaBiomeKeys.registerModBiomes();
-        EdumiaBiomesData edumiaBiomesData = new EdumiaBiomesData();
-        edumiaBiomesData.loadBiomes();
+//        EdumiaBiomesData edumiaBiomesData = new EdumiaBiomesData();
+//        edumiaBiomesData.loadBiomes();
         ModWorldGeneration.generateModWorldGen();
 
         try {
@@ -87,10 +96,14 @@ public class Edumia
             throw new RuntimeException(e);
         }
 
-
         MinecraftForge.EVENT_BUS.register(this);
+    }
+    private void commonSetup(final FMLCommonSetupEvent event) {
+        EdumiaBiomesData edumiaBiomesData = new EdumiaBiomesData();
+        edumiaBiomesData.loadBiomes();
 
     }
+
 
     public static ResourceLocation location(String name) {
         return new ResourceLocation(MOD_ID, name);

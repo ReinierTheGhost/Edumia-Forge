@@ -1,4 +1,4 @@
-// 1.20.1	2024-07-26T14:53:18.7355693	Registries
+// 1.20.1	2024-07-26T15:58:52.0298631	Registries
 dcab4807982c412c48599df57f54e0ac956dae83 data/edumia/worldgen/biome/avelion_mountains.json
 4d7f0415a427886073ecc4d00c560ab4c1f43b61 data/edumia/worldgen/biome/avelion_plains.json
 2bf132af274d0dec469080deecccd5f593f33d32 data/edumia/worldgen/biome/basalt_cave.json
@@ -58,6 +58,14 @@ be7eb9f720fda862f08f0e675b36271fdf1a9421 data/edumia/worldgen/configured_feature
 cbc01407f81c547e1384753574d83f4983bc738b data/edumia/worldgen/configured_feature/noting.json
 aee52253c5cb8dcb9e126ce9e991a2b65b56f911 data/edumia/worldgen/configured_feature/ocean/reef/reef.json
 b81d081efa664613a9fdaebee17d74bd9d8a0d15 data/edumia/worldgen/configured_feature/reeds.json
+559db7750d67ca23aba889cc2cec7d684dd0b5e1 data/edumia/worldgen/configured_feature/trees/fruit_trees/apple/apple_tree.json
+c17ebfddcbad33dfc3754f9d0cb54324e671867e data/edumia/worldgen/configured_feature/trees/fruit_trees/apple/apple_tree_bees.json
+b29fbf0fe565f68f4b68bdaba5c7d23a84e46553 data/edumia/worldgen/configured_feature/trees/fruit_trees/apple/green_apple_tree.json
+494b5312222cb4a05e47ccd5d4af9e69cbb6894f data/edumia/worldgen/configured_feature/trees/fruit_trees/apple/green_apple_tree_bees.json
+5954c8683e68c3af21d1fc0c3e83e70a7442b1a2 data/edumia/worldgen/configured_feature/trees/fruit_trees/apple/mixed_apple_tree.json
+781ffcb426b938a7e1ce7052c54b65ea02375f03 data/edumia/worldgen/configured_feature/trees/fruit_trees/apple/mixed_apple_tree_bees.json
+ae8b99330d2e9e93541254c7809f3aa6e9dabaae data/edumia/worldgen/configured_feature/trees/fruit_trees/apple/red_apple_tree.json
+e83debb672e0af51beb143f3fc4f13419c4e3c80 data/edumia/worldgen/configured_feature/trees/fruit_trees/apple/red_apple_tree_bees.json
 8d5581710f633997cc8621e12540f8c3142e17bb data/edumia/worldgen/configured_feature/tree/apple_tree.json
 71871db13b0e6aa23db8c1f7597790f114370ccf data/edumia/worldgen/configured_feature/tree/beech/beech_tree.json
 fb3e86c67978fd0f0a3a600b3b12004f78ddb186 data/edumia/worldgen/configured_feature/tree/beech/big_beech_tree.json

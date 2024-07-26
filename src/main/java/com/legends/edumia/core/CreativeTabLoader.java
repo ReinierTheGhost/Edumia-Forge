@@ -27,7 +27,8 @@ public class CreativeTabLoader {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS =
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Edumia.MOD_ID);
 
-    public static final RegistryObject<CreativeModeTab>  LEGENDS_GROUP = CREATIVE_MODE_TABS.register("edumia_rewards",() ->
+    public static final RegistryObject<CreativeModeTab>  LEGENDS_GROUP =
+            CREATIVE_MODE_TABS.register("edumia_rewards",() ->
             CreativeModeTab.builder().icon(() -> new ItemStack(ItemLoader.LEGENDS_COIN.get()))
                     .title(Component.translatable("creativetab.edumia_rewards"))
                     .displayItems((displayParameters, entries) -> {

@@ -3,6 +3,7 @@ package com.legends.edumia.worldgen.biome.surface;
 import com.legends.edumia.worldgen.biome.BiomeColorsDTO;
 import com.legends.edumia.worldgen.biome.EdumiaBiomeKeys;
 import com.legends.edumia.worldgen.biome.caves.ModCaveBiomes;
+import com.legends.edumia.worldgen.placedfeatures.biomes.OgreBiomePlacedFeatures;
 import com.legends.edumia.worldgen.placedfeatures.ocean.ReefPlacedFeatures;
 import com.legends.edumia.worldgen.placedfeatures.trees.TemperateTreePlacedFeatures;
 import com.legends.edumia.worldgen.placedfeatures.trees.TropicalTreePlacedFeatures;
@@ -87,7 +88,7 @@ public class ModBiomes {
         context.register(EdumiaBiomeKeys.WASTE_POND, createWastePondBiome(context, new BiomeColorsDTO(
                 8163746, 10926783, 5860963, 863008, 4020033, 2371608)));
         context.register(EdumiaBiomeKeys.OGRE_FOREST, createOgreForestBiome(context, new BiomeColorsDTO(
-                8163746, 10926783, 5860963, 863008, 4020033, 2371608)));
+                10864127, 13822975, 4962255, 329011, 7982981, 16755660)));
     }
     public static Biome createEdumiaValesBiome(BootstapContext<Biome> context, BiomeColorsDTO biomeColors) {
         MobSpawnSettings.Builder spawnSettings = new MobSpawnSettings.Builder();
@@ -176,7 +177,7 @@ public class ModBiomes {
 
         addTundraVegetation(generationSettings);
 
-        return createBiome(biomeColors, spawnSettings, generationSettings, -0.8f, true);
+        return createBiome(biomeColors, spawnSettings, generationSettings, -0.8f,  true);
     }
     public static Biome createFrozenOceanBiome(BootstapContext<Biome> context, BiomeColorsDTO biomeColors) {
         MobSpawnSettings.Builder spawnSettings = new MobSpawnSettings.Builder();
@@ -441,8 +442,9 @@ public class ModBiomes {
         MobSpawnSettings.Builder spawnSettings = new MobSpawnSettings.Builder();
         BiomeGenerationSettings.Builder generationSettings = new BiomeGenerationSettings.Builder(
                 context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
+        vegetation.add(OgreBiomePlacedFeatures.OGRE_FOREST_TREES);
 
-        return createBiome(biomeColors, spawnSettings, generationSettings);
+        return createBiome(biomeColors, spawnSettings, generationSettings,0.7f, 0.8f, true);
     }
     public static Biome createTestBiome(BootstapContext<Biome> context, BiomeColorsDTO biomeColors) {
         MobSpawnSettings.Builder spawnSettings = new MobSpawnSettings.Builder();
@@ -567,11 +569,20 @@ public class ModBiomes {
     public static void addReef(BiomeGenerationSettings.Builder generationSettings) {
         vegetation.add(ReefPlacedFeatures.REEF_KEY);
     }
-    public static Biome createBiome(BiomeColorsDTO biomeColors, MobSpawnSettings.Builder spawnSettings, BiomeGenerationSettings.Builder generationSettings) {
-        return createBiome(biomeColors, spawnSettings, generationSettings, 0.5f, true);
+    public static Biome createBiome(BiomeColorsDTO biomeColors, MobSpawnSettings.Builder spawnSettings, BiomeGenerationSettings.Builder generationSettings, float downfall) {
+        return createBiome(biomeColors, spawnSettings, generationSettings, 0.5f, downfall, true);
     }
 
+
     public static Biome createBiome(BiomeColorsDTO biomeColors, MobSpawnSettings.Builder spawnSettings, BiomeGenerationSettings.Builder generationSettings, float temperature, boolean precipitation) {
+        return createBiome(biomeColors, spawnSettings, generationSettings, temperature, 0.5f, precipitation);
+    }
+
+    public static Biome createBiome(BiomeColorsDTO biomeColors, MobSpawnSettings.Builder spawnSettings, BiomeGenerationSettings.Builder generationSettings) {
+        return createBiome(biomeColors, spawnSettings, generationSettings, 0.5f, 0.5f, true);
+    }
+
+    public static Biome createBiome(BiomeColorsDTO biomeColors, MobSpawnSettings.Builder spawnSettings, BiomeGenerationSettings.Builder generationSettings, float temperature, float downfall, boolean precipitation) {
         undergroundOres.add(OrePlacements.ORE_DIRT);
         undergroundOres.add(OrePlacements.ORE_GRAVEL);
         undergroundOres.add(OrePlacements.ORE_GRANITE_UPPER);
@@ -597,7 +608,7 @@ public class ModBiomes {
         Biome biome = (new Biome.BiomeBuilder())
                 .hasPrecipitation(precipitation)
                 .temperature(temperature)
-                .downfall(0.5F)
+                .downfall(downfall)
                 .specialEffects((new BiomeSpecialEffects.Builder())
                         .skyColor(biomeColors.skyColor)
                         .fogColor(biomeColors.fogColor)

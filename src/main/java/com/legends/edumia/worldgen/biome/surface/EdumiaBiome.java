@@ -1,5 +1,7 @@
 package com.legends.edumia.worldgen.biome.surface;
 
+import com.legends.edumia.worldgen.biome.BlocksLayeringData;
+import com.legends.edumia.worldgen.biome.SlopeMap;
 import com.legends.edumia.worldgen.biome.caves.CaveType;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.biome.Biome;
@@ -9,13 +11,18 @@ import java.awt.*;
 import java.util.function.Supplier;
 
 public class EdumiaBiome {
+    public static int DEFAULT_WATER_HEIGHT = 64;
     public int height;
+    public int waterHeight;
     public Color color;
     public ResourceKey<Biome> biome;
+
     public Block surfaceBlock;
     public Block underSurfaceBlock;
     public Block upperStoneBlock;
     public Block stoneBlock;
+    public SlopeMap slopeMap;
+    public BlocksLayeringData blocksLayering;
     public CaveType caveType;
 
     public EdumiaBiome(){

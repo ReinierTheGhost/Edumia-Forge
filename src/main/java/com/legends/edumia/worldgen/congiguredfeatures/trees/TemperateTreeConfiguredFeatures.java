@@ -30,6 +30,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfigur
 import net.minecraft.world.level.levelgen.feature.configurations.RandomFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.BushFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FancyFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.PineFoliagePlacer;
@@ -38,6 +39,7 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStatePr
 import net.minecraft.world.level.levelgen.feature.treedecorators.BeehiveDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.LeaveVineDecorator;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.FancyTrunkPlacer;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.ForkingTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
@@ -60,6 +62,7 @@ public class TemperateTreeConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> ASPEN_2_KEY = registerKey("aspen/aspen_2_tree");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> BIRCH_TREE_KEY = registerKey("birch/birch_tree");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> CLOUD_BIRCH_TREE_TALL_KEY = registerKey("birch/cloud_birch_tree_tall");
     public static final ResourceKey<ConfiguredFeature<?, ?>> MEGA_BIRCH_TREE_KEY = registerKey("birch/mega_birch_tree");
 
 
@@ -81,6 +84,7 @@ public class TemperateTreeConfiguredFeatures {
 
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context){
         HolderGetter<PlacedFeature> placed = context.lookup(Registries.PLACED_FEATURE);
+        BeehiveDecorator beehive03TreeDecorator = new BeehiveDecorator(0.03f);
         BeehiveDecorator beehive05TreeDecorator = new BeehiveDecorator(0.05f);
 
         Holder.Reference<PlacedFeature> noting = placed.getOrThrow(ModPlacedFeatures.NOTING);
@@ -102,6 +106,15 @@ public class TemperateTreeConfiguredFeatures {
                 new OvalFoliagePlacer(3, ConstantInt.of(0), ConstantInt.of(2), 0.4f),
                 new TwoLayersFeatureSize(1, 0, 2))
                 .dirt(BlockStateProvider.simple(Blocks.GRASS_BLOCK)).build());
+
+        register(context, CLOUD_BIRCH_TREE_TALL_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(Blocks.BIRCH_LOG),
+                new ForkingTrunkPlacer(5, 4, 8),
+                BlockStateProvider.simple(Blocks.BIRCH_LEAVES),
+                new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(2), 2),
+                new TwoLayersFeatureSize(1, 0, 2))
+                .dirt(BlockStateProvider.simple(Blocks.GRASS_BLOCK))
+                .decorators(List.of(beehive03TreeDecorator)).build());
 
         register(context, MEGA_BIRCH_TREE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(Blocks.BIRCH_LOG),

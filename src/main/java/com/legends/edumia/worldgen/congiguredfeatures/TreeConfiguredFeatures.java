@@ -47,7 +47,6 @@ public class TreeConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> GHOST_GUM_KEY = registerKey("tree/ghost_gum_tree");
     public static final ResourceKey<ConfiguredFeature<?, ?>> GHOST_GUM_BEES_KEY = registerKey("tree/ghost_gum_bees_tree");
     public static final ResourceKey<ConfiguredFeature<?, ?>> WHITE_ASH_KEY = registerKey("tree/white_ash_tree");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> FIR_KEY = registerKey("tree/fir_tree");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> PINE_KEY = registerKey("tree/pine_tree");
     public static final ResourceKey<ConfiguredFeature<?, ?>> REDWOOD_KEY = registerKey("tree/redwood_tree");
@@ -64,9 +63,9 @@ public class TreeConfiguredFeatures {
 
         register(context, TEST_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(WoodBlockSets.MAPLE.log().get()),
-                new YellowMerantiTrunkPlacer(12, 13, 14),
+                new BaobabTrunkPlacer(16, 10, 0),
                 BlockStateProvider.simple(ModNatureBlocks.MAPLE_LEAVES.get()),
-                new BlobFoliagePlacer(ConstantInt.of(6), ConstantInt.of(4), 3),
+                new EmptyFoliagePlacer(),
                 new TwoLayersFeatureSize(1, 0, 1))
                 .ignoreVines().build ());
 
@@ -112,20 +111,6 @@ public class TreeConfiguredFeatures {
                 new TwoLayersFeatureSize(1, 0, 1)).ignoreVines()
                 .decorators(Collections.singletonList(new
                         PineBranchDecorator(WoodBlockSets.PINE.log().get().defaultBlockState(), 0.75f))).build());
-
-
-        register(context, FIR_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
-                BlockStateProvider.simple(WoodBlockSets.FIR.log().get()),
-                new StraightTrunkPlacer(6, 7, 0),
-                BlockStateProvider.simple(WoodBlockSets.FIR.leaves().get()),
-                new FirFoliagePlacer(UniformInt.of(2, 3), ConstantInt.of(2),
-                        UniformInt.of(7, 11)),
-                new TwoLayersFeatureSize(1, 0, 1)).ignoreVines().build());
-
-
-
-
-
 
         register(context, WHITE_ASH_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(WoodBlockSets.WHITE_ASH.log().get()),

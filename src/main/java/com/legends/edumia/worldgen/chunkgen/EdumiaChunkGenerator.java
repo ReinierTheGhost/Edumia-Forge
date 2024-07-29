@@ -1,11 +1,14 @@
 package com.legends.edumia.worldgen.chunkgen;
 
+import com.legends.edumia.blocks.blocksets.StoneSets;
 import com.legends.edumia.utils.noises.BlendedNoise;
+import com.legends.edumia.worldgen.biome.BlocksLayeringData;
 import com.legends.edumia.worldgen.biome.EdumiaBiomeKeys;
 import com.legends.edumia.worldgen.biome.surface.EdumiaBiome;
 import com.legends.edumia.worldgen.biome.surface.EdumiaBiomesData;
 import com.legends.edumia.worldgen.biome.surface.ModBiomeSource;
 import com.legends.edumia.worldgen.chunkgen.map.EdumiaHeightMap;
+import com.legends.edumia.worldgen.map.EdumiaMapConfigs;
 import com.legends.edumia.worldgen.map.EdumiaMapRuntime;
 import com.legends.edumia.worldgen.map.EdumiaMapUtils;
 import com.mojang.serialization.Codec;
@@ -29,6 +32,7 @@ import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.*;
 import net.minecraft.world.level.levelgen.blending.Blender;
+import net.minecraft.world.phys.Vec2;
 import net.minecraftforge.registries.DeferredRegister;
 import org.joml.SimplexNoise;
 
@@ -53,10 +57,11 @@ public class EdumiaChunkGenerator extends ChunkGenerator {
     EdumiaMapUtils middleEarthMapUtils;
     EdumiaMapRuntime middleEarthMapRuntime;
 
+    public static final int mapMultiplier = (int) Math.pow(2, EdumiaMapConfigs.MAP_ITERATION + EdumiaMapConfigs.PIXEL_WEIGHT - 2);
+    public static final Vec2 gensaiVolcano = new Vec2(2131.5f, 1715.2f).scale(mapMultiplier);
+
     private static final int CAVE_STRETCH_H = 60;
     private static final int CAVE_STRETCH_V = 50;
-    private static float minNoise = 10000;
-    private static float maxNoise = -10000;
     HolderGetter<Biome> biomeRegistry;
     public static final Codec<EdumiaChunkGenerator> CODEC = RecordCodecBuilder.create((instance) ->
             instance.group(RegistryOps.retrieveGetter(Registries.BIOME))
@@ -214,6 +219,17 @@ public class EdumiaChunkGenerator extends ChunkGenerator {
 
     }
 
+    private float getTerrainSlope(float height, int x, int z){
+        int offset = 3;
+        float eastHeight = EdumiaHeightMap.getHeight(x + offset, z);
+        float southHeight = EdumiaHeightMap.getHeight(x, z + offset);
+
+        float eastSlope = Math.abs((eastHeight - height) / offset);
+        float southSlope = Math.abs((southHeight - height) / offset);
+        float highestSlope = Math.max(eastSlope, southSlope);
+
+        return (float) Math.toDegrees(Math.atan(highestSlope));
+    }
     private void trySetBlock(ChunkAccess chunk, BlockPos blockPos, BlockState blockState) {
         float noise = 0;
         if(blockPos.getY() < WATER_HEIGHT) {
@@ -229,6 +245,12 @@ public class EdumiaChunkGenerator extends ChunkGenerator {
         if(noise < 0.4f && noise3 < 0.75f && miniNoise < 0.8f) { //
             chunk.setBlockState(blockPos, blockState, false);
         }
+    }
+
+    public static float getMacrchesHeight(int x, int z, float height){
+        height = -2 + (2.0f * (float) BlendedNoise.noise((double) x / 19, (double) z / 19));
+        height += (float) BlendedNoise.noise((double) z / 11, (double) z / 11);
+        return height;
     }
 
     @Override

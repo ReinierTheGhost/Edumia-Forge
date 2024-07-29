@@ -30,17 +30,17 @@ public class EdumiaHeightMap {
     public static final float WATER_PERLIN_DIVIDER = 2.2f;
     private static final int PIXEL_WEIGHT = EdumiaMapConfigs.PIXEL_WEIGHT;
     public static final ArrayList<Float> percentages = new ArrayList<Float>();
-    private static EdumiaMapRuntime middleEarthMapRuntime;
+    private static EdumiaMapRuntime edumiaMapRuntime;
     private static Float defaultWeightHeight = null;
 
     public EdumiaHeightMap(){
-        middleEarthMapRuntime = EdumiaMapRuntime.getInstance();
+        edumiaMapRuntime = EdumiaMapRuntime.getInstance();
     }
 
     private static float getImageHeight(int xWorld, int zWorld) {
-        if(middleEarthMapRuntime == null) middleEarthMapRuntime = EdumiaMapRuntime.getInstance();
+        if(edumiaMapRuntime == null) edumiaMapRuntime = EdumiaMapRuntime.getInstance();
 
-        Color color = middleEarthMapRuntime.getHeight(xWorld, zWorld);
+        Color color = edumiaMapRuntime.getHeight(xWorld, zWorld);
 
 
         if(color != null){
@@ -166,5 +166,16 @@ public class EdumiaHeightMap {
 
     public static float lerp(float a, float b, float interpolation) {
         return a + interpolation * (b - a);
+    }
+
+    public static float getImageNoiseModifier(int xWorld, int zWorld) {
+        if (edumiaMapRuntime == null) edumiaMapRuntime = EdumiaMapRuntime.getInstance();
+
+        Color color = edumiaMapRuntime.getHeight(xWorld, zWorld);
+
+        if (color != null){
+            return color.getGreen();
+        }
+        return 0.5f;
     }
 }

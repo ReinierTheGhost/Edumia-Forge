@@ -3,6 +3,7 @@ package com.legends.edumia.worldgen.congiguredfeatures;
 import com.legends.edumia.Edumia;
 import com.legends.edumia.worldgen.congiguredfeatures.beach.BeachConfiguredFeatures;
 import com.legends.edumia.worldgen.congiguredfeatures.biomes.BiomeConfiguredFeatures;
+import com.legends.edumia.worldgen.congiguredfeatures.biomes.OgreBiomeConfiguredFeatures;
 import com.legends.edumia.worldgen.congiguredfeatures.boulders.BoulderConfiguredFeatures;
 import com.legends.edumia.worldgen.congiguredfeatures.crystals.CrystalConfiguresFeatures;
 import com.legends.edumia.worldgen.congiguredfeatures.ocean.ReefConfiguredFeatures;
@@ -39,6 +40,7 @@ public class ModConfiguredFeatures {
         ReedsConfiguredFeatures.bootstrap(context);
         BiomeConfiguredFeatures.bootstrap(context);
         FruitTreeConfiguredFeatures.bootstrap(context);
+        OgreBiomeConfiguredFeatures.bootstrap(context);
     }
 
     public static ResourceKey<ConfiguredFeature<?, ?>> registerKey(String name){

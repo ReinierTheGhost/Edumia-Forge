@@ -31,6 +31,7 @@ public class BorealTreePlacedFeatures {
     public static final ResourceKey<PlacedFeature> FOOTHILLS_SPRUCE_PLACED_TREE_KEY = registerKey("spruce/foothills_spruce_tree");
     public static final ResourceKey<PlacedFeature> COMMON_SPRUCE_PLACED_TREE_KEY = registerKey("spruce/common_spruce_tree");
     public static final ResourceKey<PlacedFeature> SPRUCE_PLACED_TREE_KEY = registerKey("spruce/spruce_tree");
+    public static final ResourceKey<PlacedFeature> MEGA_SPRUCE_TREE_LIST = registerKey("list/spruce/mega_spruce_tree");
     public static final ResourceKey<PlacedFeature> COMMON_SPRUCE_BUSH_PLACED_TREE_KEY = registerKey("spruce/common_spruce_bush_tree");
     public static final ResourceKey<PlacedFeature> SPRUCE_BUSH_PLACED_TREE_KEY = registerKey("spruce/spruce_bush_tree");
     public static final ResourceKey<PlacedFeature> SCARCE_SPRUCE_PLACED_TREE_KEY = registerKey("spruce/scarce_spruce_tree");
@@ -39,6 +40,7 @@ public class BorealTreePlacedFeatures {
 
     public static final ResourceKey<PlacedFeature> SILVER_SPRUCE_TREE_LIST = registerKey("silver_spruce/silver_spruce_tree");
 
+    public static final ResourceKey<PlacedFeature> LIST_FIR_TREE = registerKey("list/fir/fir_tree");
 
     static PlacementModifier foothillsTree = PlacementUtils.countExtra(5, 0.5f, 1);
     static PlacementModifier abundantTree = PlacementUtils.countExtra(3, 0.5f, 1);
@@ -55,6 +57,8 @@ public class BorealTreePlacedFeatures {
     public static void boostrap(BootstapContext<PlacedFeature> context) {
         var configuredFeatureRegistryEntryLookup = context.lookup(Registries.CONFIGURED_FEATURE);
 
+        register(context, LIST_FIR_TREE, configuredFeatureRegistryEntryLookup.getOrThrow(BorealTreeConfiguredFeatures.FIR_KEY),
+                List.of());
         register(context, COMMON_LARCH_PLACED_TREE_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(BorealTreeConfiguredFeatures.LARCH_TREE_KEY),
                 VegetationPlacements.treePlacement(frequentTree,
                         ModNatureBlocks.LARCH_SAPLING.get()));
@@ -90,6 +94,8 @@ public class BorealTreePlacedFeatures {
         register(context, SPRUCE_PLACED_TREE_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(BorealTreeConfiguredFeatures.SPRUCE_TREE_KEY),
                 VegetationPlacements.treePlacement(uncommonTree,
                         Blocks.SPRUCE_SAPLING));
+        register(context, MEGA_SPRUCE_TREE_LIST, configuredFeatureRegistryEntryLookup.getOrThrow(BorealTreeConfiguredFeatures.MEGA_SPRUCE_TREE_KEY),
+                List.of());
         register(context, SCARCE_SPRUCE_PLACED_TREE_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(BorealTreeConfiguredFeatures.SPRUCE_TREE_KEY),
                 VegetationPlacements.treePlacement(scarceTree,
                         Blocks.SPRUCE_SAPLING));

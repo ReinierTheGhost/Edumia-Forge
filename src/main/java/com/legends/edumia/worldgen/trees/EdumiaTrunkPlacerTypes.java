@@ -78,6 +78,9 @@ public class EdumiaTrunkPlacerTypes {
 
     public static final RegistryObject<TrunkPlacerType<YellowMerantiTrunkPlacer>> YELLOW_MERANTI_TRUNK_PLACER =
             TRUNK_PLACERS.register("yellow_meranti_trunk_placer", () -> new TrunkPlacerType<>(YellowMerantiTrunkPlacer.CODEC));
+    public static final RegistryObject<TrunkPlacerType<BaobabTrunkPlacer>> BAOBAB_TRUNK_PLACER =
+            TRUNK_PLACERS.register("baobab_trunk_placer", () -> new TrunkPlacerType<>(BaobabTrunkPlacer.CODEC));
+
 
     public static void register(IEventBus eventBus) {
         TRUNK_PLACERS.register(eventBus);

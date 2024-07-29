@@ -1,6 +1,6 @@
 package com.legends.edumia.worldgen.treegrowers;
 
-import com.legends.edumia.worldgen.congiguredfeatures.TreeConfiguredFeatures;
+import com.legends.edumia.worldgen.congiguredfeatures.trees.BorealTreeConfiguredFeatures;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.grower.AbstractTreeGrower;
@@ -11,6 +11,6 @@ public class FirTreeGrower extends AbstractTreeGrower {
     @Nullable
     @Override
     protected ResourceKey<ConfiguredFeature<?, ?>> getConfiguredFeature(RandomSource random, boolean bees) {
-        return TreeConfiguredFeatures.FIR_KEY;
+        return BorealTreeConfiguredFeatures.FIR_KEY;
     }
 }

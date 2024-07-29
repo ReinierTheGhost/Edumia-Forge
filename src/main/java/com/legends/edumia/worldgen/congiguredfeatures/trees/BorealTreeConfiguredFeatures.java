@@ -2,6 +2,7 @@ package com.legends.edumia.worldgen.congiguredfeatures.trees;
 
 import com.legends.edumia.Edumia;
 import com.legends.edumia.blocks.blocksets.WoodBlockSets;
+import com.legends.edumia.worldgen.trees.foliageplacer.FirFoliagePlacer;
 import com.legends.edumia.worldgen.trees.foliageplacer.SilverSpruceFoliagePlacer;
 import com.legends.edumia.worldgen.trees.trunkplacers.SpruceTrunkPlacer;
 import net.minecraft.core.HolderGetter;
@@ -35,10 +36,13 @@ public class BorealTreeConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> LARCH_TREE_KEY = registerKey("larch/larch_tree_2");
     public static final ResourceKey<ConfiguredFeature<?, ?>> BIG_LARCH_KEY = registerKey("larch/big_larch_tree");
 
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FIR_KEY = registerKey("fir/fir_tree");
+
     public static final ResourceKey<ConfiguredFeature<?, ?>> PINE_TREE_KEY = registerKey("pine/pine_tree");
     public static final ResourceKey<ConfiguredFeature<?, ?>> DEAD_PINE_TREE_KEY = registerKey("pine/dead_pine_tree");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SPRUCE_TREE_KEY = registerKey("spruce/spruce_tree");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SPRUCE_BUSH_TREE_KEY = registerKey("spruce/spruce_bush_tree");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> MEGA_SPRUCE_TREE_KEY = registerKey("spruce/mega_spruce_tree");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> SILVER_SPRUCE_TREE_KEY = registerKey("silver_spruce/silver_spruce_tree");
 
@@ -95,9 +99,18 @@ public class BorealTreeConfiguredFeatures {
                 .dirt(BlockStateProvider.simple(Blocks.GRASS_BLOCK)).build());
         register(context, SPRUCE_BUSH_TREE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(Blocks.SPRUCE_LOG),
-                new StraightTrunkPlacer(1, 0, 0), BlockStateProvider.simple(Blocks.SPRUCE_LEAVES),
+                new StraightTrunkPlacer(1, 0, 0),
+                BlockStateProvider.simple(Blocks.SPRUCE_LEAVES),
                 new BushFoliagePlacer(ConstantInt.of(2), ConstantInt.of(1), 2),
                 new TwoLayersFeatureSize(0, 0, 0)).build());
+        register(context, MEGA_SPRUCE_TREE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(Blocks.SPRUCE_LOG),
+                new StraightTrunkPlacer(8, 3, 10),
+                BlockStateProvider.simple(Blocks.SPRUCE_LEAVES),
+                new MegaPineFoliagePlacer(BiasedToBottomInt.of(0, 1), UniformInt.of(1, 3),
+                        UniformInt.of(12, 17)),
+                new TwoLayersFeatureSize(1, 0, 0, OptionalInt.of(0)))
+                .dirt(BlockStateProvider.simple(Blocks.COARSE_DIRT)).build());
 
         register(context, SILVER_SPRUCE_TREE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(WoodBlockSets.SILVER_SPRUCE.log().get()),
@@ -106,6 +119,14 @@ public class BorealTreeConfiguredFeatures {
                 new SilverSpruceFoliagePlacer(ConstantInt.of(2), UniformInt.of(0, 2), UniformInt.of(7, 11)),
                 new TwoLayersFeatureSize(1, 0, 1))
                 .dirt(BlockStateProvider.simple(Blocks.GRASS_BLOCK)).build());
+
+        register(context, FIR_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(WoodBlockSets.FIR.log().get()),
+                new StraightTrunkPlacer(6, 7, 0),
+                BlockStateProvider.simple(WoodBlockSets.FIR.leaves().get()),
+                new FirFoliagePlacer(UniformInt.of(2, 3), ConstantInt.of(2),
+                        UniformInt.of(7, 11)),
+                new TwoLayersFeatureSize(1, 0, 1)).ignoreVines().build());
 
     }
 

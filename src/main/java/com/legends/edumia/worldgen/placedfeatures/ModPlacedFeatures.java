@@ -3,6 +3,7 @@ package com.legends.edumia.worldgen.placedfeatures;
 import com.legends.edumia.Edumia;
 import com.legends.edumia.worldgen.congiguredfeatures.ModConfiguredFeatures;
 import com.legends.edumia.worldgen.placedfeatures.biomes.BiomePlacedFeatures;
+import com.legends.edumia.worldgen.placedfeatures.biomes.OgreBiomePlacedFeatures;
 import com.legends.edumia.worldgen.placedfeatures.boulders.BoulderPlacedFeatures;
 import com.legends.edumia.worldgen.placedfeatures.crystrals.CrystalPlacedFeatures;
 import com.legends.edumia.worldgen.placedfeatures.ocean.ReefPlacedFeatures;
@@ -44,6 +45,7 @@ public class ModPlacedFeatures {
         ReedsPlacedFeatures.boostrap(context);
         OakTreePlacedFeatures.boostrap(context);
         BiomePlacedFeatures.boostrap(context);
+        OgreBiomePlacedFeatures.boostrap(context);
     }
 
     public static ResourceKey<PlacedFeature> registerKey(String name) {

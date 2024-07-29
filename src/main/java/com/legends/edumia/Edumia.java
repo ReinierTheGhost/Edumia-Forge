@@ -1,12 +1,5 @@
 package com.legends.edumia;
 
-import com.ferreusveritas.dynamictrees.api.GatherDataHelper;
-import com.ferreusveritas.dynamictrees.api.registry.RegistryHandler;
-import com.ferreusveritas.dynamictrees.block.leaves.LeavesProperties;
-import com.ferreusveritas.dynamictrees.systems.fruit.Fruit;
-import com.ferreusveritas.dynamictrees.systems.pod.Pod;
-import com.ferreusveritas.dynamictrees.tree.family.Family;
-import com.ferreusveritas.dynamictrees.tree.species.Species;
 import com.legends.edumia.blocks.blocksets.*;
 import com.legends.edumia.core.BlockLoader;
 import com.legends.edumia.core.CreativeTabLoader;

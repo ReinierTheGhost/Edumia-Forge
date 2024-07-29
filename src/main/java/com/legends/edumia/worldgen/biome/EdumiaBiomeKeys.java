@@ -43,6 +43,7 @@ public class EdumiaBiomeKeys extends Biomes {
 
 
         public static final ResourceKey<Biome> TAIGA_FOREST = EdumiaBiomeKeys.register("taiga_forest");
+        public static final ResourceKey<Biome> MARSHES = EdumiaBiomeKeys.register("marches");
 
 
         public static final ResourceKey<Biome> GENSAI_JUNGLE = EdumiaBiomeKeys.register("gensai_jungle");

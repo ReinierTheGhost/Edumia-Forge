@@ -21,6 +21,7 @@
       "baseHeight": 2,
       "baseRadius": 2,
       "extraSize": 0.3,
+      "leaves": [],
       "offset": -1
     },
     "foliage_provider": {

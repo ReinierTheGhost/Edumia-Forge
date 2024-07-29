@@ -36,6 +36,7 @@ public class TemperateTreePlacedFeatures {
     public static final ResourceKey<PlacedFeature> ASPEN_KEY = registerKey("aspen/aspen_tree");
     public static final ResourceKey<PlacedFeature> ASPEN_2_KEY = registerKey("aspen/aspen_2_tree");
 
+    public static final ResourceKey<PlacedFeature> LIST_BIRCH_TREE = registerKey("list/birch/birch_tree");
     public static final ResourceKey<PlacedFeature> BIRCH_PLACED_TREE_KEY = registerKey("birch/birch_tree");
     public static final ResourceKey<PlacedFeature> SPARSE_BIRCH_PLACED_TREE_KEY = registerKey("birch/sparse_birch_tree");
     public static final ResourceKey<PlacedFeature> RARE_BIRCH_PLACED_TREE_KEY = registerKey("birch/rare_birch_tree");
@@ -75,7 +76,8 @@ public class TemperateTreePlacedFeatures {
 
     public static void boostrap(BootstapContext<PlacedFeature> context) {
         var configuredFeatureRegistryEntryLookup = context.lookup(Registries.CONFIGURED_FEATURE);
-
+        register(context, LIST_BIRCH_TREE, configuredFeatureRegistryEntryLookup.getOrThrow(TemperateTreeConfiguredFeatures.BIRCH_TREE_KEY),
+                List.of());
         register(context, BIRCH_PLACED_TREE_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(TemperateTreeConfiguredFeatures.BIRCH_TREE_KEY),
                 VegetationPlacements.treePlacement(scarceTree,
                         Blocks.BIRCH_SAPLING));
@@ -167,6 +169,7 @@ public class TemperateTreePlacedFeatures {
                         HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE), RarityFilter.onAverageOnceEvery(100),
                         BlockPredicateFilter.forPredicate(BlockPredicate.wouldSurvive(Blocks.FERN.defaultBlockState(), BlockPos.ZERO)),
                         BiomeFilter.biome()));
+
 
     }
 

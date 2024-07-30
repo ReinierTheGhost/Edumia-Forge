@@ -1,4 +1,4 @@
-// 1.20.1	2024-07-29T12:05:20.9129338	Registries
+// 1.20.1	2024-07-30T16:03:18.8295862	Registries
 dcab4807982c412c48599df57f54e0ac956dae83 data/edumia/worldgen/biome/avelion_mountains.json
 4d7f0415a427886073ecc4d00c560ab4c1f43b61 data/edumia/worldgen/biome/avelion_plains.json
 2bf132af274d0dec469080deecccd5f593f33d32 data/edumia/worldgen/biome/basalt_cave.json
@@ -24,6 +24,8 @@ a375f60b182ce7d3d93bd2e3927ae92df4f58e91 data/edumia/worldgen/biome/gensai_volca
 9ec66a310c55cf7e356f3054ab047237d6616574 data/edumia/worldgen/biome/ice_cave.json
 08c4f7c68153e591110b7e821c07763d6730adbc data/edumia/worldgen/biome/lush_cave.json
 214acce7e920ace336112c77144af6bc1b992213 data/edumia/worldgen/biome/magma_cave.json
+6cd3cf4c40621a1d1467ce8ba2efcbe945d99295 data/edumia/worldgen/biome/marches.json
+6cd3cf4c40621a1d1467ce8ba2efcbe945d99295 data/edumia/worldgen/biome/marches_water.json
 9625c616d24973d19c8f765d45a7d98909ca1282 data/edumia/worldgen/biome/mithril_cave.json
 3b029476ec720148c63f1691661fad9c90f12c1d data/edumia/worldgen/biome/mud_cave.json
 29215dfd5c5b916597295fa90f26b16721cee851 data/edumia/worldgen/biome/oasis.json

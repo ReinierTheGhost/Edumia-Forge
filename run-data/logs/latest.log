@@ -1,27 +1,28 @@
-[29Jul2024 12:04:59.572] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgedatauserdev, --assetIndex, 5, --assetsDir, C:\Users\reini\.gradle\caches\forge_gradle\assets, --gameDir, ., --fml.forgeVersion, 47.1.0, --fml.mcVersion, 1.20.1, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20230612.114412, --mod, edumia, --all, --output, C:\Users\reini\Desktop\Edumia.1\src\generated\resources, --existing, C:\Users\reini\Desktop\Edumia.1\src\main\resources]
-[29Jul2024 12:04:59.588] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 10.0.9+10.0.9+main.dcd20f30 starting: java version 17.0.7 by Eclipse Adoptium; OS Windows 11 arch amd64 version 10.0
-[29Jul2024 12:04:59.789] [main/INFO] [net.minecraftforge.fml.loading.ImmediateWindowHandler/]: ImmediateWindowProvider not loading because launch target is forgedatauserdev
-[29Jul2024 12:04:59.839] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/C:/Users/reini/.gradle/caches/modules-2/files-2.1/org.spongepowered/mixin/0.8.5/9d1c0c3a304ae6697ecd477218fa61b850bf57fc/mixin-0.8.5.jar%23128!/ Service=ModLauncher Env=CLIENT
-[29Jul2024 12:05:00.444] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\reini\.gradle\caches\modules-2\files-2.1\net.minecraftforge\javafmllanguage\1.20.1-47.1.0\a2cd58d15791eaac9983e30be0995e66bd48633e\javafmllanguage-1.20.1-47.1.0.jar is missing mods.toml file
-[29Jul2024 12:05:00.446] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\reini\.gradle\caches\modules-2\files-2.1\net.minecraftforge\lowcodelanguage\1.20.1-47.1.0\f1f11b7217b8320f1b3eb81c746b7b8a70a9ba06\lowcodelanguage-1.20.1-47.1.0.jar is missing mods.toml file
-[29Jul2024 12:05:00.449] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\reini\.gradle\caches\modules-2\files-2.1\net.minecraftforge\mclanguage\1.20.1-47.1.0\ff1b8eeb1bd00dfb130263b8952b931f5369252e\mclanguage-1.20.1-47.1.0.jar is missing mods.toml file
-[29Jul2024 12:05:00.453] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\reini\.gradle\caches\modules-2\files-2.1\net.minecraftforge\fmlcore\1.20.1-47.1.0\69ca36ae5b8d45c377a5485dc38a7343e5ebf33c\fmlcore-1.20.1-47.1.0.jar is missing mods.toml file
-[29Jul2024 12:05:00.631] [main/INFO] [net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator/]: No dependencies to load found. Skipping!
-[29Jul2024 12:05:04.265] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgedatauserdev' with arguments [--gameDir, ., --assetsDir, C:\Users\reini\.gradle\caches\forge_gradle\assets, --assetIndex, 5, --mod, edumia, --all, --output, C:\Users\reini\Desktop\Edumia.1\src\generated\resources, --existing, C:\Users\reini\Desktop\Edumia.1\src\main\resources]
-[29Jul2024 12:05:04.854] [main/INFO] [net.minecraftforge.data.loading.DatagenModLoader/]: Initializing Data Gatherer for mods [edumia]
-[29Jul2024 12:05:10.161] [modloading-worker-0/INFO] [net.minecraftforge.common.ForgeMod/FORGEMOD]: Forge mod loading, version 47.1.0, for MC 1.20.1 with MCP 20230612.114412
-[29Jul2024 12:05:10.163] [modloading-worker-0/INFO] [net.minecraftforge.common.MinecraftForge/FORGE]: MinecraftForge v47.1.0 Initialized
-[29Jul2024 12:05:10.346] [modloading-worker-0/INFO] [edumia/]: Registering ModDimensions for edumia
-[29Jul2024 12:05:10.347] [modloading-worker-0/INFO] [edumia/]: Registering ModBiomes for edumia
-[29Jul2024 12:05:10.352] [modloading-worker-0/INFO] [edumia/]: 
-[29Jul2024 12:05:10.352] [modloading-worker-0/INFO] [edumia/]: ================ EdumiaMapGeneration ================
-[29Jul2024 12:05:10.352] [modloading-worker-0/INFO] [edumia/]: Validating ORIGINAL image existence;
-[29Jul2024 12:05:10.563] [modloading-worker-0/INFO] [edumia/]: Validating ORIGINAL image size;
-[29Jul2024 12:05:10.563] [modloading-worker-0/INFO] [edumia/]: Validating BIOME generation availability;
-[29Jul2024 12:05:15.723] [modloading-worker-0/INFO] [edumia/]: Validating HEIGHT generation availability;
-[29Jul2024 12:05:20.172] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/reini/Desktop/Edumia.1/build/fg_cache/net/minecraftforge/forge/1.20.1-47.1.0_mapped_official_1.20.1/forge-1.20.1-47.1.0_mapped_official_1.20.1.jar%23191!/assets/.mcassetsroot' uses unexpected schema
-[29Jul2024 12:05:20.173] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/reini/Desktop/Edumia.1/build/fg_cache/net/minecraftforge/forge/1.20.1-47.1.0_mapped_official_1.20.1/forge-1.20.1-47.1.0_mapped_official_1.20.1.jar%23191!/data/.mcassetsroot' uses unexpected schema
-[29Jul2024 12:05:20.548] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Registries
-[29Jul2024 12:05:20.906] [main/INFO] [net.minecraft.data.DataGenerator/]: Registries finished after 356 ms
-[29Jul2024 12:05:20.908] [main/INFO] [net.minecraft.data.DataGenerator/]: All providers took: 359 ms
-[29Jul2024 12:05:20.957] [main/INFO] [net.minecraft.data.HashCache/]: Caching: total files: 288, old count: 288, new count: 289, removed stale: 0, written: 25
+[30Jul2024 16:03:05.741] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgedatauserdev, --assetIndex, 5, --assetsDir, C:\Users\reini\.gradle\caches\forge_gradle\assets, --gameDir, ., --fml.forgeVersion, 47.1.0, --fml.mcVersion, 1.20.1, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20230612.114412, --mod, edumia, --all, --output, C:\Users\reini\Desktop\Edumia.1\src\generated\resources, --existing, C:\Users\reini\Desktop\Edumia.1\src\main\resources]
+[30Jul2024 16:03:05.751] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 10.0.9+10.0.9+main.dcd20f30 starting: java version 17.0.7 by Eclipse Adoptium; OS Windows 11 arch amd64 version 10.0
+[30Jul2024 16:03:05.942] [main/INFO] [net.minecraftforge.fml.loading.ImmediateWindowHandler/]: ImmediateWindowProvider not loading because launch target is forgedatauserdev
+[30Jul2024 16:03:06.038] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/C:/Users/reini/.gradle/caches/modules-2/files-2.1/org.spongepowered/mixin/0.8.5/9d1c0c3a304ae6697ecd477218fa61b850bf57fc/mixin-0.8.5.jar%23128!/ Service=ModLauncher Env=CLIENT
+[30Jul2024 16:03:06.631] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\reini\.gradle\caches\modules-2\files-2.1\net.minecraftforge\javafmllanguage\1.20.1-47.1.0\a2cd58d15791eaac9983e30be0995e66bd48633e\javafmllanguage-1.20.1-47.1.0.jar is missing mods.toml file
+[30Jul2024 16:03:06.634] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\reini\.gradle\caches\modules-2\files-2.1\net.minecraftforge\lowcodelanguage\1.20.1-47.1.0\f1f11b7217b8320f1b3eb81c746b7b8a70a9ba06\lowcodelanguage-1.20.1-47.1.0.jar is missing mods.toml file
+[30Jul2024 16:03:06.638] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\reini\.gradle\caches\modules-2\files-2.1\net.minecraftforge\mclanguage\1.20.1-47.1.0\ff1b8eeb1bd00dfb130263b8952b931f5369252e\mclanguage-1.20.1-47.1.0.jar is missing mods.toml file
+[30Jul2024 16:03:06.640] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\reini\.gradle\caches\modules-2\files-2.1\net.minecraftforge\fmlcore\1.20.1-47.1.0\69ca36ae5b8d45c377a5485dc38a7343e5ebf33c\fmlcore-1.20.1-47.1.0.jar is missing mods.toml file
+[30Jul2024 16:03:06.754] [main/INFO] [net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator/]: No dependencies to load found. Skipping!
+[30Jul2024 16:03:10.623] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgedatauserdev' with arguments [--gameDir, ., --assetsDir, C:\Users\reini\.gradle\caches\forge_gradle\assets, --assetIndex, 5, --mod, edumia, --all, --output, C:\Users\reini\Desktop\Edumia.1\src\generated\resources, --existing, C:\Users\reini\Desktop\Edumia.1\src\main\resources]
+[30Jul2024 16:03:11.067] [main/INFO] [net.minecraftforge.data.loading.DatagenModLoader/]: Initializing Data Gatherer for mods [edumia]
+[30Jul2024 16:03:16.089] [modloading-worker-0/INFO] [net.minecraftforge.common.ForgeMod/FORGEMOD]: Forge mod loading, version 47.1.0, for MC 1.20.1 with MCP 20230612.114412
+[30Jul2024 16:03:16.090] [modloading-worker-0/INFO] [net.minecraftforge.common.MinecraftForge/FORGE]: MinecraftForge v47.1.0 Initialized
+[30Jul2024 16:03:16.282] [modloading-worker-0/INFO] [edumia/]: Registering ModDimensions for edumia
+[30Jul2024 16:03:16.283] [modloading-worker-0/INFO] [edumia/]: Registering ModBiomes for edumia
+[30Jul2024 16:03:16.291] [modloading-worker-0/INFO] [edumia/]: 
+[30Jul2024 16:03:16.291] [modloading-worker-0/INFO] [edumia/]: ================ EdumiaMapGeneration ================
+[30Jul2024 16:03:16.291] [modloading-worker-0/INFO] [edumia/]: Validating ORIGINAL image existence;
+[30Jul2024 16:03:16.605] [modloading-worker-0/INFO] [edumia/]: Validating ORIGINAL image size;
+[30Jul2024 16:03:16.605] [modloading-worker-0/INFO] [edumia/]: Validating initial map BIOME colors;
+[30Jul2024 16:03:16.609] [modloading-worker-0/ERROR] [edumia/]: EdumiaBiomes::No registered biome has java.awt.Color[r=55,g=90,b=195] for color
+[30Jul2024 16:03:16.610] [modloading-worker-0/ERROR] [edumia/]: EdumiaMapGeneration::Cannot find color at [0,0] in the inital map
+[30Jul2024 16:03:18.169] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/reini/Desktop/Edumia.1/build/fg_cache/net/minecraftforge/forge/1.20.1-47.1.0_mapped_official_1.20.1/forge-1.20.1-47.1.0_mapped_official_1.20.1.jar%23191!/assets/.mcassetsroot' uses unexpected schema
+[30Jul2024 16:03:18.170] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/reini/Desktop/Edumia.1/build/fg_cache/net/minecraftforge/forge/1.20.1-47.1.0_mapped_official_1.20.1/forge-1.20.1-47.1.0_mapped_official_1.20.1.jar%23191!/data/.mcassetsroot' uses unexpected schema
+[30Jul2024 16:03:18.581] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Registries
+[30Jul2024 16:03:18.826] [main/INFO] [net.minecraft.data.DataGenerator/]: Registries finished after 244 ms
+[30Jul2024 16:03:18.827] [main/INFO] [net.minecraft.data.DataGenerator/]: All providers took: 246 ms
+[30Jul2024 16:03:18.858] [main/INFO] [net.minecraft.data.HashCache/]: Caching: total files: 290, old count: 288, new count: 291, removed stale: 0, written: 2

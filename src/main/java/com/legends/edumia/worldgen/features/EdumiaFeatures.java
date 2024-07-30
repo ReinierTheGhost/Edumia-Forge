@@ -78,9 +78,6 @@ public class EdumiaFeatures {
             EdumiaBiome edumiaBiome = new EdumiaBiome();
             Block block = state.getBlock();
 
-            Block topMaterial = edumiaBiome.surfaceBlock;
-            Block underMaterial = edumiaBiome.underSurfaceBlock;
-
             if (!block.defaultBlockState().is(BlockTags.SAND) && !block.defaultBlockState().is(BlockTags.VALID_SPAWN)
                     && !block.defaultBlockState().is(ModTags.Blocks.GRAVEL) && !block.defaultBlockState().is(ModTags.Blocks.DIRT)){
                 if (block.defaultBlockState().is(ModTags.Blocks.VOLCANIC_PLANT_SURFACE)) {

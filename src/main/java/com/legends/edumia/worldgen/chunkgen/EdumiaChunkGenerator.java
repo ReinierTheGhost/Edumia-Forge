@@ -44,8 +44,8 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 
 public class EdumiaChunkGenerator extends ChunkGenerator {
-    public static final int EPMOSTO_LEVEL = -32;
-    public static final int DIFTOMIN_LEVEL = 0;
+    public static final int MEDGON_LEVEL = -32;
+    public static final int NURGON_LEVEL = 0;
     public static final int DEEPSLATE_LEVEL = 32;
     public static final int STONE_HEIGHT = 36;
     public static final int WATER_HEIGHT = 64;
@@ -113,7 +113,8 @@ public class EdumiaChunkGenerator extends ChunkGenerator {
                                 biomeRegistry.getOrThrow(EdumiaBiomeKeys.WASTE_POND),
 
                                 biomeRegistry.getOrThrow(EdumiaBiomeKeys.OGRE_FOREST),
-
+                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.MARSHES),
+                                biomeRegistry.getOrThrow(EdumiaBiomeKeys.MARSHES_WATER),
 
                                 biomeRegistry.getOrThrow(EdumiaBiomeKeys.BASIC_CAVE),
                                 biomeRegistry.getOrThrow(EdumiaBiomeKeys.LUSH_CAVE),
@@ -158,62 +159,95 @@ public class EdumiaChunkGenerator extends ChunkGenerator {
             for(int z = 0; z < 16; z++) {
                 int posX = (chunk.getPos().x * 16) + x;
                 int posZ = (chunk.getPos().z * 16) + z;
-                EdumiaBiome meBiome = null;
+                EdumiaBiome edumiaBiome = null;
 
                 if(middleEarthMapUtils.isWorldCoordinateInBorder(posX, posZ)) {
                     Holder<Biome> biome = region.getBiome(new BlockPos(posX, chunk.getMaxBuildHeight(), posZ));
-                    meBiome = EdumiaBiomesData.getBiomeByKey(biome);
-                    if(meBiome == null) {
-                        meBiome = EdumiaBiomesData.defaultBiome;
+                    edumiaBiome = EdumiaBiomesData.getBiomeByKey(biome);
+                    if(edumiaBiome == null) {
+                        edumiaBiome = EdumiaBiomesData.defaultBiome;
                     }
                 } else {
-                    meBiome = EdumiaBiomesData.defaultBiome;
+                    edumiaBiome = EdumiaBiomesData.defaultBiome;
                 }
 
                 float height = EdumiaHeightMap.getHeight(posX, posZ);
+
                 float caveBlendNoise = (float) ((2 * CAVE_NOISE * BlendedNoise.noise((double) posX / 24,  (double) posZ / 24)) - CAVE_NOISE);
+                float slopeAngle = getTerrainSlope(height, posX, posZ);
+                int waterHeight = edumiaBiome.waterHeight;
+
+                if(edumiaBiome.biome == EdumiaBiomeKeys.GENSAI_VOLCANO) {
+                    float percentage = (float) Math.sqrt(gensaiVolcano.distanceToSqr(new Vec2(posX, posZ))) / 50;
+                    percentage = Math.min(1, Math.max(0.0f, percentage));
+                    percentage = (float) Math.pow(percentage, 2.45f);
+                    height = height * percentage;
+                }
+                if(edumiaBiome.biome == EdumiaBiomeKeys.MARSHES || edumiaBiome.biome == EdumiaBiomeKeys.MARSHES_WATER) {
+                    float oldHeight = height;
+                    height = getMarshesHeight(posX, posZ, height);
+                    float percentage = Math.min(EdumiaHeightMap.getImageNoiseModifier(posX, posZ), 0.3f) / 0.3f;
+                    height = EdumiaHeightMap.lerp(height, oldHeight, percentage);
+                }
 
                 chunk.setBlockState(chunk.getPos().getBlockAt(x, bottomY, z), Blocks.BEDROCK.defaultBlockState(), false);
                 for(int y = bottomY + 1; y <= LAVA_HEIGHT; y++) {
                     chunk.setBlockState(chunk.getPos().getBlockAt(x, y, z), Blocks.LAVA.defaultBlockState(), false);
                 }
 
-                for(int y = bottomY + 1; y < EPMOSTO_LEVEL + caveBlendNoise; y++) {
-                    trySetBlock(chunk, chunk.getPos().getBlockAt(x, y, z),   Blocks.BLACKSTONE.defaultBlockState()); //StoneSets.GNEISS.block().getDefaultState());
+                for(int y = bottomY + 1; y < MEDGON_LEVEL + caveBlendNoise; y++) {
+                    trySetBlock(chunk, chunk.getPos().getBlockAt(x, y, z), StoneSets.BROWN_STONE.block().get().defaultBlockState());
                 }
                 if(Math.random() < 0.5f) chunk.setBlockState(chunk.getPos().getBlockAt(x, chunk.getMinBuildHeight() + 1, z),
                         Blocks.BEDROCK.defaultBlockState(), false);
 
-                for(int y = EPMOSTO_LEVEL + (int) caveBlendNoise; y < DIFTOMIN_LEVEL + caveBlendNoise; y++) {
-                    trySetBlock(chunk, chunk.getPos().getBlockAt(x, y, z),  Blocks.TUFF.defaultBlockState());//StoneSets.BROWN_STONE.block().getDefaultState());
+                for(int y = MEDGON_LEVEL + (int) caveBlendNoise; y < NURGON_LEVEL + caveBlendNoise; y++) {
+                    trySetBlock(chunk, chunk.getPos().getBlockAt(x, y, z), StoneSets.CYAN_STONE.block().get().defaultBlockState());
                 }
-                for(int y = DIFTOMIN_LEVEL + (int) caveBlendNoise; y < DEEPSLATE_LEVEL + caveBlendNoise; y++) {
+                for(int y = NURGON_LEVEL + (int) caveBlendNoise; y < DEEPSLATE_LEVEL + caveBlendNoise; y++) {
                     trySetBlock(chunk, chunk.getPos().getBlockAt(x, y, z), Blocks.DEEPSLATE.defaultBlockState());
                 }
+
                 float dirtHeight = HEIGHT + height - 1;
-                for(int y = DEEPSLATE_LEVEL + (int) caveBlendNoise; y < (dirtHeight / 2); y++) {
-                    trySetBlock(chunk, chunk.getPos().getBlockAt(x, y, z), meBiome.stoneBlock.defaultBlockState());
+                int currentHeight = DEEPSLATE_LEVEL + (int) caveBlendNoise;
+                int totalLayersHeight = (int) (dirtHeight - currentHeight);
+                for(BlocksLayeringData.LayerData layerData : edumiaBiome.blocksLayering.layers) {
+                    int blocks = (int) (totalLayersHeight * layerData.percentage);
+                    for(int y = 0; y <= blocks; y++) {
+                        trySetBlock(chunk, chunk.getPos().getBlockAt(x, currentHeight++, z), layerData.block.defaultBlockState());
+                    }
                 }
-                for(int y = (int) (dirtHeight / 2); y < dirtHeight; y++) {
-                    trySetBlock(chunk, chunk.getPos().getBlockAt(x, y, z), meBiome.upperStoneBlock.defaultBlockState());
-                }
+                BlockState surfaceBlock = edumiaBiome.slopeMap.slopeDatas.get(0).block.defaultBlockState();
+                BlockState underSurfaceBlock;
 
-                chunk.setBlockState(chunk.getPos().getBlockAt(x, (int) (HEIGHT + height - 1), z), meBiome.stoneBlock.defaultBlockState(), false);
-                for(int y = (int) (HEIGHT + height); y < DIRT_HEIGHT + height; y++) {
-                    chunk.setBlockState(chunk.getPos().getBlockAt(x, y, z), meBiome.underSurfaceBlock.defaultBlockState(), false);
-                }
 
-                BlockState surfaceBlock = meBiome.surfaceBlock.defaultBlockState();
-
-                if(DIRT_HEIGHT + height < WATER_HEIGHT && meBiome.surfaceBlock == Blocks.GRASS_BLOCK) {
+                if(DIRT_HEIGHT + height < waterHeight && surfaceBlock == Blocks.GRASS_BLOCK.defaultBlockState()) {
                     surfaceBlock = Blocks.DIRT.defaultBlockState();
+                    underSurfaceBlock = surfaceBlock;
+                } else {
+                    surfaceBlock = edumiaBiome.slopeMap.getBlockAtAngle(slopeAngle).defaultBlockState();
+                    if(surfaceBlock == Blocks.GRASS_BLOCK.defaultBlockState()) underSurfaceBlock = Blocks.DIRT.defaultBlockState();
+                    else underSurfaceBlock = surfaceBlock;
                 }
 
+                chunk.setBlockState(chunk.getPos().getBlockAt(x, (int) (HEIGHT + height - 1), z), underSurfaceBlock, false);
+                for(int y = (int) (HEIGHT + height); y < DIRT_HEIGHT + height; y++) {
+                    chunk.setBlockState(chunk.getPos().getBlockAt(x, y, z), underSurfaceBlock, false);
+                }
                 chunk.setBlockState(chunk.getPos().getBlockAt(x, (int) (DIRT_HEIGHT + height), z), surfaceBlock, false);
 
-                for(int y = (int) (DIRT_HEIGHT + height + 1); y <= WATER_HEIGHT; y++) {
-                    chunk.setBlockState(chunk.getPos().getBlockAt(x, y, z), Blocks.WATER.defaultBlockState(), false);
+                if(edumiaBiome.biome == EdumiaBiomeKeys.GENSAI_VOLCANO) {
+                    for(int y = (int) (DIRT_HEIGHT + height + 1); y <= 90; y++) {
+                        chunk.setBlockState(chunk.getPos().getBlockAt(x, y, z), Blocks.LAVA.defaultBlockState(), false);
+                    }
+                } else {
+                    for(int y = (int) (DIRT_HEIGHT + height + 1); y <= waterHeight; y++) {
+                        chunk.setBlockState(chunk.getPos().getBlockAt(x, y, z), Blocks.WATER.defaultBlockState(), false);
+                    }
                 }
+
+
+                //ProceduralStructures.generateStructures(meBiome, chunk, posX, (int) (DIRT_HEIGHT + height), posZ);
             }
         }
 
@@ -247,7 +281,7 @@ public class EdumiaChunkGenerator extends ChunkGenerator {
         }
     }
 
-    public static float getMacrchesHeight(int x, int z, float height){
+    public static float getMarshesHeight(int x, int z, float height){
         height = -2 + (2.0f * (float) BlendedNoise.noise((double) x / 19, (double) z / 19));
         height += (float) BlendedNoise.noise((double) z / 11, (double) z / 11);
         return height;

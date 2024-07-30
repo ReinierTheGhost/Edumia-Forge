@@ -27,8 +27,12 @@ public class EdumiaMapRegion {
     }
 
     public EdumiaBiome getBiome(Vector2i imageCoordinates){
-        if(biomeImage != null){
-            return EdumiaBiomesData.getBiomeByColor(biomeImage.getRGB(imageCoordinates.x, imageCoordinates.y));
+        try {
+            if(biomeImage != null){
+                return EdumiaBiomesData.getBiomeByColor(biomeImage.getRGB(imageCoordinates.x, imageCoordinates.y));
+            }
+        } catch (Exception exception){
+            return EdumiaBiomesData.defaultBiome;
         }
         return EdumiaBiomesData.defaultBiome;
     }

@@ -1,5 +1,6 @@
 package com.legends.edumia.worldgen.biome.surface;
 
+import com.legends.edumia.worldgen.biome.BiomeGenerationData;
 import com.legends.edumia.worldgen.biome.BlocksLayeringData;
 import com.legends.edumia.worldgen.biome.SlopeMap;
 import com.legends.edumia.worldgen.biome.caves.CaveType;
@@ -16,11 +17,7 @@ public class EdumiaBiome {
     public int waterHeight;
     public Color color;
     public ResourceKey<Biome> biome;
-
-    public Block surfaceBlock;
-    public Block underSurfaceBlock;
-    public Block upperStoneBlock;
-    public Block stoneBlock;
+    public BiomeGenerationData biomeGenerationData;
     public SlopeMap slopeMap;
     public BlocksLayeringData blocksLayering;
     public CaveType caveType;
@@ -28,25 +25,25 @@ public class EdumiaBiome {
     public EdumiaBiome(){
 
     }
-    public EdumiaBiome(int height, ResourceKey<Biome> biome, Supplier<Block> surfaceBlock, Supplier<Block> underSurfaceBlock, Supplier<Block> stoneBlock) {
-        this(height, biome, surfaceBlock.get(), underSurfaceBlock.get(), stoneBlock.get(), stoneBlock.get(), CaveType.DEFAULT);
+    public EdumiaBiome(int height, ResourceKey<Biome> biome, BiomeGenerationData biomeGenerationData, SlopeMap slopeMap, BlocksLayeringData blocksLayering) {
+        this(height, DEFAULT_WATER_HEIGHT, biome, biomeGenerationData, slopeMap, blocksLayering, CaveType.DEFAULT);
     }
 
-    public EdumiaBiome(int height, ResourceKey<Biome> biome, Supplier<Block> surfaceBlock, Supplier<Block> underSurfaceBlock, Supplier<Block> stoneBlock, CaveType caveType) {
-        this(height, biome, surfaceBlock.get(), underSurfaceBlock.get(), stoneBlock.get(), stoneBlock.get(), caveType);
+    public EdumiaBiome(int height, ResourceKey<Biome> biome, BiomeGenerationData biomeGenerationData, SlopeMap slopeMap, BlocksLayeringData blocksLayering, CaveType caveType) {
+        this(height, DEFAULT_WATER_HEIGHT, biome, biomeGenerationData, slopeMap, blocksLayering, caveType);
     }
 
-    public EdumiaBiome(int height, ResourceKey<Biome> biome, Supplier<Block> surfaceBlock, Supplier<Block> underSurfaceBlock, Supplier<Block> upperStoneBlock, Supplier<Block> stoneBlock) {
-        this(height, biome, surfaceBlock.get(), underSurfaceBlock.get(), upperStoneBlock.get(), stoneBlock.get(), CaveType.DEFAULT);
+    public EdumiaBiome(int height, int waterHeight, ResourceKey<Biome> biome, BiomeGenerationData biomeGenerationData, SlopeMap slopeMap, BlocksLayeringData blocksLayering) {
+        this(height, waterHeight, biome, biomeGenerationData, slopeMap, blocksLayering, CaveType.DEFAULT);
     }
 
-    public EdumiaBiome(int height, ResourceKey<Biome> biome, Block surfaceBlock, Block underSurfaceBlock, Block upperStoneBlock, Block stoneBlock, CaveType caveType) {
+    public EdumiaBiome(int height, int waterHeight, ResourceKey<Biome> biome, BiomeGenerationData biomeGenerationData, SlopeMap slopeMap, BlocksLayeringData blocksLayering, CaveType caveType) {
         this.height = height;
+        this.waterHeight = waterHeight;
         this.biome = biome;
-        this.surfaceBlock = surfaceBlock;
-        this.underSurfaceBlock = underSurfaceBlock;
-        this.upperStoneBlock = upperStoneBlock;
-        this.stoneBlock = stoneBlock;
+        this.biomeGenerationData = biomeGenerationData;
+        this.slopeMap = slopeMap;
+        this.blocksLayering = blocksLayering;
         this.caveType = caveType;
     }
 }

@@ -11,23 +11,22 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class EdumiaHeightMap {
-    public static final int SMOOTH_BRUSH_SIZE = 2;
+    public static final int SMOOTH_BRUSH_SIZE = 4;
     public static final int PERLIN_STRETCH_X = 210;
     public static final int PERLIN_STRETCH_Y = 180;
     public static final int PERLIN_STRETCH_X2 = 37;
     public static final int PERLIN_STRETCH_Y2 = 37;
-    public static final int PERLIN_HEIGHT_RANGE = 33;
-    public static final float MOUNTAIN_HEIGHT_RANGE = 8.6f;
-    public static final float MOUNTAIN_HEIGHT_MULTIPLIER = 1.87f;
-    public static final float MOUNTAIN_EXPONENTIAL_HEIGHT = 1.107f;
-    public static final int MOUNTAIN_START_HEIGHT = 16; // Height depending on the Biome Data.
+    public static final int PERLIN_HEIGHT_RANGE = 53;
+    public static final float MOUNTAIN_HEIGHT_RANGE = 3.5f;
+    public static final float MOUNTAIN_EXPONENTIAL_HEIGHT = 1.02f;
+    public static final int MOUNTAIN_START_HEIGHT = 32; // Height depending on the Biome Data.
     public static final int PERLIN_HEIGHT_OFFSET = 8;
     public static final int STONE_HEIGHT = 54;
     public static final int HEIGHT = 8 + STONE_HEIGHT;
     public static final int DIRT_HEIGHT = 3 + HEIGHT;
-    public static final int WATER_MAX = 16;
-    public static final float WATER_MULTIPLIER = 1.31f;
-    public static final float WATER_PERLIN_DIVIDER = 2.2f;
+    public static final int WATER_MAX = 24;
+    public static final float WATER_MULTIPLIER = 1.8f;
+    public static final float WATER_PERLIN_DIVIDER = 3.6f;
     private static final int PIXEL_WEIGHT = EdumiaMapConfigs.PIXEL_WEIGHT;
     public static final ArrayList<Float> percentages = new ArrayList<Float>();
     private static EdumiaMapRuntime edumiaMapRuntime;
@@ -42,21 +41,34 @@ public class EdumiaHeightMap {
 
         Color color = edumiaMapRuntime.getHeight(xWorld, zWorld);
 
-
-        if(color != null){
-            float red = color.getRed();
+        if(color != null) {
             float blue = color.getBlue();
-            float height = red;
+            float height = color.getRed();
 
             if(blue > 0) { // Water carver
+                EdumiaBiome meBiome = edumiaMapRuntime.getBiome(xWorld, zWorld);
                 float percentage = (WATER_MAX - blue) / WATER_MAX;
                 percentage = Math.max(0, Math.min(1, percentage));
+                float waterDifference = (float) (meBiome.waterHeight - EdumiaBiome.DEFAULT_WATER_HEIGHT);
+                height -= waterDifference;
                 height *= percentage;
+                height += waterDifference;
                 height -= blue * WATER_MULTIPLIER;
             }
             return height;
         }
-        return EdumiaBiomesData.defaultBiome.height * WATER_MULTIPLIER;
+        return EdumiaBiomesData.defaultBiome.height * 2.0f;
+    }
+
+    public static float getImageNoiseModifier(int xWorld, int zWorld) {
+        if(edumiaMapRuntime == null) edumiaMapRuntime = EdumiaMapRuntime.getInstance();
+
+        Color color = edumiaMapRuntime.getHeight(xWorld, zWorld);
+
+        if(color != null) {
+            return color.getGreen();
+        }
+        return 0.5f;
     }
 
     public static double getPerlinHeight(int x, int z) {
@@ -73,28 +85,34 @@ public class EdumiaHeightMap {
     }
 
     private static float getPerlinMapHeight(int x, int z) {
+        if(edumiaMapRuntime == null)
+            edumiaMapRuntime = EdumiaMapRuntime.getInstance();
+
         double additionalHeight;
-        EdumiaBiome meBiome;
+
         double perlin = getPerlinHeight(x, z);
 
         float biomeHeight = 0;
 
         if(EdumiaMapUtils.getInstance().isWorldCoordinateInBorder(x,z)) {
             biomeHeight = getBiomeWeightHeight(x, z);
+            int green = edumiaMapRuntime.getHeight(x, z).getGreen();
+            perlin *= ((float)green) / 128f;
         } else {
-            biomeHeight = getDefaultWeightHeight();
+            biomeHeight = ((getSmoothHeight(x, z) + getDefaultWeightHeight()) / 2f);
         }
 
         if(biomeHeight < 0) {
             perlin /= (Math.max(1, Math.min(5, Math.abs(biomeHeight / WATER_PERLIN_DIVIDER))));
         }
+
         if(biomeHeight >= MOUNTAIN_START_HEIGHT) {
             float multiplier = (biomeHeight / MOUNTAIN_START_HEIGHT) - 1;
             biomeHeight += biomeHeight * multiplier * MOUNTAIN_EXPONENTIAL_HEIGHT;
-            multiplier = MOUNTAIN_HEIGHT_MULTIPLIER * multiplier;
             perlin += multiplier * MOUNTAIN_EXPONENTIAL_HEIGHT * MOUNTAIN_HEIGHT_RANGE * BlendedNoise.noise((double) x / PERLIN_STRETCH_X2,  (double) z / PERLIN_STRETCH_Y2);
             perlin += multiplier * (MOUNTAIN_HEIGHT_RANGE / 2) * BlendedNoise.noise((double) (2 * x) / PERLIN_STRETCH_X2,  (double) (2 * z) / PERLIN_STRETCH_Y2);
         }
+
         additionalHeight = biomeHeight + perlin;
 
         return (float) additionalHeight;
@@ -141,8 +159,10 @@ public class EdumiaHeightMap {
         float total = 0;
         for(int i = -SMOOTH_BRUSH_SIZE; i <= SMOOTH_BRUSH_SIZE; i++) {
             for(int j = -SMOOTH_BRUSH_SIZE; j <= SMOOTH_BRUSH_SIZE; j++) {
-                if(EdumiaMapUtils.getInstance().isWorldCoordinateInBorder(x + i, z + j)) total += EdumiaBiomesData.defaultBiome.height;
-                else total += getBiomeWeightHeight(x,z);
+                if(!EdumiaMapUtils.getInstance().isWorldCoordinateInBorder(x + i, z + j))
+                    total += EdumiaBiomesData.defaultBiome.height;
+                else
+                    total += getImageHeight(x, z);
             }
         }
 
@@ -166,16 +186,5 @@ public class EdumiaHeightMap {
 
     public static float lerp(float a, float b, float interpolation) {
         return a + interpolation * (b - a);
-    }
-
-    public static float getImageNoiseModifier(int xWorld, int zWorld) {
-        if (edumiaMapRuntime == null) edumiaMapRuntime = EdumiaMapRuntime.getInstance();
-
-        Color color = edumiaMapRuntime.getHeight(xWorld, zWorld);
-
-        if (color != null){
-            return color.getGreen();
-        }
-        return 0.5f;
     }
 }

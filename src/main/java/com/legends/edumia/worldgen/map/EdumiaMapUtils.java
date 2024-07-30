@@ -57,8 +57,8 @@ public class EdumiaMapUtils {
         Vector2i region = new Vector2i();
         x /= EdumiaMapConfigs.PIXEL_WEIGHT;
         z /= EdumiaMapConfigs.PIXEL_WEIGHT;
-        region.x = (int)((x - (x % EdumiaMapConfigs.REGION_SIZE)) / EdumiaMapConfigs.REGION_SIZE);
-        region.y = (int)((z - (z % EdumiaMapConfigs.REGION_SIZE)) / EdumiaMapConfigs.REGION_SIZE);
+        region.x = ((x - (x % EdumiaMapConfigs.REGION_SIZE)) / EdumiaMapConfigs.REGION_SIZE);
+        region.y = ((z - (z % EdumiaMapConfigs.REGION_SIZE)) / EdumiaMapConfigs.REGION_SIZE);
         return region;
     }
 

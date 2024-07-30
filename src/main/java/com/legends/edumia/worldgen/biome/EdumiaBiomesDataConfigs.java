@@ -1,0 +1,94 @@
+package com.legends.edumia.worldgen.biome;
+
+import net.minecraft.world.level.block.Blocks;
+
+public class EdumiaBiomesDataConfigs {
+    /**
+     * region Slopes
+     * defines the surface blocks (4 blocks depth)
+     */
+
+    private static final int MAX_ANGLE = 90;
+
+    public static SlopeMap ocean = new SlopeMap()
+            .addSlopeData(30, Blocks.GRAVEL)
+            .addSlopeData(36, Blocks.SAND)
+            .addSlopeData(MAX_ANGLE, Blocks.STONE);
+
+    public static SlopeMap river = new SlopeMap()
+            .addSlopeData(30, Blocks.SAND)
+            .addSlopeData(36, Blocks.DIRT)
+            .addSlopeData(MAX_ANGLE, Blocks.STONE);
+
+    public static SlopeMap grassPlains = new SlopeMap()
+            .addSlopeData(25, Blocks.GRASS_BLOCK)
+            .addSlopeData(36, Blocks.COARSE_DIRT)
+            .addSlopeData(MAX_ANGLE, Blocks.STONE);
+    public static SlopeMap beach = new SlopeMap()
+            .addSlopeData(30, Blocks.SAND)
+            .addSlopeData(36, Blocks.SANDSTONE)
+            .addSlopeData(MAX_ANGLE, Blocks.STONE);
+
+    /**
+     * endregion
+     */
+
+    /**
+     * region Blocks Layering
+     * excludes the surface blocks since it's handled by Slopes blocks
+    */
+
+    public static BlocksLayeringData stoneLayers = new BlocksLayeringData().addLayerData(1.0f, Blocks.STONE);
+
+    public static BlocksLayeringData sandstoneLayers = new BlocksLayeringData().addLayerData(0.9f, Blocks.STONE)
+            .addLayerData(0.1f, Blocks.SANDSTONE);
+
+    public static BlocksLayeringData whiteLayers = new BlocksLayeringData().addLayerData(0.5f, Blocks.STONE)
+            .addLayerData(0.4f, Blocks.CALCITE)
+            .addLayerData(0.1f, Blocks.DIORITE);
+
+    /**
+     * endregion
+     */
+
+    /**
+     * region Biome Generation Data
+     * Expansion weights
+     */
+
+    private static final byte[] RIVER_WEIGHT = {2, 2};
+    private static final byte[] OCEAN_WEIGHT = {2, 3};
+    private static final byte[] MOUNTAIN_WEIGHT = {1, 4};
+    private static final byte[] LAND_WEIGHT = {1, 4};
+
+    /** Noise Modifiers */
+    private static final double WATER_NOISE_MODIFIER = 0.4f;
+    private static final double PLAINS_NOISE_MODIFIER = 0.31f;
+    private static final double FOOTHILL_NOISE_MODIFIER = 0.6f;
+    private static final double MOUNTAIN_NOISE_MODIFIER = 0.82f;
+    private static final double MOUNTAIN_PEAKS_NOISE_MODIFIER = 1.5f;
+
+    /** Height Base Modifiers */
+    private static final double WATER_HEIGHT_MODIFIER = 0.2f;
+    private static final double LAND_HEIGHT_MODIFIER = 0.3f;
+    private static final double FOOTHILL_HEIGHT_MODIFIER = 0.38f;
+    private static final double MOUNTAIN_HEIGHT_MODIFIER = 0.46f;
+    private static final double MOUNTAIN_PEAKS_HEIGHT_MODIFIER = 0.55f;
+
+    public static BiomeGenerationData landModifier = new BiomeGenerationData().expansionWeight(LAND_WEIGHT).noiseModifier(0.39f).heightModifier(0.33f);
+    public static BiomeGenerationData plainsModifier = new BiomeGenerationData().expansionWeight(LAND_WEIGHT).noiseModifier(PLAINS_NOISE_MODIFIER).heightModifier(LAND_HEIGHT_MODIFIER);
+    public static BiomeGenerationData riverModifier = new BiomeGenerationData().expansionWeight(RIVER_WEIGHT).noiseModifier(WATER_NOISE_MODIFIER).heightModifier(WATER_HEIGHT_MODIFIER);
+    public static BiomeGenerationData smallRiverModifier = new BiomeGenerationData().expansionWeight(RIVER_WEIGHT).noiseModifier(0.05f).heightModifier(0.05f);
+    public static BiomeGenerationData oceanModifier = new BiomeGenerationData().expansionWeight(OCEAN_WEIGHT).noiseModifier(WATER_NOISE_MODIFIER).heightModifier(WATER_HEIGHT_MODIFIER);
+    public static BiomeGenerationData foothillModifier = new BiomeGenerationData().expansionWeight(MOUNTAIN_WEIGHT).noiseModifier(FOOTHILL_NOISE_MODIFIER).heightModifier(FOOTHILL_HEIGHT_MODIFIER);
+    public static BiomeGenerationData fieldsModifier = new BiomeGenerationData().expansionWeight(LAND_WEIGHT).noiseModifier(FOOTHILL_NOISE_MODIFIER).heightModifier(FOOTHILL_HEIGHT_MODIFIER);
+    public static BiomeGenerationData mountainModifier = new BiomeGenerationData().expansionWeight(MOUNTAIN_WEIGHT).noiseModifier(MOUNTAIN_NOISE_MODIFIER).heightModifier(MOUNTAIN_HEIGHT_MODIFIER);
+    public static BiomeGenerationData volcanicMountainModifier = new BiomeGenerationData().expansionWeight(MOUNTAIN_WEIGHT).noiseModifier(1.47f).heightModifier(MOUNTAIN_HEIGHT_MODIFIER);
+    public static BiomeGenerationData bmModifier = new BiomeGenerationData().expansionWeight(MOUNTAIN_WEIGHT).noiseModifier(MOUNTAIN_NOISE_MODIFIER).heightModifier(0.36f);
+    public static BiomeGenerationData bmPeaksModifier = new BiomeGenerationData().expansionWeight(MOUNTAIN_WEIGHT).noiseModifier(1.47f).heightModifier(0.33f);
+    public static BiomeGenerationData darkWoodsModifier = new BiomeGenerationData().expansionWeight(LAND_WEIGHT).noiseModifier(0.5f).heightModifier(0.4f);
+    public static BiomeGenerationData emynMuilModifier = new BiomeGenerationData().expansionWeight(LAND_WEIGHT).noiseModifier(1.2f).heightModifier(0.67f);
+
+
+
+}

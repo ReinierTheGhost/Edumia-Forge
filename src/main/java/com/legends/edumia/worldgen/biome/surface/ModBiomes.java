@@ -89,6 +89,10 @@ public class ModBiomes {
                 8163746, 10926783, 5860963, 863008, 4020033, 2371608)));
         context.register(EdumiaBiomeKeys.OGRE_FOREST, createOgreForestBiome(context, new BiomeColorsDTO(
                 10864127, 13822975, 4962255, 329011, 7982981, 16755660)));
+        context.register(EdumiaBiomeKeys.MARSHES, createTestBiome(context, new BiomeColorsDTO(
+                10864127, 13822975, 4962255, 329011, 7982981, 16755660)));
+        context.register(EdumiaBiomeKeys.MARSHES_WATER, createTestBiome(context, new BiomeColorsDTO(
+                10864127, 13822975, 4962255, 329011, 7982981, 16755660)));
     }
     public static Biome createEdumiaValesBiome(BootstapContext<Biome> context, BiomeColorsDTO biomeColors) {
         MobSpawnSettings.Builder spawnSettings = new MobSpawnSettings.Builder();

@@ -51,9 +51,10 @@ public class EdumiaMapRuntime {
         if(!middleEarthMapUtils.isWorldCoordinateInBorder(posX, posZ)) return null;
 
         EdumiaMapRegion region = getRegionToUse(middleEarthMapUtils.getRegionByWorldCoordinate(posX, posZ));
-        if(region == null) return null;
+        if(region == null) return new Color(0);
 
-        return region.getHeightColor(getImageCoordinates(posX, posZ));
+        Vector2i coords = getImageCoordinates(posX, posZ);
+        return region.getHeightColor(coords);
     }
 
     private Vector2i getImageCoordinates(int posX, int posZ){

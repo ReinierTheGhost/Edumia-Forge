@@ -1,18 +1,26 @@
 package com.legends.edumia.utils.resources;
 
 import com.legends.edumia.utils.LoggerUtil;
+import com.legends.edumia.worldgen.biome.surface.EdumiaBiomesData;
 import com.legends.edumia.worldgen.chunkgen.map.ImageUtils;
+import com.legends.edumia.worldgen.map.EdumiaMapConfigs;
+import org.joml.Vector2i;
+import org.joml.sampling.Convolution;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.ConvolveOp;
 import java.awt.image.Kernel;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class FileUtils {
     private static FileUtils single_instance = null;
+    private static HashMap<Integer, float[]> gaussianBlurKernels = new HashMap<>();
+    private static final float GAUSSIAN_SIGMA = 3.81f;
 
     public static synchronized FileUtils getInstance()
     {
@@ -47,6 +55,37 @@ public class FileUtils {
         }
     }
 
+    private static final Vector2i[] directions = {new Vector2i(-1, 1), new Vector2i(0, 1), new Vector2i(1, 1),
+            new Vector2i(-1, 0), new Vector2i(1, 0),
+            new Vector2i(-1, -1), new Vector2i(0, -1), new Vector2i(1, -1)};
+    public BufferedImage getRunImageWithBorders(int x, int y, int padding) {
+        String basePath = EdumiaMapConfigs.BIOME_PATH.formatted(EdumiaMapConfigs.MAP_ITERATION);
+        String centerPath = basePath + EdumiaMapConfigs.IMAGE_NAME.formatted(x, y);
+        BufferedImage centerImage = getRunImage(centerPath);
+        if(centerImage == null) return null;
+
+        int width = centerImage.getWidth();
+        int height = centerImage.getHeight();
+
+        BufferedImage imageWithBorders = new BufferedImage(width + 2*padding, height + 2*padding, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D graphics = imageWithBorders.createGraphics();
+
+        graphics.setColor(EdumiaBiomesData.defaultBiome.color);
+        graphics.fillRect(0, 0, width + 2*padding, height + 2*padding);
+        graphics.drawImage(centerImage, padding, padding, null);
+
+        for(Vector2i direction : directions) {
+            String edgePath = basePath + EdumiaMapConfigs.IMAGE_NAME.formatted(x + direction.x, y + direction.y);
+            BufferedImage edgeImage = getRunImage(edgePath);
+            if(edgeImage != null) {
+                graphics.drawImage(edgeImage, padding + (width * direction.x), padding + (height * direction.y), null);
+            }
+        }
+        graphics.dispose();
+
+        return imageWithBorders;
+    }
+
     public void saveImage(BufferedImage bufferedImage, String path, String fileName, FileType fileType) {
         try{
             new File(path).mkdirs();
@@ -61,42 +100,36 @@ public class FileUtils {
     /**
      * TODO : Optimise this part, it the longest process in World-Gen
      */
-    public static BufferedImage blur(BufferedImage image, int brushSize, float ratio) {
-        // Create new expended image :
+    public static BufferedImage blur(BufferedImage image, int brushSize, boolean crop) {
         int width = image.getWidth();
         int height = image.getHeight();
-        int newWidth = width + (2 * brushSize);
-        int newHeight = height + (2 * brushSize);
 
-        BufferedImage expendedImage = new BufferedImage(newWidth, newHeight, image.getType());
-        // Copy image content
-        for (int x = 0; x < width; x++) {
-            for (int y = 0; y < height; y++) {
-                expendedImage.setRGB(x + brushSize, y + brushSize, image.getRGB(x, y));
-            }
-        }
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < brushSize; x++) {
-                expendedImage.setRGB(x, y + brushSize, image.getRGB(0, y)); // Left edge
-                expendedImage.setRGB(width + brushSize + x, y + brushSize, image.getRGB(width - 1, y)); // Right edge
-            }
+        BufferedImage imageWithBorders = image;
+        if(!crop) {
+            imageWithBorders = new BufferedImage(width + 2*brushSize, height + 2*brushSize, BufferedImage.TYPE_INT_ARGB);
+            Graphics2D graphics = imageWithBorders.createGraphics();
+
+            graphics.setColor(EdumiaBiomesData.defaultBiome.color);
+            graphics.fillRect(0, 0, width + 2*brushSize, height + 2*brushSize);
+            graphics.drawImage(image, brushSize, brushSize, null);
         }
 
-        for (int x = 0; x < width + 2 * brushSize; x++) {
-            for (int y = 0; y < brushSize; y++) {
-                expendedImage.setRGB(x, y, expendedImage.getRGB(x, brushSize)); // Top edge
-                expendedImage.setRGB(x, height + brushSize + y, expendedImage.getRGB(x, height + brushSize - 1)); // Bottom edge
-            }
-        }
+        float[] blurKernel = new float[brushSize*brushSize];
 
-        float[] blurKernel = new float[brushSize * brushSize];
-        Arrays.fill(blurKernel, ratio);
+        if(gaussianBlurKernels.containsKey(brushSize)) {
+            blurKernel = gaussianBlurKernels.get(brushSize);
+        }
+        else {
+            Convolution.gaussianKernel(brushSize, brushSize, GAUSSIAN_SIGMA, blurKernel);
+            gaussianBlurKernels.put(brushSize, blurKernel);
+        }
         Kernel kernel = new Kernel(brushSize, brushSize, blurKernel);
         ConvolveOp op = new ConvolveOp(kernel, ConvolveOp.EDGE_NO_OP, null);
 
-        expendedImage = op.filter(expendedImage, null);
+        BufferedImage blurredImage = new BufferedImage(width, height, image.getType());
+        op.filter(image, blurredImage);
 
-
-        return expendedImage.getSubimage(brushSize, brushSize, width, height);
+        if(crop) return blurredImage.getSubimage(brushSize, brushSize, width - brushSize*2, height - brushSize*2);
+        else return blurredImage;
     }
 }

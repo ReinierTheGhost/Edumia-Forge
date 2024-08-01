@@ -1,11 +1,10 @@
 package com.legends.edumia.utils.noises;
-
 /* Version 2012-03-09
- *
- * This code was placed in the public domain by its original author,
- * Stefan Gustavson. You may use it as you see fit, but
- * attribution is appreciated.
- */
+*
+* This code was placed in the public domain by its original author,
+* Stefan Gustavson. You may use it as you see fit, but
+* attribution is appreciated.
+*/
 
 public class SimplexNoise {  // Simplex noise in 2D, 3D and 4D
     private static Grad grad3[] = {new Grad(1,1,0),new Grad(-1,1,0),new Grad(1,-1,0),new Grad(-1,-1,0),

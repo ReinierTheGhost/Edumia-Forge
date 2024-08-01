@@ -17,13 +17,8 @@
     [],
     [],
     [
-      "edumia:crystals/elven_crystal",
-      "minecraft:disk_clay",
-      "minecraft:disk_gravel",
-      "minecraft:disk_sand",
       "minecraft:ore_andesite_lower",
       "minecraft:ore_andesite_upper",
-      "minecraft:ore_clay",
       "minecraft:ore_diorite_lower",
       "minecraft:ore_diorite_upper",
       "minecraft:ore_dirt",
@@ -31,14 +26,12 @@
       "minecraft:ore_granite_upper",
       "minecraft:ore_gravel",
       "minecraft:ore_tuff",
-      "minecraft:spring_water",
-      "minecraft:underwater_magma"
+      "minecraft:spring_water"
     ],
     [],
     [],
     [
-      "minecraft:glow_lichen",
-      "minecraft:patch_tall_grass_2"
+      "minecraft:glow_lichen"
     ],
     [
       "minecraft:freeze_top_layer"
@@ -47,14 +40,7 @@
   "has_precipitation": true,
   "spawn_costs": {},
   "spawners": {
-    "ambient": [
-      {
-        "type": "minecraft:bat",
-        "maxCount": 2,
-        "minCount": 1,
-        "weight": 3
-      }
-    ],
+    "ambient": [],
     "axolotls": [],
     "creature": [],
     "misc": [],

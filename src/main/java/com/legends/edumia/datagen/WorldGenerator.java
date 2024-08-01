@@ -1,10 +1,9 @@
 package com.legends.edumia.datagen;
 
 import com.legends.edumia.Edumia;
-import com.legends.edumia.worldgen.biome.caves.ModCaveBiomes;
-import com.legends.edumia.worldgen.biome.surface.ModBiomes;
-import com.legends.edumia.worldgen.congiguredfeatures.ModConfiguredFeatures;
-import com.legends.edumia.worldgen.placedfeatures.ModPlacedFeatures;
+import com.legends.edumia.world.biomes.surface.ModBiomes;
+import com.legends.edumia.world.congiguredfeatures.ModConfiguredFeatures;
+import com.legends.edumia.world.placedfeatures.ModPlacedFeatures;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;

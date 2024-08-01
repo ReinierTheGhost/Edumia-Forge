@@ -3,7 +3,7 @@ package com.legends.edumia.client.gui;
 import com.legends.edumia.Edumia;
 import com.legends.edumia.client.gui.map.EdumiaMapScreen;
 import com.legends.edumia.client.gui.widget.button.EdumiaMenuButton;
-import com.legends.edumia.worldgen.dimension.ModDimensions;
+import com.legends.edumia.world.dimension.ModDimensions;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Button;
@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+@SuppressWarnings("unchecked")
 public class EdumiaMasterMenuScreen extends BasicIngameScreen{
     private Button.CreateNarration createNarration = EdumiaMenuButton.DEFAULT_NARRATION;
     public static final ResourceLocation MENU_ICONS = new ResourceLocation(Edumia.MOD_ID, "textures/gui/buttons/menu_icons.png");

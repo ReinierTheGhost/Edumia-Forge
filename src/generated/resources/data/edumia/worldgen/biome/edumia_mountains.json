@@ -2,10 +2,10 @@
   "carvers": {},
   "downfall": 0.5,
   "effects": {
-    "fog_color": 13426943,
-    "foliage_color": 7709826,
-    "grass_color": 7643011,
-    "sky_color": 9745151,
+    "fog_color": 12638463,
+    "foliage_color": 7316862,
+    "grass_color": 7777673,
+    "sky_color": 8233727,
     "water_color": 4159204,
     "water_fog_color": 329011
   },
@@ -36,10 +36,10 @@
     [
       "edumia:boulders/andesite_boulder",
       "edumia:boulders/big_andesite_boulder",
-      "edumia:tree/boreal/larch/abundant_larch_tree",
-      "edumia:tree/boreal/pine/abundant_pine_tree",
-      "edumia:tree/boreal/spruce/common_spruce_bush_tree",
-      "edumia:tree/boreal/spruce/foothills_spruce_tree",
+      "edumia:tree/boreal/larch/sparse_larch_tree",
+      "edumia:tree/boreal/pine/sparse_pine_tree",
+      "edumia:tree/boreal/spruce/scarce_spruce_tree",
+      "edumia:tree/boreal/spruce/spruce_bush_tree",
       "minecraft:brown_mushroom_normal",
       "minecraft:flower_default",
       "minecraft:glow_lichen",
@@ -64,5 +64,5 @@
     "water_ambient": [],
     "water_creature": []
   },
-  "temperature": 0.2
+  "temperature": 0.5
 }

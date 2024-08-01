@@ -1,7 +1,7 @@
 package com.legends.edumia.item;
 
 
-import com.legends.edumia.worldgen.dimension.ModDimensions;
+import com.legends.edumia.world.dimension.ModDimensions;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;

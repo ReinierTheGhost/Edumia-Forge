@@ -1,6 +1,8 @@
 package com.legends.edumia.utils.noises;
 
+
 public class BlendedNoise {
+
     public static double noise(double x, double y){
         int xi = (int) Math.floor(x) & 255;
         int yi = (int) Math.floor(y) & 255;

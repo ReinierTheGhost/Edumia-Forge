@@ -17,9 +17,6 @@
     [],
     [],
     [
-      "minecraft:disk_clay",
-      "minecraft:disk_gravel",
-      "minecraft:disk_sand",
       "minecraft:ore_andesite_lower",
       "minecraft:ore_andesite_upper",
       "minecraft:ore_coal_upper",
@@ -34,19 +31,7 @@
     [],
     [],
     [
-      "edumia:boulders/big_limestone_boulder",
-      "edumia:boulders/limestone_boulder",
-      "edumia:tree/oaks/oak/oak_bush_tree",
-      "edumia:tree/temperate/sakura/gensai_sakura_grove_trees",
-      "edumia:tree/temperate/white_ash/white_ash_bush",
-      "minecraft:brown_mushroom_normal",
-      "minecraft:flower_meadow",
-      "minecraft:glow_lichen",
-      "minecraft:patch_grass_forest",
-      "minecraft:patch_pumpkin",
-      "minecraft:patch_sugar_cane",
-      "minecraft:red_mushroom_normal",
-      "minecraft:trees_plains"
+      "minecraft:glow_lichen"
     ],
     [
       "minecraft:freeze_top_layer"

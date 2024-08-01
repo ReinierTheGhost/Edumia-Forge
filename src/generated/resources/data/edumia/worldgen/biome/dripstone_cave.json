@@ -17,9 +17,6 @@
     [],
     [],
     [
-      "minecraft:disk_gravel",
-      "minecraft:dripstone_cluster",
-      "minecraft:large_dripstone",
       "minecraft:ore_andesite_lower",
       "minecraft:ore_andesite_upper",
       "minecraft:ore_diorite_lower",
@@ -29,7 +26,6 @@
       "minecraft:ore_granite_upper",
       "minecraft:ore_gravel",
       "minecraft:ore_tuff",
-      "minecraft:pointed_dripstone",
       "minecraft:spring_water"
     ],
     [],
@@ -44,14 +40,7 @@
   "has_precipitation": true,
   "spawn_costs": {},
   "spawners": {
-    "ambient": [
-      {
-        "type": "minecraft:bat",
-        "maxCount": 2,
-        "minCount": 1,
-        "weight": 3
-      }
-    ],
+    "ambient": [],
     "axolotls": [],
     "creature": [],
     "misc": [],

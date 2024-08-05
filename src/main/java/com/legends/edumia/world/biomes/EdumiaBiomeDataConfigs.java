@@ -2,6 +2,7 @@ package com.legends.edumia.world.biomes;
 
 
 import com.legends.edumia.blocks.blocksets.StoneSets;
+import com.legends.edumia.core.BlockLoader;
 import net.minecraft.world.level.block.Blocks;
 
 public class EdumiaBiomeDataConfigs {
@@ -9,24 +10,27 @@ public class EdumiaBiomeDataConfigs {
     // defines the surface blocks (4 blocks depth)
     private static final int MAX_ANGLE = 90;
 
-    public static SlopeMap ashenDirt = new SlopeMap().addSlopeData(25, Blocks.GRAVEL)
+    public static SlopeMap ashenDirt = new SlopeMap()
+            .addSlopeData(25, Blocks.GRAVEL)
             .addSlopeData(32, Blocks.DIRT)
             .addSlopeData(MAX_ANGLE, Blocks.STONE);
 
 
 
-    public static SlopeMap mordor = new SlopeMap().addSlopeData(30, Blocks.BLACK_WOOL)
-            .addSlopeData(36, Blocks.TUFF)
+    public static SlopeMap gensaiVolcano = new SlopeMap()
+            .addSlopeData(30, () -> StoneSets.VOLCANIC_ROCK.block().get())
             .addSlopeData(44, Blocks.BASALT)
             .addSlopeData(MAX_ANGLE, Blocks.BLACKSTONE);
 
 
-    public static SlopeMap mistyMountains = new SlopeMap().addSlopeData(13, Blocks.GRASS_BLOCK)
+    public static SlopeMap mistyMountains = new SlopeMap()
+            .addSlopeData(13, Blocks.GRASS_BLOCK)
             .addSlopeData(16, Blocks.COARSE_DIRT)
             .addSlopeData(32, Blocks.STONE)
             .addSlopeData(48, Blocks.TUFF)
             .addSlopeData(MAX_ANGLE, Blocks.BASALT);
-    public static SlopeMap edumiaMountainsBase = new SlopeMap().addSlopeData(13, Blocks.GRASS_BLOCK)
+    public static SlopeMap edumiaMountainsBase = new SlopeMap()
+            .addSlopeData(13, Blocks.GRASS_BLOCK)
             .addSlopeData(30, Blocks.GRASS_BLOCK)
             .addSlopeData(33, Blocks.COARSE_DIRT)
             .addSlopeData(34, Blocks.GRAVEL)
@@ -37,7 +41,8 @@ public class EdumiaBiomeDataConfigs {
             .addSlopeData(51, () -> StoneSets.BLUE_STONE.block().get())
             .addSlopeData(MAX_ANGLE, Blocks.COBBLED_DEEPSLATE);
 
-    public static SlopeMap edumiaMountains = new SlopeMap().addSlopeData(13, Blocks.GRASS_BLOCK)
+    public static SlopeMap edumiaMountains = new SlopeMap()
+            .addSlopeData(13, Blocks.GRASS_BLOCK)
             .addSlopeData(30, Blocks.GRASS_BLOCK)
             .addSlopeData(33, Blocks.COARSE_DIRT)
             .addSlopeData(34, Blocks.GRAVEL)
@@ -50,75 +55,113 @@ public class EdumiaBiomeDataConfigs {
 
     public static SlopeMap edumiaMountainsPeaks = new SlopeMap()
             .addSlopeData(25, Blocks.SNOW_BLOCK)
-            .addSlopeData(33, Blocks.STONE)
-            .addSlopeData(35, Blocks.ANDESITE)
-            .addSlopeData(42, Blocks.TUFF)
-            .addSlopeData(50, () -> StoneSets.CYAN_STONE.block().get())
-            .addSlopeData(MAX_ANGLE, Blocks.COBBLED_DEEPSLATE);
+            .addSlopeData(MAX_ANGLE, Blocks.SNOW_BLOCK);
 
-
-
-
-
-
-    public static SlopeMap grassPlains = new SlopeMap().addSlopeData(25, Blocks.GRASS_BLOCK)
+    public static SlopeMap grassPlains = new SlopeMap()
+            .addSlopeData(25, Blocks.GRASS_BLOCK)
             .addSlopeData(36, Blocks.COARSE_DIRT)
             .addSlopeData(MAX_ANGLE, Blocks.STONE);
-    public static SlopeMap sandShores = new SlopeMap().addSlopeData(27, Blocks.SAND)
+
+    public static SlopeMap avelionRockShore = new SlopeMap()
+            .addSlopeData(20, Blocks.GRASS_BLOCK)
+            .addSlopeData(30, Blocks.COARSE_DIRT)
+            .addSlopeData(35, () -> StoneSets.LIGHT_HIGH_ELVEN_ROCK.block().get())
+            .addSlopeData(45, () -> StoneSets.HIGH_ELVEN_ROCK.block().get())
+            .addSlopeData(55, () -> StoneSets.DARK_HIGH_ELVEN_ROCK.block().get())
+            .addSlopeData(65, () -> StoneSets.LIGHT_HIGH_ELVEN_ROCK.block().get())
+            .addSlopeData(75, () -> StoneSets.HIGH_ELVEN_ROCK.block().get())
+            .addSlopeData(85, () -> StoneSets.DARK_HIGH_ELVEN_ROCK.block().get())
+            .addSlopeData(MAX_ANGLE, () -> StoneSets.CACHOLONG.block().get());
+
+    public static SlopeMap sandShores = new SlopeMap()
+            .addSlopeData(27, Blocks.SAND)
             .addSlopeData(30, Blocks.SANDSTONE)
             .addSlopeData(36, Blocks.COARSE_DIRT)
             .addSlopeData(MAX_ANGLE, Blocks.STONE);
 
-    public static SlopeMap river = new SlopeMap().addSlopeData(30, Blocks.SAND)
+    public static SlopeMap river = new SlopeMap()
+            .addSlopeData(30, Blocks.SAND)
             .addSlopeData(36, Blocks.DIRT)
             .addSlopeData(MAX_ANGLE, Blocks.STONE);
 
-    public static SlopeMap forodwaith = new SlopeMap().addSlopeData(30, Blocks.SNOW_BLOCK)
+    public static SlopeMap forodwaith = new SlopeMap()
+            .addSlopeData(30, Blocks.SNOW_BLOCK)
             .addSlopeData(MAX_ANGLE, Blocks.FROSTED_ICE);
 
-    public static SlopeMap mud = new SlopeMap().addSlopeData(25, Blocks.MUD)
+    public static SlopeMap mud = new SlopeMap()
+            .addSlopeData(25, Blocks.MUD)
             .addSlopeData(32, Blocks.DIRT)
             .addSlopeData(MAX_ANGLE, Blocks.STONE);
-    public static SlopeMap nearHarad = new SlopeMap().addSlopeData(32, Blocks.GRASS_BLOCK)
+    public static SlopeMap nearHarad = new SlopeMap()
+            .addSlopeData(32, Blocks.GRASS_BLOCK)
             .addSlopeData(36, Blocks.SMOOTH_SANDSTONE)
             .addSlopeData(44, Blocks.SANDSTONE)
             .addSlopeData(56, Blocks.STONE)
             .addSlopeData(MAX_ANGLE, Blocks.TERRACOTTA);
-    public static SlopeMap harad = new SlopeMap().addSlopeData(32, Blocks.SAND)
+    public static SlopeMap harad = new SlopeMap()
+            .addSlopeData(32, Blocks.SAND)
             .addSlopeData(45, Blocks.SANDSTONE)
             .addSlopeData(60, Blocks.STONE)
             .addSlopeData(MAX_ANGLE, Blocks.TERRACOTTA);
-    public static SlopeMap ocean = new SlopeMap().addSlopeData(30, Blocks.GRAVEL)
+
+    public static SlopeMap ocean = new SlopeMap()
+            .addSlopeData(30, Blocks.GRAVEL)
             .addSlopeData(36, Blocks.SAND)
             .addSlopeData(MAX_ANGLE, Blocks.STONE);
-    public static SlopeMap beach = new SlopeMap().addSlopeData(30, Blocks.SAND)
+    public static SlopeMap beach = new SlopeMap()
+            .addSlopeData(30, Blocks.SAND)
             .addSlopeData(36, Blocks.SAND)
             .addSlopeData(MAX_ANGLE, Blocks.STONE);
+
+    public static SlopeMap gensaiShores = new SlopeMap()
+            .addSlopeData(26, () -> BlockLoader.WHITE_SAND.get())
+            .addSlopeData(28, Blocks.SAND)
+            .addSlopeData(33, Blocks.COARSE_DIRT)
+            .addSlopeData(MAX_ANGLE, Blocks.CLAY);
+    public static SlopeMap whiteShores = new SlopeMap()
+            .addSlopeData(26, () -> BlockLoader.WHITE_SAND.get())
+            .addSlopeData(33, () -> StoneSets.CACHOLONG.block().get())
+            .addSlopeData(MAX_ANGLE, () -> BlockLoader.WHITE_SAND.get());
     // endregion
 
     // region Blocks Layering
     // excludes the surface blocks since it's handled by Slopes blocks
 
-    public static BlocksLayeringData stoneLayers = new BlocksLayeringData().addLayerData(1.0f, Blocks.STONE);
+    public static BlocksLayeringData stoneLayers = new BlocksLayeringData()
+            .addLayerData(1.0f, Blocks.STONE);
 
-    public static BlocksLayeringData ashenStoneLayers = new BlocksLayeringData().addLayerData(1.0f, Blocks.BASALT);
+    public static BlocksLayeringData volcanicRockLayers = new BlocksLayeringData()
+            .addLayerData(1.0f, () -> StoneSets.VOLCANIC_ROCK.block().get());
 
-    public static BlocksLayeringData frozenLayers = new BlocksLayeringData().addLayerData(0.5f, Blocks.STONE)
+    public static BlocksLayeringData frozenLayers = new BlocksLayeringData()
+            .addLayerData(0.5f, Blocks.STONE)
             .addLayerData(0.5f, Blocks.FROSTED_ICE);
 
 
-    public static BlocksLayeringData limeStoneLayers = new BlocksLayeringData().addLayerData(0.5f, Blocks.STONE)
+    public static BlocksLayeringData limeStoneLayers = new BlocksLayeringData()
+            .addLayerData(0.5f, Blocks.STONE)
             .addLayerData(0.5f, Blocks.CALCITE);
 
-    public static BlocksLayeringData sandstoneLayers = new BlocksLayeringData().addLayerData(0.9f, Blocks.STONE)
+    public static BlocksLayeringData sandstoneLayers = new BlocksLayeringData()
+            .addLayerData(0.9f, Blocks.STONE)
             .addLayerData(0.1f, Blocks.SANDSTONE);
+    public static BlocksLayeringData avelionLayers = new BlocksLayeringData()
+            .addLayerData(0.3f, () -> StoneSets.LIGHT_HIGH_ELVEN_ROCK.block().get())
+            .addLayerData(0.3f, () -> StoneSets.DARK_HIGH_ELVEN_ROCK.block().get())
+            .addLayerData(0.3f, () -> StoneSets.HIGH_ELVEN_ROCK.block().get())
+            .addLayerData(0.1f, () -> StoneSets.CACHOLONG.block().get());
+    public static BlocksLayeringData limestoneLayers = new BlocksLayeringData()
+            .addLayerData(0.5f, Blocks.STONE)
+            .addLayerData(0.5f, StoneSets.LIMESTONE.block().get());
 
-    public static BlocksLayeringData gondorLayers = new BlocksLayeringData().addLayerData(0.5f, Blocks.STONE)
+    public static BlocksLayeringData gondorLayers = new BlocksLayeringData()
+            .addLayerData(0.5f, Blocks.STONE)
             .addLayerData(0.4f, Blocks.CALCITE)
             .addLayerData(0.1f, Blocks.DIORITE);
 
 
-    public static BlocksLayeringData mistyMountainsLayers = new BlocksLayeringData().addLayerData(0.9f, Blocks.STONE)
+    public static BlocksLayeringData mistyMountainsLayers = new BlocksLayeringData()
+            .addLayerData(0.9f, Blocks.STONE)
             .addLayerData(0.1f, Blocks.TUFF);
 
     // endregion
@@ -155,5 +198,8 @@ public class EdumiaBiomeDataConfigs {
             .noiseModifier(MOUNTAIN_NOISE_MODIFIER).heightModifier(0.36f);
     public static BiomeGenerationData emPeaksModifier = new BiomeGenerationData().expansionWeight(MOUNTAIN_WEIGHT)
             .noiseModifier(1.47f).heightModifier(0.33f);
+
+    public static BiomeGenerationData mountTitleistModifier = new BiomeGenerationData().expansionWeight(MOUNTAIN_WEIGHT)
+            .noiseModifier(1.47f).heightModifier(MOUNTAIN_HEIGHT_MODIFIER);
 
 }

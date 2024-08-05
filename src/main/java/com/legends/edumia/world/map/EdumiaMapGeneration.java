@@ -279,13 +279,20 @@ public class EdumiaMapGeneration {
 
                     int red = (int)Math.round((biome.biomeGenerationData.heightModifier * ((double)Math.abs(height)) + (1 - biome.biomeGenerationData.heightModifier) * (double)heightModifier.getRed()));
 
-                    int green = (int)((noiseModifier + heightModifier.getGreen()) / 2f);
+                    int green = (int)((noiseModifier + heightModifier.getRed()) / 2f);
 
-                    Color newColor = new Color(red, green, water);
+                    // Compute grayscale value based on height
+                    int grayscale = (int) Math.round((biome.biomeGenerationData.heightModifier * ((double) Math.abs(height))
+                            + (1 - biome.biomeGenerationData.heightModifier) * (double) heightModifier.getRed()));
+
+                    // Clamp grayscale value between 0 and 255
+                    grayscale = Math.max(0, Math.min(255, grayscale));
+
+                    Color newColor = new Color(red, green, water); // grayscale color
 
                     newHeightRegion.setRGB(x, z, newColor.getRGB());
                 } catch (Exception e) {
-                    throw new RuntimeException("MiddleEarthMapGeneration.processHeightRegion : Failed to create color for the height [%s]".formatted(e));
+                    throw new RuntimeException("EdumiaMapGeneration.processHeightRegion : Failed to create color for the height [%s]".formatted(e));
                 }
             }
         }
@@ -339,5 +346,6 @@ public class EdumiaMapGeneration {
             return color1;
         }
     }
+
 }
 

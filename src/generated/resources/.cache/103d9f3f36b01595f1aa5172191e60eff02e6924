@@ -1,4 +1,4 @@
-// 1.20.1	2024-08-01T22:07:53.9231624	Registries
+// 1.20.1	2024-08-05T17:03:14.965348	Registries
 e8fe31e48cb8dc787958966f2a2a1f21a1a7d872 data/edumia/worldgen/biome/avelion_plains.json
 76629217579744778d432b4ad4824acb5c9eaea9 data/edumia/worldgen/biome/basalt_cave.json
 40474d6ea3f25f584cc8abbc7f2bcc9f677d133a data/edumia/worldgen/biome/basic_cave.json
@@ -12,6 +12,8 @@ e8fe31e48cb8dc787958966f2a2a1f21a1a7d872 data/edumia/worldgen/biome/avelion_plai
 1f4984d5826d45663b121b560921538b6de60e84 data/edumia/worldgen/biome/edumia_mountains_base.json
 b50aa5a43b7fff98e40313104ccf02ad3dbd98f0 data/edumia/worldgen/biome/edumia_mountains_peaks.json
 2e342a409c17150a8c72943185fe6a54f2f8ef6a data/edumia/worldgen/biome/edumia_river.json
+e8fe31e48cb8dc787958966f2a2a1f21a1a7d872 data/edumia/worldgen/biome/edumia_rocky_shores.json
+e8fe31e48cb8dc787958966f2a2a1f21a1a7d872 data/edumia/worldgen/biome/edumia_sandy_shores.json
 9f7c74cef55c4aa7d14c86494a03bbcbcf13c6ae data/edumia/worldgen/biome/edumia_tundra.json
 a311e5023e167bba210ea398872fcfcff6187aeb data/edumia/worldgen/biome/edumia_vales.json
 4aaa60b66e09d41b7af956cf14cd27c7910bff3b data/edumia/worldgen/biome/fairy_swamp.json
@@ -21,13 +23,17 @@ a311e5023e167bba210ea398872fcfcff6187aeb data/edumia/worldgen/biome/edumia_vales
 2eb600a3fd584578b0840f3da7d953f96fd2a49b data/edumia/worldgen/biome/gensai_beach.json
 c0cc83fd0279825cba2bd36e6f0089b09b284331 data/edumia/worldgen/biome/gensai_jungle.json
 437b9a294d3ea7d53bb8a8efcf9ff1c778774326 data/edumia/worldgen/biome/gensai_reef.json
-b0d0be40f35efceab0b5cc41451599e62c182589 data/edumia/worldgen/biome/gensai_sakura_grove.json
-bf33660dfd5d5345cda60f276170091b9719deb5 data/edumia/worldgen/biome/gensai_volcano.json
+3e44f24f4da830653fac4b7caecd60297a6547d4 data/edumia/worldgen/biome/gensai_sakura_grove.json
+bf33660dfd5d5345cda60f276170091b9719deb5 data/edumia/worldgen/biome/gensai_volcano_plains.json
 b4477f80cd79488d18812405870e11ce8cb526ec data/edumia/worldgen/biome/great_river.json
 a11e05b6836ce26d407eb8aa37c7be19a2ccaa91 data/edumia/worldgen/biome/ice_cave.json
 011a7b6d91a37a838432d8286518b361aeb3d564 data/edumia/worldgen/biome/lush_cave.json
 76629217579744778d432b4ad4824acb5c9eaea9 data/edumia/worldgen/biome/magma_cave.json
 40474d6ea3f25f584cc8abbc7f2bcc9f677d133a data/edumia/worldgen/biome/mithril_cave.json
+bf33660dfd5d5345cda60f276170091b9719deb5 data/edumia/worldgen/biome/mount_titleist.json
+bf33660dfd5d5345cda60f276170091b9719deb5 data/edumia/worldgen/biome/mount_titleist_crater.json
+bf33660dfd5d5345cda60f276170091b9719deb5 data/edumia/worldgen/biome/mount_titleist_foot.json
+bf33660dfd5d5345cda60f276170091b9719deb5 data/edumia/worldgen/biome/mount_titleist_peak.json
 f9c7484b891fce2b1931182b3b312a794fc4fe62 data/edumia/worldgen/biome/mud_cave.json
 29215dfd5c5b916597295fa90f26b16721cee851 data/edumia/worldgen/biome/oasis.json
 788c5dbbcd0278edd57eb7524e314bd97b41133d data/edumia/worldgen/biome/ocean.json

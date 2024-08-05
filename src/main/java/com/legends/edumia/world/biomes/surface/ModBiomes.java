@@ -72,11 +72,15 @@ public class ModBiomes {
 
         context.register(EdumiaBiomeKeys.AVELION_PLAINS, createAvelionPlainsBiome(context, new BiomeColorsDTO(
                 8827134, 12771327, defaultWater, defaultWaterFog, 6523989, 5667402)));
+        context.register(EdumiaBiomeKeys.AVELION_SANDY_SHORES, createAvelionPlainsBiome(context, new BiomeColorsDTO(
+                8827134, 12771327, defaultWater, defaultWaterFog, 6523989, 5667402)));
+        context.register(EdumiaBiomeKeys.AVELION_ROCKY_SHORES, createAvelionPlainsBiome(context, new BiomeColorsDTO(
+                8827134, 12771327, defaultWater, defaultWaterFog, 6523989, 5667402)));
 
         context.register(EdumiaBiomeKeys.OGRE_FOREST, createOgreForestBiome(context, new BiomeColorsDTO(
                 defaultSky, defaultFog, defaultWater, defaultWaterFog, 8240485, 7909996)));
 
-        context.register(EdumiaBiomeKeys.GENSAI_SAKURA_GROVE, createTestBiome(context, new BiomeColorsDTO(
+        context.register(EdumiaBiomeKeys.GENSAI_SAKURA_GROVE, createGensaiSakuraGroveBiome(context, new BiomeColorsDTO(
                 defaultSky, 13748853, defaultWater, defaultWaterFog, 12961832, 6989412)));
 
         context.register(EdumiaBiomeKeys.FAIRY_SWAMP, createDarkElvenSwampBiome(context, new BiomeColorsDTO(
@@ -97,7 +101,15 @@ public class ModBiomes {
 
 
 
-        context.register(EdumiaBiomeKeys.GENSAI_VOLCANO, createGensaiVolcanoBiome(context, new BiomeColorsDTO(
+        context.register(EdumiaBiomeKeys.GENSAI_VOLCANO_PLAINS, createGensaiVolcanoBiome(context, new BiomeColorsDTO(
+                5460048, 4999240, 5860962, 731161, 6252369, 4735297)));
+        context.register(EdumiaBiomeKeys.MOUNT_TITLEIST_FOOT, createMountTitleistBiome(context, new BiomeColorsDTO(
+                5460048, 4999240, 5860962, 731161, 6252369, 4735297)));
+        context.register(EdumiaBiomeKeys.MOUNT_TITLEIST, createMountTitleistBiome(context, new BiomeColorsDTO(
+                5460048, 4999240, 5860962, 731161, 6252369, 4735297)));
+        context.register(EdumiaBiomeKeys.MOUNT_TITLEIST_PEAK, createMountTitleistBiome(context, new BiomeColorsDTO(
+                5460048, 4999240, 5860962, 731161, 6252369, 4735297)));
+        context.register(EdumiaBiomeKeys.MOUNT_TITLEIST_CRATER, createMountTitleistBiome(context, new BiomeColorsDTO(
                 5460048, 4999240, 5860962, 731161, 6252369, 4735297)));
 
 
@@ -365,6 +377,17 @@ public class ModBiomes {
 
         return createBiome(biomeColors, spawnSettings, generationSettings, 0.7f, false);
     }
+
+    public static Biome createMountTitleistBiome(BootstapContext<Biome> context, BiomeColorsDTO biomeColors) {
+        MobSpawnSettings.Builder spawnSettings = new MobSpawnSettings.Builder();
+        BiomeGenerationSettings.Builder generationSettings = new BiomeGenerationSettings.Builder(
+                context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
+
+        addVolcanoVegetation(generationSettings);
+        ModBiomeFeatures.addLavaMagmaLake(generationSettings);
+
+        return createBiome(biomeColors, spawnSettings, generationSettings, 0.7f, false);
+    }
     public static Biome createOceanCoastBiome(BootstapContext<Biome> context, BiomeColorsDTO biomeColors) {
         MobSpawnSettings.Builder spawnSettings = new MobSpawnSettings.Builder();
         BiomeGenerationSettings.Builder generationSettings = new BiomeGenerationSettings.Builder(
@@ -585,11 +608,6 @@ public class ModBiomes {
     }
     public static void addVolcanoVegetation(BiomeGenerationSettings.Builder generationSettings) {
         ModBiomeFeatures.addDisks(undergroundOres);
-        ModBiomeFeatures.addMordorLichen(vegetation);
-        ModBiomeFeatures.addAshBlockOre(vegetation);
-        ModBiomeFeatures.addBasaltOre(vegetation);
-        ModBiomeFeatures.addBlackSand(vegetation);
-        ModBiomeFeatures.addCommonToughBerries(vegetation);
     }
     public static void addOasisVegetation(BiomeGenerationSettings.Builder generationSettings) {
         ModBiomeFeatures.addDisks(undergroundOres);

@@ -71,18 +71,18 @@ public class Edumia
 //        edumiaBiomesData.loadBiomes();
         ModWorldGeneration.generateModWorldGen();
 
-        try {
-            new EdumiaMapGeneration();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+
 
         MinecraftForge.EVENT_BUS.register(this);
     }
     private void commonSetup(final FMLCommonSetupEvent event) {
         EdumiaBiomesData edumiaBiomesData = new EdumiaBiomesData();
         edumiaBiomesData.loadBiomes();
-
+        try {
+            new EdumiaMapGeneration();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 

@@ -29,6 +29,9 @@ public class EdumiaBiomeKeys extends Biomes {
     public static final ResourceKey<Biome> ORC_DESERT = EdumiaBiomeKeys.register("orc_desert");
 
     public static final ResourceKey<Biome> AVELION_PLAINS = EdumiaBiomeKeys.register("avelion_plains");
+    public static final ResourceKey<Biome> AVELION_SANDY_SHORES = EdumiaBiomeKeys.register("edumia_sandy_shores");
+    public static final ResourceKey<Biome> AVELION_ROCKY_SHORES = EdumiaBiomeKeys.register("edumia_rocky_shores");
+
     public static final ResourceKey<Biome> OGRE_FOREST = EdumiaBiomeKeys.register("ogre_forest");
     public static final ResourceKey<Biome> GENSAI_SAKURA_GROVE = EdumiaBiomeKeys.register("gensai_sakura_grove");
 
@@ -41,7 +44,11 @@ public class EdumiaBiomeKeys extends Biomes {
     public static final ResourceKey<Biome> EDUMIA_MOUNTAINS = EdumiaBiomeKeys.register("edumia_mountains");
     public static final ResourceKey<Biome> EDUMIA_MOUNTAINS_PEAKS = EdumiaBiomeKeys.register("edumia_mountains_peaks");
 
-    public static final ResourceKey<Biome> GENSAI_VOLCANO = EdumiaBiomeKeys.register("gensai_volcano");
+    public static final ResourceKey<Biome> GENSAI_VOLCANO_PLAINS = EdumiaBiomeKeys.register("gensai_volcano_plains");
+    public static final ResourceKey<Biome> MOUNT_TITLEIST_CRATER = EdumiaBiomeKeys.register("mount_titleist_crater");
+    public static final ResourceKey<Biome> MOUNT_TITLEIST_FOOT = EdumiaBiomeKeys.register("mount_titleist_foot");
+    public static final ResourceKey<Biome> MOUNT_TITLEIST = EdumiaBiomeKeys.register("mount_titleist");
+    public static final ResourceKey<Biome> MOUNT_TITLEIST_PEAK = EdumiaBiomeKeys.register("mount_titleist_peak");
     public static final ResourceKey<Biome> OASIS = EdumiaBiomeKeys.register("oasis");
     public static final ResourceKey<Biome> OCEAN = EdumiaBiomeKeys.register("ocean");
     public static final ResourceKey<Biome> OCEAN_COAST = EdumiaBiomeKeys.register("ocean_coast");

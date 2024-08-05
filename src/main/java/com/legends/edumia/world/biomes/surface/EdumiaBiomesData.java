@@ -49,7 +49,7 @@ public class EdumiaBiomesData {
             return biomes.stream().filter(x -> x.color.getRGB() == rgb).findFirst().get();
         } catch (Exception e){
             Color color = new Color(rgb);
-            LoggerUtil.getInstance().logError("MeBiomes::No registered biome has %s for color".formatted(color.toString()));
+            LoggerUtil.getInstance().logError("EdumiaBiomes::No registered biome has %s for color".formatted(color.toString()));
             throw new Exception();
         }
     }
@@ -81,9 +81,9 @@ public class EdumiaBiomesData {
         pond = new EdumiaBiome(-10, EdumiaBiomeKeys.POND, EdumiaBiomeDataConfigs.riverModifier, EdumiaBiomeDataConfigs.ocean, EdumiaBiomeDataConfigs.stoneLayers);
         mirkwoodSwamp = new EdumiaBiome(-10, EdumiaBiomeKeys.FAIRY_SWAMP, EdumiaBiomeDataConfigs.riverModifier, EdumiaBiomeDataConfigs.ocean, EdumiaBiomeDataConfigs.stoneLayers);
         greatRiver = new EdumiaBiome(-10, EdumiaBiomeKeys.GREAT_RIVER, EdumiaBiomeDataConfigs.riverModifier, EdumiaBiomeDataConfigs.river, EdumiaBiomeDataConfigs.stoneLayers);
-        wastePond = new EdumiaBiome(-10, EdumiaBiomeKeys.WASTE_POND, EdumiaBiomeDataConfigs.riverModifier, EdumiaBiomeDataConfigs.ashenDirt, EdumiaBiomeDataConfigs.ashenStoneLayers);
+        wastePond = new EdumiaBiome(-10, EdumiaBiomeKeys.WASTE_POND, EdumiaBiomeDataConfigs.riverModifier, EdumiaBiomeDataConfigs.ashenDirt, EdumiaBiomeDataConfigs.volcanicRockLayers);
         deadMarshes = new EdumiaBiome(0, EdumiaBiomeKeys.DEAD_MARSHES, EdumiaBiomeDataConfigs.plainsModifier.noiseModifier(0f), EdumiaBiomeDataConfigs.grassPlains, EdumiaBiomeDataConfigs.stoneLayers);
-        deadMarshesWater = new EdumiaBiome(-10, EdumiaBiomeKeys.DEAD_MARSHES_WATER, EdumiaBiomeDataConfigs.riverModifier, EdumiaBiomeDataConfigs.ashenDirt, EdumiaBiomeDataConfigs.ashenStoneLayers);
+        deadMarshesWater = new EdumiaBiome(-10, EdumiaBiomeKeys.DEAD_MARSHES_WATER, EdumiaBiomeDataConfigs.riverModifier, EdumiaBiomeDataConfigs.ashenDirt, EdumiaBiomeDataConfigs.volcanicRockLayers);
 
         // Water Biomes :
         addBiome(new Color(55, 90, 195), defaultBiome);
@@ -103,7 +103,9 @@ public class EdumiaBiomesData {
 
         // Land Biomes :
         addBiome(new Color(156, 207, 113), new EdumiaBiome(4, EdumiaBiomeKeys.EDUMIA_VALES, EdumiaBiomeDataConfigs.landModifier, EdumiaBiomeDataConfigs.grassPlains, EdumiaBiomeDataConfigs.stoneLayers));
-        addBiome(new Color(234, 222, 117), new EdumiaBiome(6, EdumiaBiomeKeys.GENSAI_BEACH, EdumiaBiomeDataConfigs.landModifier, EdumiaBiomeDataConfigs.nearHarad, EdumiaBiomeDataConfigs.sandstoneLayers, CaveType.HARAD));
+        addBiome(new Color(234, 222, 117), new EdumiaBiome(0, EdumiaBiomeKeys.GENSAI_BEACH,
+                EdumiaBiomeDataConfigs.landModifier.heightModifier(0.97f).heightModifier(0.1f).noiseModifier(0.05f),
+                EdumiaBiomeDataConfigs.gensaiShores, EdumiaBiomeDataConfigs.limestoneLayers, CaveType.HARAD));
         addBiome(new Color(48, 94, 66), deadMarshes);
         addBiome(new Color(54, 75, 12), new EdumiaBiome(6, EdumiaBiomeKeys.DARK_ELF_FOREST, EdumiaBiomeDataConfigs.landModifier, EdumiaBiomeDataConfigs.grassPlains, EdumiaBiomeDataConfigs.stoneLayers));
         addBiome(new Color(236, 236, 236), new EdumiaBiome(14, EdumiaBiomeKeys.EDUMIA_TUNDRA, EdumiaBiomeDataConfigs.landModifier, EdumiaBiomeDataConfigs.forodwaith, EdumiaBiomeDataConfigs.frozenLayers, CaveType.FOROD));
@@ -114,10 +116,24 @@ public class EdumiaBiomesData {
         addBiome(new Color(132, 137, 124), new EdumiaBiome(37, EdumiaBiomeKeys.EDUMIA_FOOTHILLS, EdumiaBiomeDataConfigs.emModifier.heightModifier(0.23f), EdumiaBiomeDataConfigs.edumiaMountainsBase, EdumiaBiomeDataConfigs.mistyMountainsLayers, CaveType.MISTIES));
         addBiome(new Color(143, 142, 142), new EdumiaBiome(53, EdumiaBiomeKeys.EDUMIA_MOUNTAINS_BASE, EdumiaBiomeDataConfigs.emModifier, EdumiaBiomeDataConfigs.edumiaMountainsBase, EdumiaBiomeDataConfigs.mistyMountainsLayers, CaveType.MISTIES));
         addBiome(new Color(129, 129, 129), new EdumiaBiome(82, EdumiaBiomeKeys.EDUMIA_MOUNTAINS, EdumiaBiomeDataConfigs.emModifier, EdumiaBiomeDataConfigs.edumiaMountains, EdumiaBiomeDataConfigs.mistyMountainsLayers, CaveType.MISTIES));
-        addBiome(new Color(185, 183, 183), new EdumiaBiome(97, EdumiaBiomeKeys.EDUMIA_MOUNTAINS_PEAKS, EdumiaBiomeDataConfigs.emPeaksModifier, EdumiaBiomeDataConfigs.edumiaMountainsPeaks, EdumiaBiomeDataConfigs.mistyMountainsLayers, CaveType.MISTIES));
-        addBiome(new Color(36, 31, 31), new EdumiaBiome(3, EdumiaBiomeKeys.GENSAI_VOLCANO, EdumiaBiomeDataConfigs.landModifier, EdumiaBiomeDataConfigs.ashenDirt, EdumiaBiomeDataConfigs.ashenStoneLayers, CaveType.ASHEN));
+        addBiome(new Color(185, 183, 183), new EdumiaBiome(100, EdumiaBiomeKeys.EDUMIA_MOUNTAINS_PEAKS, EdumiaBiomeDataConfigs.emPeaksModifier, EdumiaBiomeDataConfigs.edumiaMountainsPeaks, EdumiaBiomeDataConfigs.mistyMountainsLayers, CaveType.MISTIES));
+
+        addBiome(new Color(56, 36, 36), new EdumiaBiome(6, EdumiaBiomeKeys.GENSAI_VOLCANO_PLAINS, EdumiaBiomeDataConfigs.landModifier, EdumiaBiomeDataConfigs.gensaiVolcano, EdumiaBiomeDataConfigs.volcanicRockLayers, CaveType.ASHEN));
+        addBiome(new Color(45, 42, 42), new EdumiaBiome(36, EdumiaBiomeKeys.MOUNT_TITLEIST_FOOT, EdumiaBiomeDataConfigs.mountTitleistModifier, EdumiaBiomeDataConfigs.gensaiVolcano, EdumiaBiomeDataConfigs.volcanicRockLayers, CaveType.ASHEN));
+        addBiome(new Color(36, 31, 31), new EdumiaBiome(73, EdumiaBiomeKeys.MOUNT_TITLEIST, EdumiaBiomeDataConfigs.mountTitleistModifier, EdumiaBiomeDataConfigs.gensaiVolcano, EdumiaBiomeDataConfigs.volcanicRockLayers, CaveType.ASHEN));
+        addBiome(new Color(26, 23, 23), new EdumiaBiome(96, EdumiaBiomeKeys.MOUNT_TITLEIST_PEAK, EdumiaBiomeDataConfigs.mountTitleistModifier, EdumiaBiomeDataConfigs.gensaiVolcano, EdumiaBiomeDataConfigs.volcanicRockLayers, CaveType.ASHEN));
+        addBiome(new Color(96, 39, 13), new EdumiaBiome(90, EdumiaBiomeKeys.MOUNT_TITLEIST_CRATER, EdumiaBiomeDataConfigs.mountTitleistModifier.heightModifier(0.36f).noiseModifier(1.0f).expansionWeight(new byte[]{2, 3}), EdumiaBiomeDataConfigs.gensaiVolcano, EdumiaBiomeDataConfigs.volcanicRockLayers, CaveType.ASHEN));
+
+
+
         addBiome(new Color(121, 186, 111), new EdumiaBiome(4, EdumiaBiomeKeys.TAIGA_FOREST, EdumiaBiomeDataConfigs.landModifier, EdumiaBiomeDataConfigs.grassPlains, EdumiaBiomeDataConfigs.stoneLayers));
         addBiome(new Color(48, 109, 42), new EdumiaBiome(7, EdumiaBiomeKeys.GENSAI_JUNGLE, EdumiaBiomeDataConfigs.landModifier, EdumiaBiomeDataConfigs.grassPlains, EdumiaBiomeDataConfigs.stoneLayers));
+        addBiome(new Color(222, 227, 191), new EdumiaBiome(0, EdumiaBiomeKeys.AVELION_SANDY_SHORES,
+                EdumiaBiomeDataConfigs.landModifier.heightModifier(0.97f).heightModifier(0.1f).noiseModifier(0.05),
+                EdumiaBiomeDataConfigs.whiteShores, EdumiaBiomeDataConfigs.sandstoneLayers));
+        addBiome(new Color(74, 213, 138), new EdumiaBiome(30, EdumiaBiomeKeys.AVELION_ROCKY_SHORES,
+                EdumiaBiomeDataConfigs.landModifier.heightModifier(0.76f),
+                EdumiaBiomeDataConfigs.avelionRockShore, EdumiaBiomeDataConfigs.avelionLayers));
 
 
         riverbiomes.add(EdumiaBiomeKeys.RIVER);
@@ -130,6 +146,8 @@ public class EdumiaBiomesData {
         waterBiomes.add(EdumiaBiomeKeys.OCEAN_COAST);
         waterBiomes.add(EdumiaBiomeKeys.RIVER);
         waterBiomes.add(EdumiaBiomeKeys.GENSAI_REEF);
+        waterBiomes.add(EdumiaBiomeKeys.AVELION_ROCKY_SHORES);
+        waterBiomes.add(EdumiaBiomeKeys.AVELION_SANDY_SHORES);
 
         anduinWaterBiomes.add(EdumiaBiomeKeys.GREAT_RIVER);
 
@@ -138,11 +156,10 @@ public class EdumiaBiomesData {
 
 
 
-        oasisBiomes.add(EdumiaBiomeKeys.GENSAI_BEACH);
         oasisBiomes.add(EdumiaBiomeKeys.ORC_DESERT);
 
 
-        wastePondBiomes.add(EdumiaBiomeKeys.GENSAI_VOLCANO);
+        wastePondBiomes.add(EdumiaBiomeKeys.GENSAI_VOLCANO_PLAINS);
 
         deadMarshesBiomes.add(EdumiaBiomeKeys.DEAD_MARSHES);
     }

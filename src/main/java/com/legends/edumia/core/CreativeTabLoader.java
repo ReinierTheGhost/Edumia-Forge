@@ -465,7 +465,7 @@ public class CreativeTabLoader {
 
     public static final RegistryObject<CreativeModeTab>  EDUMIA_NATURAL_STONE_BLOCKS =
             CREATIVE_MODE_TABS.register("edumia_natural_stone_blocks",() ->
-            CreativeModeTab.builder().icon(() -> new ItemStack(GlassSets.FINE_GLASS.block().get()))
+            CreativeModeTab.builder().icon(() -> new ItemStack(BlockLoader.WHITE_SAND.get()))
                     .title(Component.translatable("creativetab.edumia_natural_stone_blocks"))
                     .displayItems((displayParameters, entries) -> {
                         for (StoneSets.StoneSet item: StoneSets.naturalSets){

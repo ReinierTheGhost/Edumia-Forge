@@ -52,7 +52,7 @@ public class EdumiaChunkGenerator extends ChunkGenerator {
     EdumiaMapRuntime edumiaMapRuntime;
 
     public static final int mapMultiplier = (int) Math.pow(2, EdumiaMapConfigs.MAP_ITERATION + EdumiaMapConfigs.PIXEL_WEIGHT - 2);
-    public static final Vec2 mountDoom = new Vec2 (2131.5f, 1715.2f).scale(mapMultiplier);
+    public static final Vec2 mountTitleist = new Vec2 (2752.5f, 505.2f).scale(mapMultiplier);
     private static final int CAVE_STRETCH_H = 60;
     private static final int CAVE_STRETCH_V = 50;
 
@@ -78,6 +78,8 @@ public class EdumiaChunkGenerator extends ChunkGenerator {
                     biomeRegistry.getOrThrow(EdumiaBiomeKeys.FROZEN_POND),
                     biomeRegistry.getOrThrow(EdumiaBiomeKeys.ORC_DESERT),
                     biomeRegistry.getOrThrow(EdumiaBiomeKeys.AVELION_PLAINS),
+                    biomeRegistry.getOrThrow(EdumiaBiomeKeys.AVELION_SANDY_SHORES),
+                    biomeRegistry.getOrThrow(EdumiaBiomeKeys.AVELION_ROCKY_SHORES),
                     biomeRegistry.getOrThrow(EdumiaBiomeKeys.OGRE_FOREST),
                     biomeRegistry.getOrThrow(EdumiaBiomeKeys.GENSAI_SAKURA_GROVE),
                     biomeRegistry.getOrThrow(EdumiaBiomeKeys.OASIS),
@@ -88,7 +90,11 @@ public class EdumiaChunkGenerator extends ChunkGenerator {
                     biomeRegistry.getOrThrow(EdumiaBiomeKeys.EDUMIA_MOUNTAINS_PEAKS),
                     biomeRegistry.getOrThrow(EdumiaBiomeKeys.EDUMIA_MOUNTAINS),
 
-                    biomeRegistry.getOrThrow(EdumiaBiomeKeys.GENSAI_VOLCANO),
+                    biomeRegistry.getOrThrow(EdumiaBiomeKeys.GENSAI_VOLCANO_PLAINS),
+                    biomeRegistry.getOrThrow(EdumiaBiomeKeys.MOUNT_TITLEIST_CRATER),
+                    biomeRegistry.getOrThrow(EdumiaBiomeKeys.MOUNT_TITLEIST),
+                    biomeRegistry.getOrThrow(EdumiaBiomeKeys.MOUNT_TITLEIST_PEAK),
+                    biomeRegistry.getOrThrow(EdumiaBiomeKeys.MOUNT_TITLEIST_FOOT),
                     biomeRegistry.getOrThrow(EdumiaBiomeKeys.OCEAN_COAST),
 
                     biomeRegistry.getOrThrow(EdumiaBiomeKeys.RIVER),
@@ -157,8 +163,8 @@ public class EdumiaChunkGenerator extends ChunkGenerator {
                 float slopeAngle = getTerrainSlope(height, posX, posZ);
                 int waterHeight = edumiaBiome.waterHeight;
 
-                if(edumiaBiome.biome == EdumiaBiomeKeys.GENSAI_VOLCANO) {
-                    float percentage = (float) Math.sqrt(mountDoom.distanceToSqr(new Vec2(posX, posZ))) / 50;
+                if(edumiaBiome.biome == EdumiaBiomeKeys.MOUNT_TITLEIST_CRATER) {
+                    float percentage = (float) Math.sqrt(mountTitleist.distanceToSqr(new Vec2(posX, posZ))) / 50;
                     percentage = Math.min(1, Math.max(0.0f, percentage));
                     percentage = (float) Math.pow(percentage, 2.45f);
                     height = height * percentage;
@@ -216,7 +222,7 @@ public class EdumiaChunkGenerator extends ChunkGenerator {
                 }
                 chunk.setBlockState(chunk.getPos().getBlockAt(x, (int) (DIRT_HEIGHT + height), z), surfaceBlock, false);
 
-                if(edumiaBiome.biome == EdumiaBiomeKeys.GENSAI_VOLCANO) {
+                if(edumiaBiome.biome == EdumiaBiomeKeys.MOUNT_TITLEIST_CRATER) {
                     for(int y = (int) (DIRT_HEIGHT + height + 1); y <= 90; y++) {
                         chunk.setBlockState(chunk.getPos().getBlockAt(x, y, z), Blocks.LAVA.defaultBlockState(), false);
                     }

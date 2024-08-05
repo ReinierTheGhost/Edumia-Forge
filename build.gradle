@@ -117,16 +117,8 @@ repositories {
     maven {
         url "https://www.cursemaven.com"
     }
-    maven {
-        url "https://harleyoconnor.com/maven"
-    }
-    flatDir {
-        dirs("libs")
-    }
-    maven {
-        name = "Sinytra"
-        url = "https://maven.su5ed.dev/releases"
-    }
+
+
     // If you have mod jar dependencies in ./libs, you can declare them as a repository like so.
     // See https://docs.gradle.org/current/userguide/declaring_repositories.html#sub:flat_dir_resolver
     // flatDir {
@@ -142,14 +134,7 @@ dependencies {
     // then special handling is done to allow a setup of a vanilla dependency without the use of an external repository.
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
-    //minecraftLibrary fg.deobf("dev.su5ed.sinytra:Connector:1.0.0-beta.43+1.20.1")
 
-    //annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
-
-    //implementation fg.deobf("com.ferreusveritas.dynamictrees:DynamicTrees-1.20.1:1.3.0-BETA5")
-    //implementation(fg.deobf("curse.maven:terralith-513688:5351328"))
-
-    //runtimeOnly fg.deobf("curse.maven:jade-324717:5072729")
     // Example mod dependency with JEI - using fg.deobf() ensures the dependency is remapped to your development mappings
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
     // compileOnly fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}")

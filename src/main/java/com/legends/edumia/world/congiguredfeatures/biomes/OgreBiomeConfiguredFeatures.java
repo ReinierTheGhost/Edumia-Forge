@@ -20,7 +20,7 @@ import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import java.util.List;
 
 public class OgreBiomeConfiguredFeatures {
-    public static final ResourceKey<ConfiguredFeature<?, ?>> OGRE_FOREST_TREES = registerKey("ogre/forest_trees");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> OGRE_FOREST_TREES = registerKey("forest_trees");
 
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context){
         HolderGetter<PlacedFeature> registryEntryLookup = context.lookup(Registries.PLACED_FEATURE);
@@ -44,7 +44,7 @@ public class OgreBiomeConfiguredFeatures {
     }
 
     public static ResourceKey<ConfiguredFeature<?, ?>> registerKey(String name){
-        return ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation(Edumia.MOD_ID, "biome/" +name));
+        return ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation(Edumia.MOD_ID, "biome/ogre/" +name));
     }
 
     private static <FC extends FeatureConfiguration, F extends Feature<FC>> void register(BootstapContext< ConfiguredFeature<?, ?>> context,

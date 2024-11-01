@@ -1,6 +1,8 @@
 package com.legends.edumia.world.treegrowers;
 
 import com.legends.edumia.world.congiguredfeatures.TreeConfiguredFeatures;
+import com.legends.edumia.world.congiguredfeatures.trees.JungleTreeConfiguredFeatures;
+import com.legends.edumia.world.congiguredfeatures.trees.TropicalTreeConfiguredFeatures;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.grower.AbstractTreeGrower;
@@ -11,6 +13,6 @@ public class TestTreeGrower  extends AbstractTreeGrower {
     @Nullable
     @Override
     protected ResourceKey<ConfiguredFeature<?, ?>> getConfiguredFeature(RandomSource random, boolean bees) {
-        return TreeConfiguredFeatures.TEST_KEY;
+        return TropicalTreeConfiguredFeatures.MAHOGANY_NBT;
     }
 }

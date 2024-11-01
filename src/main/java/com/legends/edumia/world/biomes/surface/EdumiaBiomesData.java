@@ -78,7 +78,7 @@ public class EdumiaBiomesData {
         // Ponds
         frozenPond = new EdumiaBiome(-10, EdumiaBiomeKeys.FROZEN_POND, EdumiaBiomeDataConfigs.riverModifier, EdumiaBiomeDataConfigs.ocean, EdumiaBiomeDataConfigs.stoneLayers, CaveType.FOROD);
         oasis = new EdumiaBiome(-10, EdumiaBiomeKeys.OASIS, EdumiaBiomeDataConfigs.riverModifier, EdumiaBiomeDataConfigs.beach, EdumiaBiomeDataConfigs.sandstoneLayers, CaveType.HARAD);
-        pond = new EdumiaBiome(-10, EdumiaBiomeKeys.POND, EdumiaBiomeDataConfigs.riverModifier, EdumiaBiomeDataConfigs.ocean, EdumiaBiomeDataConfigs.stoneLayers);
+        pond = new EdumiaBiome(-10, EdumiaBiomeKeys.POND, EdumiaBiomeDataConfigs.riverModifier, EdumiaBiomeDataConfigs.pond, EdumiaBiomeDataConfigs.stoneLayers);
         mirkwoodSwamp = new EdumiaBiome(-10, EdumiaBiomeKeys.FAIRY_SWAMP, EdumiaBiomeDataConfigs.riverModifier, EdumiaBiomeDataConfigs.ocean, EdumiaBiomeDataConfigs.stoneLayers);
         greatRiver = new EdumiaBiome(-10, EdumiaBiomeKeys.GREAT_RIVER, EdumiaBiomeDataConfigs.riverModifier, EdumiaBiomeDataConfigs.river, EdumiaBiomeDataConfigs.stoneLayers);
         wastePond = new EdumiaBiome(-10, EdumiaBiomeKeys.WASTE_POND, EdumiaBiomeDataConfigs.riverModifier, EdumiaBiomeDataConfigs.ashenDirt, EdumiaBiomeDataConfigs.volcanicRockLayers);
@@ -117,6 +117,8 @@ public class EdumiaBiomesData {
         addBiome(new Color(143, 142, 142), new EdumiaBiome(53, EdumiaBiomeKeys.EDUMIA_MOUNTAINS_BASE, EdumiaBiomeDataConfigs.emModifier, EdumiaBiomeDataConfigs.edumiaMountainsBase, EdumiaBiomeDataConfigs.mistyMountainsLayers, CaveType.MISTIES));
         addBiome(new Color(129, 129, 129), new EdumiaBiome(82, EdumiaBiomeKeys.EDUMIA_MOUNTAINS, EdumiaBiomeDataConfigs.emModifier, EdumiaBiomeDataConfigs.edumiaMountains, EdumiaBiomeDataConfigs.mistyMountainsLayers, CaveType.MISTIES));
         addBiome(new Color(185, 183, 183), new EdumiaBiome(100, EdumiaBiomeKeys.EDUMIA_MOUNTAINS_PEAKS, EdumiaBiomeDataConfigs.emPeaksModifier, EdumiaBiomeDataConfigs.edumiaMountainsPeaks, EdumiaBiomeDataConfigs.mistyMountainsLayers, CaveType.MISTIES));
+        addBiome(new Color(54, 114, 12), new EdumiaBiome(7, EdumiaBiomeKeys.FAIRY_FOREST, EdumiaBiomeDataConfigs.landModifier, EdumiaBiomeDataConfigs.grassPlains, EdumiaBiomeDataConfigs.stoneLayers));
+
 
         addBiome(new Color(56, 36, 36), new EdumiaBiome(6, EdumiaBiomeKeys.GENSAI_VOLCANO_PLAINS, EdumiaBiomeDataConfigs.landModifier, EdumiaBiomeDataConfigs.gensaiVolcano, EdumiaBiomeDataConfigs.volcanicRockLayers, CaveType.ASHEN));
         addBiome(new Color(45, 42, 42), new EdumiaBiome(36, EdumiaBiomeKeys.MOUNT_TITLEIST_FOOT, EdumiaBiomeDataConfigs.mountTitleistModifier, EdumiaBiomeDataConfigs.gensaiVolcano, EdumiaBiomeDataConfigs.volcanicRockLayers, CaveType.ASHEN));

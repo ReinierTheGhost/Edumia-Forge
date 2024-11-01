@@ -10,7 +10,10 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.Component;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
+@OnlyIn(Dist.CLIENT)
 public class EdumiaMenuButton extends Button {
     public static final Button.CreateNarration DEFAULT_NARRATION = (p_253298_) -> {
         return p_253298_.get();

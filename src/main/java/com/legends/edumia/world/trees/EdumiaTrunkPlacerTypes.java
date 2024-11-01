@@ -81,6 +81,9 @@ public class EdumiaTrunkPlacerTypes {
     public static final RegistryObject<TrunkPlacerType<BaobabTrunkPlacer>> BAOBAB_TRUNK_PLACER =
             TRUNK_PLACERS.register("baobab_trunk_placer", () -> new TrunkPlacerType<>(BaobabTrunkPlacer.CODEC));
 
+    public static final RegistryObject<TrunkPlacerType<AncientOakTrunkPlacer>> ANCIENT_OAK_TRUNK_PLACER =
+            TRUNK_PLACERS.register("ancient_oak_trunk_placer", () -> new TrunkPlacerType<>(AncientOakTrunkPlacer.CODEC));
+
 
     public static void register(IEventBus eventBus) {
         TRUNK_PLACERS.register(eventBus);

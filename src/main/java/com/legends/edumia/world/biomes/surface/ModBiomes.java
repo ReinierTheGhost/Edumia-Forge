@@ -42,8 +42,8 @@ public class ModBiomes {
     public static final int nearHaradSky = 7254527;
     public static final int nearHaradSkyFog = 12902399;
 
-    private static List<ResourceKey<PlacedFeature>> vegetation = new ArrayList<>();;
-    private static ArrayList<ResourceKey<PlacedFeature>> undergroundOres = new ArrayList<>();;
+    private static List<ResourceKey<PlacedFeature>> vegetation = new ArrayList<>();
+    private static ArrayList<ResourceKey<PlacedFeature>> undergroundOres = new ArrayList<>();
 
     public static void bootstrap(BootstapContext<Biome> context) {
         ModCaveBiomes.bootstrap(context);
@@ -112,6 +112,9 @@ public class ModBiomes {
         context.register(EdumiaBiomeKeys.MOUNT_TITLEIST_CRATER, createMountTitleistBiome(context, new BiomeColorsDTO(
                 5460048, 4999240, 5860962, 731161, 6252369, 4735297)));
 
+        context.register(EdumiaBiomeKeys.FAIRY_FOREST, createFairyForestBiome(context, new BiomeColorsDTO(
+                7842047, 12638463, 4159204, 329011, 8703593, 8703593)));
+
 
 
         context.register(EdumiaBiomeKeys.OASIS, createOasisBiome(context, new BiomeColorsDTO(
@@ -142,7 +145,14 @@ public class ModBiomes {
 
 
     }
+    public static Biome createFairyForestBiome(BootstapContext<Biome> context, BiomeColorsDTO biomeColors) {
+        MobSpawnSettings.Builder spawnSettings = new MobSpawnSettings.Builder();
+        BiomeGenerationSettings.Builder generationSettings = new BiomeGenerationSettings.Builder(context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
 
+       ModBiomeFeatures.addJungleTrees(vegetation);
+
+        return createBiome(biomeColors, spawnSettings, generationSettings, 0.9f, 0.95f, true);
+    }
     public static Biome createEdumiaValesBiome(BootstapContext<Biome> context, BiomeColorsDTO biomeColors) {
         MobSpawnSettings.Builder spawnSettings = new MobSpawnSettings.Builder();
         //ModSpawnSettingsBuilder.addFarmAnimals(spawnSettings);
@@ -377,7 +387,6 @@ public class ModBiomes {
 
         return createBiome(biomeColors, spawnSettings, generationSettings, 0.7f, false);
     }
-
     public static Biome createMountTitleistBiome(BootstapContext<Biome> context, BiomeColorsDTO biomeColors) {
         MobSpawnSettings.Builder spawnSettings = new MobSpawnSettings.Builder();
         BiomeGenerationSettings.Builder generationSettings = new BiomeGenerationSettings.Builder(
@@ -497,7 +506,6 @@ public class ModBiomes {
 
         return createBiome(biomeColors, spawnSettings, generationSettings);
     }
-
     public static Biome createOgreForestBiome(BootstapContext<Biome> context, BiomeColorsDTO biomeColors) {
         MobSpawnSettings.Builder spawnSettings = new MobSpawnSettings.Builder();
         BiomeGenerationSettings.Builder generationSettings = new BiomeGenerationSettings.Builder(
@@ -516,6 +524,8 @@ public class ModBiomes {
 
         return createBiome(biomeColors, spawnSettings, generationSettings);
     }
+
+
     public static void addDefaultVegetation(BiomeGenerationSettings.Builder generationSettings) {
         ModBiomeFeatures.addDisks(undergroundOres);
         vegetation.add(VegetationPlacements.PATCH_GRASS_FOREST);
@@ -624,20 +634,21 @@ public class ModBiomes {
     }
 
 
-    public static Biome createBiome(BiomeColorsDTO biomeColors, MobSpawnSettings.Builder spawnSettings, BiomeGenerationSettings.Builder generationSettings, float downfall) {
+    public static Biome createBiome(BiomeColorsDTO biomeColors, MobSpawnSettings.Builder spawnSettings,
+                                    BiomeGenerationSettings.Builder generationSettings, float downfall) {
         return createBiome(biomeColors, spawnSettings, generationSettings, 0.5f, downfall, true);
     }
-
-
-    public static Biome createBiome(BiomeColorsDTO biomeColors, MobSpawnSettings.Builder spawnSettings, BiomeGenerationSettings.Builder generationSettings, float temperature, boolean precipitation) {
+    public static Biome createBiome(BiomeColorsDTO biomeColors, MobSpawnSettings.Builder spawnSettings,
+                                    BiomeGenerationSettings.Builder generationSettings, float temperature, boolean precipitation) {
         return createBiome(biomeColors, spawnSettings, generationSettings, temperature, 0.5f, precipitation);
     }
-
-    public static Biome createBiome(BiomeColorsDTO biomeColors, MobSpawnSettings.Builder spawnSettings, BiomeGenerationSettings.Builder generationSettings) {
+    public static Biome createBiome(BiomeColorsDTO biomeColors, MobSpawnSettings.Builder spawnSettings,
+                                    BiomeGenerationSettings.Builder generationSettings) {
         return createBiome(biomeColors, spawnSettings, generationSettings, 0.5f, 0.5f, true);
     }
-
-    public static Biome createBiome(BiomeColorsDTO biomeColors, MobSpawnSettings.Builder spawnSettings, BiomeGenerationSettings.Builder generationSettings, float temperature, float downfall, boolean precipitation) {
+    public static Biome createBiome(BiomeColorsDTO biomeColors, MobSpawnSettings.Builder spawnSettings,
+                                    BiomeGenerationSettings.Builder generationSettings, float temperature, float downfall,
+                                    boolean precipitation) {
         undergroundOres.add(OrePlacements.ORE_DIRT);
         undergroundOres.add(OrePlacements.ORE_GRAVEL);
         undergroundOres.add(OrePlacements.ORE_GRANITE_UPPER);

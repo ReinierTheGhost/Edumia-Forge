@@ -9,9 +9,12 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.lang.module.ResolutionException;
 
+@OnlyIn(Dist.CLIENT)
 public class LeftRightButton extends Button {
     private static final ResourceLocation LEFT_RIGHT_BUTTON_TEXTURE = new ResourceLocation(Edumia.MOD_ID, "textures/gui/buttons/widgets.png");
     private static final int FULL_WIDTH = 120;

@@ -32,8 +32,8 @@ public class ItemLoader {
     public static final RegistryObject<Item> LEGENDS_COIN = ITEMS.register("legends_coin",
             () -> new WorldTeleporterItem(new Item.Properties().stacksTo(1)));
 
-    public static final RegistryObject<Item> ATLAS = ITEMS.register("atlas",
-            () -> new EdumiaMapItem(new Item.Properties().stacksTo(1)));
+//    public static final RegistryObject<Item> ATLAS = ITEMS.register("atlas",
+//            () -> new EdumiaMapItem(new Item.Properties().stacksTo(1)));
     //gems
     public static final RegistryObject<Item> GEM_FINE_AMBER = ITEMS.register("gem_fine_amber",
             () -> new Item(new Item.Properties()));

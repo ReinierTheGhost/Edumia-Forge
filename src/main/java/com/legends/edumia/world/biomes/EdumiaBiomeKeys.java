@@ -33,11 +33,8 @@ public class EdumiaBiomeKeys extends Biomes {
     public static final ResourceKey<Biome> AVELION_ROCKY_SHORES = EdumiaBiomeKeys.register("edumia_rocky_shores");
 
     public static final ResourceKey<Biome> OGRE_FOREST = EdumiaBiomeKeys.register("ogre_forest");
-    public static final ResourceKey<Biome> GENSAI_SAKURA_GROVE = EdumiaBiomeKeys.register("gensai_sakura_grove");
 
-    public static final ResourceKey<Biome> FAIRY_SWAMP = EdumiaBiomeKeys.register("fairy_swamp");
-    public static final ResourceKey<Biome> GREAT_RIVER = EdumiaBiomeKeys.register("great_river");
-
+    public static final ResourceKey<Biome> FAIRY_FOREST = EdumiaBiomeKeys.register("fairy_forest");
 
     public static final ResourceKey<Biome> EDUMIA_FOOTHILLS = EdumiaBiomeKeys.register("edumia_foothills");
     public static final ResourceKey<Biome> EDUMIA_MOUNTAINS_BASE = EdumiaBiomeKeys.register("edumia_mountains_base");
@@ -49,17 +46,21 @@ public class EdumiaBiomeKeys extends Biomes {
     public static final ResourceKey<Biome> MOUNT_TITLEIST_FOOT = EdumiaBiomeKeys.register("mount_titleist_foot");
     public static final ResourceKey<Biome> MOUNT_TITLEIST = EdumiaBiomeKeys.register("mount_titleist");
     public static final ResourceKey<Biome> MOUNT_TITLEIST_PEAK = EdumiaBiomeKeys.register("mount_titleist_peak");
-    public static final ResourceKey<Biome> OASIS = EdumiaBiomeKeys.register("oasis");
-    public static final ResourceKey<Biome> OCEAN = EdumiaBiomeKeys.register("ocean");
-    public static final ResourceKey<Biome> OCEAN_COAST = EdumiaBiomeKeys.register("ocean_coast");
-    public static final ResourceKey<Biome> POND = EdumiaBiomeKeys.register("pond");
+
     public static final ResourceKey<Biome> GENSAI_REEF = EdumiaBiomeKeys.register("gensai_reef");
-    public static final ResourceKey<Biome> RIVER = EdumiaBiomeKeys.register("edumia_river");
+    public static final ResourceKey<Biome> GENSAI_JUNGLE = EdumiaBiomeKeys.register("gensai_jungle");
+    public static final ResourceKey<Biome> GENSAI_SAKURA_GROVE = EdumiaBiomeKeys.register("gensai_sakura_grove");
 
     public static final ResourceKey<Biome> TAIGA_FOREST = EdumiaBiomeKeys.register("taiga_forest");
 
-    public static final ResourceKey<Biome> GENSAI_JUNGLE = EdumiaBiomeKeys.register("gensai_jungle");
 
+    public static final ResourceKey<Biome> OCEAN = EdumiaBiomeKeys.register("ocean");
+    public static final ResourceKey<Biome> OCEAN_COAST = EdumiaBiomeKeys.register("ocean_coast");
+    public static final ResourceKey<Biome> RIVER = EdumiaBiomeKeys.register("edumia_river");
+    public static final ResourceKey<Biome> OASIS = EdumiaBiomeKeys.register("oasis");
+    public static final ResourceKey<Biome> POND = EdumiaBiomeKeys.register("pond");
+    public static final ResourceKey<Biome> FAIRY_SWAMP = EdumiaBiomeKeys.register("fairy_swamp");
+    public static final ResourceKey<Biome> GREAT_RIVER = EdumiaBiomeKeys.register("great_river");
     public static final ResourceKey<Biome> WASTE_POND = EdumiaBiomeKeys.register("waste_pond");
 
     // endregion

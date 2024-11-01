@@ -9,6 +9,8 @@ import com.legends.edumia.world.features.crystal.CrystalFeature;
 import com.legends.edumia.world.features.crystal.CrystalFeatureConfig;
 import com.legends.edumia.world.features.reeds.ReedsFeature;
 import com.legends.edumia.world.features.reeds.ReedsFeatureConfig;
+import com.legends.edumia.world.features.treesnbt.TreeFromStructureNBTConfig;
+import com.legends.edumia.world.features.treesnbt.TreeFromStructureNBTFeature;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -34,6 +36,8 @@ public class EdumiaFeatures {
     public static final RegistryObject<BoulderFeature> BOULDER = register("boulder", () -> new BoulderFeature(BouldersFeatureConfig.CODEC));
     public static final RegistryObject<CrystalFeature> CRYSTAL = register("crystal", () -> new CrystalFeature(CrystalFeatureConfig.CODEC));
     public static final RegistryObject<ReedsFeature> REEDS = register("reeds", () -> new ReedsFeature(ReedsFeatureConfig.CODEC));
+    public static final RegistryObject<TreeFromStructureNBTFeature> TREE_FROM_NBT = register("tree_from_nbt",
+            () -> new TreeFromStructureNBTFeature(TreeFromStructureNBTConfig.CODEC));
 
 
 

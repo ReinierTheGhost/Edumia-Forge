@@ -3,38 +3,49 @@ package com.legends.edumia.world.congiguredfeatures.trees;
 import com.google.common.collect.ImmutableList;
 import com.legends.edumia.Edumia;
 import com.legends.edumia.blocks.blocksets.WoodBlockSets;
+import com.legends.edumia.utils.ModTags;
+import com.legends.edumia.world.features.EdumiaFeatures;
+import com.legends.edumia.world.features.treesnbt.TreeFromStructureNBTConfig;
 import com.legends.edumia.world.trees.foliageplacer.*;
 import com.legends.edumia.world.trees.treedecorators.HangingBranchDecorator;
 import com.legends.edumia.world.trees.trunkplacers.*;
 import com.legends.edumia.world.placedfeatures.trees.TropicalTreePlacedFeatures;
-import net.minecraft.core.Holder;
-import net.minecraft.core.HolderGetter;
+import net.minecraft.core.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.data.worldgen.placement.TreePlacements;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.valueproviders.BiasedToBottomInt;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.WeightedPlacedFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.RandomFeatureConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.SimpleRandomFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.FancyFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.MegaJungleFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.RandomSpreadFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.feature.treedecorators.AttachedToLeavesDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.CocoaDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.LeaveVineDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TrunkVineDecorator;
-import net.minecraft.world.level.levelgen.feature.trunkplacers.BendingTrunkPlacer;
-import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.*;
+import net.minecraft.world.level.levelgen.placement.BlockPredicateFilter;
+import net.minecraft.world.level.levelgen.placement.CountPlacement;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+import net.minecraft.world.level.levelgen.placement.RandomOffsetPlacement;
+import org.checkerframework.checker.units.qual.C;
 
 import java.util.List;
 
@@ -43,11 +54,16 @@ public class TropicalTreeConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> CANOPY_JUNGLE_TREE = registerKey("canopy_jungle_tree");
     public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_JUNGLE_TREE = registerKey("large_jungle_tree");
     public static final ResourceKey<ConfiguredFeature<?, ?>> MEGA_JUNGLE_TREE = registerKey("mega_jungle_tree");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> MEGA_JUNGLE_TREE_2 = registerKey("mega_jungle_tree_2");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> MEGA_JUNGLE_TREE_3 = registerKey("mega_jungle_tree_3");
+
+
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> MAHOGANY = registerKey("mahogany");
     public static final ResourceKey<ConfiguredFeature<?, ?>> BIG_MAHOGANY = registerKey("big_mahogany");
     public static final ResourceKey<ConfiguredFeature<?, ?>> CANOPY_MAHOGANY_TREE = registerKey("canopy_mahogany_tree");
     public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_MAHOGANY_TREE = registerKey("large_mahogany_tree");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> MAHOGANY_NBT = registerKey("mahogany_nbt");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> SMALL_PALM_TREE = registerKey("small_palm_tree");
 
@@ -65,7 +81,7 @@ public class TropicalTreeConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> GENSAI_JUNGLE_TREES = registerKey("gensai_jungle_trees");
 
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context){
-
+        HolderGetter<ConfiguredFeature<?, ?>> holdergetter = context.lookup(Registries.CONFIGURED_FEATURE);
         HolderGetter<PlacedFeature> registryEntryLookup = context.lookup(Registries.PLACED_FEATURE);
         Holder.Reference<PlacedFeature> jungle_bush = registryEntryLookup.getOrThrow(TreePlacements.JUNGLE_BUSH);
         Holder.Reference<PlacedFeature> jungle = registryEntryLookup.getOrThrow(TreePlacements.JUNGLE_TREE_CHECKED);
@@ -91,6 +107,7 @@ public class TropicalTreeConfiguredFeatures {
 
         Holder.Reference<PlacedFeature> mango = registryEntryLookup.getOrThrow(TropicalTreePlacedFeatures.MANGO);
         Holder.Reference<PlacedFeature> mango_two = registryEntryLookup.getOrThrow(TropicalTreePlacedFeatures.MANGO_TWO);
+
 
 
 
@@ -130,6 +147,24 @@ public class TropicalTreeConfiguredFeatures {
                 BlockStateProvider.simple(Blocks.JUNGLE_LEAVES.defaultBlockState().setValue(LeavesBlock.PERSISTENT, true)),
                 new OvalFoliagePlacer(3, ConstantInt.of(0), ConstantInt.of(3), 0.5f),
                 new TwoLayersFeatureSize(1, 0, 2))
+                .decorators(ImmutableList.of(TrunkVineDecorator.INSTANCE, new LeaveVineDecorator(0.25f)))
+                .ignoreVines().build());
+
+        register(context, MEGA_JUNGLE_TREE_2, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(Blocks.JUNGLE_LOG),
+                new FancyTrunkPlacer(24, 18, 12),
+                BlockStateProvider.simple(Blocks.JUNGLE_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, 6)),
+                new MegaJungleFoliagePlacer(ConstantInt.of(4), ConstantInt.of(2), 3),
+                new TwoLayersFeatureSize(2, 3, 3))
+                .decorators(ImmutableList.of(TrunkVineDecorator.INSTANCE, new LeaveVineDecorator(0.25f)))
+                .ignoreVines().build());
+
+        register(context, MEGA_JUNGLE_TREE_3, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(Blocks.JUNGLE_LOG),
+                new FancyTrunkPlacer(20, 10, 10),
+                BlockStateProvider.simple(Blocks.JUNGLE_LEAVES),
+                new MegaJungleFoliagePlacer(ConstantInt.of(3), ConstantInt.of(1), 2),
+                new TwoLayersFeatureSize(1, 1, 2))
                 .decorators(ImmutableList.of(TrunkVineDecorator.INSTANCE, new LeaveVineDecorator(0.25f)))
                 .ignoreVines().build());
 
@@ -192,6 +227,17 @@ public class TropicalTreeConfiguredFeatures {
                                 BlockStateProvider.simple(WoodBlockSets.MAHOGANY.leaves().get().defaultBlockState()
                                         .setValue(BlockStateProperties.PERSISTENT, true))
                         ))).ignoreVines().build());
+
+        register(context, MAHOGANY_NBT,  EdumiaFeatures.TREE_FROM_NBT.get(), new TreeFromStructureNBTConfig(
+                Edumia.location("features/trees/mahogany/mahogany_tree_trunk1"),
+                Edumia.location("features/trees/mahogany/mahogany_tree_canopy1"),
+                BiasedToBottomInt.of(5, 15),
+                BlockStateProvider.simple(WoodBlockSets.MAHOGANY.log().get()),
+                BlockStateProvider.simple(WoodBlockSets.MAHOGANY.leaves().get()),
+                WoodBlockSets.MAHOGANY.log(),
+                WoodBlockSets.MAHOGANY.leaves(),
+                ModTags.Blocks.GROUND_MAHOGANY_SAPLING, 5, ImmutableList.of(new LeaveVineDecorator(0.5f))
+        ));
 
         register(context, SMALL_PALM_TREE, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(WoodBlockSets.PALM.log().get()),

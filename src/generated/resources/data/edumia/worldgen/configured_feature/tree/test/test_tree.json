@@ -9,12 +9,15 @@
       }
     },
     "foliage_placer": {
-      "type": "edumia:empty_foliage_placer"
+      "type": "minecraft:fancy_foliage_placer",
+      "height": 3,
+      "offset": 0,
+      "radius": 2
     },
     "foliage_provider": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "edumia:maple_leaves",
+        "Name": "minecraft:dark_oak_leaves",
         "Properties": {
           "distance": "7",
           "persistent": "false",
@@ -23,23 +26,25 @@
       }
     },
     "force_dirt": false,
-    "ignore_vines": true,
+    "ignore_vines": false,
     "minimum_size": {
-      "type": "minecraft:two_layers_feature_size",
-      "limit": 1,
+      "type": "minecraft:three_layers_feature_size",
+      "limit": 2,
       "lower_size": 0,
-      "upper_size": 1
+      "middle_size": 1,
+      "upper_limit": 3,
+      "upper_size": 2
     },
     "trunk_placer": {
-      "type": "edumia:baobab_trunk_placer",
-      "base_height": 16,
-      "height_rand_a": 10,
-      "height_rand_b": 0
+      "type": "edumia:ancient_oak_trunk_placer",
+      "base_height": 10,
+      "height_rand_a": 2,
+      "height_rand_b": 14
     },
     "trunk_provider": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "edumia:maple_log",
+        "Name": "minecraft:dark_oak_log",
         "Properties": {
           "axis": "y"
         }

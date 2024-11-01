@@ -1,7 +1,6 @@
 {
-    "__comment": "Made for the LOTR MC mod",
     "textures": {
-        "chandelier_chain": "lotr:block/chandelier_chain",
+        "chandelier_chain": "edumia:block/chandelier_chain",
         "particle": "#chandelier"
     },
     "elements": [

@@ -68,9 +68,6 @@ public class EdumiaBiomeDataConfigs {
             .addSlopeData(35, () -> StoneSets.LIGHT_HIGH_ELVEN_ROCK.block().get())
             .addSlopeData(45, () -> StoneSets.HIGH_ELVEN_ROCK.block().get())
             .addSlopeData(55, () -> StoneSets.DARK_HIGH_ELVEN_ROCK.block().get())
-            .addSlopeData(65, () -> StoneSets.LIGHT_HIGH_ELVEN_ROCK.block().get())
-            .addSlopeData(75, () -> StoneSets.HIGH_ELVEN_ROCK.block().get())
-            .addSlopeData(85, () -> StoneSets.DARK_HIGH_ELVEN_ROCK.block().get())
             .addSlopeData(MAX_ANGLE, () -> StoneSets.CACHOLONG.block().get());
 
     public static SlopeMap sandShores = new SlopeMap()
@@ -106,6 +103,11 @@ public class EdumiaBiomeDataConfigs {
 
     public static SlopeMap ocean = new SlopeMap()
             .addSlopeData(30, Blocks.GRAVEL)
+            .addSlopeData(36, Blocks.SAND)
+            .addSlopeData(MAX_ANGLE, Blocks.STONE);
+
+    public static SlopeMap pond = new SlopeMap()
+            .addSlopeData(30, Blocks.DIRT)
             .addSlopeData(36, Blocks.SAND)
             .addSlopeData(MAX_ANGLE, Blocks.STONE);
     public static SlopeMap beach = new SlopeMap()

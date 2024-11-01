@@ -16,11 +16,13 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.FormattedCharSequence;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Iterator;
 import java.util.List;
 
-
+@OnlyIn(Dist.CLIENT)
 public abstract class BasicIngameScreen extends Screen {
 
     public final List<AbstractWidget> buttons = Lists.newArrayList();

@@ -11,12 +11,15 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+@OnlyIn(Dist.CLIENT)
 @SuppressWarnings("unchecked")
 public class EdumiaMasterMenuScreen extends BasicIngameScreen{
     private Button.CreateNarration createNarration = EdumiaMenuButton.DEFAULT_NARRATION;

@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    "edumia:ruby_ore",
     "edumia:clay_tiling",
     "edumia:clay_tiling_slab",
     "edumia:clay_tiling_stairs",
@@ -730,13 +729,6 @@
     "edumia:polished_dripstone",
     "edumia:polished_dripstone_slab",
     "edumia:polished_dripstone_stairs",
-    "edumia:tin_ore",
-    "edumia:silver_ore",
-    "edumia:deepslate_tin_ore",
-    "edumia:limestone_tin_ore",
-    "edumia:limestone_silver_ore",
-    "edumia:limestone_gold_ore",
-    "edumia:limestone_iron_ore",
     "edumia:red_gensai_stone",
     "edumia:red_gensai_stone_slab",
     "edumia:red_gensai_stone_stairs",

@@ -6,8 +6,12 @@
   "mixins": [
     "ChunkGeneratorMixin",
     "PigEntityMixin",
-    "ServerWorldMixin"
+    "ServerLevelMixin",
+    "chunk.LevelChunkMixin",
+    "chunk.ChunkAccessMixin",
+    "chunk.ChunkSerializerMixin"
   ],
+
   "client": [
   ],
   "injectors": {

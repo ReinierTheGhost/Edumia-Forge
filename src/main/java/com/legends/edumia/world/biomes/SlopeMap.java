@@ -1,6 +1,5 @@
 package com.legends.edumia.world.biomes;
 
-
 import net.minecraft.world.level.block.Block;
 
 import java.util.ArrayList;
@@ -34,6 +33,18 @@ public class SlopeMap {
         return this;
     }
 
+    public SlopeMap addLayeredSlopeData(float angle, ArrayList<Layer> layers) {
+        if(!slopeDatas.isEmpty()) {
+            int last = slopeDatas.size() - 1;
+            float newAngle = slopeDatas.get(last).angle;
+            if (newAngle >= angle) {
+                throw new ArithmeticException("Cannot add slope angle smaller than previous slope data");
+            }
+        }
+        slopeDatas.add(new LayeredSlopeData(angle, layers));
+        return this;
+    }
+
     public Block getBlockAtAngle(float angle) {
         for(SlopeData slopeData : slopeDatas) {
             if(angle <= slopeData.angle) {
@@ -50,6 +61,36 @@ public class SlopeMap {
 
         public SlopeData(float angle, Block block) {
             this.angle = angle;
+            this.block = block;
+        }
+    }
+
+    public class LayeredSlopeData extends SlopeData {
+        private final ArrayList<Layer> layers;
+
+        public LayeredSlopeData(float angle, ArrayList<Layer> layers) {
+            super(angle, null);  // No single block, layers will be used instead
+            this.layers = layers;
+        }
+
+        public Block getBlockForHeight(int height) {
+            for (Layer layer : layers) {
+                if (height >= layer.minHeight && height <= layer.maxHeight) {
+                    return layer.block;
+                }
+            }
+            return null;  // No block found in the layers for the given height
+        }
+    }
+
+    public class Layer {
+        public final int minHeight;
+        public final int maxHeight;
+        public final Block block;
+
+        public Layer(int minHeight, int maxHeight, Block block) {
+            this.minHeight = minHeight;
+            this.maxHeight = maxHeight;
             this.block = block;
         }
     }

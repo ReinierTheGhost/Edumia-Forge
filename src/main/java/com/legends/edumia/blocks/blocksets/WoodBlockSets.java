@@ -25,31 +25,33 @@ public class WoodBlockSets {
     public static final float LEAVES_STRENGTH = 0.1f;
 
     public static SimpleBlockSet APPLE = registerWoodSet("apple", WOOD_STRENGTH, true);
-    public static SimpleBlockSet BANANA = registerWoodSet("banana", WOOD_STRENGTH, true);
     public static SimpleBlockSet ASPEN = registerWoodSet("aspen", WOOD_STRENGTH, true);
+    public static SimpleBlockSet BANANA = registerWoodSet("banana", WOOD_STRENGTH, true);
     public static SimpleBlockSet BEECH = registerWoodSet("beech", WOOD_STRENGTH, true);
     public static SimpleBlockSet BLACKTHORN = registerWoodSet("blackthorn", WOOD_STRENGTH, true);
+    public static SimpleBlockSet BLACK_OAK = registerWoodSet("black_oak", WOOD_STRENGTH, false);
+
     public static SimpleBlockSet CEDAR = registerWoodSet("cedar", WOOD_STRENGTH, true);
+    public static SimpleBlockSet CHARRED = registerWoodSet("charred", WOOD_STRENGTH, false);
     public static SimpleBlockSet CHERRY = registerWoodSet("cherry", WOOD_STRENGTH, true);
     public static SimpleBlockSet CYPRESS = registerWoodSet("cypress", WOOD_STRENGTH, true);
+    public static SimpleBlockSet DRAGON_BLOOD = registerWoodSet("dragon_blood", WOOD_STRENGTH, true);
+
     public static SimpleBlockSet FIR = registerWoodSet("fir", WOOD_STRENGTH, true);
     public static SimpleBlockSet GHOST_GUM = registerWoodSet("ghost_gum", WOOD_STRENGTH, false);
     public static SimpleBlockSet GREEN_OAK = registerWoodSet("green_oak", WOOD_STRENGTH, true);
     public static SimpleBlockSet HOLLY = registerWoodSet("holly", WOOD_STRENGTH, false);
     public static SimpleBlockSet LARCH = registerWoodSet("larch", WOOD_STRENGTH, true);
+    public static SimpleBlockSet MAHOGANY = registerWoodSet("mahogany", WOOD_STRENGTH, true);
     public static SimpleBlockSet MANGO = registerWoodSet("mango", WOOD_STRENGTH, true);
     public static SimpleBlockSet MAPLE = registerWoodSet("maple", WOOD_STRENGTH, false);
+    public static SimpleBlockSet PALM = registerWoodSet("palm", WOOD_STRENGTH, true);
     public static SimpleBlockSet PEAR = registerWoodSet("pear", WOOD_STRENGTH, true);
     public static SimpleBlockSet PINE = registerWoodSet("pine", WOOD_STRENGTH, true);
     public static SimpleBlockSet RED_OAK = registerWoodSet("red_oak", WOOD_STRENGTH, true);
     public static SimpleBlockSet REDWOOD = registerWoodSet("redwood", WOOD_STRENGTH, true);
     public static SimpleBlockSet SILVER_SPRUCE = registerWoodSet("silver_spruce", WOOD_STRENGTH, true);
     public static SimpleBlockSet WHITE_ASH = registerWoodSet("white_ash", WOOD_STRENGTH, true);
-    public static SimpleBlockSet DRAGON_BLOOD = registerWoodSet("dragon_blood", WOOD_STRENGTH, true);
-    public static SimpleBlockSet PALM = registerWoodSet("palm", WOOD_STRENGTH, true);
-    public static SimpleBlockSet MAHOGANY = registerWoodSet("mahogany", WOOD_STRENGTH, true);
-    public static SimpleBlockSet CHARRED = registerWoodSet("charred", WOOD_STRENGTH, false);
-    public static SimpleBlockSet BLACK_OAK = registerWoodSet("black_oak", WOOD_STRENGTH, false);
     public static SimpleBlockSet WILLOW = registerWoodSet("willow", WOOD_STRENGTH, true);
 
 

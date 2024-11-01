@@ -33,7 +33,7 @@ public class CreativeTabLoader {
                     .title(Component.translatable("creativetab.edumia_rewards"))
                     .displayItems((displayParameters, entries) -> {
                         entries.accept(ItemLoader.LEGENDS_COIN.get());
-                        entries.accept(ItemLoader.ATLAS.get());
+                        //entries.accept(ItemLoader.ATLAS.get());
                     }).build());
 
     public static final RegistryObject<CreativeModeTab>  UTILITY_GROUP =

@@ -3,7 +3,7 @@
     "textures": {
         "particle": "#all"
     },
-    "loader": "lotr:connected_textures",
+    "loader": "edumia:connected_textures",
     "texture_connection_properties": {
         "#all": {
             "make_from_single_icon": true

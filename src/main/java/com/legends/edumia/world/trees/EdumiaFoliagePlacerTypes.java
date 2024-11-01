@@ -108,6 +108,11 @@ public class EdumiaFoliagePlacerTypes {
 
     public static final RegistryObject<FoliagePlacerType<OliveFoliagePlacer>> OLIVE_FOLIAGE_PLACER = FOLIAGE_PLACERS.register("olive_foliage_placer",
             () -> new FoliagePlacerType<>(OliveFoliagePlacer.CODEC));
+    public static final RegistryObject<FoliagePlacerType<AshiraFoliagePlacer>> ASHIRA_FOLIAGE_PLACER = FOLIAGE_PLACERS.register("ashira_foliage_placer",
+            () -> new FoliagePlacerType<>(AshiraFoliagePlacer.CODEC));
+
+    public static final RegistryObject<FoliagePlacerType<HeveaFoliagePlacer>> HEVEA_FOLIAGE_PLACER = FOLIAGE_PLACERS.register("hevea_foliage_placer",
+            () -> new FoliagePlacerType<>(HeveaFoliagePlacer.CODEC));
 
     public static void register(IEventBus eventBus) {
         FOLIAGE_PLACERS.register(eventBus);

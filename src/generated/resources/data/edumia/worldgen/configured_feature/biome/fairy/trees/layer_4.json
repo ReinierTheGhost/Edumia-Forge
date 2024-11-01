@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:random_selector",
+  "config": {
+    "default": "edumia:noting",
+    "features": [
+      {
+        "chance": 0.15,
+        "feature": {
+          "feature": "edumia:tree/tropical/jungle_trees/jungle_tree/4",
+          "placement": []
+        }
+      }
+    ]
+  }
+}

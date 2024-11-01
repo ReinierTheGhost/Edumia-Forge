@@ -4,38 +4,53 @@ import com.google.common.collect.ImmutableList;
 import com.legends.edumia.Edumia;
 import com.legends.edumia.blocks.blocksets.ModNatureBlocks;
 import com.legends.edumia.blocks.blocksets.WoodBlockSets;
+import com.legends.edumia.world.congiguredfeatures.trees.RootsConfiguredFeatures;
 import com.legends.edumia.world.trees.foliageplacer.*;
 import com.legends.edumia.world.trees.treedecorators.PineBranchDecorator;
 import com.legends.edumia.world.trees.trunkplacers.*;
+import net.minecraft.core.Direction;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.HolderSet;
+import net.minecraft.core.Vec3i;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.data.worldgen.placement.CavePlacements;
+import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.SimpleRandomFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
+import net.minecraft.world.level.levelgen.feature.featuresize.ThreeLayersFeatureSize;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.FancyFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.feature.stateproviders.SimpleStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
-import net.minecraft.world.level.levelgen.feature.treedecorators.BeehiveDecorator;
-import net.minecraft.world.level.levelgen.feature.treedecorators.LeaveVineDecorator;
-import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
-import net.minecraft.world.level.levelgen.feature.treedecorators.TrunkVineDecorator;
+import net.minecraft.world.level.levelgen.feature.treedecorators.*;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.DarkOakTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.ForkingTrunkPlacer;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.MegaJungleTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
+import net.minecraft.world.level.levelgen.placement.BlockPredicateFilter;
+import net.minecraft.world.level.levelgen.placement.CountPlacement;
+import net.minecraft.world.level.levelgen.placement.RandomOffsetPlacement;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.OptionalInt;
 
 public class TreeConfiguredFeatures {
 
@@ -55,6 +70,7 @@ public class TreeConfiguredFeatures {
 
 
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context){
+        HolderGetter<ConfiguredFeature<?, ?>> holdergetter = context.lookup(Registries.CONFIGURED_FEATURE);
         BeehiveDecorator beehiveTreeDecorator = new BeehiveDecorator(0.03f);
         BlockStateProvider pineBranchProvider = (new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
                 .add(WoodBlockSets.PINE.log().get().defaultBlockState(), 2)
@@ -62,12 +78,12 @@ public class TreeConfiguredFeatures {
 
 
         register(context, TEST_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
-                BlockStateProvider.simple(WoodBlockSets.MAPLE.log().get()),
-                new BaobabTrunkPlacer(16, 10, 0),
-                BlockStateProvider.simple(ModNatureBlocks.MAPLE_LEAVES.get()),
-                new EmptyFoliagePlacer(),
-                new TwoLayersFeatureSize(1, 0, 1))
-                .ignoreVines().build ());
+                BlockStateProvider.simple(Blocks.DARK_OAK_LOG),
+                new AncientOakTrunkPlacer(10, 2, 14),
+                BlockStateProvider.simple(Blocks.DARK_OAK_LEAVES),
+                new FancyFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 3),
+                new ThreeLayersFeatureSize(2, 3, 0, 1, 2, OptionalInt.empty())
+        ).build());
 
         register(context, DRAGON_BLOOD_SMALL_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(WoodBlockSets.DRAGON_BLOOD.log().get()),

@@ -2,6 +2,7 @@ package com.legends.edumia.world.biomes.surface;
 
 import com.legends.edumia.world.placedfeatures.TreePlacedFeatures;
 import com.legends.edumia.world.placedfeatures.biomes.BiomePlacedFeatures;
+import com.legends.edumia.world.placedfeatures.biomes.FairyBiomePlacedFeatures;
 import com.legends.edumia.world.placedfeatures.boulders.BoulderPlacedFeatures;
 import com.legends.edumia.world.placedfeatures.crystrals.CrystalPlacedFeatures;
 import com.legends.edumia.world.placedfeatures.plants.ReedsPlacedFeatures;
@@ -150,6 +151,10 @@ public class ModBiomeFeatures {
     }
     public static void addOakBushes(List<ResourceKey<PlacedFeature>> vegetation) {
         vegetation.add(OakTreePlacedFeatures.OAK_BUSH_PLACED_TREE_KEY);
+    }
+
+    public static void addJungleTrees(List<ResourceKey<PlacedFeature>> vegetation) {
+        vegetation.add(FairyBiomePlacedFeatures.FAIRY_FOREST_TREES_LAYER_4);
     }
     public static void addCommonOakTrees(List<ResourceKey<PlacedFeature>> vegetation) {
         vegetation.add(OakTreePlacedFeatures.COMMON_OAK_PLACED_TREE_KEY);

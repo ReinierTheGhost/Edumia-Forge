@@ -15,6 +15,8 @@ import com.legends.edumia.world.trees.EdumiaFoliagePlacerTypes;
 import com.legends.edumia.world.trees.EdumiaTreeDecoratorTypes;
 import com.legends.edumia.world.trees.EdumiaTrunkPlacerTypes;
 import com.mojang.logging.LogUtils;
+import net.minecraft.core.Holder;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -83,6 +85,14 @@ public class Edumia
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static ResourceLocation createLocation(ResourceKey<?> path) {
+        return path.location();
+    }
+
+    public static ResourceLocation createLocation(Holder<?> holder) {
+        return createLocation(holder.unwrapKey().orElseThrow());
     }
 
 

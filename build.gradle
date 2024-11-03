@@ -138,6 +138,7 @@ dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     implementation 'fastutil:fastutil:5.0.9'
 
+    //implementation fg.deobf("curse.maven:oh-the-trees-youll-grow-962544:5693539")
 
     //annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 

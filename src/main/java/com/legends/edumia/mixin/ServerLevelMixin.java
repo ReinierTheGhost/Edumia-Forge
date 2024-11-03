@@ -26,7 +26,7 @@ public abstract class ServerLevelMixin extends Level {
         super($$0, $$1, $$2, $$3, $$4, $$5, $$6, $$7, $$8);
     }
 
-    @Inject(method = "tickChunk", at = @At("HEAD"))
+    @Inject(method = "tickChunk(Lnet/minecraft/world/level/chunk/LevelChunk;I)V", at = @At("HEAD"))
     private void tickScheduledRandomTicks(LevelChunk chunk, int randomTickSpeed, CallbackInfo ci) {
         ((RandomTickScheduler) chunk).getScheduledRandomTicks().removeIf(scheduledPos -> {
             chunk.getBlockState(scheduledPos).randomTick((ServerLevel) (Object) this, scheduledPos, this.random);

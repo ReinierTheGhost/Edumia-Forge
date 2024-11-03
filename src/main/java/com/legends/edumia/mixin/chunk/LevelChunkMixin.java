@@ -11,8 +11,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(LevelChunk.class)
 public abstract class LevelChunkMixin implements RandomTickScheduler {
+    public LevelChunkMixin(){
 
-    @Inject(method = "<init>(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/level/chunk/ProtoChunk;Lnet/minecraft/world/level/chunk/LevelChunk$PostLoadProcessor;)V", at = @At("RETURN"))
+    }
+
+    @Inject(method = "<init>(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/level/chunk/ProtoChunk;Lnet/minecraft/world/level/chunk/LevelChunk$PostLoadProcessor;)V",
+            at = @At("RETURN"))
     private void addScheduledRandomTicks(ServerLevel serverLevel, ProtoChunk chunk, LevelChunk.PostLoadProcessor $$2, CallbackInfo ci) {
         this.getScheduledRandomTicks().addAll(((RandomTickScheduler) chunk).getScheduledRandomTicks());
     }

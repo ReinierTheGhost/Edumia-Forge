@@ -11,6 +11,7 @@ import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
@@ -222,7 +223,14 @@ public class TreeFromStructureNBTFeature extends Feature<TreeFromStructureNBTCon
                     level.setBlock(mutableBlockPos, state, 2);
                     mutableBlockPos.move(Direction.DOWN);
                 } else {
-                    ((RandomTickScheduler) level.getChunk(mutableBlockPos)).scheduleRandomTick(mutableBlockPos.immutable());
+                    // Check if the chunk can be cast to RandomTickScheduler
+                    LevelChunk chunk = (LevelChunk) level.getChunk(mutableBlockPos);
+                    if (chunk instanceof RandomTickScheduler) {
+                        RandomTickScheduler scheduler = (RandomTickScheduler) chunk;
+                        scheduler.scheduleRandomTick(mutableBlockPos.immutable());
+                    } else {
+                        System.out.println("Warning: Expected RandomTickScheduler but found " + chunk.getClass().getName());
+                    }
                     break;
                 }
             }

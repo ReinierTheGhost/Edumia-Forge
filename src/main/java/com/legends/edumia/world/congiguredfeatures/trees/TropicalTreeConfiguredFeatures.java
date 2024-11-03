@@ -239,6 +239,8 @@ public class TropicalTreeConfiguredFeatures {
                 ModTags.Blocks.GROUND_MAHOGANY_SAPLING, 5, ImmutableList.of(new LeaveVineDecorator(0.5f))
         ));
 
+
+
         register(context, SMALL_PALM_TREE, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(WoodBlockSets.PALM.log().get()),
                 new PleodendronTrunkPlacer(9, 6, 7),

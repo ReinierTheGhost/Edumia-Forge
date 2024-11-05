@@ -121,7 +121,12 @@ public class TreeFromStructureNBTFeature extends Feature<TreeFromStructureNBTCon
         List<StructureTemplate.StructureBlockInfo> additionalBlocks = getStructureInfosInStructurePalletteFromBlockList(config.placeFromNBT(), palette);
         for (StructureTemplate.StructureBlockInfo additionalBlock : additionalBlocks) {
             BlockPos pos = getModifiedPos(placeSettings, additionalBlock, centerOffset, origin);
-            level.setBlock(pos, additionalBlock.state(), 2);
+
+            // Apply the rotation/transformation to the block state, including stairs
+            BlockState transformedState = getTransformedState(pos, additionalBlock.state(), additionalBlock.state(), placeSettings.getRotation(), level);
+
+
+            level.setBlock(pos, transformedState, 2);
         }
     }
 
@@ -212,61 +217,61 @@ public class TreeFromStructureNBTFeature extends Feature<TreeFromStructureNBTCon
     }
 
     public static void fillLogsUnder(RandomSource randomSource, BlockStateProvider logProvider, WorldGenLevel level, BlockPos origin, StructurePlaceSettings placeSettings, BlockPos centerOffset, List<StructureTemplate.StructureBlockInfo> logBuilders, int maxTrunkBuildingDepth, BlockPredicate groundFilter) {
-        for (StructureTemplate.StructureBlockInfo logBuilder : logBuilders) {
-            BlockPos pos = getModifiedPos(placeSettings, logBuilder, centerOffset, origin);
-            BlockPos.MutableBlockPos mutableBlockPos = new BlockPos.MutableBlockPos().set(pos);
+//        for (StructureTemplate.StructureBlockInfo logBuilder : logBuilders) {
+//            BlockPos pos = getModifiedPos(placeSettings, logBuilder, centerOffset, origin);
+//            BlockPos.MutableBlockPos mutableBlockPos = new BlockPos.MutableBlockPos().set(pos);
+//
+//            for (int i = 0; i < maxTrunkBuildingDepth; i++) {
+//                if (!groundFilter.test(level, mutableBlockPos) && !level.getBlockState(mutableBlockPos).is(Blocks.BEDROCK)) {
+//                    if (level instanceof Level) { // Drop the replaced block.
+//                        level.removeBlock(mutableBlockPos, true);
+//                    }
+//
+//
+//                    BlockState state = logProvider.getState(randomSource, mutableBlockPos);
+//
+//                    state = Block.updateFromNeighbourShapes(state, level, mutableBlockPos);
+//                    level.setBlock(mutableBlockPos, state, 2);
+//                    mutableBlockPos.move(Direction.DOWN);
+//                } else {
+//                    // Check if the chunk can be cast to RandomTickScheduler
+//                    LevelChunk chunk = (LevelChunk) level.getChunk(mutableBlockPos);
+//                    if (chunk instanceof RandomTickScheduler) {
+//                        RandomTickScheduler scheduler = (RandomTickScheduler) chunk;
+//                        scheduler.scheduleRandomTick(mutableBlockPos.immutable());
+//                    } else {
+//                        System.out.println("Warning: Expected RandomTickScheduler but found " + chunk.getClass().getName());
+//                    }
+//                    break;
+//                }
+//            }
+//        }
 
-            for (int i = 0; i < maxTrunkBuildingDepth; i++) {
-                if (!groundFilter.test(level, mutableBlockPos) && !level.getBlockState(mutableBlockPos).is(Blocks.BEDROCK)) {
-                    if (level instanceof Level) { // Drop the replaced block.
-                        level.removeBlock(mutableBlockPos, true);
-                    }
 
 
-                    BlockState state = logProvider.getState(randomSource, mutableBlockPos);
+         for (StructureTemplate.StructureBlockInfo logBuilder : logBuilders) {
+                     BlockPos pos = getModifiedPos(placeSettings, logBuilder, centerOffset, origin);
+                     BlockPos.MutableBlockPos mutableBlockPos = new BlockPos.MutableBlockPos().set(pos);
+                     for (int i = 0; i < maxTrunkBuildingDepth; i++) {
+                         if (!level.getBlockState(mutableBlockPos).canOcclude()) {
+                              if (level instanceof Level) { // Drop the replaced block.
+                                  level.removeBlock(mutableBlockPos, true);
+                              }
+                             level.setBlock(mutableBlockPos, logProvider.getState(randomSource, mutableBlockPos), 2);
+                              mutableBlockPos.move(Direction.DOWN);
+                          } else {
+                              level.getChunk(mutableBlockPos);
+                              break;
+                          }
+                      }
+                  }
 
-                    state = Block.updateFromNeighbourShapes(state, level, mutableBlockPos);
-                    level.setBlock(mutableBlockPos, state, 2);
-                    mutableBlockPos.move(Direction.DOWN);
-                } else {
-                    // Check if the chunk can be cast to RandomTickScheduler
-                    LevelChunk chunk = (LevelChunk) level.getChunk(mutableBlockPos);
-                    if (chunk instanceof RandomTickScheduler) {
-                        RandomTickScheduler scheduler = (RandomTickScheduler) chunk;
-                        scheduler.scheduleRandomTick(mutableBlockPos.immutable());
-                    } else {
-                        System.out.println("Warning: Expected RandomTickScheduler but found " + chunk.getClass().getName());
-                    }
-                    break;
-                }
-            }
-        }
-
-        /**
-         * Used to be
-         * for (StructureTemplate.StructureBlockInfo logBuilder : logBuilders) {
-         *             BlockPos pos = getModifiedPos(placeSettings, logBuilder, centerOffset, origin);
-         *             BlockPos.MutableBlockPos mutableBlockPos = new BlockPos.MutableBlockPos().set(pos);
-         *
-         *             for (int i = 0; i < maxTrunkBuildingDepth; i++) {
-         *                 if (!level.getBlockState(mutableBlockPos).canOcclude()) {
-         *                     if (level instanceof Level) { // Drop the replaced block.
-         *                         level.removeBlock(mutableBlockPos, true);
-         *                     }
-         *                     level.setBlock(mutableBlockPos, logProvider.getState(randomSource, mutableBlockPos), 2);
-         *                     mutableBlockPos.move(Direction.DOWN);
-         *                 } else {
-         *                     ((RandomTickScheduler) level.getChunk(mutableBlockPos)).scheduleRandomTick(mutableBlockPos.immutable());
-         *                     break;
-         *                 }
-         *             }
-         *         }
-         */
     }
 
 
     @NotNull
     public static BlockState getTransformedState(BlockPos modifiedPos, BlockState state, BlockState nbtState, Rotation rotation, WorldGenLevel level) {
+        // Set block properties based on the NBT state
         for (Property property : state.getProperties()) {
             if (nbtState.hasProperty(property)) {
                 Comparable value = nbtState.getValue(property);
@@ -274,6 +279,7 @@ public class TreeFromStructureNBTFeature extends Feature<TreeFromStructureNBTCon
             }
         }
 
+        // Handle waterlogging if applicable
         if (state.hasProperty(LeavesBlock.WATERLOGGED)) {
             FluidState fluidState = level.getFluidState(modifiedPos);
             if (fluidState.is(Fluids.WATER) && fluidState.getAmount() >= 7) {
@@ -282,8 +288,18 @@ public class TreeFromStructureNBTFeature extends Feature<TreeFromStructureNBTCon
                 state = state.setValue(LeavesBlock.WATERLOGGED, false);
             }
         }
-
+        // Rotate the block state based on the structure's rotation
         state = state.rotate(rotation);
+
+        if (state.getBlock() instanceof StairBlock){
+            Direction facing = state.getValue(StairBlock.FACING);
+            facing = rotation.rotate(facing);  // Rotate the facing direction
+            state = state.setValue(StairBlock.FACING, facing);
+
+            // Optionally handle the SHAPE property of the stairs here if needed
+        }
+
+
 
         return state;
     }

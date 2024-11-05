@@ -37,7 +37,9 @@ public class FairyBiomesConfiguredFeatures {
                         new WeightedPlacedFeature(
                                 PlacementUtils.inlinePlaced(holdergetter.getOrThrow(JungleTreeConfiguredFeatures.JUNGLE_TREE_4)), 0.15f),
                         new WeightedPlacedFeature(
-                                PlacementUtils.inlinePlaced(holdergetter.getOrThrow(TropicalTreeConfiguredFeatures.MAHOGANY_NBT)), 0.15f)
+                                PlacementUtils.inlinePlaced(holdergetter.getOrThrow(TropicalTreeConfiguredFeatures.MAHOGANY_NBT)), 0.15f),
+                        new WeightedPlacedFeature(
+                                PlacementUtils.inlinePlaced(holdergetter.getOrThrow(TropicalTreeConfiguredFeatures.KAPOK_1)), 0.15f)
                 ), noting));
 
     }

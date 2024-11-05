@@ -16,6 +16,13 @@
           "feature": "edumia:tree/tropical/mahogany_nbt",
           "placement": []
         }
+      },
+      {
+        "chance": 0.15,
+        "feature": {
+          "feature": "edumia:tree/tropical/kapok_1",
+          "placement": []
+        }
       }
     ]
   }

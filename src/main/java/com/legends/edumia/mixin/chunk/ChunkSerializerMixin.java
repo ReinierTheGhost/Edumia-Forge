@@ -37,31 +37,20 @@ public class ChunkSerializerMixin {
             }
             corgiLibTag.put("scheduled_random_ticks", listTag);
 
-            tag.put(Edumia.MOD_ID, corgiLibTag);
+            tag.put("corgilib", corgiLibTag);
         }
     }
 
 
     @Inject(method = "read", at = @At("RETURN"))
     private static void readScheduledRandomTicks(ServerLevel serverLevel, PoiManager poiManager, ChunkPos pos, CompoundTag tag, CallbackInfoReturnable<ProtoChunk> cir) {
-        // Legacy Support
-        if (tag.contains("edumia")) {
-            CompoundTag edumiaTag = tag.getCompound("edumia");
-            if (edumiaTag.contains("scheduled_random_ticks", Tag.TAG_LIST)) {
-                for (Tag scheduledTick : tag.getList("scheduled_random_ticks", Tag.TAG_COMPOUND)) {
-                    ((RandomTickScheduler) cir.getReturnValue()).getScheduledRandomTicks().add(NbtUtils.readBlockPos((CompoundTag) scheduledTick));
-                }
-            }
-        }
-
-        if (tag.contains(Edumia.MOD_ID)) {
-            CompoundTag edumiaTag = tag.getCompound(Edumia.MOD_ID);
-            if (edumiaTag.contains("scheduled_random_ticks", Tag.TAG_LIST)) {
-                for (Tag scheduledTick : tag.getList("scheduled_random_ticks", Tag.TAG_COMPOUND)) {
+        if (tag.contains("corgilib")) {
+            CompoundTag corgiLibTag = tag.getCompound("corgilib");
+            if (corgiLibTag.contains("scheduled_random_ticks", Tag.TAG_LIST)) {
+                for (Tag scheduledTick : corgiLibTag.getList("scheduled_random_ticks", Tag.TAG_COMPOUND)) {
                     ((RandomTickScheduler) cir.getReturnValue()).getScheduledRandomTicks().add(NbtUtils.readBlockPos((CompoundTag) scheduledTick));
                 }
             }
         }
     }
-
 }

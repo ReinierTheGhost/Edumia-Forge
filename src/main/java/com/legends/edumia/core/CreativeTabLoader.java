@@ -460,6 +460,11 @@ public class CreativeTabLoader {
                                 for (WoodBlockSets.SimpleVanillaBlocks wood: WoodBlockSets.beams){
                                     entries.accept(wood.beam().get());
                                 }
+
+                                entries.accept(ModNatureBlocks.JUNGLE_WOOD_FENCE.get());
+                                entries.accept(ModNatureBlocks.JUNGLE_WOOD_WALL.get());
+                                entries.accept(ModNatureBlocks.JUNGLE_WOOD_SLAB.get());
+                                entries.accept(ModNatureBlocks.JUNGLE_WOOD_STAIRS.get());
                             }).build());
 
 

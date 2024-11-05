@@ -2,6 +2,7 @@ package com.legends.edumia.world.congiguredfeatures.trees;
 
 import com.google.common.collect.ImmutableList;
 import com.legends.edumia.Edumia;
+import com.legends.edumia.blocks.blocksets.ModNatureBlocks;
 import com.legends.edumia.blocks.blocksets.WoodBlockSets;
 import com.legends.edumia.utils.ModTags;
 import com.legends.edumia.world.features.EdumiaFeatures;
@@ -20,6 +21,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.valueproviders.BiasedToBottomInt;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -48,6 +50,7 @@ import net.minecraft.world.level.levelgen.placement.RandomOffsetPlacement;
 import org.checkerframework.checker.units.qual.C;
 
 import java.util.List;
+import java.util.Set;
 
 public class TropicalTreeConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> BENDING_JUNGLE_TREE = registerKey("bending_jungle_tree");
@@ -57,14 +60,14 @@ public class TropicalTreeConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> MEGA_JUNGLE_TREE_2 = registerKey("mega_jungle_tree_2");
     public static final ResourceKey<ConfiguredFeature<?, ?>> MEGA_JUNGLE_TREE_3 = registerKey("mega_jungle_tree_3");
 
-
+    public static final ResourceKey<ConfiguredFeature<?, ?>> KAPOK_1 = registerKey("kapok_1");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> MAHOGANY = registerKey("mahogany");
     public static final ResourceKey<ConfiguredFeature<?, ?>> BIG_MAHOGANY = registerKey("big_mahogany");
     public static final ResourceKey<ConfiguredFeature<?, ?>> CANOPY_MAHOGANY_TREE = registerKey("canopy_mahogany_tree");
     public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_MAHOGANY_TREE = registerKey("large_mahogany_tree");
     public static final ResourceKey<ConfiguredFeature<?, ?>> MAHOGANY_NBT = registerKey("mahogany_nbt");
-
+    public static final ResourceKey<ConfiguredFeature<?, ?>> MAHOGANY_ROOTS_NBT = registerKey("mahogany_roots_nbt");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SMALL_PALM_TREE = registerKey("small_palm_tree");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> BIG_PARASOL_PALM = registerKey("big_parasol_palm");
@@ -237,6 +240,33 @@ public class TropicalTreeConfiguredFeatures {
                 WoodBlockSets.MAHOGANY.log(),
                 WoodBlockSets.MAHOGANY.leaves(),
                 ModTags.Blocks.GROUND_MAHOGANY_SAPLING, 5, ImmutableList.of(new LeaveVineDecorator(0.5f))
+        ));
+
+        register(context, MAHOGANY_ROOTS_NBT,  EdumiaFeatures.TREE_FROM_NBT.get(), new TreeFromStructureNBTConfig(
+                Edumia.location("features/trees/mahogany/mahogany_tree_trunk1_roots"),
+                Edumia.location("features/trees/mahogany/mahogany_tree_canopy1"),
+                BiasedToBottomInt.of(5, 15),
+                BlockStateProvider.simple(WoodBlockSets.MAHOGANY.log().get()),
+                BlockStateProvider.simple(WoodBlockSets.MAHOGANY.leaves().get()),
+                WoodBlockSets.MAHOGANY.log(),
+                WoodBlockSets.MAHOGANY.leaves(),
+                ModTags.Blocks.GROUND_MAHOGANY_SAPLING, 5, ImmutableList.of(new LeaveVineDecorator(0.5f)),
+                Set.of(WoodBlockSets.MAHOGANY.woodSlab().get(), WoodBlockSets.MAHOGANY.woodStairs().get())
+        ));
+
+        register(context, KAPOK_1,  EdumiaFeatures.TREE_FROM_NBT.get(), new TreeFromStructureNBTConfig(
+                Edumia.location("features/trees/kapok/kapok_trunk_1"),
+                Edumia.location("features/trees/kapok/kapok_canopy_1"),
+                BiasedToBottomInt.of(15, 20),
+                BlockStateProvider.simple(Blocks.JUNGLE_WOOD),
+                BlockStateProvider.simple(Blocks.JUNGLE_LEAVES.defaultBlockState().setValue(LeavesBlock.PERSISTENT, true)),
+                Set.of(Blocks.JUNGLE_WOOD, ModNatureBlocks.JUNGLE_WOOD_FENCE.get(), ModNatureBlocks.JUNGLE_WOOD_STAIRS.get(),
+                        ModNatureBlocks.JUNGLE_WOOD_SLAB.get()),
+                Blocks.JUNGLE_LEAVES,
+                ModTags.Blocks.GROUND_MAHOGANY_SAPLING, 5, ImmutableList.of(new LeaveVineDecorator(0.5f),
+                TrunkVineDecorator.INSTANCE),
+                Set.of(ModNatureBlocks.JUNGLE_WOOD_FENCE.get(), ModNatureBlocks.JUNGLE_WOOD_STAIRS.get(),
+                        ModNatureBlocks.JUNGLE_WOOD_SLAB.get(), Blocks.MANGROVE_LEAVES, Blocks.MANGROVE_ROOTS, Blocks.JUNGLE_LEAVES)
         ));
 
 

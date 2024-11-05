@@ -9,6 +9,13 @@
           "feature": "edumia:tree/tropical/jungle_trees/jungle_tree/4",
           "placement": []
         }
+      },
+      {
+        "chance": 0.15,
+        "feature": {
+          "feature": "edumia:tree/tropical/mahogany_nbt",
+          "placement": []
+        }
       }
     ]
   }

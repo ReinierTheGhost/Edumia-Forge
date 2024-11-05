@@ -62,6 +62,21 @@ public record TreeFromStructureNBTConfig(ResourceLocation baseLocation, Resource
     public TreeFromStructureNBTConfig(ResourceLocation baseLocation, ResourceLocation canopyLocation,
                                       IntProvider height, BlockStateProvider logProvider,
                                       BlockStateProvider leavesProvider, Block logTarget,
+                                      Block leavesTarget, TagKey<Block> growableOn, int maxLogDepth, List<TreeDecorator> treeDecorators,
+                                      Set<Block> placeFromNBT) {
+        this(baseLocation, canopyLocation, height, logProvider, leavesProvider, Collections.singleton(logTarget), Collections.singleton(leavesTarget), BlockPredicate.matchesTag(growableOn), BlockPredicate.replaceable(), maxLogDepth, treeDecorators, placeFromNBT);
+    }
+
+    public TreeFromStructureNBTConfig(ResourceLocation baseLocation, ResourceLocation canopyLocation,
+                                      IntProvider height, BlockStateProvider logProvider,
+                                      BlockStateProvider leavesProvider, Set<Block> logTarget,
+                                      Block leavesTarget, TagKey<Block> growableOn, int maxLogDepth, List<TreeDecorator> treeDecorators,
+                                      Set<Block> placeFromNBT) {
+        this(baseLocation, canopyLocation, height, logProvider, leavesProvider, logTarget, Collections.singleton(leavesTarget), BlockPredicate.matchesTag(growableOn), BlockPredicate.replaceable(), maxLogDepth, treeDecorators, placeFromNBT);
+    }
+    public TreeFromStructureNBTConfig(ResourceLocation baseLocation, ResourceLocation canopyLocation,
+                                      IntProvider height, BlockStateProvider logProvider,
+                                      BlockStateProvider leavesProvider, Block logTarget,
                                       Block leavesTarget, TagKey<Block> growableOn, int maxLogDepth) {
         this(baseLocation, canopyLocation, height, logProvider, leavesProvider, Collections.singleton(logTarget), Collections.singleton(leavesTarget), BlockPredicate.matchesTag(growableOn), BlockPredicate.replaceable(), maxLogDepth, ImmutableList.of(), Set.of());
     }
@@ -71,5 +86,21 @@ public record TreeFromStructureNBTConfig(ResourceLocation baseLocation, Resource
                                       BlockStateProvider leavesProvider, Supplier<? extends Block> logTarget,
                                       Supplier<? extends Block> leavesTarget, TagKey<Block> growableOn, int maxLogDepth, List<TreeDecorator> treeDecorators) {
         this(baseLocation, canopyLocation, height, logProvider, leavesProvider, logTarget.get(), leavesTarget.get(), growableOn, maxLogDepth, treeDecorators);
+    }
+
+    public TreeFromStructureNBTConfig(ResourceLocation baseLocation, ResourceLocation canopyLocation,
+                                      IntProvider height, BlockStateProvider logProvider,
+                                      BlockStateProvider leavesProvider, Supplier<? extends Block> logTarget,
+                                      Supplier<? extends Block> leavesTarget, TagKey<Block> growableOn, int maxLogDepth,
+                                      List<TreeDecorator> treeDecorators, Set<Block> placeFromNBT) {
+        this(baseLocation, canopyLocation, height, logProvider, leavesProvider, logTarget.get(), leavesTarget.get(), growableOn, maxLogDepth,
+                treeDecorators, placeFromNBT);
+    }
+
+    public TreeFromStructureNBTConfig(ResourceLocation baseLocation, ResourceLocation canopyLocation,
+                                      IntProvider height, BlockStateProvider logProvider,
+                                      BlockStateProvider leavesProvider, Set<Block> logTarget,
+                                      Supplier<? extends Block> leavesTarget, TagKey<Block> growableOn, int maxLogDepth, List<TreeDecorator> treeDecorators, Set<Block> placeFromNBT) {
+        this(baseLocation, canopyLocation, height, logProvider, leavesProvider, logTarget, leavesTarget.get(), growableOn, maxLogDepth, treeDecorators, placeFromNBT);
     }
 }

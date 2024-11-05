@@ -31,6 +31,9 @@
     [],
     [],
     [
+      "edumia:beach/layers/white/first",
+      "edumia:beach/layers/white/second",
+      "edumia:beach/layers/white/third",
       "edumia:boulders/big_granite_boulder",
       "edumia:boulders/big_sandstone_boulder",
       "edumia:boulders/big_stone_boulder",

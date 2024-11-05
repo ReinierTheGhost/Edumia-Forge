@@ -132,9 +132,14 @@ public class TreeFromStructureNBTFeature extends Feature<TreeFromStructureNBTCon
         placeAdditional(config, level, origin, placeSettings, trunkBasePalette, centerOffset);
     }
 
-    public static void placeCanopy(TreeFromStructureNBTConfig config, BlockStateProvider logProvider, BlockStateProvider leavesProvider, WorldGenLevel level, BlockPos origin, RandomSource random, StructurePlaceSettings placeSettings, StructureTemplate.Palette randomCanopyPalette, Set<BlockPos> leavePositions, Set<BlockPos> trunkPositions, int trunkLength, BlockPredicate groundFilter) {
-        List<StructureTemplate.StructureBlockInfo> leaves = getStructureInfosInStructurePalletteFromBlockList(config.leavesTarget(), randomCanopyPalette);
-        List<StructureTemplate.StructureBlockInfo> canopyLogs = getStructureInfosInStructurePalletteFromBlockList(config.logTarget(), randomCanopyPalette);
+    public static void placeCanopy(TreeFromStructureNBTConfig config, BlockStateProvider logProvider, BlockStateProvider leavesProvider,
+                                   WorldGenLevel level, BlockPos origin, RandomSource random, StructurePlaceSettings placeSettings,
+                                   StructureTemplate.Palette randomCanopyPalette, Set<BlockPos> leavePositions, Set<BlockPos> trunkPositions,
+                                   int trunkLength, BlockPredicate groundFilter) {
+        List<StructureTemplate.StructureBlockInfo> leaves = getStructureInfosInStructurePalletteFromBlockList(config.leavesTarget(),
+                randomCanopyPalette);
+        List<StructureTemplate.StructureBlockInfo> canopyLogs = getStructureInfosInStructurePalletteFromBlockList(config.logTarget(),
+                randomCanopyPalette);
         List<StructureTemplate.StructureBlockInfo> canopyAnchor = randomCanopyPalette.blocks(Blocks.WHITE_WOOL);
 
         if (canopyAnchor.isEmpty()) {
@@ -149,7 +154,8 @@ public class TreeFromStructureNBTFeature extends Feature<TreeFromStructureNBTCon
         canopyCenterOffset = new BlockPos(-canopyCenterOffset.getX(), trunkLength, -canopyCenterOffset.getZ());
 
         List<StructureTemplate.StructureBlockInfo> trunkFillers = new ArrayList<>(randomCanopyPalette.blocks(Blocks.RED_WOOL));
-        fillLogsUnder(random, logProvider, level, origin, placeSettings, canopyCenterOffset, trunkFillers, trunkLength + 1, BlockPredicate.matchesBlocks(config.logTarget().toArray(new Block[0])));
+        fillLogsUnder(random, logProvider, level, origin, placeSettings, canopyCenterOffset, trunkFillers, trunkLength + 1,
+                BlockPredicate.matchesBlocks(config.logTarget().toArray(new Block[0])));
 
 
         placeLogsWithRotation(logProvider, level, origin, random, placeSettings, canopyCenterOffset, canopyLogs, trunkPositions);
@@ -235,6 +241,27 @@ public class TreeFromStructureNBTFeature extends Feature<TreeFromStructureNBTCon
                 }
             }
         }
+
+        /**
+         * Used to be
+         * for (StructureTemplate.StructureBlockInfo logBuilder : logBuilders) {
+         *             BlockPos pos = getModifiedPos(placeSettings, logBuilder, centerOffset, origin);
+         *             BlockPos.MutableBlockPos mutableBlockPos = new BlockPos.MutableBlockPos().set(pos);
+         *
+         *             for (int i = 0; i < maxTrunkBuildingDepth; i++) {
+         *                 if (!level.getBlockState(mutableBlockPos).canOcclude()) {
+         *                     if (level instanceof Level) { // Drop the replaced block.
+         *                         level.removeBlock(mutableBlockPos, true);
+         *                     }
+         *                     level.setBlock(mutableBlockPos, logProvider.getState(randomSource, mutableBlockPos), 2);
+         *                     mutableBlockPos.move(Direction.DOWN);
+         *                 } else {
+         *                     ((RandomTickScheduler) level.getChunk(mutableBlockPos)).scheduleRandomTick(mutableBlockPos.immutable());
+         *                     break;
+         *                 }
+         *             }
+         *         }
+         */
     }
 
 

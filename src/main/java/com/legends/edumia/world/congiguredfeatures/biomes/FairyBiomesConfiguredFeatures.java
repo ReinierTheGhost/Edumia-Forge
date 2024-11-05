@@ -33,9 +33,12 @@ public class FairyBiomesConfiguredFeatures {
         Holder.Reference<PlacedFeature> noting = registryEntryLookup.getOrThrow(ModPlacedFeatures.NOTING);
 
         register(context, FAIRY_FOREST_TREES_LAYER_4, Feature.RANDOM_SELECTOR,
-                new RandomFeatureConfiguration(List.of(new WeightedPlacedFeature(
-                        PlacementUtils.inlinePlaced(holdergetter.getOrThrow(JungleTreeConfiguredFeatures.JUNGLE_TREE_4)), 0.15f)),
-                        noting));
+                new RandomFeatureConfiguration(List.of(
+                        new WeightedPlacedFeature(
+                                PlacementUtils.inlinePlaced(holdergetter.getOrThrow(JungleTreeConfiguredFeatures.JUNGLE_TREE_4)), 0.15f),
+                        new WeightedPlacedFeature(
+                                PlacementUtils.inlinePlaced(holdergetter.getOrThrow(TropicalTreeConfiguredFeatures.MAHOGANY_NBT)), 0.15f)
+                ), noting));
 
     }
     public static ResourceKey<ConfiguredFeature<?, ?>> registerKey(String name){

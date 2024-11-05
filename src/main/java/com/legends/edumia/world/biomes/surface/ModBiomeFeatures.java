@@ -1,5 +1,6 @@
 package com.legends.edumia.world.biomes.surface;
 
+import com.legends.edumia.world.placedfeatures.BeachPlacedFeatures;
 import com.legends.edumia.world.placedfeatures.TreePlacedFeatures;
 import com.legends.edumia.world.placedfeatures.biomes.BiomePlacedFeatures;
 import com.legends.edumia.world.placedfeatures.biomes.FairyBiomePlacedFeatures;
@@ -441,6 +442,9 @@ public class ModBiomeFeatures {
     public static void addSnowOre(List<ResourceKey<PlacedFeature>> vegetation) {
     }
     public static void addSandOre(List<ResourceKey<PlacedFeature>> vegetation) {
+        vegetation.add(BeachPlacedFeatures.WHITE_SAND_LAYER_FIRST);
+        vegetation.add(BeachPlacedFeatures.WHITE_SAND_LAYER_SECOND);
+        vegetation.add(BeachPlacedFeatures.WHITE_SAND_LAYER_THIRD);
     }
     public static void addCalciteStoneOre(List<ResourceKey<PlacedFeature>> vegetation) {
     }

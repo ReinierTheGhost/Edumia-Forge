@@ -1,6 +1,7 @@
 package com.legends.edumia.blocks.blocksets;
 
 import com.legends.edumia.Edumia;
+import com.legends.edumia.blocks.AxialSlabBlock;
 import com.legends.edumia.blocks.EdumiaLeavesBlock;
 import com.legends.edumia.blocks.trees.BlackOakLeavesBlock;
 import com.legends.edumia.core.ItemLoader;
@@ -98,6 +99,15 @@ public class ModNatureBlocks {
             new SaplingBlock(new WillowTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
 
 
+    public static final RegistryObject<Block> JUNGLE_WOOD_SLAB = registerBlock("jungle_wood_slab", () ->
+            new AxialSlabBlock(Blocks.JUNGLE_WOOD));
+    public static final RegistryObject<Block> JUNGLE_WOOD_STAIRS = registerBlock("jungle_wood_stairs", () ->
+            new StairBlock(Blocks.JUNGLE_WOOD.defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.JUNGLE_WOOD)));
+
+    public static final RegistryObject<Block> JUNGLE_WOOD_FENCE = registerBlock("jungle_wood_fence", () ->
+            new FenceBlock(BlockBehaviour.Properties.copy(Blocks.JUNGLE_WOOD)));
+    public static final RegistryObject<Block> JUNGLE_WOOD_WALL = registerBlock("jungle_wood_wall", () ->
+            new WallBlock(BlockBehaviour.Properties.copy(Blocks.JUNGLE_WOOD)));
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
         registerBlockItem(name, toReturn);

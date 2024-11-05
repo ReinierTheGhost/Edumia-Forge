@@ -162,6 +162,10 @@
     "edumia:willow_wood_wall",
     "edumia:willow_wood_fence",
     "edumia:willow_wood_slab",
-    "edumia:willow_wood_stairs"
+    "edumia:willow_wood_stairs",
+    "edumia:jungle_wood_wall",
+    "edumia:jungle_wood_fence",
+    "edumia:jungle_wood_slab",
+    "edumia:jungle_wood_stairs"
   ]
 }

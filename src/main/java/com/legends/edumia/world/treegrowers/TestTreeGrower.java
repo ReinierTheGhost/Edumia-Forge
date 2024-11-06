@@ -13,6 +13,6 @@ public class TestTreeGrower  extends AbstractTreeGrower {
     @Nullable
     @Override
     protected ResourceKey<ConfiguredFeature<?, ?>> getConfiguredFeature(RandomSource random, boolean bees) {
-        return TropicalTreeConfiguredFeatures.KAPOK_1;
+        return TropicalTreeConfiguredFeatures.LEOPARD_2;
     }
 }

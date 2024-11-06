@@ -1,6 +1,5 @@
 package com.legends.edumia.world.features.treesnbt;
 
-import com.legends.edumia.world.RandomTickScheduler;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -11,7 +10,6 @@ import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
-import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
@@ -58,7 +56,7 @@ public class TreeFromStructureNBTFeature extends Feature<TreeFromStructureNBTCon
         StructureTemplate canopyTemplate = canopyTemplateOptional.get();
         List<StructureTemplate.Palette> basePalettes = baseTemplate.palettes;
         List<StructureTemplate.Palette> canopyPalettes = canopyTemplate.palettes;
-        BlockPos origin = featurePlaceContext.origin();
+        BlockPos origin = featurePlaceContext.origin().below();
         if (DEBUG) {
             level.setBlock(origin, Blocks.DIAMOND_BLOCK.defaultBlockState(), 2);
         }
@@ -292,7 +290,7 @@ public class TreeFromStructureNBTFeature extends Feature<TreeFromStructureNBTCon
         state = state.rotate(rotation);
 
         if (state.getBlock() instanceof StairBlock){
-            Direction facing = state.getValue(StairBlock.FACING);
+            Direction facing = nbtState.getValue(StairBlock.FACING);
             facing = rotation.rotate(facing);  // Rotate the facing direction
             state = state.setValue(StairBlock.FACING, facing);
 

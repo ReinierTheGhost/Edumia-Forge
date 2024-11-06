@@ -1,0 +1,54 @@
+{
+  "type": "edumia:tree_from_nbt",
+  "config": {
+    "base_location": "edumia:features/trees/johanes/johanes_trunk",
+    "can_grow_on_filter": {
+      "type": "minecraft:matching_block_tag",
+      "tag": "edumia:mahogany_sapling"
+    },
+    "can_leaves_place_filter": {
+      "type": "minecraft:replaceable"
+    },
+    "canopy_location": "edumia:features/trees/johanes/johanes_top",
+    "height": {
+      "type": "minecraft:biased_to_bottom",
+      "value": {
+        "max_inclusive": 5,
+        "min_inclusive": 1
+      }
+    },
+    "leaves_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "edumia:cedar_leaves",
+        "Properties": {
+          "distance": "7",
+          "persistent": "true",
+          "waterlogged": "false"
+        }
+      }
+    },
+    "leaves_target": [
+      "edumia:cedar_leaves"
+    ],
+    "log_provider": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "edumia:cedar_wood",
+        "Properties": {
+          "axis": "y"
+        }
+      }
+    },
+    "log_target": [
+      "edumia:cedar_wood_fence",
+      "edumia:cedar_wood"
+    ],
+    "place_from_nbt": [
+      "edumia:cedar_leaves",
+      "minecraft:dark_oak_slab",
+      "minecraft:brown_stained_glass_pane",
+      "edumia:cedar_wood_fence"
+    ]
+  }
+}

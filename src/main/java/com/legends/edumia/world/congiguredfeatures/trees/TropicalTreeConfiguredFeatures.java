@@ -61,6 +61,19 @@ public class TropicalTreeConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> MEGA_JUNGLE_TREE_3 = registerKey("mega_jungle_tree_3");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> KAPOK_1 = registerKey("kapok_1");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> KAPOK_2 = registerKey("kapok_2");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> KAPOK_3 = registerKey("kapok_3");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> KAPOK_4 = registerKey("kapok_4");
+
+    public static final ResourceKey<ConfiguredFeature<?, ?>> MAHOGANY_1 = registerKey("mahogany_1");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> MAHOGANY_2 = registerKey("mahogany_2");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> MAHOGANY_3 = registerKey("mahogany_3");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> MAHOGANY_4 = registerKey("mahogany_4");
+
+    public static final ResourceKey<ConfiguredFeature<?, ?>> LEOPARD_1 = registerKey("leopard_1");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> LEOPARD_2 = registerKey("leopard_2");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> LEOPARD_3 = registerKey("leopard_3");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> LEOPARD_4 = registerKey("leopard_4");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> MAHOGANY = registerKey("mahogany");
     public static final ResourceKey<ConfiguredFeature<?, ?>> BIG_MAHOGANY = registerKey("big_mahogany");
@@ -254,10 +267,132 @@ public class TropicalTreeConfiguredFeatures {
                 Set.of(WoodBlockSets.MAHOGANY.woodSlab().get(), WoodBlockSets.MAHOGANY.woodStairs().get())
         ));
 
+        register(context, MAHOGANY_1,  EdumiaFeatures.TREE_FROM_NBT.get(), new TreeFromStructureNBTConfig(
+                Edumia.location("features/trees/mahogany/mahogany_trunk_1"),
+                Edumia.location("features/trees/mahogany/mahogany_canopy_1"),
+                ConstantInt.of(5),
+                BlockStateProvider.simple(WoodBlockSets.MAHOGANY.wood().get()),
+                BlockStateProvider.simple(WoodBlockSets.MAHOGANY.leaves().get().defaultBlockState().setValue(LeavesBlock.PERSISTENT, true)),
+                Set.of(WoodBlockSets.MAHOGANY.wood().get(), WoodBlockSets.MAHOGANY.woodFence().get(), WoodBlockSets.MAHOGANY.woodStairs().get(),
+                        WoodBlockSets.MAHOGANY.woodSlab().get()),
+                WoodBlockSets.MAHOGANY.leaves().get(),
+                ModTags.Blocks.GROUND_MAHOGANY_SAPLING, 5, ImmutableList.of(new LeaveVineDecorator(0.5f),
+                TrunkVineDecorator.INSTANCE),
+                Set.of(WoodBlockSets.MAHOGANY.woodFence().get(), WoodBlockSets.MAHOGANY.woodStairs().get(),
+                        WoodBlockSets.MAHOGANY.woodSlab().get(), WoodBlockSets.MAHOGANY.leaves().get())
+        ));
+
+        register(context, MAHOGANY_2,  EdumiaFeatures.TREE_FROM_NBT.get(), new TreeFromStructureNBTConfig(
+                Edumia.location("features/trees/mahogany/mahogany_trunk_2"),
+                Edumia.location("features/trees/mahogany/mahogany_canopy_2"),
+                ConstantInt.of(8),
+                BlockStateProvider.simple(WoodBlockSets.MAHOGANY.wood().get()),
+                BlockStateProvider.simple(WoodBlockSets.MAHOGANY.leaves().get().defaultBlockState().setValue(LeavesBlock.PERSISTENT, true)),
+                Set.of(WoodBlockSets.MAHOGANY.wood().get(), WoodBlockSets.MAHOGANY.woodFence().get(), WoodBlockSets.MAHOGANY.woodStairs().get(),
+                        WoodBlockSets.MAHOGANY.woodSlab().get()),
+                WoodBlockSets.MAHOGANY.leaves().get(),
+                ModTags.Blocks.GROUND_MAHOGANY_SAPLING, 5, ImmutableList.of(new LeaveVineDecorator(0.5f),
+                TrunkVineDecorator.INSTANCE),
+                Set.of(WoodBlockSets.MAHOGANY.woodFence().get(), WoodBlockSets.MAHOGANY.woodStairs().get(),
+                        WoodBlockSets.MAHOGANY.woodSlab().get(), WoodBlockSets.MAHOGANY.leaves().get())
+        ));
+
+        register(context, MAHOGANY_3,  EdumiaFeatures.TREE_FROM_NBT.get(), new TreeFromStructureNBTConfig(
+                Edumia.location("features/trees/mahogany/mahogany_trunk_3"),
+                Edumia.location("features/trees/mahogany/mahogany_canopy_3"),
+                ConstantInt.of(4),
+                BlockStateProvider.simple(WoodBlockSets.MAHOGANY.wood().get()),
+                BlockStateProvider.simple(WoodBlockSets.MAHOGANY.leaves().get().defaultBlockState().setValue(LeavesBlock.PERSISTENT, true)),
+                Set.of(WoodBlockSets.MAHOGANY.wood().get(), WoodBlockSets.MAHOGANY.woodFence().get(), WoodBlockSets.MAHOGANY.woodStairs().get(),
+                        WoodBlockSets.MAHOGANY.woodSlab().get()),
+                WoodBlockSets.MAHOGANY.leaves().get(),
+                ModTags.Blocks.GROUND_MAHOGANY_SAPLING, 5, ImmutableList.of(new LeaveVineDecorator(0.5f),
+                TrunkVineDecorator.INSTANCE),
+                Set.of(WoodBlockSets.MAHOGANY.woodFence().get(), WoodBlockSets.MAHOGANY.woodStairs().get(),
+                        WoodBlockSets.MAHOGANY.woodSlab().get(), WoodBlockSets.MAHOGANY.leaves().get())
+        ));
+
+        register(context, MAHOGANY_4,  EdumiaFeatures.TREE_FROM_NBT.get(), new TreeFromStructureNBTConfig(
+                Edumia.location("features/trees/mahogany/mahogany_trunk_4"),
+                Edumia.location("features/trees/mahogany/mahogany_canopy_4"),
+                ConstantInt.of(5),
+                BlockStateProvider.simple(WoodBlockSets.MAHOGANY.wood().get()),
+                BlockStateProvider.simple(WoodBlockSets.MAHOGANY.leaves().get().defaultBlockState().setValue(LeavesBlock.PERSISTENT, true)),
+                Set.of(WoodBlockSets.MAHOGANY.wood().get(), WoodBlockSets.MAHOGANY.woodFence().get(), WoodBlockSets.MAHOGANY.woodStairs().get(),
+                        WoodBlockSets.MAHOGANY.woodSlab().get()),
+                WoodBlockSets.MAHOGANY.leaves().get(),
+                ModTags.Blocks.GROUND_MAHOGANY_SAPLING, 5, ImmutableList.of(new LeaveVineDecorator(0.5f),
+                TrunkVineDecorator.INSTANCE, new HangingBranchDecorator(0.25f,
+                        BlockStateProvider.simple(WoodBlockSets.MAHOGANY.leaves().get().defaultBlockState()
+                                .setValue(BlockStateProperties.PERSISTENT, true)),
+                        BlockStateProvider.simple(WoodBlockSets.MAHOGANY.leaves().get().defaultBlockState()
+                                .setValue(BlockStateProperties.PERSISTENT, true)))),
+                Set.of(WoodBlockSets.MAHOGANY.woodFence().get(), WoodBlockSets.MAHOGANY.woodStairs().get(),
+                        WoodBlockSets.MAHOGANY.woodSlab().get(), WoodBlockSets.MAHOGANY.leaves().get())
+        ));
+
+        register(context, LEOPARD_1,  EdumiaFeatures.TREE_FROM_NBT.get(), new TreeFromStructureNBTConfig(
+                Edumia.location("features/trees/leopard/leopard_trunk_1"),
+                Edumia.location("features/trees/leopard/leopard_canopy_1"),
+                ConstantInt.of(8),
+                BlockStateProvider.simple(WoodBlockSets.GHOST_GUM.wood().get()),
+                BlockStateProvider.simple(ModNatureBlocks.GHOST_GUM_LEAVES.get().defaultBlockState().setValue(LeavesBlock.PERSISTENT, true)),
+                Set.of(WoodBlockSets.GHOST_GUM.wood().get(), WoodBlockSets.GHOST_GUM.woodFence().get(), WoodBlockSets.GHOST_GUM.woodStairs().get(),
+                        WoodBlockSets.GHOST_GUM.woodSlab().get()),
+                ModNatureBlocks.GHOST_GUM_LEAVES.get(),
+                ModTags.Blocks.GROUND_MAHOGANY_SAPLING, 5, ImmutableList.of(),
+                Set.of(WoodBlockSets.GHOST_GUM.log().get(), WoodBlockSets.GHOST_GUM.woodFence().get(), WoodBlockSets.GHOST_GUM.woodStairs().get(),
+                        WoodBlockSets.GHOST_GUM.woodSlab().get(), ModNatureBlocks.GHOST_GUM_LEAVES.get())
+        ));
+
+        register(context, LEOPARD_2,  EdumiaFeatures.TREE_FROM_NBT.get(), new TreeFromStructureNBTConfig(
+                Edumia.location("features/trees/leopard/leopard_trunk_2"),
+                Edumia.location("features/trees/leopard/leopard_canopy_2"),
+                ConstantInt.of(4),
+                BlockStateProvider.simple(WoodBlockSets.GHOST_GUM.wood().get()),
+                BlockStateProvider.simple(ModNatureBlocks.GHOST_GUM_LEAVES.get().defaultBlockState().setValue(LeavesBlock.PERSISTENT, true)),
+                Set.of(WoodBlockSets.GHOST_GUM.wood().get(), WoodBlockSets.GHOST_GUM.woodFence().get(), WoodBlockSets.GHOST_GUM.woodStairs().get(),
+                        WoodBlockSets.GHOST_GUM.woodSlab().get()),
+                ModNatureBlocks.GHOST_GUM_LEAVES.get(),
+                ModTags.Blocks.GROUND_MAHOGANY_SAPLING, 5, ImmutableList.of(),
+                Set.of(WoodBlockSets.GHOST_GUM.log().get(), WoodBlockSets.GHOST_GUM.woodFence().get(), WoodBlockSets.GHOST_GUM.woodStairs().get(),
+                        WoodBlockSets.GHOST_GUM.woodSlab().get(), ModNatureBlocks.GHOST_GUM_LEAVES.get())
+        ));
+
+        register(context, LEOPARD_3,  EdumiaFeatures.TREE_FROM_NBT.get(), new TreeFromStructureNBTConfig(
+                Edumia.location("features/trees/leopard/leopard_trunk_3"),
+                Edumia.location("features/trees/leopard/leopard_canopy_3"),
+                ConstantInt.of(5),
+                BlockStateProvider.simple(WoodBlockSets.GHOST_GUM.wood().get()),
+                BlockStateProvider.simple(ModNatureBlocks.GHOST_GUM_LEAVES.get().defaultBlockState().setValue(LeavesBlock.PERSISTENT, true)),
+                Set.of(WoodBlockSets.GHOST_GUM.wood().get(), WoodBlockSets.GHOST_GUM.woodFence().get(), WoodBlockSets.GHOST_GUM.woodStairs().get(),
+                        WoodBlockSets.GHOST_GUM.woodSlab().get()),
+                ModNatureBlocks.GHOST_GUM_LEAVES.get(),
+                ModTags.Blocks.GROUND_MAHOGANY_SAPLING, 5, ImmutableList.of(),
+                Set.of(WoodBlockSets.GHOST_GUM.log().get(), WoodBlockSets.GHOST_GUM.woodFence().get(), WoodBlockSets.GHOST_GUM.woodStairs().get(),
+                        WoodBlockSets.GHOST_GUM.woodSlab().get(), ModNatureBlocks.GHOST_GUM_LEAVES.get())
+        ));
+
+        register(context, LEOPARD_4,  EdumiaFeatures.TREE_FROM_NBT.get(), new TreeFromStructureNBTConfig(
+                Edumia.location("features/trees/leopard/leopard_trunk_4"),
+                Edumia.location("features/trees/leopard/leopard_canopy_4"),
+                ConstantInt.of(4),
+                BlockStateProvider.simple(WoodBlockSets.GHOST_GUM.wood().get()),
+                BlockStateProvider.simple(ModNatureBlocks.GHOST_GUM_LEAVES.get().defaultBlockState().setValue(LeavesBlock.PERSISTENT, true)),
+                Set.of(WoodBlockSets.GHOST_GUM.wood().get(), WoodBlockSets.GHOST_GUM.woodFence().get(), WoodBlockSets.GHOST_GUM.woodStairs().get(),
+                        WoodBlockSets.GHOST_GUM.woodSlab().get()),
+                ModNatureBlocks.GHOST_GUM_LEAVES.get(),
+                ModTags.Blocks.GROUND_MAHOGANY_SAPLING, 5, ImmutableList.of(),
+                Set.of(WoodBlockSets.GHOST_GUM.log().get(), WoodBlockSets.GHOST_GUM.woodFence().get(), WoodBlockSets.GHOST_GUM.woodStairs().get(),
+                        WoodBlockSets.GHOST_GUM.woodSlab().get(), ModNatureBlocks.GHOST_GUM_LEAVES.get())
+        ));
+
+
+
         register(context, KAPOK_1,  EdumiaFeatures.TREE_FROM_NBT.get(), new TreeFromStructureNBTConfig(
                 Edumia.location("features/trees/kapok/kapok_trunk_1"),
                 Edumia.location("features/trees/kapok/kapok_canopy_1"),
-                BiasedToBottomInt.of(15, 20),
+                ConstantInt.of(28),
                 BlockStateProvider.simple(Blocks.JUNGLE_WOOD),
                 BlockStateProvider.simple(Blocks.JUNGLE_LEAVES.defaultBlockState().setValue(LeavesBlock.PERSISTENT, true)),
                 Set.of(Blocks.JUNGLE_WOOD, ModNatureBlocks.JUNGLE_WOOD_FENCE.get(), ModNatureBlocks.JUNGLE_WOOD_STAIRS.get(),
@@ -266,8 +401,55 @@ public class TropicalTreeConfiguredFeatures {
                 ModTags.Blocks.GROUND_MAHOGANY_SAPLING, 5, ImmutableList.of(new LeaveVineDecorator(0.5f),
                 TrunkVineDecorator.INSTANCE),
                 Set.of(ModNatureBlocks.JUNGLE_WOOD_FENCE.get(), ModNatureBlocks.JUNGLE_WOOD_STAIRS.get(),
-                        ModNatureBlocks.JUNGLE_WOOD_SLAB.get(), Blocks.MANGROVE_LEAVES, Blocks.MANGROVE_ROOTS, Blocks.JUNGLE_LEAVES)
+                        ModNatureBlocks.JUNGLE_WOOD_SLAB.get(), WoodBlockSets.BANANA.leaves().get(), Blocks.MANGROVE_ROOTS, Blocks.JUNGLE_LEAVES)
         ));
+
+        register(context, KAPOK_2,  EdumiaFeatures.TREE_FROM_NBT.get(), new TreeFromStructureNBTConfig(
+                Edumia.location("features/trees/kapok/kapok_trunk_2"),
+                Edumia.location("features/trees/kapok/kapok_canopy_2"),
+                ConstantInt.of(13),
+                BlockStateProvider.simple(Blocks.JUNGLE_WOOD),
+                BlockStateProvider.simple(Blocks.JUNGLE_LEAVES.defaultBlockState().setValue(LeavesBlock.PERSISTENT, true)),
+                Set.of(Blocks.JUNGLE_WOOD, ModNatureBlocks.JUNGLE_WOOD_FENCE.get(), ModNatureBlocks.JUNGLE_WOOD_STAIRS.get(),
+                        ModNatureBlocks.JUNGLE_WOOD_SLAB.get()),
+                Blocks.JUNGLE_LEAVES,
+                ModTags.Blocks.GROUND_MAHOGANY_SAPLING, 5, ImmutableList.of(new LeaveVineDecorator(0.5f),
+                TrunkVineDecorator.INSTANCE),
+                Set.of(ModNatureBlocks.JUNGLE_WOOD_FENCE.get(), ModNatureBlocks.JUNGLE_WOOD_STAIRS.get(),
+                        ModNatureBlocks.JUNGLE_WOOD_SLAB.get(), WoodBlockSets.BANANA.leaves().get(), Blocks.MANGROVE_ROOTS, Blocks.JUNGLE_LEAVES)
+        ));
+
+        register(context, KAPOK_3,  EdumiaFeatures.TREE_FROM_NBT.get(), new TreeFromStructureNBTConfig(
+                Edumia.location("features/trees/kapok/kapok_trunk_3"),
+                Edumia.location("features/trees/kapok/kapok_canopy_3"),
+                ConstantInt.of(12),
+                BlockStateProvider.simple(Blocks.JUNGLE_WOOD),
+                BlockStateProvider.simple(Blocks.JUNGLE_LEAVES.defaultBlockState().setValue(LeavesBlock.PERSISTENT, true)),
+                Set.of(Blocks.JUNGLE_WOOD, ModNatureBlocks.JUNGLE_WOOD_FENCE.get(), ModNatureBlocks.JUNGLE_WOOD_STAIRS.get(),
+                        ModNatureBlocks.JUNGLE_WOOD_SLAB.get()),
+                Blocks.JUNGLE_LEAVES,
+                ModTags.Blocks.GROUND_MAHOGANY_SAPLING, 5, ImmutableList.of(new LeaveVineDecorator(0.5f),
+                TrunkVineDecorator.INSTANCE),
+                Set.of(ModNatureBlocks.JUNGLE_WOOD_FENCE.get(), ModNatureBlocks.JUNGLE_WOOD_STAIRS.get(),
+                        ModNatureBlocks.JUNGLE_WOOD_SLAB.get(), WoodBlockSets.BANANA.leaves().get(), Blocks.MANGROVE_ROOTS, Blocks.JUNGLE_LEAVES)
+        ));
+
+        register(context, KAPOK_4,  EdumiaFeatures.TREE_FROM_NBT.get(), new TreeFromStructureNBTConfig(
+                Edumia.location("features/trees/kapok/kapok_trunk_4"),
+                Edumia.location("features/trees/kapok/kapok_canopy_4"),
+                ConstantInt.of(27),
+                BlockStateProvider.simple(Blocks.JUNGLE_WOOD),
+                BlockStateProvider.simple(Blocks.JUNGLE_LEAVES.defaultBlockState().setValue(LeavesBlock.PERSISTENT, true)),
+                Set.of(Blocks.JUNGLE_WOOD, ModNatureBlocks.JUNGLE_WOOD_FENCE.get(), ModNatureBlocks.JUNGLE_WOOD_STAIRS.get(),
+                        ModNatureBlocks.JUNGLE_WOOD_SLAB.get()),
+                Blocks.JUNGLE_LEAVES,
+                ModTags.Blocks.GROUND_MAHOGANY_SAPLING, 5, ImmutableList.of(new LeaveVineDecorator(0.5f),
+                TrunkVineDecorator.INSTANCE),
+                Set.of(ModNatureBlocks.JUNGLE_WOOD_FENCE.get(), ModNatureBlocks.JUNGLE_WOOD_STAIRS.get(),
+                        ModNatureBlocks.JUNGLE_WOOD_SLAB.get(), WoodBlockSets.BANANA.leaves().get(), Blocks.MANGROVE_ROOTS, Blocks.JUNGLE_LEAVES)
+        ));
+
+
 
 
 

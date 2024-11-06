@@ -34,12 +34,36 @@ public class FairyBiomesConfiguredFeatures {
 
         register(context, FAIRY_FOREST_TREES_LAYER_4, Feature.RANDOM_SELECTOR,
                 new RandomFeatureConfiguration(List.of(
+//                        new WeightedPlacedFeature(
+//                                PlacementUtils.inlinePlaced(holdergetter.getOrThrow(JungleTreeConfiguredFeatures.JUNGLE_TREE_4)), 0.15f),
                         new WeightedPlacedFeature(
-                                PlacementUtils.inlinePlaced(holdergetter.getOrThrow(JungleTreeConfiguredFeatures.JUNGLE_TREE_4)), 0.15f),
+                                PlacementUtils.inlinePlaced(holdergetter.getOrThrow(TropicalTreeConfiguredFeatures.LEOPARD_1)), 0.10f),
                         new WeightedPlacedFeature(
-                                PlacementUtils.inlinePlaced(holdergetter.getOrThrow(TropicalTreeConfiguredFeatures.MAHOGANY_NBT)), 0.15f),
+                                PlacementUtils.inlinePlaced(holdergetter.getOrThrow(TropicalTreeConfiguredFeatures.KAPOK_1)), 0.05f),
                         new WeightedPlacedFeature(
-                                PlacementUtils.inlinePlaced(holdergetter.getOrThrow(TropicalTreeConfiguredFeatures.KAPOK_1)), 0.15f)
+                                PlacementUtils.inlinePlaced(holdergetter.getOrThrow(TropicalTreeConfiguredFeatures.MAHOGANY_1)), 0.10f),
+
+                        new WeightedPlacedFeature(
+                                PlacementUtils.inlinePlaced(holdergetter.getOrThrow(TropicalTreeConfiguredFeatures.LEOPARD_2)), 0.10f),
+                        new WeightedPlacedFeature(
+                                PlacementUtils.inlinePlaced(holdergetter.getOrThrow(TropicalTreeConfiguredFeatures.KAPOK_2)), 0.05f),
+                        new WeightedPlacedFeature(
+                                PlacementUtils.inlinePlaced(holdergetter.getOrThrow(TropicalTreeConfiguredFeatures.MAHOGANY_2)), 0.10f),
+
+                        new WeightedPlacedFeature(
+                                PlacementUtils.inlinePlaced(holdergetter.getOrThrow(TropicalTreeConfiguredFeatures.LEOPARD_3)), 0.10f),
+                        new WeightedPlacedFeature(
+                                PlacementUtils.inlinePlaced(holdergetter.getOrThrow(TropicalTreeConfiguredFeatures.KAPOK_3)), 0.05f),
+                        new WeightedPlacedFeature(
+                                PlacementUtils.inlinePlaced(holdergetter.getOrThrow(TropicalTreeConfiguredFeatures.MAHOGANY_3)), 0.10f),
+
+                        new WeightedPlacedFeature(
+                                PlacementUtils.inlinePlaced(holdergetter.getOrThrow(TropicalTreeConfiguredFeatures.LEOPARD_4)), 0.10f),
+                        new WeightedPlacedFeature(
+                                PlacementUtils.inlinePlaced(holdergetter.getOrThrow(TropicalTreeConfiguredFeatures.KAPOK_4)), 0.05f),
+                        new WeightedPlacedFeature(
+                                PlacementUtils.inlinePlaced(holdergetter.getOrThrow(TropicalTreeConfiguredFeatures.MAHOGANY_4)), 0.10f)
+
                 ), noting));
 
     }

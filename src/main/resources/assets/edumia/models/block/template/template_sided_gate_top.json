@@ -3,7 +3,7 @@
     "textures": {
         "particle": "#face"
     },
-    "loader": "lotr:connected_textures",
+    "loader": "edumia:connected_textures",
     "texture_connection_properties": {
         "#side": {
             "connection_elements": {

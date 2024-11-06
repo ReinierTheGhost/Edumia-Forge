@@ -41,6 +41,13 @@ public class EdumiaBiomeDataConfigs {
             .addSlopeData(51, () -> StoneSets.BLUE_STONE.block().get())
             .addSlopeData(MAX_ANGLE, Blocks.COBBLED_DEEPSLATE);
 
+    public static SlopeMap ogreMountains = new SlopeMap()
+            .addSlopeData(13, () -> BlockLoader.WHITE_SAND.get())
+            .addSlopeData(30, () -> BlockLoader.WHITE_SAND.get())
+            .addSlopeData(33, () -> StoneSets.LIMESTONE.block().get())
+            .addSlopeData(34, () -> StoneSets.CHALK.block().get())
+            .addSlopeData(37, () -> StoneSets.CACHOLONG.block().get())
+            .addSlopeData(MAX_ANGLE, Blocks.CALCITE);
     public static SlopeMap edumiaMountains = new SlopeMap()
             .addSlopeData(13, Blocks.GRASS_BLOCK)
             .addSlopeData(30, Blocks.GRASS_BLOCK)

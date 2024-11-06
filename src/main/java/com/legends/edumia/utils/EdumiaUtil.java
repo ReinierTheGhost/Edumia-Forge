@@ -9,6 +9,10 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import javax.swing.text.html.BlockView;
 import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class EdumiaUtil {
 
@@ -28,5 +32,11 @@ public class EdumiaUtil {
     public static boolean hasSolidSide(BlockGetter world, BlockPos pos, Direction side) {
         BlockState state = world.getBlockState(pos);
         return Block.isFaceFull(state.getBlockSupportShape(world, pos), side);
+    }
+
+    public static <E extends Enum<E>, T> Map<T, E> createKeyedEnumMap(E[] values, Function<E, T> keyGetter){
+        return Arrays.stream(values).collect(Collectors.toMap(keyGetter, (type) ->
+            type
+        ));
     }
 }

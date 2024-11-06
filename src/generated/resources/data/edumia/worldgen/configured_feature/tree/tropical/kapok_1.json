@@ -19,13 +19,7 @@
         "type": "minecraft:trunk_vine"
       }
     ],
-    "height": {
-      "type": "minecraft:biased_to_bottom",
-      "value": {
-        "max_inclusive": 20,
-        "min_inclusive": 15
-      }
-    },
+    "height": 28,
     "leaves_provider": {
       "type": "minecraft:simple_state_provider",
       "state": {
@@ -50,17 +44,17 @@
       }
     },
     "log_target": [
-      "edumia:jungle_wood_slab",
+      "minecraft:jungle_wood",
       "edumia:jungle_wood_fence",
-      "edumia:jungle_wood_stairs",
-      "minecraft:jungle_wood"
+      "edumia:jungle_wood_slab",
+      "edumia:jungle_wood_stairs"
     ],
     "place_from_nbt": [
-      "minecraft:mangrove_roots",
-      "edumia:jungle_wood_slab",
+      "edumia:banana_leaves",
       "edumia:jungle_wood_fence",
+      "edumia:jungle_wood_slab",
+      "minecraft:mangrove_roots",
       "edumia:jungle_wood_stairs",
-      "minecraft:mangrove_leaves",
       "minecraft:jungle_leaves"
     ]
   }

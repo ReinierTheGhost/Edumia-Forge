@@ -4,7 +4,10 @@ import com.google.common.collect.ImmutableList;
 import com.legends.edumia.Edumia;
 import com.legends.edumia.blocks.blocksets.ModNatureBlocks;
 import com.legends.edumia.blocks.blocksets.WoodBlockSets;
+import com.legends.edumia.utils.ModTags;
 import com.legends.edumia.world.congiguredfeatures.trees.RootsConfiguredFeatures;
+import com.legends.edumia.world.features.EdumiaFeatures;
+import com.legends.edumia.world.features.treesnbt.TreeFromStructureNBTConfig;
 import com.legends.edumia.world.trees.foliageplacer.*;
 import com.legends.edumia.world.trees.treedecorators.PineBranchDecorator;
 import com.legends.edumia.world.trees.trunkplacers.*;
@@ -19,6 +22,7 @@ import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.random.SimpleWeightedRandomList;
+import net.minecraft.util.valueproviders.BiasedToBottomInt;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Blocks;
@@ -47,14 +51,11 @@ import net.minecraft.world.level.levelgen.placement.BlockPredicateFilter;
 import net.minecraft.world.level.levelgen.placement.CountPlacement;
 import net.minecraft.world.level.levelgen.placement.RandomOffsetPlacement;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.OptionalInt;
+import java.util.*;
 
 public class TreeConfiguredFeatures {
 
-
+    public static final ResourceKey<ConfiguredFeature<?, ?>> JOHANES_TREE = registerKey("tree/johanes_tree");
     public static final ResourceKey<ConfiguredFeature<?, ?>> APPLE_KEY = registerKey("tree/apple_tree");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TEST_KEY = registerKey("tree/test/test_tree");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TEST2_KEY = registerKey("tree/test/test2_tree");
@@ -76,6 +77,18 @@ public class TreeConfiguredFeatures {
                 .add(WoodBlockSets.PINE.log().get().defaultBlockState(), 2)
                 .add(WoodBlockSets.PINE.strippedLog().get().defaultBlockState(), 1)));
 
+        register(context, JOHANES_TREE,  EdumiaFeatures.TREE_FROM_NBT.get(), new TreeFromStructureNBTConfig(
+                Edumia.location("features/trees/johanes/johanes_trunk"),
+                Edumia.location("features/trees/johanes/johanes_top"),
+                BiasedToBottomInt.of(1, 5),
+                BlockStateProvider.simple(WoodBlockSets.CEDAR.wood().get()),
+                BlockStateProvider.simple(WoodBlockSets.CEDAR.leaves().get().defaultBlockState().setValue(LeavesBlock.PERSISTENT, true)),
+                Set.of(WoodBlockSets.CEDAR.wood().get(), WoodBlockSets.CEDAR.woodFence().get()),
+                WoodBlockSets.CEDAR.leaves(),
+                ModTags.Blocks.GROUND_MAHOGANY_SAPLING, 5, ImmutableList.of(),
+                Set.of(WoodBlockSets.CEDAR.woodFence().get(), Blocks.BROWN_STAINED_GLASS_PANE, Blocks.DARK_OAK_SLAB,
+                        WoodBlockSets.CEDAR.leaves().get())
+        ));
 
         register(context, TEST_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(Blocks.DARK_OAK_LOG),

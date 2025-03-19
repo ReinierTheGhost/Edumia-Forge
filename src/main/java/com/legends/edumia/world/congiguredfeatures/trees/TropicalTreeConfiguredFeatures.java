@@ -60,10 +60,7 @@ public class TropicalTreeConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> MEGA_JUNGLE_TREE_2 = registerKey("mega_jungle_tree_2");
     public static final ResourceKey<ConfiguredFeature<?, ?>> MEGA_JUNGLE_TREE_3 = registerKey("mega_jungle_tree_3");
 
-    public static final ResourceKey<ConfiguredFeature<?, ?>> KAPOK_1 = registerKey("kapok_1");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> KAPOK_2 = registerKey("kapok_2");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> KAPOK_3 = registerKey("kapok_3");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> KAPOK_4 = registerKey("kapok_4");
+
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> MAHOGANY_1 = registerKey("mahogany_1");
     public static final ResourceKey<ConfiguredFeature<?, ?>> MAHOGANY_2 = registerKey("mahogany_2");
@@ -386,72 +383,6 @@ public class TropicalTreeConfiguredFeatures {
                 Set.of(WoodBlockSets.GHOST_GUM.log().get(), WoodBlockSets.GHOST_GUM.woodFence().get(), WoodBlockSets.GHOST_GUM.woodStairs().get(),
                         WoodBlockSets.GHOST_GUM.woodSlab().get(), ModNatureBlocks.GHOST_GUM_LEAVES.get())
         ));
-
-
-
-        register(context, KAPOK_1,  EdumiaFeatures.TREE_FROM_NBT.get(), new TreeFromStructureNBTConfig(
-                Edumia.location("features/trees/kapok/kapok_trunk_1"),
-                Edumia.location("features/trees/kapok/kapok_canopy_1"),
-                ConstantInt.of(28),
-                BlockStateProvider.simple(Blocks.JUNGLE_WOOD),
-                BlockStateProvider.simple(Blocks.JUNGLE_LEAVES.defaultBlockState().setValue(LeavesBlock.PERSISTENT, true)),
-                Set.of(Blocks.JUNGLE_WOOD, ModNatureBlocks.JUNGLE_WOOD_FENCE.get(), ModNatureBlocks.JUNGLE_WOOD_STAIRS.get(),
-                        ModNatureBlocks.JUNGLE_WOOD_SLAB.get()),
-                Blocks.JUNGLE_LEAVES,
-                ModTags.Blocks.GROUND_MAHOGANY_SAPLING, 5, ImmutableList.of(new LeaveVineDecorator(0.5f),
-                TrunkVineDecorator.INSTANCE),
-                Set.of(ModNatureBlocks.JUNGLE_WOOD_FENCE.get(), ModNatureBlocks.JUNGLE_WOOD_STAIRS.get(),
-                        ModNatureBlocks.JUNGLE_WOOD_SLAB.get(), WoodBlockSets.BANANA.leaves().get(), Blocks.MANGROVE_ROOTS, Blocks.JUNGLE_LEAVES)
-        ));
-
-        register(context, KAPOK_2,  EdumiaFeatures.TREE_FROM_NBT.get(), new TreeFromStructureNBTConfig(
-                Edumia.location("features/trees/kapok/kapok_trunk_2"),
-                Edumia.location("features/trees/kapok/kapok_canopy_2"),
-                ConstantInt.of(13),
-                BlockStateProvider.simple(Blocks.JUNGLE_WOOD),
-                BlockStateProvider.simple(Blocks.JUNGLE_LEAVES.defaultBlockState().setValue(LeavesBlock.PERSISTENT, true)),
-                Set.of(Blocks.JUNGLE_WOOD, ModNatureBlocks.JUNGLE_WOOD_FENCE.get(), ModNatureBlocks.JUNGLE_WOOD_STAIRS.get(),
-                        ModNatureBlocks.JUNGLE_WOOD_SLAB.get()),
-                Blocks.JUNGLE_LEAVES,
-                ModTags.Blocks.GROUND_MAHOGANY_SAPLING, 5, ImmutableList.of(new LeaveVineDecorator(0.5f),
-                TrunkVineDecorator.INSTANCE),
-                Set.of(ModNatureBlocks.JUNGLE_WOOD_FENCE.get(), ModNatureBlocks.JUNGLE_WOOD_STAIRS.get(),
-                        ModNatureBlocks.JUNGLE_WOOD_SLAB.get(), WoodBlockSets.BANANA.leaves().get(), Blocks.MANGROVE_ROOTS, Blocks.JUNGLE_LEAVES)
-        ));
-
-        register(context, KAPOK_3,  EdumiaFeatures.TREE_FROM_NBT.get(), new TreeFromStructureNBTConfig(
-                Edumia.location("features/trees/kapok/kapok_trunk_3"),
-                Edumia.location("features/trees/kapok/kapok_canopy_3"),
-                ConstantInt.of(12),
-                BlockStateProvider.simple(Blocks.JUNGLE_WOOD),
-                BlockStateProvider.simple(Blocks.JUNGLE_LEAVES.defaultBlockState().setValue(LeavesBlock.PERSISTENT, true)),
-                Set.of(Blocks.JUNGLE_WOOD, ModNatureBlocks.JUNGLE_WOOD_FENCE.get(), ModNatureBlocks.JUNGLE_WOOD_STAIRS.get(),
-                        ModNatureBlocks.JUNGLE_WOOD_SLAB.get()),
-                Blocks.JUNGLE_LEAVES,
-                ModTags.Blocks.GROUND_MAHOGANY_SAPLING, 5, ImmutableList.of(new LeaveVineDecorator(0.5f),
-                TrunkVineDecorator.INSTANCE),
-                Set.of(ModNatureBlocks.JUNGLE_WOOD_FENCE.get(), ModNatureBlocks.JUNGLE_WOOD_STAIRS.get(),
-                        ModNatureBlocks.JUNGLE_WOOD_SLAB.get(), WoodBlockSets.BANANA.leaves().get(), Blocks.MANGROVE_ROOTS, Blocks.JUNGLE_LEAVES)
-        ));
-
-        register(context, KAPOK_4,  EdumiaFeatures.TREE_FROM_NBT.get(), new TreeFromStructureNBTConfig(
-                Edumia.location("features/trees/kapok/kapok_trunk_4"),
-                Edumia.location("features/trees/kapok/kapok_canopy_4"),
-                ConstantInt.of(27),
-                BlockStateProvider.simple(Blocks.JUNGLE_WOOD),
-                BlockStateProvider.simple(Blocks.JUNGLE_LEAVES.defaultBlockState().setValue(LeavesBlock.PERSISTENT, true)),
-                Set.of(Blocks.JUNGLE_WOOD, ModNatureBlocks.JUNGLE_WOOD_FENCE.get(), ModNatureBlocks.JUNGLE_WOOD_STAIRS.get(),
-                        ModNatureBlocks.JUNGLE_WOOD_SLAB.get()),
-                Blocks.JUNGLE_LEAVES,
-                ModTags.Blocks.GROUND_MAHOGANY_SAPLING, 5, ImmutableList.of(new LeaveVineDecorator(0.5f),
-                TrunkVineDecorator.INSTANCE),
-                Set.of(ModNatureBlocks.JUNGLE_WOOD_FENCE.get(), ModNatureBlocks.JUNGLE_WOOD_STAIRS.get(),
-                        ModNatureBlocks.JUNGLE_WOOD_SLAB.get(), WoodBlockSets.BANANA.leaves().get(), Blocks.MANGROVE_ROOTS, Blocks.JUNGLE_LEAVES)
-        ));
-
-
-
-
 
         register(context, SMALL_PALM_TREE, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(WoodBlockSets.PALM.log().get()),

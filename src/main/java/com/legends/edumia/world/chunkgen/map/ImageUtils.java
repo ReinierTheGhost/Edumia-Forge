@@ -2,24 +2,38 @@ package com.legends.edumia.world.chunkgen.map;
 
 import com.google.common.base.Stopwatch;
 import com.legends.edumia.utils.LoggerUtil;
-import com.legends.edumia.world.biomes.surface.EdumiaBiomesData;
+import com.legends.edumia.world.biomes.surface.MapBasedBiomePool;
 import com.legends.edumia.world.map.EdumiaMapGeneration;
+import org.joml.sampling.Convolution;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.awt.image.ConvolveOp;
+import java.awt.image.Kernel;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+import java.util.List;
 
 public class ImageUtils {
-    public static int BRUSH_SIZE = 16;
-    public static float RATIO = 1.0f / (BRUSH_SIZE * BRUSH_SIZE);
+
+    private static HashMap<Integer, float[]> gaussianBlurKernel = new HashMap<>();
+
+    private static float[] edgeKernel =
+                    {-1f, -2f, -1f,
+                     -2f, 12f, -2f,
+                     -1f, -2f, -1f};
+
+    private static final float GAUSSIAN_SIGMA = 3.81f;
 
     public static Random random = new Random();
 
-    public static BufferedImage fetchResourceImage(ClassLoader classLoader, String path) throws IOException {
-        URL resource = classLoader.getResource(path);
+
+
+    public static BufferedImage fetchResourceImage(String path) throws IOException {
+        URL resource = ImageUtils.class.getClassLoader().getResource(path);
         BufferedImage img = ImageIO.read(resource);
         return img;
     }
@@ -127,7 +141,7 @@ public class ImageUtils {
 
     private static Integer getMostOccuringColorFromBiomeList(ArrayList<Integer> list) throws Exception {
         if(list.isEmpty()){
-            LoggerUtil.getInstance().logError("ImageUtils::getMostCommonColor - List was empty!");
+            LoggerUtil.logError("ImageUtils::getMostCommonColor - List was empty!");
             return null;
         }
         Map<Integer, Integer> counts = new HashMap<>();
@@ -161,9 +175,63 @@ public class ImageUtils {
     }
 
     private static int getExpansionWeight(Integer integer) throws Exception{
-        return EdumiaBiomesData.getBiomeByColor(integer).biomeGenerationData.biomeWeight[(EdumiaMapGeneration.CURRENT_ITERATION <= 1) ? 0 : 1];
+        return MapBasedBiomePool.getBiomeByColor(integer).getBiomeData().biomeWeight[(EdumiaMapGeneration.CURRENT_ITERATION <= 1) ? 0 : 1];
     }
 
+    /**
+     * TODO : Optimise this part, it is the longest process in World-Gen
+     * about 60s before -> 40s now
+     */
+
+    /**
+     * TODO : Optimise this part, it the longest process in World-Gen
+     */
+    public static BufferedImage blur(BufferedImage image, int brushSize, boolean crop) {
+        int width = image.getWidth();
+        int height = image.getHeight();
+
+        BufferedImage imageWithBorders = image;
+        if(!crop) {
+            imageWithBorders = new BufferedImage(width + 2*brushSize, height + 2*brushSize, BufferedImage.TYPE_INT_ARGB);
+            Graphics2D graphics = imageWithBorders.createGraphics();
+
+            graphics.setColor(MapBasedBiomePool.DEFAULT_COLOR);
+            graphics.fillRect(0, 0, width + 2*brushSize, height + 2*brushSize);
+            graphics.drawImage(image, brushSize, brushSize, null);
+        }
+
+        float[] blurKernel = new float[brushSize*brushSize];
+
+        if(gaussianBlurKernel.containsKey(brushSize)) {
+            blurKernel = gaussianBlurKernel.get(brushSize);
+        }
+        else {
+            Convolution.gaussianKernel(brushSize, brushSize, GAUSSIAN_SIGMA, blurKernel);
+            gaussianBlurKernel.put(brushSize, blurKernel);
+        }
+        Kernel kernel = new Kernel(brushSize, brushSize, blurKernel);
+        ConvolveOp op = new ConvolveOp(kernel, ConvolveOp.EDGE_NO_OP, null);
+
+        BufferedImage blurredImage = new BufferedImage(width, height, image.getType());
+        op.filter(image, blurredImage);
+
+        if(crop) return blurredImage.getSubimage(brushSize, brushSize, width - brushSize*2, height - brushSize*2);
+        else return blurredImage;
+    }
+
+    private static final int EDGE_BRUSH_SIZE = 3;
+    public static BufferedImage edge(BufferedImage image){
+        int width = image.getWidth();
+        int height = image.getHeight();
+
+        Kernel kernel = new Kernel(EDGE_BRUSH_SIZE, EDGE_BRUSH_SIZE, edgeKernel);
+        ConvolveOp op = new ConvolveOp(kernel, ConvolveOp.EDGE_NO_OP, null);
+
+        BufferedImage edgeImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        edgeImage = op.filter(image, edgeImage);
+
+        return edgeImage;
+    }
 
     // Old algorithm
     private static BufferedImage fillImage(BufferedImage image) {

@@ -5,6 +5,7 @@ import net.minecraft.Util;
 
 import java.util.*;
 
+@SuppressWarnings("unchecked")
 
 public enum ConnectedTextureElement {
     BASE("base", 0),

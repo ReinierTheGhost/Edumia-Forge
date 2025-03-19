@@ -10,7 +10,7 @@
       "count": 10
     },
     {
-      "type": "minecraft:biome"
+      "type": "minecraft:in_square"
     },
     {
       "type": "minecraft:heightmap",
@@ -23,7 +23,12 @@
         "predicates": [
           {
             "type": "minecraft:matching_blocks",
-            "blocks": "edumia:white_sand",
+            "blocks": [
+              "minecraft:grass_block",
+              "minecraft:snow_block",
+              "minecraft:blackstone",
+              "edumia:white_sand"
+            ],
             "offset": [
               0,
               -1,
@@ -36,49 +41,66 @@
               "minecraft:air",
               "edumia:white_sand_layer"
             ]
-          }
-        ]
-      }
-    },
-    {
-      "type": "minecraft:block_predicate_filter",
-      "predicate": {
-        "type": "minecraft:all_of",
-        "predicates": [
-          {
-            "type": "minecraft:matching_blocks",
-            "blocks": "edumia:white_sand",
-            "offset": [
-              1,
-              0,
-              0
-            ]
           },
           {
-            "type": "minecraft:matching_blocks",
-            "blocks": "edumia:white_sand",
-            "offset": [
-              0,
-              0,
-              1
-            ]
-          },
-          {
-            "type": "minecraft:matching_blocks",
-            "blocks": "edumia:white_sand",
-            "offset": [
-              -1,
-              0,
-              0
-            ]
-          },
-          {
-            "type": "minecraft:matching_blocks",
-            "blocks": "edumia:white_sand",
-            "offset": [
-              0,
-              0,
-              -1
+            "type": "minecraft:any_of",
+            "predicates": [
+              {
+                "type": "minecraft:matching_blocks",
+                "blocks": [
+                  "minecraft:grass_block",
+                  "minecraft:snow_block",
+                  "minecraft:blackstone",
+                  "edumia:white_sand"
+                ],
+                "offset": [
+                  1,
+                  0,
+                  0
+                ]
+              },
+              {
+                "type": "minecraft:matching_blocks",
+                "blocks": [
+                  "minecraft:grass_block",
+                  "minecraft:snow_block",
+                  "minecraft:blackstone",
+                  "edumia:white_sand"
+                ],
+                "offset": [
+                  0,
+                  0,
+                  1
+                ]
+              },
+              {
+                "type": "minecraft:matching_blocks",
+                "blocks": [
+                  "minecraft:grass_block",
+                  "minecraft:snow_block",
+                  "minecraft:blackstone",
+                  "edumia:white_sand"
+                ],
+                "offset": [
+                  -1,
+                  0,
+                  0
+                ]
+              },
+              {
+                "type": "minecraft:matching_blocks",
+                "blocks": [
+                  "minecraft:grass_block",
+                  "minecraft:snow_block",
+                  "minecraft:blackstone",
+                  "edumia:white_sand"
+                ],
+                "offset": [
+                  0,
+                  0,
+                  -1
+                ]
+              }
             ]
           }
         ]

@@ -13,8 +13,8 @@ import java.util.List;
 public class EdumiaMapUtils {
     private static EdumiaMapUtils single_instance = null;
 
-    private final float ratioX;
-    private final float ratioZ;
+    public final float ratioX;
+    public final float ratioZ;
     private final int maxImageCoordinateX;
     private final int maxImageCoordinateZ;
     private MinecraftServer server;

@@ -1,10 +1,16 @@
 package com.legends.edumia.utils.resources;
 
 
+import com.legends.edumia.Edumia;
 import com.legends.edumia.utils.LoggerUtil;
-import com.legends.edumia.world.biomes.surface.EdumiaBiomesData;
+import com.legends.edumia.world.biomes.surface.MapBasedBiomePool;
 import com.legends.edumia.world.chunkgen.map.ImageUtils;
 import com.legends.edumia.world.map.EdumiaMapConfigs;
+import com.mojang.authlib.minecraft.client.MinecraftClient;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.ResourceManager;
 import org.joml.Vector2i;
 import org.joml.sampling.Convolution;
 
@@ -20,9 +26,6 @@ import java.util.HashMap;
 public class FileUtils {
 
     private static FileUtils single_instance = null;
-    private static HashMap<Integer, float[]> gaussianBlurKernels = new HashMap<>();
-    private static final float GAUSSIAN_SIGMA = 3.81f;
-
     public static synchronized FileUtils getInstance()
     {
         if (single_instance == null)
@@ -30,7 +33,6 @@ public class FileUtils {
 
         return single_instance;
     }
-
     private ClassLoader classLoader;
 
     public FileUtils(ClassLoader classLoader){
@@ -39,7 +41,7 @@ public class FileUtils {
 
     public BufferedImage getResourceImage(String path) {
         try{
-            return ImageUtils.fetchResourceImage(getClass().getClassLoader(), path);
+            return ImageUtils.fetchResourceImage(path);
         } catch (IOException e) {
             return null;
         }
@@ -71,7 +73,7 @@ public class FileUtils {
         BufferedImage imageWithBorders = new BufferedImage(width + 2*padding, height + 2*padding, BufferedImage.TYPE_INT_ARGB);
         Graphics2D graphics = imageWithBorders.createGraphics();
 
-        graphics.setColor(EdumiaBiomesData.defaultBiome.color);
+        graphics.setColor(MapBasedBiomePool.DEFAULT_COLOR);
         graphics.fillRect(0, 0, width + 2*padding, height + 2*padding);
         graphics.drawImage(centerImage, padding, padding, null);
 
@@ -93,44 +95,21 @@ public class FileUtils {
             File f = new File(path + fileName);
             ImageIO.write(bufferedImage, fileType.extension, f);
         } catch(Exception e){
-            LoggerUtil.getInstance().logError("Image Utils couldn't save image for {0}.".formatted(path + fileName));
+            LoggerUtil.logError("Image Utils couldn't save image for {0}.".formatted(path + fileName));
         }
     }
 
-
-    /**
-     * TODO : Optimise this part, it the longest process in World-Gen
-     */
-    public static BufferedImage blur(BufferedImage image, int brushSize, boolean crop) {
-        int width = image.getWidth();
-        int height = image.getHeight();
-
-        BufferedImage imageWithBorders = image;
-        if(!crop) {
-            imageWithBorders = new BufferedImage(width + 2*brushSize, height + 2*brushSize, BufferedImage.TYPE_INT_ARGB);
-            Graphics2D graphics = imageWithBorders.createGraphics();
-
-            graphics.setColor(EdumiaBiomesData.defaultBiome.color);
-            graphics.fillRect(0, 0, width + 2*brushSize, height + 2*brushSize);
-            graphics.drawImage(image, brushSize, brushSize, null);
-        }
-
-        float[] blurKernel = new float[brushSize*brushSize];
-
-        if(gaussianBlurKernels.containsKey(brushSize)) {
-            blurKernel = gaussianBlurKernels.get(brushSize);
-        }
-        else {
-            Convolution.gaussianKernel(brushSize, brushSize, GAUSSIAN_SIGMA, blurKernel);
-            gaussianBlurKernels.put(brushSize, blurKernel);
-        }
-        Kernel kernel = new Kernel(brushSize, brushSize, blurKernel);
-        ConvolveOp op = new ConvolveOp(kernel, ConvolveOp.EDGE_NO_OP, null);
-
-        BufferedImage blurredImage = new BufferedImage(width, height, image.getType());
-        op.filter(image, blurredImage);
-
-        if(crop) return blurredImage.getSubimage(brushSize, brushSize, width - brushSize*2, height - brushSize*2);
-        else return blurredImage;
+    public static boolean isLanguageFileExist(String languageCode){
+        Minecraft client = Minecraft.getInstance();
+        ResourceManager resourceManager = client.getResourceManager();
+        ResourceLocation path = ResourceLocation.tryBuild(Edumia.MOD_ID, String.format("lang/%s.json", languageCode));
+        return resourceManager.getResource(path).isPresent();
     }
+
+    public ClassLoader getClassLoader(){
+        return classLoader;
+    }
+
+
+
 }

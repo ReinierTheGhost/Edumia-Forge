@@ -22,7 +22,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import javax.swing.text.html.BlockView;
 
 public class Layer extends WaterloggedShape {
-    public static final IntegerProperty LAYERS;
+    public static final IntegerProperty LAYERS = BlockStateProperties.LAYERS;
     private static final VoxelShape[] BOTTOM_SHAPE;
     public static final VoxelShape SPECIAL_FULL_SHAPE_COLLISION;
 
@@ -79,7 +79,6 @@ public class Layer extends WaterloggedShape {
     }
 
     static {
-        LAYERS = BlockStateProperties.LAYERS;
         BOTTOM_SHAPE = new VoxelShape[]{
                 Block.box(0.0, 0.0, 0.0, 16.0, 2.0, 16.0),
                 Block.box(0.0, 0.0, 0.0, 16.0, 4.0, 16.0),

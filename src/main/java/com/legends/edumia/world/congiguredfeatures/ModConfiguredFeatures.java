@@ -14,16 +14,28 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
+import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 
 public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> NOTING = registerKey("noting");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> STONE = registerKey("stone");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> RED_SAND = registerKey("red_sand");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SAND = registerKey("sand");
 
     public static void boostrap(BootstapContext<ConfiguredFeature<?, ?>> context){
         register(context, NOTING, Feature.NO_OP, new NoneFeatureConfiguration());
+        register(context, STONE, Feature.SIMPLE_BLOCK,
+                new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.STONE)));
+        register(context, RED_SAND, Feature.SIMPLE_BLOCK,
+                new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.RED_SAND)));
+        register(context, SAND, Feature.SIMPLE_BLOCK,
+                new SimpleBlockConfiguration(BlockStateProvider.simple(Blocks.SAND)));
 
         BeechTreeConfiguredFeatures.bootstrap(context);
         TreeConfiguredFeatures.bootstrap(context);
@@ -45,6 +57,10 @@ public class ModConfiguredFeatures {
         RootsConfiguredFeatures.bootstrap(context);
         FairyBiomesConfiguredFeatures.bootstrap(context);
         JungleTreeConfiguredFeatures.bootstrap(context);
+        KapokTreeConfiguredFeatures.bootstrap(context);
+        MahoganyConfiguredFeatures.bootstrap(context);
+        LeopardTreeConfiguredFeatures.bootstrap(context);
+        PalmConfiguredFeatures.bootstrap(context);
     }
 
     public static ResourceKey<ConfiguredFeature<?, ?>> registerKey(String name){

@@ -45,9 +45,9 @@
       "edumia:cedar_wood"
     ],
     "place_from_nbt": [
-      "edumia:cedar_leaves",
-      "minecraft:dark_oak_slab",
       "minecraft:brown_stained_glass_pane",
+      "minecraft:dark_oak_slab",
+      "edumia:cedar_leaves",
       "edumia:cedar_wood_fence"
     ]
   }

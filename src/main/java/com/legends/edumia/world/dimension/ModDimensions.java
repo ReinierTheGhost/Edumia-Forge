@@ -34,7 +34,7 @@ public class ModDimensions {
 //        Registry.register(Registries.CHUNK_GENERATOR, Identifier.of(Edumia.MOD_ID, PATH), EdumiaChunkGenerator.CODEC);
         WORLD_KEY = ResourceKey.create(Registries.DIMENSION, new ResourceLocation(Edumia.MOD_ID, PATH));
 
-        LoggerUtil.getInstance().logDebugMsg("Registering ModDimensions for " + Edumia.MOD_ID);
+        LoggerUtil.logDebugMsg("Registering ModDimensions for " + Edumia.MOD_ID);
     }
 
     public static void teleportPlayerToME(Player player) {

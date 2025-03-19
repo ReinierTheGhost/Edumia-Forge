@@ -27,10 +27,16 @@ public class EdumiaBiomeKeys extends Biomes {
     public static final ResourceKey<Biome> FROZEN_POND = EdumiaBiomeKeys.register("frozen_pond");
 
     public static final ResourceKey<Biome> ORC_DESERT = EdumiaBiomeKeys.register("orc_desert");
+    public static final ResourceKey<Biome> RED_ORC_DESERT = EdumiaBiomeKeys.register("red_orc_desert");
 
     public static final ResourceKey<Biome> AVELION_PLAINS = EdumiaBiomeKeys.register("avelion_plains");
-    public static final ResourceKey<Biome> AVELION_SANDY_SHORES = EdumiaBiomeKeys.register("edumia_sandy_shores");
-    public static final ResourceKey<Biome> AVELION_ROCKY_SHORES = EdumiaBiomeKeys.register("edumia_rocky_shores");
+    public static final ResourceKey<Biome> AVELION_SANDY_SHORES = EdumiaBiomeKeys.register("avelion_sandy_shores");
+    public static final ResourceKey<Biome> AVELION_ROCKY_SHORES = EdumiaBiomeKeys.register("avelion_rocky_shores");
+    public static final ResourceKey<Biome> AVELION_FOOTHILLS = EdumiaBiomeKeys.register("avelion_foothills");
+    public static final ResourceKey<Biome> AVELION_MOUNTAIN_BASE = EdumiaBiomeKeys.register("avelion_mountain_base");
+    public static final ResourceKey<Biome> AVELION_MOUNTAIN = EdumiaBiomeKeys.register("avelion_mountain");
+    public static final ResourceKey<Biome> AVELION_MOUNTAIN_PEAKS = EdumiaBiomeKeys.register("avelion_mountain_peaks");
+
 
     public static final ResourceKey<Biome> OGRE_FOREST = EdumiaBiomeKeys.register("ogre_forest");
 
@@ -53,6 +59,8 @@ public class EdumiaBiomeKeys extends Biomes {
 
     public static final ResourceKey<Biome> TAIGA_FOREST = EdumiaBiomeKeys.register("taiga_forest");
 
+
+    public static final ResourceKey<Biome> MOUNTAIN_STREAM = EdumiaBiomeKeys.register("mountain_stream");
 
     public static final ResourceKey<Biome> OCEAN = EdumiaBiomeKeys.register("ocean");
     public static final ResourceKey<Biome> OCEAN_COAST = EdumiaBiomeKeys.register("ocean_coast");
@@ -84,6 +92,6 @@ public class EdumiaBiomeKeys extends Biomes {
     }
 
     public static void registerModBiomes() {
-        LoggerUtil.getInstance().logDebugMsg("Registering ModBiomes for " + Edumia.MOD_ID);
+        LoggerUtil.logDebugMsg("Registering ModBiomes for " + Edumia.MOD_ID);
     }
 }

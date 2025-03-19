@@ -19,7 +19,7 @@ import java.util.function.Supplier;
 
 import static com.legends.edumia.blocks.blocksets.WoodBlockSets.LEAVES_STRENGTH;
 
-
+@SuppressWarnings("deprecation")
 public class ModNatureBlocks {
     public static final DeferredRegister<Block> BLOCKS =
             DeferredRegister.create(ForgeRegistries.BLOCKS, Edumia.MOD_ID);

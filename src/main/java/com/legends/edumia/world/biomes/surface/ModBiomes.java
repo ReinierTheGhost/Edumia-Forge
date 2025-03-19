@@ -29,131 +29,76 @@ import java.util.Comparator;
 import java.util.List;
 
 public class ModBiomes {
-    public static final int defaultSky = 7907327;
-    public static final int defaultFog = 12638463;
-    public static final int defaultWater = 4159204;
-    public static final int defaultWaterFog = 329011;
-    public static final int defaultShoreWater = 4157124;
-    public static final int defaultCoastWater = 4155044;
-    public static final int defaultOceanWater = 3956102;
-    public static final int defaultOceanWaterFog = 2309971;
-    public static final int hillySky = 8233727;
-    public static final int waterSky = 8103167;
-    public static final int nearHaradSky = 7254527;
-    public static final int nearHaradSkyFog = 12902399;
+    private static List<ResourceKey<PlacedFeature>> rawGeneration = new ArrayList<>();
+    private static List<ResourceKey<PlacedFeature>> surfaceStructures = new ArrayList<>();
 
     private static List<ResourceKey<PlacedFeature>> vegetation = new ArrayList<>();
     private static ArrayList<ResourceKey<PlacedFeature>> undergroundOres = new ArrayList<>();
+    private static ArrayList<ResourceKey<PlacedFeature>> topLayer = new ArrayList<>();
 
     public static void bootstrap(BootstapContext<Biome> context) {
         ModCaveBiomes.bootstrap(context);
-        context.register(EdumiaBiomeKeys.EDUMIA_VALES, createEdumiaValesBiome(context, new BiomeColorsDTO(
-                defaultSky, defaultFog, defaultWater, defaultWaterFog, 8703593, 8703593)));
 
-        context.register(EdumiaBiomeKeys.GENSAI_BEACH, createGensaiBeachBiome(context, new BiomeColorsDTO(
-                nearHaradSky, defaultFog, 5212644, 333363, 12107900, 10860366)));
-        context.register(EdumiaBiomeKeys.DEAD_MARSHES, createTestBiome(context, new BiomeColorsDTO(
-                11908531, 7108218, 3289373, 198924, 6115374, 5794902)));
-        context.register(EdumiaBiomeKeys.DEAD_MARSHES_WATER, createTestBiome(context, new BiomeColorsDTO(
-                11908531, 7108218, 3289373, 198924, 6115374, 5794902)));
+        createEdumiaValesBiome(context, EdumiaBiomeKeys.EDUMIA_VALES);
+        createGensaiBeachBiome(context, EdumiaBiomeKeys.GENSAI_BEACH);
+        createTestBiome(context, EdumiaBiomeKeys.DEAD_MARSHES);
+        createTestBiome(context, EdumiaBiomeKeys.DEAD_MARSHES_WATER);
+        createDarkElvenWoodBiome(context, EdumiaBiomeKeys.DARK_ELF_FOREST);
+        createTundraBiome(context, EdumiaBiomeKeys.EDUMIA_TUNDRA);
+        createFrozenOceanBiome(context, EdumiaBiomeKeys.FROZEN_OCEAN);
+        createFrozenPond(context, EdumiaBiomeKeys.FROZEN_POND);
 
-        context.register(EdumiaBiomeKeys.DARK_ELF_FOREST, createDarkElvenWoodBiome(context, new BiomeColorsDTO(
-                7972607, defaultFog, 4293787, 338483, 3559947, 1789719)));
+        createOrcDesertBiome(context, EdumiaBiomeKeys.ORC_DESERT);
+        createRedOrcDesertBiome(context, EdumiaBiomeKeys.RED_ORC_DESERT);
 
-        context.register(EdumiaBiomeKeys.EDUMIA_TUNDRA, createTundraBiome(context, new BiomeColorsDTO(
-                8364543, 10335206, 3823818, 66852, 3494723, 4478280)));
-        context.register(EdumiaBiomeKeys.FROZEN_OCEAN, createFrozenOceanBiome(context, new BiomeColorsDTO(
-                8628223, 10599910, 3750089, 263470, 3494723, 4478280)));
-        context.register(EdumiaBiomeKeys.FROZEN_POND, createFrozenPond(context, new BiomeColorsDTO(
-                8628223, 10599910, 3750089, 263470, 3494723, 4478280)));
+        createAvelionPlainsBiome(context, EdumiaBiomeKeys.AVELION_PLAINS);
+        createAvelionPlainsBiome(context, EdumiaBiomeKeys.AVELION_SANDY_SHORES);
+        createAvelionPlainsBiome(context, EdumiaBiomeKeys.AVELION_ROCKY_SHORES);
+        createEdumiaMountainBiome(context, EdumiaBiomeKeys.AVELION_FOOTHILLS, false);
+        createEdumiaMountainBiome(context, EdumiaBiomeKeys.AVELION_MOUNTAIN_BASE, false);
+        createEdumiaMountainBiome(context, EdumiaBiomeKeys.AVELION_MOUNTAIN, false);
+        createEdumiaMountainBiome(context, EdumiaBiomeKeys.AVELION_MOUNTAIN_PEAKS, true);
 
-        context.register(EdumiaBiomeKeys.ORC_DESERT, createOrcDesertBiome(context, new BiomeColorsDTO(
-                nearHaradSky, nearHaradSkyFog, 5407446, 1120828, 13419633, 9615182)));
-
-        context.register(EdumiaBiomeKeys.AVELION_PLAINS, createAvelionPlainsBiome(context, new BiomeColorsDTO(
-                8827134, 12771327, defaultWater, defaultWaterFog, 6523989, 5667402)));
-        context.register(EdumiaBiomeKeys.AVELION_SANDY_SHORES, createAvelionPlainsBiome(context, new BiomeColorsDTO(
-                8827134, 12771327, defaultWater, defaultWaterFog, 6523989, 5667402)));
-        context.register(EdumiaBiomeKeys.AVELION_ROCKY_SHORES, createAvelionPlainsBiome(context, new BiomeColorsDTO(
-                8827134, 12771327, defaultWater, defaultWaterFog, 6523989, 5667402)));
-
-        context.register(EdumiaBiomeKeys.OGRE_FOREST, createOgreForestBiome(context, new BiomeColorsDTO(
-                defaultSky, defaultFog, defaultWater, defaultWaterFog, 8240485, 7909996)));
-
-        context.register(EdumiaBiomeKeys.GENSAI_SAKURA_GROVE, createGensaiSakuraGroveBiome(context, new BiomeColorsDTO(
-                defaultSky, 13748853, defaultWater, defaultWaterFog, 12961832, 6989412)));
-
-        context.register(EdumiaBiomeKeys.FAIRY_SWAMP, createDarkElvenSwampBiome(context, new BiomeColorsDTO(
-                6981536, 8821922, 7111535, 1458241, 4546876, 4284215)));
+        createOgreForestBiome(context, EdumiaBiomeKeys.OGRE_FOREST);
+        createGensaiSakuraGroveBiome(context, EdumiaBiomeKeys.GENSAI_SAKURA_GROVE);
+        createDarkElvenSwampBiome(context, EdumiaBiomeKeys.FAIRY_SWAMP);
+        createRiverBiome(context, EdumiaBiomeKeys.GREAT_RIVER);
 
 
-        context.register(EdumiaBiomeKeys.GREAT_RIVER, createRiverBiome(context, new BiomeColorsDTO(
-                waterSky, 12638463, 6853316, 6853316, 10995507, 7181907)));
-
-        context.register(EdumiaBiomeKeys.EDUMIA_FOOTHILLS, createEdumiaMountainBiome(context, new BiomeColorsDTO(
-                hillySky, defaultFog, defaultWater, defaultWaterFog, 7777673, 7316862),false));
-        context.register(EdumiaBiomeKeys.EDUMIA_MOUNTAINS_BASE, createEdumiaMountainBiome(context, new BiomeColorsDTO(
-                hillySky, defaultFog, defaultWater, defaultWaterFog, 7777673, 7316862), false));
-        context.register(EdumiaBiomeKeys.EDUMIA_MOUNTAINS, createEdumiaMountainBiome(context, new BiomeColorsDTO(
-                hillySky, defaultFog, defaultWater, defaultWaterFog, 7777673, 7316862), false));
-        context.register(EdumiaBiomeKeys.EDUMIA_MOUNTAINS_PEAKS, createEdumiaMountainBiome(context, new BiomeColorsDTO(
-                hillySky, defaultFog, defaultWater, defaultWaterFog, 7777673, 7316862), true));
-
-
-
-        context.register(EdumiaBiomeKeys.GENSAI_VOLCANO_PLAINS, createGensaiVolcanoBiome(context, new BiomeColorsDTO(
-                5460048, 4999240, 5860962, 731161, 6252369, 4735297)));
-        context.register(EdumiaBiomeKeys.MOUNT_TITLEIST_FOOT, createMountTitleistBiome(context, new BiomeColorsDTO(
-                5460048, 4999240, 5860962, 731161, 6252369, 4735297)));
-        context.register(EdumiaBiomeKeys.MOUNT_TITLEIST, createMountTitleistBiome(context, new BiomeColorsDTO(
-                5460048, 4999240, 5860962, 731161, 6252369, 4735297)));
-        context.register(EdumiaBiomeKeys.MOUNT_TITLEIST_PEAK, createMountTitleistBiome(context, new BiomeColorsDTO(
-                5460048, 4999240, 5860962, 731161, 6252369, 4735297)));
-        context.register(EdumiaBiomeKeys.MOUNT_TITLEIST_CRATER, createMountTitleistBiome(context, new BiomeColorsDTO(
-                5460048, 4999240, 5860962, 731161, 6252369, 4735297)));
-
-        context.register(EdumiaBiomeKeys.FAIRY_FOREST, createFairyForestBiome(context, new BiomeColorsDTO(
-                7842047, 12638463, 4159204, 329011, 8703593, 8703593)));
-
-
-
-        context.register(EdumiaBiomeKeys.OASIS, createOasisBiome(context, new BiomeColorsDTO(
-                nearHaradSky, nearHaradSkyFog, 5407446, 1120828, 7253092, 6592350)));
-        context.register(EdumiaBiomeKeys.OCEAN, createOceanBiome(context, new BiomeColorsDTO(
-                waterSky, defaultFog, defaultOceanWater, defaultOceanWaterFog, 7576434, 6588506)));
-        context.register(EdumiaBiomeKeys.OCEAN_COAST, createOceanCoastBiome(context, new BiomeColorsDTO(
-                8104447, defaultFog, defaultCoastWater, defaultOceanWaterFog, 7971954, 6590810)));
-
-        context.register(EdumiaBiomeKeys.POND, createPondBiome(context, new BiomeColorsDTO(
-                waterSky, defaultFog, 4290786, defaultWaterFog, 7583083, 6592339)));
-
-
-        context.register(EdumiaBiomeKeys.RIVER, createRiverBiome(context, new BiomeColorsDTO(
-                waterSky, defaultFog, 4290790, defaultWaterFog, 7583083, 6592339)));
-
-        context.register(EdumiaBiomeKeys.GENSAI_REEF, createGensaiReefBiome(context, new BiomeColorsDTO(
-                waterSky, 12638463, 4159204, defaultWaterFog, 10995507, 7181907)));
-
-        context.register(EdumiaBiomeKeys.TAIGA_FOREST, createTaigaBiome(context, new BiomeColorsDTO(
-                7508201, 10863086, defaultWater, defaultWaterFog, 8302697, 7252827), true));
-
-        context.register(EdumiaBiomeKeys.GENSAI_JUNGLE, createGensaiJungleBiome(context, new BiomeColorsDTO(
-                6785744, 10004675, 4421513, 402733, 2311707, 2050588)));
-
-        context.register(EdumiaBiomeKeys.WASTE_POND, createWastePondBiome(context, new BiomeColorsDTO(
-                8163746, 10926783, 5860963, 863008, 4020033, 2695710)));
+        createEdumiaMountainBiome(context, EdumiaBiomeKeys.EDUMIA_FOOTHILLS, false);
+        createEdumiaMountainBiome(context, EdumiaBiomeKeys.EDUMIA_MOUNTAINS_BASE, false);
+        createEdumiaMountainBiome(context, EdumiaBiomeKeys.EDUMIA_MOUNTAINS, false);
+        createEdumiaMountainBiome(context, EdumiaBiomeKeys.EDUMIA_MOUNTAINS_PEAKS, true);
+        createGensaiVolcanoBiome(context, EdumiaBiomeKeys.GENSAI_VOLCANO_PLAINS);
+        createMountTitleistBiome(context, EdumiaBiomeKeys.MOUNT_TITLEIST_FOOT);
+        createMountTitleistBiome(context, EdumiaBiomeKeys.MOUNT_TITLEIST);
+        createMountTitleistBiome(context, EdumiaBiomeKeys.MOUNT_TITLEIST_PEAK);
+        createMountTitleistBiome(context, EdumiaBiomeKeys.MOUNT_TITLEIST_CRATER);
+        createFairyForestBiome(context, EdumiaBiomeKeys.FAIRY_FOREST);
+        createOasisBiome(context, EdumiaBiomeKeys.OASIS);
+        createOceanBiome(context, EdumiaBiomeKeys.OCEAN);
+        createOceanCoastBiome(context, EdumiaBiomeKeys.OCEAN_COAST);
+        createPondBiome(context, EdumiaBiomeKeys.POND);
+        createRiverBiome(context, EdumiaBiomeKeys.RIVER);
+        createRiverBiome(context, EdumiaBiomeKeys.MOUNTAIN_STREAM);
+        createGensaiReefBiome(context, EdumiaBiomeKeys.GENSAI_REEF);
+        createTaigaBiome(context, EdumiaBiomeKeys.TAIGA_FOREST, true);
+        createGensaiJungleBiome(context, EdumiaBiomeKeys.GENSAI_JUNGLE);
+        createWastePondBiome(context, EdumiaBiomeKeys.WASTE_POND);
 
 
     }
-    public static Biome createFairyForestBiome(BootstapContext<Biome> context, BiomeColorsDTO biomeColors) {
+    public static void createFairyForestBiome(BootstapContext<Biome> context, ResourceKey<Biome> biomeResourceKey) {
         MobSpawnSettings.Builder spawnSettings = new MobSpawnSettings.Builder();
-        BiomeGenerationSettings.Builder generationSettings = new BiomeGenerationSettings.Builder(context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
+        BiomeGenerationSettings.Builder generationSettings = new BiomeGenerationSettings.Builder(
+                context.lookup(Registries.PLACED_FEATURE),
+                context.lookup(Registries.CONFIGURED_CARVER));
 
        ModBiomeFeatures.addJungleTrees(vegetation);
 
-        return createBiome(biomeColors, spawnSettings, generationSettings, 0.9f, 0.95f, true);
+        registerBiome(context, biomeResourceKey, spawnSettings, generationSettings);
     }
-    public static Biome createEdumiaValesBiome(BootstapContext<Biome> context, BiomeColorsDTO biomeColors) {
+    public static void createEdumiaValesBiome(BootstapContext<Biome> context, ResourceKey<Biome> biomeResourceKey) {
         MobSpawnSettings.Builder spawnSettings = new MobSpawnSettings.Builder();
         //ModSpawnSettingsBuilder.addFarmAnimals(spawnSettings);
         BiomeGenerationSettings.Builder generationSettings = new BiomeGenerationSettings.Builder(context.lookup(Registries.PLACED_FEATURE),
@@ -170,9 +115,9 @@ public class ModBiomes {
         ModBiomeFeatures.addSparseLarchTrees(vegetation);
         ModBiomeFeatures.addMapleTrees(vegetation);
 
-        return createBiome(biomeColors, spawnSettings, generationSettings);
+        registerBiome(context, biomeResourceKey, spawnSettings, generationSettings);
     }
-    public static Biome createGensaiBeachBiome(BootstapContext<Biome> context, BiomeColorsDTO biomeColors) {
+    public static void createGensaiBeachBiome(BootstapContext<Biome> context, ResourceKey<Biome> biomeResourceKey) {
         MobSpawnSettings.Builder spawnSettings = new MobSpawnSettings.Builder();
         //ModSpawnSettingsBuilder.addHaradMobs(spawnSettings);
         //ModSpawnSettingsBuilder.addLlama(spawnSettings);
@@ -184,14 +129,14 @@ public class ModBiomes {
         ModBiomeFeatures.addGraniteBoulder(vegetation);
         ModBiomeFeatures.addSandStoneBoulder(vegetation);
         ModBiomeFeatures.addStoneBoulder(vegetation);
-        ModBiomeFeatures.addSandOre(vegetation);
+        ModBiomeFeatures.addWhiteSandLayers(topLayer);
         ModBiomeFeatures.addGravelOre(vegetation);
 
         ModBiomeFeatures.addPalmTrees(vegetation);
 
-        return createBiome(biomeColors, spawnSettings, generationSettings);
+        registerBiome(context, biomeResourceKey, spawnSettings, generationSettings);
     }
-    public static Biome createEdumiaFoothillsBiome(BootstapContext<Biome> context, BiomeColorsDTO biomeColors) {
+    public static void createEdumiaFoothillsBiome(BootstapContext<Biome> context, ResourceKey<Biome> biomeResourceKey) {
         MobSpawnSettings.Builder spawnSettings = new MobSpawnSettings.Builder();
         //ModSpawnSettingsBuilder.addMountainsMobs(spawnSettings);
         BiomeGenerationSettings.Builder generationSettings = new BiomeGenerationSettings.Builder(
@@ -209,9 +154,9 @@ public class ModBiomes {
         ModBiomeFeatures.addAbundantSpruceTrees(vegetation);
         ModBiomeFeatures.addCommonSpruceBushes(vegetation);
 
-        return createBiome(biomeColors, spawnSettings, generationSettings);
+        registerBiome(context, biomeResourceKey, spawnSettings, generationSettings);
     }
-    public static Biome createDarkElvenWoodBiome(BootstapContext<Biome> context, BiomeColorsDTO biomeColors) {
+    public static void createDarkElvenWoodBiome(BootstapContext<Biome> context, ResourceKey<Biome> biomeResourceKey) {
         MobSpawnSettings.Builder spawnSettings = new MobSpawnSettings.Builder();
         BiomeGenerationSettings.Builder generationSettings = new BiomeGenerationSettings.Builder(
                 context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
@@ -230,9 +175,9 @@ public class ModBiomes {
         ModBiomeFeatures.addDarkElvenOakTrees(vegetation);
 
 
-        return createBiome(biomeColors, spawnSettings, generationSettings);
+        registerBiome(context, biomeResourceKey, spawnSettings, generationSettings);
     }
-    public static Biome createTundraBiome(BootstapContext<Biome> context, BiomeColorsDTO biomeColors) {
+    public static void createTundraBiome(BootstapContext<Biome> context, ResourceKey<Biome> biomeResourceKey) {
         MobSpawnSettings.Builder spawnSettings = new MobSpawnSettings.Builder();
         //ModSpawnSettingsBuilder.addForochelMobs(spawnSettings);
         BiomeGenerationSettings.Builder generationSettings = new BiomeGenerationSettings.Builder(
@@ -240,9 +185,9 @@ public class ModBiomes {
 
         addTundraVegetation(generationSettings);
 
-        return createBiome(biomeColors, spawnSettings, generationSettings, -0.8f,  true);
+        registerBiome(context, biomeResourceKey, spawnSettings, generationSettings, -0.8f,  true);
     }
-    public static Biome createFrozenOceanBiome(BootstapContext<Biome> context, BiomeColorsDTO biomeColors) {
+    public static void createFrozenOceanBiome(BootstapContext<Biome> context, ResourceKey<Biome> biomeResourceKey) {
         MobSpawnSettings.Builder spawnSettings = new MobSpawnSettings.Builder();
         //ModSpawnSettingsBuilder.addOceanAnimals(spawnSettings);
         BiomeGenerationSettings.Builder generationSettings = new BiomeGenerationSettings.Builder(
@@ -250,9 +195,9 @@ public class ModBiomes {
 
         addOceanVegetation(generationSettings);
 
-        return createBiome(biomeColors, spawnSettings, generationSettings);
+        registerBiome(context, biomeResourceKey, spawnSettings, generationSettings);
     }
-    public static Biome createOceanBiome(BootstapContext<Biome> context, BiomeColorsDTO biomeColors) {
+    public static void createOceanBiome(BootstapContext<Biome> context, ResourceKey<Biome> biomeResourceKey) {
         MobSpawnSettings.Builder spawnSettings = new MobSpawnSettings.Builder();
         //ModSpawnSettingsBuilder.addOceanAnimals(spawnSettings);
         BiomeGenerationSettings.Builder generationSettings = new BiomeGenerationSettings.Builder(
@@ -260,9 +205,9 @@ public class ModBiomes {
 
         addOceanVegetation(generationSettings);
 
-        return createBiome(biomeColors, spawnSettings, generationSettings);
+        registerBiome(context, biomeResourceKey, spawnSettings, generationSettings);
     }
-    public static Biome createFrozenPond(BootstapContext<Biome> context, BiomeColorsDTO biomeColors) {
+    public static void createFrozenPond(BootstapContext<Biome> context, ResourceKey<Biome> biomeResourceKey) {
         MobSpawnSettings.Builder spawnSettings = new MobSpawnSettings.Builder();
         BiomeGenerationSettings.Builder generationSettings = new BiomeGenerationSettings.Builder(
                 context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
@@ -273,9 +218,9 @@ public class ModBiomes {
         vegetation.add(AquaticPlacements.SEAGRASS_NORMAL);
         vegetation.add(VegetationPlacements.PATCH_GRASS_FOREST);
 
-        return createBiome(biomeColors, spawnSettings, generationSettings, -0.1f, true);
+        registerBiome(context, biomeResourceKey, spawnSettings, generationSettings, -0.1f, true);
     }
-    public static Biome createOrcDesertBiome(BootstapContext<Biome> context, BiomeColorsDTO biomeColors) {
+    public static void createOrcDesertBiome(BootstapContext<Biome> context, ResourceKey<Biome> biomeResourceKey) {
         MobSpawnSettings.Builder spawnSettings = new MobSpawnSettings.Builder();
         BiomeGenerationSettings.Builder generationSettings = new BiomeGenerationSettings.Builder(
                 context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
@@ -283,16 +228,26 @@ public class ModBiomes {
         addOrcDesertVegetation(generationSettings);
         vegetation.add(VegetationPlacements.PATCH_DEAD_BUSH_2);
 
-        return createBiome(biomeColors, spawnSettings, generationSettings, 0.8f, false);
+        registerBiome(context, biomeResourceKey, spawnSettings, generationSettings, 0.8f, false);
     }
-    public static Biome createAvelionPlainsBiome(BootstapContext<Biome> context, BiomeColorsDTO biomeColors) {
+
+    public static void createRedOrcDesertBiome(BootstapContext<Biome> context, ResourceKey<Biome> biomeResourceKey) {
+        MobSpawnSettings.Builder spawnSettings = new MobSpawnSettings.Builder();
+        BiomeGenerationSettings.Builder generationSettings = new BiomeGenerationSettings.Builder(
+                context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
+
+        vegetation.add(VegetationPlacements.PATCH_DEAD_BUSH_2);
+        ModBiomeFeatures.addSandPath(rawGeneration);
+
+        registerBiome(context, biomeResourceKey, spawnSettings, generationSettings, 0.8f, false);
+    }
+    public static void createAvelionPlainsBiome(BootstapContext<Biome> context, ResourceKey<Biome> biomeResourceKey) {
         MobSpawnSettings.Builder spawnSettings = new MobSpawnSettings.Builder();
         BiomeGenerationSettings.Builder generationSettings = new BiomeGenerationSettings.Builder(
                 context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
 
         addDefaultVegetation(generationSettings);
-        ModBiomeFeatures.addCornflower(vegetation);
-        ModBiomeFeatures.addRareForestMoss(vegetation);
+        ModBiomeFeatures.addHeather(vegetation);
         ModBiomeFeatures.addGravelOre(vegetation);
         ModBiomeFeatures.addLimestoneBoulder(vegetation);
         ModBiomeFeatures.addWhiteSand(vegetation);
@@ -302,21 +257,22 @@ public class ModBiomes {
         ModBiomeFeatures.addRareMegaOakTrees(vegetation);
         ModBiomeFeatures.addElvenCrystal(undergroundOres);
 
-        return createBiome(biomeColors, spawnSettings, generationSettings);
+        registerBiome(context, biomeResourceKey, spawnSettings, generationSettings);
     }
-    public static Biome createGensaiSakuraGroveBiome(BootstapContext<Biome> context, BiomeColorsDTO biomeColors) {
+    public static void createGensaiSakuraGroveBiome(BootstapContext<Biome> context, ResourceKey<Biome> biomeResourceKey) {
         MobSpawnSettings.Builder spawnSettings = new MobSpawnSettings.Builder();
         BiomeGenerationSettings.Builder generationSettings = new BiomeGenerationSettings.Builder(
                 context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
 
         vegetation.add(TemperateTreePlacedFeatures.GENSAI_SAKURA_GROVE_TREES);
+        ModBiomeFeatures.addGensaiOrchid(vegetation);
 
         addSakuraGroveVegetation(generationSettings);
 
 
-        return createBiome(biomeColors, spawnSettings, generationSettings);
+        registerBiome(context, biomeResourceKey, spawnSettings, generationSettings);
     }
-    public static Biome createDarkElvenSwampBiome(BootstapContext<Biome> context, BiomeColorsDTO biomeColors) {
+    public static void createDarkElvenSwampBiome(BootstapContext<Biome> context, ResourceKey<Biome> biomeResourceKey) {
         MobSpawnSettings.Builder spawnSettings = new MobSpawnSettings.Builder();
         BiomeGenerationSettings.Builder generationSettings = new BiomeGenerationSettings.Builder(
                 context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
@@ -330,9 +286,9 @@ public class ModBiomes {
 
         ModBiomeFeatures.addWillowTrees(vegetation);
 
-        return createBiome(biomeColors, spawnSettings, generationSettings);
+        registerBiome(context, biomeResourceKey, spawnSettings, generationSettings);
     }
-    public static Biome createAvelionMountainBiome(BootstapContext<Biome> context, BiomeColorsDTO biomeColors, boolean foothills) {
+    public static void createAvelionMountainBiome(BootstapContext<Biome> context, ResourceKey<Biome> biomeResourceKey, boolean foothills) {
         MobSpawnSettings.Builder spawnSettings = new MobSpawnSettings.Builder();
         BiomeGenerationSettings.Builder generationSettings = new BiomeGenerationSettings.Builder(
                 context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
@@ -353,9 +309,9 @@ public class ModBiomes {
         } else {
             ModBiomeFeatures.addPowderSnowOre(vegetation);
         }
-        return createBiome(biomeColors, spawnSettings, generationSettings,temperature, true);
+        registerBiome(context, biomeResourceKey, spawnSettings, generationSettings,temperature, true);
     }
-    public static Biome createEdumiaMountainBiome(BootstapContext<Biome> context, BiomeColorsDTO biomeColors, boolean peaks) {
+    public static void createEdumiaMountainBiome(BootstapContext<Biome> context, ResourceKey<Biome> biomeResourceKey, boolean peaks) {
         MobSpawnSettings.Builder spawnSettings = new MobSpawnSettings.Builder();
         BiomeGenerationSettings.Builder generationSettings = new BiomeGenerationSettings.Builder(
                 context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
@@ -372,9 +328,9 @@ public class ModBiomes {
             ModBiomeFeatures.addScarceSpruceTrees(vegetation);
             ModBiomeFeatures.addSpruceBushes(vegetation);
         }
-        return createBiome(biomeColors, spawnSettings, generationSettings,temperature, true);
+        registerBiome(context, biomeResourceKey, spawnSettings, generationSettings,temperature, true);
     }
-    public static Biome createGensaiVolcanoBiome(BootstapContext<Biome> context, BiomeColorsDTO biomeColors) {
+    public static void createGensaiVolcanoBiome(BootstapContext<Biome> context, ResourceKey<Biome> biomeResourceKey) {
         MobSpawnSettings.Builder spawnSettings = new MobSpawnSettings.Builder();
         BiomeGenerationSettings.Builder generationSettings = new BiomeGenerationSettings.Builder(
                 context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
@@ -385,9 +341,9 @@ public class ModBiomes {
         ModBiomeFeatures.addBasaltPile(vegetation);
         ModBiomeFeatures.addBlackStonePile(vegetation);
 
-        return createBiome(biomeColors, spawnSettings, generationSettings, 0.7f, false);
+        registerBiome(context, biomeResourceKey, spawnSettings, generationSettings, 0.7f, false);
     }
-    public static Biome createMountTitleistBiome(BootstapContext<Biome> context, BiomeColorsDTO biomeColors) {
+    public static void createMountTitleistBiome(BootstapContext<Biome> context, ResourceKey<Biome> biomeResourceKey) {
         MobSpawnSettings.Builder spawnSettings = new MobSpawnSettings.Builder();
         BiomeGenerationSettings.Builder generationSettings = new BiomeGenerationSettings.Builder(
                 context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
@@ -395,9 +351,9 @@ public class ModBiomes {
         addVolcanoVegetation(generationSettings);
         ModBiomeFeatures.addLavaMagmaLake(generationSettings);
 
-        return createBiome(biomeColors, spawnSettings, generationSettings, 0.7f, false);
+        registerBiome(context, biomeResourceKey, spawnSettings, generationSettings, 0.7f, false);
     }
-    public static Biome createOceanCoastBiome(BootstapContext<Biome> context, BiomeColorsDTO biomeColors) {
+    public static void createOceanCoastBiome(BootstapContext<Biome> context, ResourceKey<Biome> biomeResourceKey) {
         MobSpawnSettings.Builder spawnSettings = new MobSpawnSettings.Builder();
         BiomeGenerationSettings.Builder generationSettings = new BiomeGenerationSettings.Builder(
                 context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
@@ -405,18 +361,18 @@ public class ModBiomes {
         addOceanVegetation(generationSettings);
         ModBiomeFeatures.addCoastalFoliage(vegetation);
 
-        return createBiome(biomeColors, spawnSettings, generationSettings);
+        registerBiome(context, biomeResourceKey, spawnSettings, generationSettings);
     }
-    public static Biome createOasisBiome(BootstapContext<Biome> context, BiomeColorsDTO biomeColors) {
+    public static void createOasisBiome(BootstapContext<Biome> context, ResourceKey<Biome> biomeResourceKey) {
         MobSpawnSettings.Builder spawnSettings = new MobSpawnSettings.Builder();
         BiomeGenerationSettings.Builder generationSettings = new BiomeGenerationSettings.Builder(
                 context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
 
         addOasisVegetation(generationSettings);
 
-        return createBiome(biomeColors, spawnSettings, generationSettings);
+        registerBiome(context, biomeResourceKey, spawnSettings, generationSettings);
     }
-    public static Biome createPondBiome(BootstapContext<Biome> context, BiomeColorsDTO biomeColors) {
+    public static void createPondBiome(BootstapContext<Biome> context, ResourceKey<Biome> biomeResourceKey) {
         MobSpawnSettings.Builder spawnSettings = new MobSpawnSettings.Builder();
         BiomeGenerationSettings.Builder generationSettings = new BiomeGenerationSettings.Builder(
                 context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
@@ -426,9 +382,9 @@ public class ModBiomes {
         ModBiomeFeatures.addWillowTrees(vegetation);
         ModBiomeFeatures.addReeds(vegetation);
 
-        return createBiome(biomeColors, spawnSettings, generationSettings);
+        registerBiome(context, biomeResourceKey, spawnSettings, generationSettings);
     }
-    public static Biome createRiverBiome(BootstapContext<Biome> context, BiomeColorsDTO biomeColors) {
+    public static void createRiverBiome(BootstapContext<Biome> context, ResourceKey<Biome> biomeResourceKey) {
         MobSpawnSettings.Builder spawnSettings = new MobSpawnSettings.Builder();
         BiomeGenerationSettings.Builder generationSettings = new BiomeGenerationSettings.Builder(
                 context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
@@ -442,9 +398,9 @@ public class ModBiomes {
         vegetation.add(VegetationPlacements.PATCH_PUMPKIN);
         ModBiomeFeatures.addReedsFoliage(vegetation);
 
-        return createBiome(biomeColors, spawnSettings, generationSettings);
+        registerBiome(context, biomeResourceKey, spawnSettings, generationSettings);
     }
-    public static Biome createGensaiReefBiome(BootstapContext<Biome> context, BiomeColorsDTO biomeColors) {
+    public static void createGensaiReefBiome(BootstapContext<Biome> context, ResourceKey<Biome> biomeResourceKey) {
         MobSpawnSettings.Builder spawnSettings = new MobSpawnSettings.Builder();
         BiomeGenerationSettings.Builder generationSettings = new BiomeGenerationSettings.Builder(
                 context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
@@ -452,9 +408,9 @@ public class ModBiomes {
         //addOceanVegetation(generationSettings);
         addReef(generationSettings);
 
-        return createBiome(biomeColors, spawnSettings, generationSettings);
+        registerBiome(context, biomeResourceKey, spawnSettings, generationSettings);
     }
-    public static Biome createTaigaBiome(BootstapContext<Biome> context, BiomeColorsDTO biomeColors, boolean trees) {
+    public static void createTaigaBiome(BootstapContext<Biome> context, ResourceKey<Biome> biomeResourceKey, boolean trees) {
         MobSpawnSettings.Builder spawnSettings = new MobSpawnSettings.Builder();
         BiomeGenerationSettings.Builder generationSettings = new BiomeGenerationSettings.Builder(
                 context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
@@ -477,9 +433,9 @@ public class ModBiomes {
             ModBiomeFeatures.addSparsePineTrees(vegetation);
             ModBiomeFeatures.addRareSpruceTrees(vegetation);
         }
-        return createBiome(biomeColors, spawnSettings, generationSettings);
+        registerBiome(context, biomeResourceKey, spawnSettings, generationSettings);
     }
-    public static Biome createGensaiJungleBiome(BootstapContext<Biome> context, BiomeColorsDTO biomeColors) {
+    public static void createGensaiJungleBiome(BootstapContext<Biome> context, ResourceKey<Biome> biomeResourceKey) {
         MobSpawnSettings.Builder spawnSettings = new MobSpawnSettings.Builder();
         BiomeGenerationSettings.Builder generationSettings = new BiomeGenerationSettings.Builder(
                 context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
@@ -490,9 +446,9 @@ public class ModBiomes {
         vegetation.add(TropicalTreePlacedFeatures.GENSAI_JUNGLE_TREES);
 
 
-        return createBiome(biomeColors, spawnSettings, generationSettings);
+        registerBiome(context, biomeResourceKey, spawnSettings, generationSettings);
     }
-    public static Biome createWastePondBiome(BootstapContext<Biome> context, BiomeColorsDTO biomeColors) {
+    public static void createWastePondBiome(BootstapContext<Biome> context, ResourceKey<Biome> biomeResourceKey) {
         MobSpawnSettings.Builder spawnSettings = new MobSpawnSettings.Builder();
         BiomeGenerationSettings.Builder generationSettings = new BiomeGenerationSettings.Builder(
                 context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
@@ -504,17 +460,17 @@ public class ModBiomes {
         vegetation.add(VegetationPlacements.PATCH_SUGAR_CANE);
         ModBiomeFeatures.addReedsFoliage(vegetation);
 
-        return createBiome(biomeColors, spawnSettings, generationSettings);
+        registerBiome(context, biomeResourceKey, spawnSettings, generationSettings);
     }
-    public static Biome createOgreForestBiome(BootstapContext<Biome> context, BiomeColorsDTO biomeColors) {
+    public static void createOgreForestBiome(BootstapContext<Biome> context, ResourceKey<Biome> biomeResourceKey) {
         MobSpawnSettings.Builder spawnSettings = new MobSpawnSettings.Builder();
         BiomeGenerationSettings.Builder generationSettings = new BiomeGenerationSettings.Builder(
                 context.lookup(Registries.PLACED_FEATURE), context.lookup(Registries.CONFIGURED_CARVER));
         vegetation.add(OgreBiomePlacedFeatures.OGRE_FOREST_TREES);
 
-        return createBiome(biomeColors, spawnSettings, generationSettings,0.7f, 0.8f, true);
+        registerBiome(context, biomeResourceKey, spawnSettings, generationSettings,0.7f, 0.8f, true);
     }
-    public static Biome createTestBiome(BootstapContext<Biome> context, BiomeColorsDTO biomeColors) {
+    public static void createTestBiome(BootstapContext<Biome> context, ResourceKey<Biome> biomeResourceKey) {
         MobSpawnSettings.Builder spawnSettings = new MobSpawnSettings.Builder();
         //ModSpawnSettingsBuilder.addRiverAnimals(spawnSettings);
         //ModSpawnSettingsBuilder.addCamel(spawnSettings);
@@ -522,7 +478,7 @@ public class ModBiomes {
 
         //addOasisVegetation(generationSettings);
 
-        return createBiome(biomeColors, spawnSettings, generationSettings);
+        registerBiome(context, biomeResourceKey, spawnSettings, generationSettings);
     }
 
 
@@ -634,60 +590,85 @@ public class ModBiomes {
     }
 
 
-    public static Biome createBiome(BiomeColorsDTO biomeColors, MobSpawnSettings.Builder spawnSettings,
+    public static void registerBiome(BootstapContext<Biome> context, ResourceKey<Biome>  biomeResourceKey,  MobSpawnSettings.Builder spawnSettings,
                                     BiomeGenerationSettings.Builder generationSettings, float downfall) {
-        return createBiome(biomeColors, spawnSettings, generationSettings, 0.5f, downfall, true);
+        registerBiome(context, biomeResourceKey, spawnSettings, generationSettings, 0.5f, downfall, true);
     }
-    public static Biome createBiome(BiomeColorsDTO biomeColors, MobSpawnSettings.Builder spawnSettings,
+    public static void registerBiome(BootstapContext<Biome> context, ResourceKey<Biome>  biomeResourceKey,  MobSpawnSettings.Builder spawnSettings,
                                     BiomeGenerationSettings.Builder generationSettings, float temperature, boolean precipitation) {
-        return createBiome(biomeColors, spawnSettings, generationSettings, temperature, 0.5f, precipitation);
+        registerBiome(context, biomeResourceKey, spawnSettings, generationSettings, temperature, 0.5f, precipitation);
     }
-    public static Biome createBiome(BiomeColorsDTO biomeColors, MobSpawnSettings.Builder spawnSettings,
+    public static void registerBiome(BootstapContext<Biome> context, ResourceKey<Biome>  biomeResourceKey,  MobSpawnSettings.Builder spawnSettings,
                                     BiomeGenerationSettings.Builder generationSettings) {
-        return createBiome(biomeColors, spawnSettings, generationSettings, 0.5f, 0.5f, true);
+        registerBiome(context, biomeResourceKey, spawnSettings, generationSettings, 0.5f, 0.5f, true);
     }
-    public static Biome createBiome(BiomeColorsDTO biomeColors, MobSpawnSettings.Builder spawnSettings,
+    public static void registerBiome(BootstapContext<Biome> context, ResourceKey<Biome>  biomeResourceKey, MobSpawnSettings.Builder spawnSettings,
                                     BiomeGenerationSettings.Builder generationSettings, float temperature, float downfall,
-                                    boolean precipitation) {
-        undergroundOres.add(OrePlacements.ORE_DIRT);
-        undergroundOres.add(OrePlacements.ORE_GRAVEL);
-        undergroundOres.add(OrePlacements.ORE_GRANITE_UPPER);
-        undergroundOres.add(OrePlacements.ORE_GRANITE_LOWER);
-        undergroundOres.add(OrePlacements.ORE_DIORITE_UPPER);
-        undergroundOres.add(OrePlacements.ORE_DIORITE_LOWER);
-        undergroundOres.add(OrePlacements.ORE_ANDESITE_UPPER);
-        undergroundOres.add(OrePlacements.ORE_ANDESITE_LOWER);
-        undergroundOres.add(OrePlacements.ORE_TUFF);
+                                    boolean precipitation, boolean... removeDefaultOres) {
+        if (removeDefaultOres.length == 0){
+            undergroundOres.add(OrePlacements.ORE_DIRT);
+            undergroundOres.add(OrePlacements.ORE_GRAVEL);
+            undergroundOres.add(OrePlacements.ORE_GRANITE_UPPER);
+            undergroundOres.add(OrePlacements.ORE_GRANITE_LOWER);
+            undergroundOres.add(OrePlacements.ORE_DIORITE_UPPER);
+            undergroundOres.add(OrePlacements.ORE_DIORITE_LOWER);
+            undergroundOres.add(OrePlacements.ORE_ANDESITE_UPPER);
+            undergroundOres.add(OrePlacements.ORE_ANDESITE_LOWER);
+            undergroundOres.add(OrePlacements.ORE_TUFF);
+        }
+
         undergroundOres.add(OrePlacements.ORE_COAL_UPPER);
         vegetation.add(CavePlacements.GLOW_LICHEN);
 
         BiomeDefaultFeatures.addSurfaceFreezing(generationSettings);
 
+        surfaceStructures = surfaceStructures.stream().sorted(Comparator.comparing(a -> a.location().toString())).toList();
         vegetation = vegetation.stream().sorted(Comparator.comparing(a -> a.location().toString())).toList();
+        for (int i = 0; i < vegetation.size() - 1; i++){
+            if (vegetation.get(i).location().toString().equals(vegetation.get(i + 1).location().toString())){
+                throw new IllegalStateException("Duplicate value in list for: " + vegetation.get(i).location().toString());
+            }
+        }
+        for (ResourceKey<PlacedFeature> feature : rawGeneration){
+            generationSettings.addFeature(GenerationStep.Decoration.RAW_GENERATION, feature);
+        }
+        for (ResourceKey<PlacedFeature> feature : surfaceStructures){
+            generationSettings.addFeature(GenerationStep.Decoration.SURFACE_STRUCTURES, feature);
+        }
         for (ResourceKey<PlacedFeature> feature: vegetation) {
             generationSettings.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, feature);
         }
         for (ResourceKey<PlacedFeature> feature: undergroundOres.stream().sorted(Comparator.comparing(a -> a.location().toString())).toList()) {
             generationSettings.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, feature);
         }
+        for (ResourceKey<PlacedFeature> feature: topLayer.stream().sorted(Comparator.comparing(a -> a.location().toString())).toList()){
+            generationSettings.addFeature(GenerationStep.Decoration.TOP_LAYER_MODIFICATION, feature);
+        }
+
+        BiomeColorsDTO biomeColorsDTO = MapBiomeData.getBiome(biomeResourceKey).getBiomeColors();
 
         Biome biome = (new Biome.BiomeBuilder())
                 .hasPrecipitation(precipitation)
                 .temperature(temperature)
                 .downfall(downfall)
                 .specialEffects((new BiomeSpecialEffects.Builder())
-                        .skyColor(biomeColors.skyColor)
-                        .fogColor(biomeColors.fogColor)
-                        .waterColor(biomeColors.waterColor)
-                        .waterFogColor(biomeColors.waterFogColor)
-                        .grassColorOverride(biomeColors.grassColor)
-                        .foliageColorOverride(biomeColors.foliageColor)
+                        .skyColor(biomeColorsDTO.skyColor)
+                        .fogColor(biomeColorsDTO.fogColor)
+                        .waterColor(biomeColorsDTO.waterColor)
+                        .waterFogColor(biomeColorsDTO.waterFogColor)
+                        .grassColorOverride(biomeColorsDTO.grassColor)
+                        .foliageColorOverride(biomeColorsDTO.foliageColor)
                         .build())
                 .mobSpawnSettings(spawnSettings.build())
                 .generationSettings(generationSettings.build())
                 .build();
+
+        context.register(biomeResourceKey, biome);
+
+        rawGeneration = new ArrayList<>();
+        surfaceStructures = new ArrayList<>();
         vegetation = new ArrayList<>();
         undergroundOres = new ArrayList<>();
-        return biome;
+        topLayer = new ArrayList<>();
     }
 }

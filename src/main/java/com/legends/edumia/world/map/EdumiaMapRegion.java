@@ -1,8 +1,8 @@
 package com.legends.edumia.world.map;
 
 import com.legends.edumia.utils.resources.FileUtils;
-import com.legends.edumia.world.biomes.surface.EdumiaBiome;
-import com.legends.edumia.world.biomes.surface.EdumiaBiomesData;
+import com.legends.edumia.world.biomes.surface.MapBasedBiomePool;
+import com.legends.edumia.world.biomes.surface.MapBasedCustomBiome;
 import org.joml.Vector2i;
 
 import java.awt.*;
@@ -26,22 +26,22 @@ public class EdumiaMapRegion {
         //LoggerUtil.getInstance().sendChat(heightPath);
     }
 
-    public EdumiaBiome getBiome(Vector2i imageCoordinates){
+    public MapBasedCustomBiome getBiome(Vector2i imageCoordinates){
         try {
             if(biomeImage != null){
-                return EdumiaBiomesData.getBiomeByColor(biomeImage.getRGB(imageCoordinates.x, imageCoordinates.y));
+                return MapBasedBiomePool.getBiomeByColor(biomeImage.getRGB(imageCoordinates.x, imageCoordinates.y));
             }
         } catch (Exception exception){
-            return EdumiaBiomesData.defaultBiome;
+            return MapBasedBiomePool.defaultBiome;
         }
-        return EdumiaBiomesData.defaultBiome;
+        return MapBasedBiomePool.defaultBiome;
     }
 
     public Color getHeightColor(Vector2i imageCoordinates) {
         if(heightImage != null){
             return new Color(heightImage.getRGB(imageCoordinates.x, imageCoordinates.y));
         }
-        return new Color(Math.abs(EdumiaBiomesData.defaultBiome.height), 1, 0);
+        return new Color(Math.abs(MapBasedBiomePool.defaultBiome.getHeight()), 1, 0);
     }
 
     public boolean isInRange(Vector2i playerCoord) {

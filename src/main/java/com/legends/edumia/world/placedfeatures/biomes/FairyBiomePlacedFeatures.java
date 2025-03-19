@@ -35,14 +35,49 @@ public class FairyBiomePlacedFeatures {
 
         Holder.Reference<PlacedFeature> noting = registryEntryLookup.getOrThrow(ModPlacedFeatures.NOTING);
 
+        register(context, FAIRY_FOREST_TREES_LAYER_1, holdergetter.getOrThrow(FairyBiomesConfiguredFeatures.FAIRY_FOREST_TREES_LAYER_4),
+                List.of(CountPlacement.of(8), InSquarePlacement.spread(),
+                        NoiseBasedCountPlacement.of(-1, 130.0d, 0.55d),
+                        HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE),
+                        SurfaceWaterDepthFilter.forMaxDepth(0),
+                        BiomeFilter.biome()
+                ));
+
+        register(context, FAIRY_FOREST_TREES_LAYER_2, holdergetter.getOrThrow(FairyBiomesConfiguredFeatures.FAIRY_FOREST_TREES_LAYER_4),
+                List.of(CountPlacement.of(10), InSquarePlacement.spread(),
+                        NoiseBasedCountPlacement.of(1, 130.0d, 0.55d),
+                        NoiseBasedCountPlacement.of(-1, 130.0d, 0.2d),
+                        HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE),
+                        SurfaceWaterDepthFilter.forMaxDepth(0),
+                        BiomeFilter.biome()
+                ));
+
+        register(context, FAIRY_FOREST_TREES_LAYER_3, holdergetter.getOrThrow(FairyBiomesConfiguredFeatures.FAIRY_FOREST_TREES_LAYER_4),
+                List.of(CountPlacement.of(12), InSquarePlacement.spread(),
+                        NoiseBasedCountPlacement.of(1, 130.0d, 0.2d),
+                        NoiseBasedCountPlacement.of(-1, 130.0d, -0.2d),
+                        HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE),
+                        SurfaceWaterDepthFilter.forMaxDepth(0),
+                        BiomeFilter.biome()
+                ));
+
+
         register(context, FAIRY_FOREST_TREES_LAYER_4, holdergetter.getOrThrow(FairyBiomesConfiguredFeatures.FAIRY_FOREST_TREES_LAYER_4),
                 List.of(CountPlacement.of(12), InSquarePlacement.spread(),
                         NoiseBasedCountPlacement.of(1, 130.0d, -0.2d),
                         NoiseBasedCountPlacement.of(-1, 130.0d, -0.55d),
-                        HeightmapPlacement.onHeightmap(Heightmap.Types.MOTION_BLOCKING),
+                        HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE),
                         SurfaceWaterDepthFilter.forMaxDepth(0),
                         BiomeFilter.biome()
                         ));
+
+        register(context, FAIRY_FOREST_TREES_LAYER_5, holdergetter.getOrThrow(FairyBiomesConfiguredFeatures.FAIRY_FOREST_TREES_LAYER_4),
+                List.of(CountPlacement.of(8), InSquarePlacement.spread(),
+                        NoiseBasedCountPlacement.of(1, 130.0d, -0.55d),
+                        HeightmapPlacement.onHeightmap(Heightmap.Types.WORLD_SURFACE),
+                        SurfaceWaterDepthFilter.forMaxDepth(0),
+                        BiomeFilter.biome()
+                ));
 
     }
 

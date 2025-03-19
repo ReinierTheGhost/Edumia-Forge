@@ -11,4 +11,7 @@ public class EdumiaLog {
     public static void error(String s){
         LOGGER.error(Edumia.MOD_ID + ": " + s);
     }
+    public static void error(String s, Object... params){
+        LOGGER.error(String.format(Edumia.MOD_ID + ": " + s, params));
+    }
 }

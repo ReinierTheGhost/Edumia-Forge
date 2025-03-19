@@ -3,6 +3,7 @@ package com.legends.edumia.world.biomes.caves;
 
 import com.legends.edumia.world.biomes.BiomeColorsDTO;
 import com.legends.edumia.world.biomes.EdumiaBiomeKeys;
+import com.legends.edumia.world.biomes.surface.BiomeData;
 import com.legends.edumia.world.biomes.surface.EdumiaBiome;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
@@ -55,13 +56,15 @@ public class ModCaveBiomes {
         forodCaves.addCave(new CaveBiomeDTO(EdumiaBiomeKeys.DRIPSTONE_CAVE, new Vec2(1.0f,0f)));
     }
 
-    public static ResourceKey<Biome> getBiome(Vec2 coordinates, EdumiaBiome surfaceBiome) {
-        return switch (surfaceBiome.caveType) {
-            case ASHEN -> ashCaves.getClosestBiome(coordinates);
-            case HARAD -> haradCaves.getClosestBiome(coordinates);
-            case FOROD -> forodCaves.getClosestBiome(coordinates);
-            default -> defaultCaves.getClosestBiome(coordinates);
-        };
+    public static ResourceKey<Biome> getBiome(Vec2 coordinates, BiomeData surfaceBiome) {
+        if (surfaceBiome.getCaveType() != null)
+            return switch (surfaceBiome.getCaveType()) {
+                case ASHEN -> ashCaves.getClosestBiome(coordinates);
+                case HARAD -> haradCaves.getClosestBiome(coordinates);
+                case FOROD -> forodCaves.getClosestBiome(coordinates);
+                default -> defaultCaves.getClosestBiome(coordinates);
+            };
+            return defaultCaves.getClosestBiome(coordinates);
     }
 
     public static void bootstrap(BootstapContext<Biome> context) {

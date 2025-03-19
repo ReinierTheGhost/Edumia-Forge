@@ -1,9 +1,11 @@
 package com.legends.edumia.world.biomes.surface;
 
 import com.legends.edumia.world.placedfeatures.BeachPlacedFeatures;
+import com.legends.edumia.world.placedfeatures.FlowerPlacedFeatures;
 import com.legends.edumia.world.placedfeatures.TreePlacedFeatures;
 import com.legends.edumia.world.placedfeatures.biomes.BiomePlacedFeatures;
 import com.legends.edumia.world.placedfeatures.biomes.FairyBiomePlacedFeatures;
+import com.legends.edumia.world.placedfeatures.biomes.OrcDesertPlacedFeatures;
 import com.legends.edumia.world.placedfeatures.boulders.BoulderPlacedFeatures;
 import com.legends.edumia.world.placedfeatures.crystrals.CrystalPlacedFeatures;
 import com.legends.edumia.world.placedfeatures.plants.ReedsPlacedFeatures;
@@ -33,8 +35,6 @@ public class ModBiomeFeatures {
     }
 
     // region TREES
-    public static void addAcaciaTrees(List<ResourceKey<PlacedFeature>> vegetation) {
-    }
     public static void addCommonBeechTrees(List<ResourceKey<PlacedFeature>> vegetation) {
         vegetation.add(TreePlacedFeatures.COMMON_BEECH_PLACED_TREE_KEY);
     }
@@ -155,7 +155,11 @@ public class ModBiomeFeatures {
     }
 
     public static void addJungleTrees(List<ResourceKey<PlacedFeature>> vegetation) {
+        vegetation.add(FairyBiomePlacedFeatures.FAIRY_FOREST_TREES_LAYER_1);
+        vegetation.add(FairyBiomePlacedFeatures.FAIRY_FOREST_TREES_LAYER_2);
+        vegetation.add(FairyBiomePlacedFeatures.FAIRY_FOREST_TREES_LAYER_3);
         vegetation.add(FairyBiomePlacedFeatures.FAIRY_FOREST_TREES_LAYER_4);
+        vegetation.add(FairyBiomePlacedFeatures.FAIRY_FOREST_TREES_LAYER_5);
     }
     public static void addCommonOakTrees(List<ResourceKey<PlacedFeature>> vegetation) {
         vegetation.add(OakTreePlacedFeatures.COMMON_OAK_PLACED_TREE_KEY);
@@ -282,12 +286,6 @@ public class ModBiomeFeatures {
     }
     public static void addFlowerGreenJewel(List<ResourceKey<PlacedFeature>> vegetation) {
     }
-    public static void addFlowerDorwinion(List<ResourceKey<PlacedFeature>> vegetation) {
-    }
-    public static void addLebenninFlowers(List<ResourceKey<PlacedFeature>> vegetation) {
-    }
-    public static void addFlowerMeadow(List<ResourceKey<PlacedFeature>> vegetation) {
-    }
 
     public static void addBasaltPile(List<ResourceKey<PlacedFeature>> vegetation) {
     }
@@ -311,26 +309,18 @@ public class ModBiomeFeatures {
     public static void addRareForestMoss(List<ResourceKey<PlacedFeature>> vegetation) {
     }
     public static void addHeather(List<ResourceKey<PlacedFeature>> vegetation) {
+        vegetation.add(FlowerPlacedFeatures.HEATHER_BUSH_FLOWER_KEY);
     }
-    public static void addRareHeather(List<ResourceKey<PlacedFeature>> vegetation) {
+
+    public static void addGensaiOrchid(List<ResourceKey<PlacedFeature>> vegetation) {
+        vegetation.add(FlowerPlacedFeatures.GENSAI_ORCHID_FLOWER_KEY);
     }
-    public static void addHeatherBush(List<ResourceKey<PlacedFeature>> vegetation) {
-    }
-    public static void addRedHeather(List<ResourceKey<PlacedFeature>> vegetation) {
-    }
+
     public static void addMallos(List<ResourceKey<PlacedFeature>> vegetation) {
-    }
-    public static void addStrawberries(List<ResourceKey<PlacedFeature>> vegetation) {
-    }
-    public static void addToughBerries(List<ResourceKey<PlacedFeature>> vegetation) {
-    }
-    public static void addCommonToughBerries(List<ResourceKey<PlacedFeature>> vegetation) {
     }
     public static void addToughBerriesRare(List<ResourceKey<PlacedFeature>> vegetation) {
     }
     public static void addTuftGrass(List<ResourceKey<PlacedFeature>> vegetation) {
-    }
-    public static void addMordorLichen(List<ResourceKey<PlacedFeature>> vegetation) {
     }
     public static void addReedsFoliage(List<ResourceKey<PlacedFeature>> vegetation) {
         vegetation.add(ReedsPlacedFeatures.REEDS);
@@ -441,7 +431,7 @@ public class ModBiomeFeatures {
     }
     public static void addSnowOre(List<ResourceKey<PlacedFeature>> vegetation) {
     }
-    public static void addSandOre(List<ResourceKey<PlacedFeature>> vegetation) {
+    public static void addWhiteSandLayers(List<ResourceKey<PlacedFeature>> vegetation) {
         vegetation.add(BeachPlacedFeatures.WHITE_SAND_LAYER_FIRST);
         vegetation.add(BeachPlacedFeatures.WHITE_SAND_LAYER_SECOND);
         vegetation.add(BeachPlacedFeatures.WHITE_SAND_LAYER_THIRD);
@@ -458,6 +448,10 @@ public class ModBiomeFeatures {
     }
     public static void addWhiteSand(List<ResourceKey<PlacedFeature>> vegetation) {
 
+    }
+
+    public static void addSandPath(List<ResourceKey<PlacedFeature>> vegetation) {
+        vegetation.add(OrcDesertPlacedFeatures.SAND_PATH);
     }
     // endregion
 

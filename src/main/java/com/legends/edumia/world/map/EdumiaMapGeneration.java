@@ -3,77 +3,158 @@ package com.legends.edumia.world.map;
 
 
 
+import com.legends.edumia.Edumia;
 import com.legends.edumia.utils.LoggerUtil;
 import com.legends.edumia.utils.resources.FileType;
 import com.legends.edumia.utils.resources.FileUtils;
 import com.legends.edumia.world.biomes.surface.EdumiaBiome;
-import com.legends.edumia.world.biomes.surface.EdumiaBiomesData;
+import com.legends.edumia.world.biomes.surface.MapBasedBiomePool;
+import com.legends.edumia.world.biomes.surface.MapBasedCustomBiome;
 import com.legends.edumia.world.chunkgen.map.ImageUtils;
 
+import javax.imageio.IIOException;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 public class EdumiaMapGeneration {
     public static int CURRENT_ITERATION = 0;
 
     private FileUtils fileUtils;
-    private LoggerUtil loggerUtil;
     private static final int WATER_BUFFER = 16;
     private static final float WATER_HEIGHT_MULTIPLIER = 1.0f;
     private static BufferedImage baseHeightImage;
+    private static BufferedImage edgeHeightImage;
+    private static BufferedImage initialMap;
+
+
     public EdumiaMapGeneration() throws Exception {
         fileUtils = FileUtils.getInstance();
-        loggerUtil = LoggerUtil.getInstance();
         generate();
     }
 
     public void generate() throws Exception {
-        loggerUtil.logInfoMsg("");
-        loggerUtil.logInfoMsg("================ EdumiaMapGeneration ================");
+        LoggerUtil.logInfoMsg("");
+        LoggerUtil.logInfoMsg("================ EdumiaMapGeneration ================");
 
-        BufferedImage initialMap = getInitialImage();
-
-        if(initialMap == null){
-            throw new Exception(this + " : The image of the map in resource has created an error and operation cannot continue.");
+        try{
+            initialMap = getInitialImage();
+            if(initialMap == null){
+                throw new Exception(this + " : The image of the map in resource has created an error and operation cannot continue.");
+            }
+        } catch (Exception e){
+            LoggerUtil.logError("MiddleEarthMapGeneration::generate() - Fetch Initial Map", e);
         }
 
-        loggerUtil.logInfoMsg("Validating initial map BIOME colors;");
+        if(!Edumia.ENABLE_INSTANT_BOOTING){
+            LoggerUtil.logInfoMsg("Instant Booting - Disabled");
+        }
+        else {
+            LoggerUtil.logInfoMsg("Instant Booting - Enabled");
+            boolean pasteSuccess = true;
+            // check if copy&paste is necessary
+            File rootFolder = new File(EdumiaMapConfigs.MOD_DATA_ROOT);
+            File modRootFolder = new File(EdumiaMapConfigs.MOD_DATA_MOD_ROOT);
+            File destFolder = new File(EdumiaMapConfigs.MOD_DATA);
+            rootFolder.mkdirs();
+            modRootFolder.mkdirs();
+            destFolder.mkdirs();
+
+            if(destFolder.list().length == 0) { // Instant Booting triggered
+                try {
+                    String resourceFolderPath = "/%s".formatted(EdumiaMapConfigs.INITIAL_MAP_FOLDER);
+                    String runtimeFolderPath = "%s".formatted(EdumiaMapConfigs.MOD_DATA_MOD_ROOT);
+                    InputStream inputStream = getClass().getResourceAsStream(resourceFolderPath + ".zip");
+                    ZipInputStream zipInputStream = new ZipInputStream(inputStream);
+                    ZipEntry entry;
+                    File runtimeDataVersionDirectory = new File(runtimeFolderPath);
+                    runtimeDataVersionDirectory.mkdirs();
+                    byte[] buffer = new byte[1024];
+                    while ((entry = zipInputStream.getNextEntry()) != null) {
+                        File entryDestination = new File(runtimeFolderPath, entry.getName());
+                        if (entry.isDirectory()) {
+                            entryDestination.mkdirs();
+                        } else {
+                            entryDestination.getParentFile().mkdirs();
+                            FileOutputStream fos = new FileOutputStream(entryDestination);
+                            int len;
+                            while ((len = zipInputStream.read(buffer)) > 0) {
+                                fos.write(buffer, 0, len);
+                            }
+                            fos.close();
+                        }
+                    }
+
+                    inputStream.close();
+                    zipInputStream.close();
+                } catch (IOException e){
+                    LoggerUtil.logError("MiddleEarthMapGeneration::Couldn't copy paste folders", e);
+                    pasteSuccess = false;
+                }
+
+                if(pasteSuccess) {
+                LoggerUtil.logInfoMsg("Instant Booting - Completed");
+                return;
+                } else {
+                    LoggerUtil.logError("Instant Booting - Failure");
+                }
+            } else {
+            LoggerUtil.logInfoMsg("Instant Booting - Skipped, Files already present");
+            LoggerUtil.logInfoMsg("Validating data content...");
+            }
+
+        }
+
+        LoggerUtil.logInfoMsg("Validating initial map BIOME colors;");
         if(!validateBaseColors(initialMap)) return;
 
 
-        loggerUtil.logInfoMsg("Validating BIOME generation availability;");
+        LoggerUtil.logInfoMsg("Validating BIOME generation availability;");
         int iterationToGenerate = (EdumiaMapConfigs.FORCE_GENERATION)
                 ? EdumiaMapConfigs.MAP_ITERATION + 1
                 : findAmountOfIterationToGenerate(initialMap);
 
         if(iterationToGenerate > 0){
-            loggerUtil.logInfoMsg("Begin BIOME generation;");
+            LoggerUtil.logInfoMsg("Begin BIOME generation;");
             generateBiomes(initialMap, iterationToGenerate);
         }
 
-        loggerUtil.logInfoMsg("Validating initial map HEIGHT MODIFIER generation availability;");
+        LoggerUtil.logInfoMsg("Validating initial map HEIGHT MODIFIER generation availability;");
         if(!validateBaseHeightDatas()){
-            loggerUtil.logInfoMsg("Begin initial map HEIGHT MODIFIER generation;");
+            LoggerUtil.logInfoMsg("Begin initial map HEIGHT MODIFIER generation;");
             generateBaseHeightImage(initialMap);
+            generateEdgeHeightImage(initialMap);
         }
 
-        loggerUtil.logInfoMsg("Validating HEIGHT generation availability;");
+        LoggerUtil.logInfoMsg("Validating HEIGHT generation availability;");
         if(!validateHeightDatas(initialMap)){
-            loggerUtil.logInfoMsg("Begin HEIGHT generation;");
+            LoggerUtil.logInfoMsg("Begin HEIGHT generation;");
             generateHeight(initialMap);
         }
+    }
+
+    public static BufferedImage getEdgeHeightImage(){
+        return edgeHeightImage;
     }
 
     private boolean validateBaseColors(BufferedImage initialMap) {
         for(int x = 0; x < initialMap.getWidth(); x++){
             for(int y = 0; y < initialMap.getWidth(); y++){
                 try{
-                    EdumiaBiomesData.getBiomeByColor(initialMap.getRGB(x,y));
+                    MapBasedBiomePool.getBiomeByColor(initialMap.getRGB(x,y));
                 } catch (Exception e) {
-                    loggerUtil.logError("EdumiaMapGeneration::Cannot find color at [%s,%s] in the inital map".formatted(x,y));
+                    LoggerUtil.logError("EdumiaMapGeneration::Cannot find color at [%s,%s] in the inital map".formatted(x,y));
                     return false;
                 }
             }
@@ -82,15 +163,15 @@ public class EdumiaMapGeneration {
     }
 
     private BufferedImage getInitialImage(){
-        loggerUtil.logInfoMsg("Validating ORIGINAL image existence;");
+        LoggerUtil.logInfoMsg("Validating ORIGINAL image existence;");
         BufferedImage initialImage = fileUtils.getResourceImage(EdumiaMapConfigs.INITIAL_IMAGE);
         if(initialImage == null){
-            loggerUtil.logError("Initial map image couldn't be found!");
+            LoggerUtil.logError("Initial map image couldn't be found!");
             return null;
         }
-        loggerUtil.logInfoMsg("Validating ORIGINAL image size;");
+        LoggerUtil.logInfoMsg("Validating ORIGINAL image size;");
         if(initialImage.getWidth() % EdumiaMapConfigs.REGION_SIZE != 0 || initialImage.getHeight() % EdumiaMapConfigs.REGION_SIZE != 0){
-            loggerUtil.logError("Initial map image has the wrong size!");
+            LoggerUtil.logError("Initial map image has the wrong size!");
             return null;
         }
 
@@ -112,7 +193,7 @@ public class EdumiaMapGeneration {
                 for(int y = 0; y < currentRegionAmountY; y ++) {
                     String path = EdumiaMapConfigs.BIOME_PATH.formatted(i) + EdumiaMapConfigs.IMAGE_NAME.formatted(x,y);
                     if(fileUtils.getRunImage(path) == null){
-                        loggerUtil.logError("Lacking biome file at : [%s]".formatted(path));
+                        LoggerUtil.logError("Need to regenerate biome files: Lacking biome file at : [%s]".formatted(path));
                         return absoluteMapIteration - i;
                     }
                 }
@@ -161,7 +242,7 @@ public class EdumiaMapGeneration {
             try {
                 executorService.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
             } catch (Exception e) {
-                loggerUtil.logError("Error while generating biomes");
+                LoggerUtil.logError("Error while generating biomes");
             }
         }
         return new BufferedImage[0][][];
@@ -169,7 +250,7 @@ public class EdumiaMapGeneration {
 
     private void generateInitialBiomes(BufferedImage initialImage){
         if(initialImage.getWidth() != EdumiaMapConfigs.REGION_SIZE || initialImage.getWidth() !=  EdumiaMapConfigs.REGION_SIZE){
-            loggerUtil.logError("TO REMOVE - Need splitting for the initial image!");
+            LoggerUtil.logError("Need to regenerate height files: Need splitting for the initial image!");
             for(int i = 0; i < initialImage.getWidth() / EdumiaMapConfigs.REGION_SIZE; i++){
                 for(int j = 0; j < initialImage.getHeight() / EdumiaMapConfigs.REGION_SIZE; j++){
                     BufferedImage newImage = initialImage.getSubimage(EdumiaMapConfigs.REGION_SIZE * i, EdumiaMapConfigs.REGION_SIZE * j, EdumiaMapConfigs.REGION_SIZE, EdumiaMapConfigs.REGION_SIZE);
@@ -210,7 +291,7 @@ public class EdumiaMapGeneration {
                 int finalY = y;
                 executorService.submit(() -> {
                     fileUtils.saveImage(
-                            FileUtils.blur(processHeightRegion(fileUtils.getRunImageWithBorders(finalX, finalY, HEIGHT_BLUR_SIZE),
+                            ImageUtils.blur(processHeightRegion(fileUtils.getRunImageWithBorders(finalX, finalY, HEIGHT_BLUR_SIZE),
                                             EdumiaMapConfigs.REGION_SIZE, true, finalX, finalY, HEIGHT_BLUR_SIZE),
                                     HEIGHT_BLUR_SIZE, true),
                             EdumiaMapConfigs.HEIGHT_PATH,
@@ -224,12 +305,12 @@ public class EdumiaMapGeneration {
         try {
             executorService.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
         } catch (Exception e) {
-            loggerUtil.logError("Error while generating heights");
+            LoggerUtil.logError("Error while generating heights");
         }
 
         long finish = System.currentTimeMillis();
         long timeElapsed = finish - start;
-        LoggerUtil.getInstance().logInfoMsg("TIME BLUR FOR HEIGHT: " + timeElapsed);
+        LoggerUtil.logInfoMsg("TIME BLUR FOR HEIGHT: " + timeElapsed);
     }
 
     private boolean validateBaseHeightDatas() {
@@ -243,12 +324,21 @@ public class EdumiaMapGeneration {
 
     private final static int BASE_HEIGHT_BLUR_SIZE = 25;
     private void generateBaseHeightImage(BufferedImage initialMap) {
-        baseHeightImage = fileUtils.blur(processHeightRegion(initialMap, EdumiaMapConfigs.REGION_SIZE, false, 0,0, 0), BASE_HEIGHT_BLUR_SIZE, false);
+        baseHeightImage = ImageUtils.blur(processHeightRegion(initialMap, EdumiaMapConfigs.REGION_SIZE, false, 0,0, 0), BASE_HEIGHT_BLUR_SIZE, false);
         fileUtils.saveImage(baseHeightImage,
                 EdumiaMapConfigs.BASE_HEIGHT_PATH,
                 EdumiaMapConfigs.BASE_HEIGHT_IMAGE_NAME,
                 FileType.Png
         );
+    }
+
+    private void generateEdgeHeightImage(BufferedImage initialMap){
+        edgeHeightImage = ImageUtils.edge(initialMap);
+        edgeHeightImage = ImageUtils.blur(edgeHeightImage, 15, false);
+        fileUtils.saveImage(edgeHeightImage,
+                EdumiaMapConfigs.BASE_HEIGHT_PATH,
+                EdumiaMapConfigs.BASE_EDGE_IMAGE_NAME,
+                FileType.Png);
     }
 
     private static BufferedImage processHeightRegion(BufferedImage biomeImage, int size, boolean hasBaseImage, int imageX, int imageZ, int brushSize) {
@@ -257,13 +347,13 @@ public class EdumiaMapGeneration {
         for (int x = 0; x < size + brushSize*2; x++) {
             for (int z = 0; z < size + brushSize*2; z++) {
                 try {
-                    EdumiaBiome biome = EdumiaBiomesData.getBiomeByColor(biomeImage.getRGB(x, z));
-                    int height = biome.height;
+                    MapBasedCustomBiome biome = MapBasedBiomePool.getBiomeByColor(biomeImage.getRGB(x, z));
+                    int height = biome.getHeight();
                     if(height > 255){
                         height = 255;
                     }
 
-                    int waterHeightDifference = biome.waterHeight - EdumiaBiome.DEFAULT_WATER_HEIGHT;
+                    int waterHeightDifference = biome.getWaterHeight() - EdumiaBiome.DEFAULT_WATER_HEIGHT;
                     int water = 0;
                     int waterHeight = height - waterHeightDifference;
                     if(waterHeight < 0) {
@@ -271,24 +361,18 @@ public class EdumiaMapGeneration {
                         height = Math.max(0, height);
                     }
 
-                    short noiseModifier = (short) (biome.biomeGenerationData.noiseModifier * 127);
+                    short noiseModifier = (short) (biome.getBiomeData().noiseModifier * 127);
 
                     Color heightModifier = (hasBaseImage)
                             ? getBaseImageHeightModifier(x, z, imageX, imageZ, brushSize)
                             : new Color(Math.abs(height), noiseModifier, 0);
 
-                    int red = (int)Math.round((biome.biomeGenerationData.heightModifier * ((double)Math.abs(height)) + (1 - biome.biomeGenerationData.heightModifier) * (double)heightModifier.getRed()));
+                    int red = (int)Math.round((biome.getBiomeData().heightModifier * ((double)Math.abs(height)) + (1 - biome.getBiomeData().heightModifier) * (double)heightModifier.getRed()));
 
                     int green = (int)((noiseModifier + heightModifier.getRed()) / 2f);
 
-                    // Compute grayscale value based on height
-                    int grayscale = (int) Math.round((biome.biomeGenerationData.heightModifier * ((double) Math.abs(height))
-                            + (1 - biome.biomeGenerationData.heightModifier) * (double) heightModifier.getRed()));
 
-                    // Clamp grayscale value between 0 and 255
-                    grayscale = Math.max(0, Math.min(255, grayscale));
-
-                    Color newColor = new Color(red, green, water); // grayscale color
+                    Color newColor = new Color(red, green, water);
 
                     newHeightRegion.setRGB(x, z, newColor.getRGB());
                 } catch (Exception e) {
@@ -342,7 +426,7 @@ public class EdumiaMapGeneration {
         try{
             return new Color(red, green, blue);
         } catch (Exception e){
-            LoggerUtil.getInstance().logError(e.getMessage());
+            LoggerUtil.logError(e.getMessage());
             return color1;
         }
     }

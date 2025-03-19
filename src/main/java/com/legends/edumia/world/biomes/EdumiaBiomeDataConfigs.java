@@ -102,9 +102,14 @@ public class EdumiaBiomeDataConfigs {
             .addSlopeData(44, Blocks.SANDSTONE)
             .addSlopeData(56, Blocks.STONE)
             .addSlopeData(MAX_ANGLE, Blocks.TERRACOTTA);
-    public static SlopeMap harad = new SlopeMap()
+    public static SlopeMap desert = new SlopeMap()
             .addSlopeData(32, Blocks.SAND)
             .addSlopeData(45, Blocks.SANDSTONE)
+            .addSlopeData(60, Blocks.STONE)
+            .addSlopeData(MAX_ANGLE, Blocks.TERRACOTTA);
+    public static SlopeMap redDesert = new SlopeMap()
+            .addSlopeData(32, Blocks.RED_SAND)
+            .addSlopeData(45, Blocks.RED_SANDSTONE)
             .addSlopeData(60, Blocks.STONE)
             .addSlopeData(MAX_ANGLE, Blocks.TERRACOTTA);
 
@@ -121,6 +126,9 @@ public class EdumiaBiomeDataConfigs {
             .addSlopeData(30, Blocks.SAND)
             .addSlopeData(36, Blocks.SAND)
             .addSlopeData(MAX_ANGLE, Blocks.STONE);
+
+    public static SlopeMap mountainStream = new SlopeMap()
+            .addSlopeData(MAX_ANGLE, Blocks.WATER);
 
     public static SlopeMap gensaiShores = new SlopeMap()
             .addSlopeData(26, () -> BlockLoader.WHITE_SAND.get())
@@ -196,18 +204,26 @@ public class EdumiaBiomeDataConfigs {
     private static final double MOUNTAIN_HEIGHT_MODIFIER = 0.46f;
     private static final double MOUNTAIN_PEAKS_HEIGHT_MODIFIER = 0.55f;
 
-    public static BiomeGenerationData landModifier = new BiomeGenerationData().expansionWeight(LAND_WEIGHT).noiseModifier(0.39f).heightModifier(0.33f);
-    public static BiomeGenerationData plainsModifier = new BiomeGenerationData().expansionWeight(LAND_WEIGHT).noiseModifier(PLAINS_NOISE_MODIFIER).heightModifier(LAND_HEIGHT_MODIFIER);
-    public static BiomeGenerationData riverModifier = new BiomeGenerationData().expansionWeight(RIVER_WEIGHT).noiseModifier(WATER_NOISE_MODIFIER).heightModifier(WATER_HEIGHT_MODIFIER);
-    public static BiomeGenerationData smallRiverModifier = new BiomeGenerationData().expansionWeight(RIVER_WEIGHT).noiseModifier(0.05f).heightModifier(0.05f);
+    public static BiomeGenerationData landModifier = new BiomeGenerationData().expansionWeight(LAND_WEIGHT)
+            .noiseModifier(0.46f).heightModifier(0.33f);
+    public static BiomeGenerationData plainsModifier = new BiomeGenerationData().expansionWeight(LAND_WEIGHT)
+            .noiseModifier(PLAINS_NOISE_MODIFIER).heightModifier(LAND_HEIGHT_MODIFIER);
+    public static BiomeGenerationData riverModifier = new BiomeGenerationData().expansionWeight(RIVER_WEIGHT)
+            .noiseModifier(WATER_NOISE_MODIFIER).heightModifier(WATER_HEIGHT_MODIFIER);
+    public static BiomeGenerationData smallRiverModifier = new BiomeGenerationData().expansionWeight(RIVER_WEIGHT)
+            .noiseModifier(0.05f).heightModifier(0.05f);
     public static BiomeGenerationData oceanModifier = new BiomeGenerationData().expansionWeight(OCEAN_WEIGHT)
             .noiseModifier(WATER_NOISE_MODIFIER).heightModifier(WATER_HEIGHT_MODIFIER);
-    public static BiomeGenerationData mountainModifier = new BiomeGenerationData().expansionWeight(MOUNTAIN_WEIGHT).noiseModifier(MOUNTAIN_NOISE_MODIFIER).heightModifier(MOUNTAIN_HEIGHT_MODIFIER);
+    public static BiomeGenerationData mountainModifier = new BiomeGenerationData().expansionWeight(MOUNTAIN_WEIGHT)
+            .noiseModifier(MOUNTAIN_NOISE_MODIFIER).heightModifier(MOUNTAIN_HEIGHT_MODIFIER);
+    public static BiomeGenerationData woodlandModifier = new BiomeGenerationData().expansionWeight(LAND_WEIGHT)
+            .noiseModifier(0.7f).heightModifier(0.4f);
     public static BiomeGenerationData emModifier = new BiomeGenerationData().expansionWeight(MOUNTAIN_WEIGHT)
-            .noiseModifier(MOUNTAIN_NOISE_MODIFIER).heightModifier(0.36f);
+            .noiseModifier(0.7f).heightModifier(0.46f);
     public static BiomeGenerationData emPeaksModifier = new BiomeGenerationData().expansionWeight(MOUNTAIN_WEIGHT)
-            .noiseModifier(1.47f).heightModifier(0.33f);
-
+            .noiseModifier(1.47f).heightModifier(0.6f);
+    public static BiomeGenerationData badLandModifier = new BiomeGenerationData().expansionWeight(LAND_WEIGHT)
+            .noiseModifier(1.2f).heightModifier(0.67f);
     public static BiomeGenerationData mountTitleistModifier = new BiomeGenerationData().expansionWeight(MOUNTAIN_WEIGHT)
             .noiseModifier(1.47f).heightModifier(MOUNTAIN_HEIGHT_MODIFIER);
 

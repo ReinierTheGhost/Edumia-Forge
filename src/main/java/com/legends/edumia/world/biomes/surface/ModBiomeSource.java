@@ -1,6 +1,7 @@
 package com.legends.edumia.world.biomes.surface;
 
 
+import com.legends.edumia.utils.noises.BlendedNoise;
 import com.legends.edumia.utils.noises.SimplexNoise;
 import com.legends.edumia.world.biomes.EdumiaBiomeKeys;
 import com.legends.edumia.world.biomes.caves.CaveType;
@@ -10,7 +11,6 @@ import com.legends.edumia.world.chunkgen.map.EdumiaHeightMap;
 import com.legends.edumia.world.features.underground.CavesPlacedFeatures;
 import com.legends.edumia.world.map.EdumiaMapRuntime;
 import com.mojang.serialization.Codec;
-import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import net.minecraft.core.Holder;
@@ -30,8 +30,10 @@ public class ModBiomeSource extends BiomeSource {
             Codec.list(Biome.CODEC).fieldOf("biomes").forGetter((biomeSource) -> biomeSource.biomes)).apply(instance, ModBiomeSource::new));
 
     private final List<Holder<Biome>> biomes;
-    private final int CAVE_NOISE = 96;
-    private final int CAVE_OFFSET = 7220;
+    private static final int CAVE_NOISE = 360;
+    private static final int CAVE_OFFSET = 7220;
+    public static final int SUB_BIOME_NOISE = 256;
+    public static final int SUB_BIOME_OFFSET = 8240;
     private EdumiaMapRuntime edumiaMapRuntime;
     public ModBiomeSource(List<Holder<Biome>> biomes) {
         this.biomes = biomes;
@@ -48,10 +50,33 @@ public class ModBiomeSource extends BiomeSource {
         return biomes.stream();
     }
 
-    private ResourceKey<Biome> getCaveBiome(int x, int z, EdumiaBiome surfaceBiome) {
+    private ResourceKey<Biome> getCaveBiome(int x, int z, BiomeData surfaceBiome) {
+        long seed = EdumiaHeightMap.getSeed();
+        x += EdumiaHeightMap.getSeed();
+        z += EdumiaHeightMap.getSeed();
         float temperature = (float) SimplexNoise.noise((double) x / CAVE_NOISE,  (double) z / CAVE_NOISE);
         float humidity = (float) SimplexNoise.noise((double) (x + CAVE_OFFSET) / CAVE_NOISE, (double)(z + CAVE_OFFSET) / CAVE_NOISE);
         return ModCaveBiomes.getBiome(new Vec2(temperature, humidity), surfaceBiome);
+    }
+
+    public static double getSubBiomeNoise(int x, int z, float frequency){
+        x +=EdumiaHeightMap.getSeed();
+        z += EdumiaHeightMap.getSeed();
+        float noiseFrequency = (SUB_BIOME_NOISE * frequency);
+        double perlin = 1 * BlendedNoise.noise((double) x / noiseFrequency, (double) z / noiseFrequency);
+        perlin += 0.5f * BlendedNoise.noise((double) x * 2 / noiseFrequency, (double) z * 2 / noiseFrequency);
+        perlin = perlin / (1 + 0.5f); // 2 octaves
+        return perlin;
+    }
+
+    private ResourceKey<Biome> getSubBiome(int x, int z, BiomeData surfaceBiome){
+        SubBiome subBiome = SubBiomes.getSubBiome(surfaceBiome.getBiomeResourceKey());
+        if (subBiome != null){
+            double perlin = getSubBiomeNoise(x, z, subBiome.getFrequency());
+            SubBiome.SubBiomeData biomeData = SubBiomes.subBiomesMap.get(surfaceBiome.getBiomeResourceKey()).getBiomeAtNoise((float) perlin);
+            if (biomeData != null) return biomeData.biome;
+        }
+        return surfaceBiome.getBiomeResourceKey();
     }
 
     @Override
@@ -60,45 +85,60 @@ public class ModBiomeSource extends BiomeSource {
         int j = QuartPos.toBlock(y);
         int k = QuartPos.toBlock(z);
 
-        EdumiaBiome edumiaBiome = edumiaMapRuntime.getBiome(i, k);
+        MapBasedCustomBiome biomeHeightData = edumiaMapRuntime.getBiome(i, k);
         
-        if (edumiaBiome == null) {
+        if (biomeHeightData == null) {
             return biomes.get(0);
         }
 
-        ResourceKey<Biome> biome = edumiaBiome.biome;
+        BiomeData biome = biomeHeightData.getBiome();
         ResourceKey<Biome> processedBiome;
 
-        if(!EdumiaBiomesData.waterBiomes.contains(biome)) {
-            float height = EdumiaChunkGenerator.DIRT_HEIGHT + EdumiaHeightMap.getHeight(i, k);
-            if(j <= CavesPlacedFeatures.MAX_MITHRIL_HEIGHT && edumiaBiome.caveType == CaveType.MISTIES) {
+        float height = EdumiaChunkGenerator.DIRT_HEIGHT + EdumiaHeightMap.getHeight(i, k);
+        if(j <= CavesPlacedFeatures.MAX_MITHRIL_HEIGHT && biome.getCaveType() == CaveType.MISTIES) {
+            processedBiome = EdumiaBiomeKeys.MITHRIL_CAVE;
+        }else if (j < (height -16)){
+            processedBiome = getCaveBiome(i, k, biome);
+        }
+        else if (!MapBasedBiomePool.waterBiomes.contains(biome.getBiomeResourceKey())){
+            SubBiome subBiome = SubBiomes.getSubBiome(biomeHeightData.getBiomeKey());
+            if (subBiome != null){
+                double perlin = ModBiomeSource.getSubBiomeNoise(i, k, subBiome.getFrequency());
+                double additionalHeight = subBiome.getAdditionalHeight((float) perlin);
+                additionalHeight *= EdumiaMapRuntime.getInstance().getEdge(i, k);
+                height += (float) additionalHeight;
+            }
+
+            if(j <= CavesPlacedFeatures.MAX_MITHRIL_HEIGHT && biome.getCaveType() == CaveType.MISTIES) {
                 processedBiome = EdumiaBiomeKeys.MITHRIL_CAVE;
-            } else if(biome == EdumiaBiomesData.deadMarshes.biome || biome == EdumiaBiomesData.deadMarshesWater.biome) {
+            }else if(biome == MapBasedBiomePool.deadMarshes.getBiome() || biome == MapBasedBiomePool.deadMarshesWater.getBiome()) {
                 height = EdumiaChunkGenerator.DIRT_HEIGHT + EdumiaChunkGenerator.getMarshesHeight(i, k, height);
-                if(j < (height - 16)) processedBiome = getCaveBiome(i, k, edumiaBiome);
-                else if(height < EdumiaChunkGenerator.WATER_HEIGHT) processedBiome = EdumiaBiomesData.deadMarshesWater.biome;
-                else processedBiome = EdumiaBiomesData.deadMarshes.biome;
-            } else if(j < (height - 16)) {
-                processedBiome = getCaveBiome(i, k, edumiaBiome);
-            } else if(height <= edumiaBiome.waterHeight + 1.25f) {
-                if(EdumiaBiomesData.coastalBiomes.contains(biome)){
-                    processedBiome = EdumiaBiomesData.oceanCoast.biome;
-                } else if(EdumiaBiomesData.wastePondBiomes.contains(biome)) {
-                    processedBiome = EdumiaBiomesData.wastePond.biome;
-                } else if(EdumiaBiomesData.mirkwoodSwampBiomes.contains(biome)) {
-                    processedBiome = EdumiaBiomesData.mirkwoodSwamp.biome;
-                } else if(EdumiaBiomesData.oasisBiomes.contains(biome)) {
-                    processedBiome = EdumiaBiomesData.oasis.biome;
-                } else if(EdumiaBiomesData.frozenBiomes.contains(biome)) {
-                    processedBiome = EdumiaBiomesData.frozenPond.biome;
-                } else if(EdumiaBiomesData.anduinWaterBiomes.contains(biome)){
-                    processedBiome = EdumiaBiomesData.greatRiver.biome;
+                if(j < (height - 16))
+                    processedBiome = getCaveBiome(i, k, biome);
+                else if(height < EdumiaChunkGenerator.WATER_HEIGHT)
+                    processedBiome = MapBasedBiomePool.deadMarshesWater.getBiomeKey();
+                else
+                    processedBiome = MapBasedBiomePool.deadMarshes.getBiomeKey();
+            } else if(height <= biomeHeightData.getWaterHeight() + 1.25f) { // TODO : This is really rough, need to be re dynamic
+                if (MapBasedBiomePool.coastalBiomes.contains(biome.getBiomeResourceKey())) {
+                    processedBiome = MapBasedBiomePool.oceanCoast.getBiomeKey();
+                } else if (MapBasedBiomePool.wastePondBiomes.contains(biome.getBiomeResourceKey())) {
+                    processedBiome = MapBasedBiomePool.wastePond.getBiomeKey();
+                } else if (MapBasedBiomePool.mirkwoodSwampBiomes.contains(biome.getBiomeResourceKey())) {
+                    processedBiome = MapBasedBiomePool.mirkwoodSwamp.getBiomeKey();
+                } else if (MapBasedBiomePool.oasisBiomes.contains(biome.getBiomeResourceKey())) {
+                    processedBiome = MapBasedBiomePool.oasis.getBiomeKey();
+                } else if (MapBasedBiomePool.frozenBiomes.contains(biome.getBiomeResourceKey())) {
+                    processedBiome = MapBasedBiomePool.frozenPond.getBiomeKey();
+                } else if (MapBasedBiomePool.anduinWaterBiomes.contains(biome.getBiomeResourceKey())) {
+                    processedBiome = MapBasedBiomePool.greatRiver.getBiomeKey();
+                } else {
+                    processedBiome = MapBasedBiomePool.pond.getBiomeKey();
                 }
-                else {
-                    processedBiome = EdumiaBiomesData.pond.biome;
-                }
-            } else processedBiome = biome;
-        } else processedBiome = biome;
+            } else {
+                processedBiome = getSubBiome(i, k, biome);
+            }
+        } else processedBiome = biome.getBiomeResourceKey();
 
         return biomes.stream().filter(
                         b -> b.unwrapKey().get().toString().equalsIgnoreCase(processedBiome.toString()))

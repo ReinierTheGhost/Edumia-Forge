@@ -4,7 +4,8 @@ package com.legends.edumia.world.chunkgen.map;
 
 import com.legends.edumia.utils.noises.BlendedNoise;
 import com.legends.edumia.world.biomes.surface.EdumiaBiome;
-import com.legends.edumia.world.biomes.surface.EdumiaBiomesData;
+import com.legends.edumia.world.biomes.surface.MapBasedBiomePool;
+import com.legends.edumia.world.biomes.surface.MapBasedCustomBiome;
 import com.legends.edumia.world.map.EdumiaMapConfigs;
 import com.legends.edumia.world.map.EdumiaMapRuntime;
 import com.legends.edumia.world.map.EdumiaMapUtils;
@@ -34,8 +35,21 @@ public class EdumiaHeightMap {
     private static EdumiaMapRuntime edumiaMapRuntime;
     private static Float defaultWeightHeight = null;
 
+    private static Long SEED;
     public EdumiaHeightMap(){
         edumiaMapRuntime = EdumiaMapRuntime.getInstance();
+    }
+
+    public static void setSeed(long newSeed){
+        if (SEED == null || newSeed != SEED){
+            SEED = newSeed;
+        }
+    }
+
+    public static Long getSeed(){
+        if(SEED == null)
+            return 0L;
+        return SEED;
     }
 
     private static float getImageHeight(int xWorld, int zWorld) {
@@ -48,10 +62,10 @@ public class EdumiaHeightMap {
             float height = color.getRed();
 
             if(blue > 0) { // Water carver
-                EdumiaBiome edumiaBiome = edumiaMapRuntime.getBiome(xWorld, zWorld);
+                MapBasedCustomBiome edumiaBiome = edumiaMapRuntime.getBiome(xWorld, zWorld);
                 float percentage = (WATER_MAX - blue) / WATER_MAX;
                 percentage = Math.max(0, Math.min(1, percentage));
-                float waterDifference = (float) (edumiaBiome.waterHeight - EdumiaBiome.DEFAULT_WATER_HEIGHT);
+                float waterDifference = (float) (edumiaBiome.getWaterHeight() - EdumiaBiome.DEFAULT_WATER_HEIGHT);
                 height -= waterDifference;
                 height *= percentage;
                 height += waterDifference;
@@ -59,7 +73,7 @@ public class EdumiaHeightMap {
             }
             return height;
         }
-        return EdumiaBiomesData.defaultBiome.height * 2.0f;
+        return MapBasedBiomePool.defaultBiome.getHeight() * 2.0f;
     }
 
     public static float getImageNoiseModifier(int xWorld, int zWorld) {
@@ -131,15 +145,7 @@ public class EdumiaHeightMap {
 
     private static float getDefaultWeightHeight() {
         if(defaultWeightHeight == null) {
-            int x = 0;
-            int z = 0;
-            float topLeft = getImageHeight(x, z);
-
-            float topRight = getImageHeight(x + PIXEL_WEIGHT, z);
-            float bottomLeft = getImageHeight(x, z + PIXEL_WEIGHT);
-            float bottomRight = getImageHeight(x + PIXEL_WEIGHT, z + PIXEL_WEIGHT);
-            defaultWeightHeight =  getHeightBetween(new float[]{topLeft, topRight, bottomLeft, bottomRight},
-                    (float) (x % PIXEL_WEIGHT) / PIXEL_WEIGHT, (float) (z % PIXEL_WEIGHT) / PIXEL_WEIGHT);
+           defaultWeightHeight = getImageHeight(0, 0);
         }
 
         return defaultWeightHeight;
@@ -162,7 +168,7 @@ public class EdumiaHeightMap {
         for(int i = -SMOOTH_BRUSH_SIZE; i <= SMOOTH_BRUSH_SIZE; i++) {
             for(int j = -SMOOTH_BRUSH_SIZE; j <= SMOOTH_BRUSH_SIZE; j++) {
                 if(!EdumiaMapUtils.getInstance().isWorldCoordinateInBorder(x + i, z + j))
-                    total += EdumiaBiomesData.defaultBiome.height;
+                    total += MapBasedBiomePool.defaultBiome.getHeight();
                 else
                     total += getImageHeight(x, z);
             }
@@ -188,5 +194,12 @@ public class EdumiaHeightMap {
 
     public static float lerp(float a, float b, float interpolation) {
         return a + interpolation * (b - a);
+    }
+
+    public static MapBasedCustomBiome getBiomeFromMap(int posX, int posZ) {
+        if (edumiaMapRuntime == null){
+            edumiaMapRuntime = EdumiaMapRuntime.getInstance();
+        }
+        return edumiaMapRuntime.getBiome(posX, posZ);
     }
 }

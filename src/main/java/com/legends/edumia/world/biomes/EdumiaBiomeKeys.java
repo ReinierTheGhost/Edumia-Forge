@@ -12,6 +12,9 @@ import net.minecraft.world.level.biome.Biomes;
 
 public class EdumiaBiomeKeys extends Biomes {
     // region SURFACE
+
+
+    public static final ResourceKey<Biome> DEMON_WASTELANDS = EdumiaBiomeKeys.register("demon_wastelands");
     public static final ResourceKey<Biome> EDUMIA_VALES = EdumiaBiomeKeys.register("edumia_vales");
 
 

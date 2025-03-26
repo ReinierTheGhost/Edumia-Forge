@@ -38,7 +38,6 @@ public class ModBiomes {
 
     public static void bootstrap(BootstapContext<Biome> context) {
         ModCaveBiomes.bootstrap(context);
-
         createEdumiaValesBiome(context, EdumiaBiomeKeys.EDUMIA_VALES);
         createGensaiBeachBiome(context, EdumiaBiomeKeys.GENSAI_BEACH);
         createTestBiome(context, EdumiaBiomeKeys.DEAD_MARSHES);
@@ -75,6 +74,9 @@ public class ModBiomes {
         createMountTitleistBiome(context, EdumiaBiomeKeys.MOUNT_TITLEIST_PEAK);
         createMountTitleistBiome(context, EdumiaBiomeKeys.MOUNT_TITLEIST_CRATER);
         createFairyForestBiome(context, EdumiaBiomeKeys.FAIRY_FOREST);
+
+        createEdumiaValesBiome(context, EdumiaBiomeKeys.DEMON_WASTELANDS);
+
         createOasisBiome(context, EdumiaBiomeKeys.OASIS);
         createOceanBiome(context, EdumiaBiomeKeys.OCEAN);
         createOceanCoastBiome(context, EdumiaBiomeKeys.OCEAN_COAST);
@@ -95,6 +97,19 @@ public class ModBiomes {
                 context.lookup(Registries.CONFIGURED_CARVER));
 
        ModBiomeFeatures.addJungleTrees(vegetation);
+
+        registerBiome(context, biomeResourceKey, spawnSettings, generationSettings);
+    }
+
+    public static void createDemonWastelandsBiome(BootstapContext<Biome> context, ResourceKey<Biome> biomeResourceKey) {
+        MobSpawnSettings.Builder spawnSettings = new MobSpawnSettings.Builder();
+        //ModSpawnSettingsBuilder.addFarmAnimals(spawnSettings);
+        BiomeGenerationSettings.Builder generationSettings = new BiomeGenerationSettings.Builder(context.lookup(Registries.PLACED_FEATURE),
+                context.lookup(Registries.CONFIGURED_CARVER));
+
+        ModBiomeFeatures.addCoarseDirtOre(vegetation);
+
+        ModBiomeFeatures.addGravelOre(vegetation);
 
         registerBiome(context, biomeResourceKey, spawnSettings, generationSettings);
     }

@@ -10,10 +10,7 @@ import com.legends.edumia.world.placedfeatures.boulders.BoulderPlacedFeatures;
 import com.legends.edumia.world.placedfeatures.crystrals.CrystalPlacedFeatures;
 import com.legends.edumia.world.placedfeatures.ocean.ReefPlacedFeatures;
 import com.legends.edumia.world.placedfeatures.plants.ReedsPlacedFeatures;
-import com.legends.edumia.world.placedfeatures.trees.BorealTreePlacedFeatures;
-import com.legends.edumia.world.placedfeatures.trees.OakTreePlacedFeatures;
-import com.legends.edumia.world.placedfeatures.trees.TemperateTreePlacedFeatures;
-import com.legends.edumia.world.placedfeatures.trees.TropicalTreePlacedFeatures;
+import com.legends.edumia.world.placedfeatures.trees.*;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
@@ -50,6 +47,7 @@ public class ModPlacedFeatures {
         OgreBiomePlacedFeatures.boostrap(context);
         FairyBiomePlacedFeatures.boostrap(context);
         OrcDesertPlacedFeatures.boostrap(context);
+        DeadTreePlacedFeatures.boostrap(context);
     }
 
     public static ResourceKey<PlacedFeature> registerKey(String name) {

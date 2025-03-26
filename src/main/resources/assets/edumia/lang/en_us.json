@@ -2137,6 +2137,8 @@
   "block.edumia.willow_door": "Willow door",
   "block.edumia.willow_trapdoor": "Willow trapdoor",
 
-  "gui.edumia.map.coords": "x : %d, z: %d"
+  "gui.edumia.map.coords": "x : %d, z: %d",
 
+  "#Comment:": "biomes",
+  "biome.edumia.ocean_coast": "Ocean coast"
 }

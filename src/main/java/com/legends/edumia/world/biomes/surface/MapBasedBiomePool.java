@@ -102,6 +102,8 @@ public class MapBasedBiomePool {
         add(new Color(234, 222, 117), new MapBasedCustomBiome(EdumiaBiomeKeys.GENSAI_BEACH, 0,
                 EdumiaBiomeDataConfigs.landModifier.heightModifier(0.97f).heightModifier(0.1f).noiseModifier(0.05f)));
 
+        add(new Color(35, 36, 36), new MapBasedCustomBiome(EdumiaBiomeKeys.DEMON_WASTELANDS, 10, EdumiaBiomeDataConfigs.landModifier));
+
         add(new Color(54, 75, 12), new MapBasedCustomBiome(EdumiaBiomeKeys.DARK_ELF_FOREST, 6, EdumiaBiomeDataConfigs.landModifier));
         add(new Color(236, 236, 236), new MapBasedCustomBiome(EdumiaBiomeKeys.EDUMIA_TUNDRA, 14, EdumiaBiomeDataConfigs.landModifier));
         add(new Color(237, 229, 145), new MapBasedCustomBiome(EdumiaBiomeKeys.ORC_DESERT, 9, EdumiaBiomeDataConfigs.landModifier));

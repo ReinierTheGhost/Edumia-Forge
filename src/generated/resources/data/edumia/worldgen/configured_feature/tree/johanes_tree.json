@@ -41,14 +41,14 @@
       }
     },
     "log_target": [
-      "edumia:cedar_wood_fence",
-      "edumia:cedar_wood"
+      "edumia:cedar_wood",
+      "edumia:cedar_wood_fence"
     ],
     "place_from_nbt": [
-      "minecraft:brown_stained_glass_pane",
-      "minecraft:dark_oak_slab",
+      "edumia:cedar_wood_fence",
       "edumia:cedar_leaves",
-      "edumia:cedar_wood_fence"
+      "minecraft:brown_stained_glass_pane",
+      "minecraft:dark_oak_slab"
     ]
   }
 }

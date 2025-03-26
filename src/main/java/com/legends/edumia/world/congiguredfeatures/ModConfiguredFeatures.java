@@ -61,6 +61,7 @@ public class ModConfiguredFeatures {
         MahoganyConfiguredFeatures.bootstrap(context);
         LeopardTreeConfiguredFeatures.bootstrap(context);
         PalmConfiguredFeatures.bootstrap(context);
+        DeadTreeConfiguredFeatures.bootstrap(context);
     }
 
     public static ResourceKey<ConfiguredFeature<?, ?>> registerKey(String name){

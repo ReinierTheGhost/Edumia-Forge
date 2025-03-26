@@ -103,7 +103,8 @@ public class MapBiomeData {
         addBiome(new BiomeData(EdumiaBiomeKeys.EDUMIA_MOUNTAINS_PEAKS, EdumiaBiomeDataConfigs.edumiaMountainsPeaks, EdumiaBiomeDataConfigs.mistyMountainsLayers,
                 new BiomeColorsDTO(hillySky, defaultFog, defaultWater, defaultWaterFog, 7777673, 7316862)));
 
-
+        addBiome(new BiomeData(EdumiaBiomeKeys.DEMON_WASTELANDS, EdumiaBiomeDataConfigs.gensaiVolcano, EdumiaBiomeDataConfigs.volcanicRockLayers,
+                new BiomeColorsDTO(5460048, 4999240, 5860962, 731161, 6252369, 4735297)));
 
         addBiome(new BiomeData(EdumiaBiomeKeys.GENSAI_VOLCANO_PLAINS, EdumiaBiomeDataConfigs.gensaiVolcano, EdumiaBiomeDataConfigs.volcanicRockLayers,
                 new BiomeColorsDTO(5460048, 4999240, 5860962, 731161, 6252369, 4735297)));
